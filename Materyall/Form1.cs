@@ -12,9 +12,31 @@ namespace Materyall
 {
     public partial class Form1 : Form
     {
+
+        Vtislemleri vtislemleri = new Vtislemleri();
+
+
         public Form1()
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+          string[] yillar =  vtislemleri.eoyillari();
+
+
+
+            foreach (string s in yillar)
+            {
+                MessageBox.Show(s, "yillar");
+            }
+
+        }
+
+
+
+
     }
 }
