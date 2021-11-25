@@ -30,13 +30,31 @@ namespace Materyall
 
             foreach (string s in yillar)
             {
-                MessageBox.Show(s, "yillar");
+              //  MessageBox.Show(s, "yillar");
+                cb_yili.Items.Add(s);
             }
 
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        private void linkLabel8_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
 
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+
+
+   
+
+
+
 }

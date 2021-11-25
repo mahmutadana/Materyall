@@ -26,6 +26,7 @@ namespace Materyall
 
               //  MessageBox.Show("Bağlandı: ");
 
+
             }
             catch (Exception ex)
             {
@@ -36,7 +37,8 @@ namespace Materyall
            
         }
 
-        private void baglantiyikapat (MySqlConnection connection)
+
+        private void baglantikapat (MySqlConnection connection)
         {
 
             if (connection != null && connection.State == System.Data.ConnectionState.Open)
@@ -69,6 +71,10 @@ namespace Materyall
 
             }
 
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
 
             return list.ToArray();
 
