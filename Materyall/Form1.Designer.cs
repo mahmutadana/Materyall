@@ -133,7 +133,7 @@
             this.comboBox9 = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
-            this.sunucudangelenmetin = new System.Windows.Forms.TextBox();
+            this.datagridSunucuTalepleri = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -151,6 +151,7 @@
             this.groupBox9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridSunucuTalepleri)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -1193,7 +1194,7 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.sunucudangelenmetin);
+            this.tabPage4.Controls.Add(this.datagridSunucuTalepleri);
             this.tabPage4.Controls.Add(this.button1);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
@@ -1213,13 +1214,13 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // sunucudangelenmetin
+            // datagridSunucuTalepleri
             // 
-            this.sunucudangelenmetin.Location = new System.Drawing.Point(16, 84);
-            this.sunucudangelenmetin.Multiline = true;
-            this.sunucudangelenmetin.Name = "sunucudangelenmetin";
-            this.sunucudangelenmetin.Size = new System.Drawing.Size(687, 375);
-            this.sunucudangelenmetin.TabIndex = 1;
+            this.datagridSunucuTalepleri.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridSunucuTalepleri.Location = new System.Drawing.Point(16, 72);
+            this.datagridSunucuTalepleri.Name = "datagridSunucuTalepleri";
+            this.datagridSunucuTalepleri.Size = new System.Drawing.Size(1182, 270);
+            this.datagridSunucuTalepleri.TabIndex = 1;
             // 
             // Form1
             // 
@@ -1260,7 +1261,7 @@
             this.groupBox9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridSunucuTalepleri)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1371,7 +1372,7 @@
         private System.Windows.Forms.ComboBox comboBox9;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox sunucudangelenmetin;
+        private System.Windows.Forms.DataGridView datagridSunucuTalepleri;
     }
 }
 

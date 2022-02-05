@@ -60,7 +60,9 @@ namespace Materyall
 
         private void button1_Click(object sender, EventArgs e)
         {
-            sunucudanTalepleriAl_Listele();
+            SunucuSnf sunucuSnf = new SunucuSnf ();
+
+            sunucuSnf.sunucudanTalepleriAl_Listele(datagridSunucuTalepleri);
         }
 
 
@@ -72,38 +74,11 @@ namespace Materyall
 
 
 
-
-        //Sunucudan talepleri al.
-        private void sunucudanTalepleriAl_Listele()
-        {
-
-            string adressunucu = "http://eryayin.com/yonetim/tumsiparisler.php";
-
-            sunucudangelenmetin.Text = GetSourceCode(adressunucu);
-
-        }
-
-
-        static string GetSourceCode(string url)
-        {
-            // web isteği oluştur
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-
-            // gelen cevabı al
-            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-
-            // cevapla gelen veriyi oku
-            using (StreamReader sRead = new StreamReader(resp.GetResponseStream(), Encoding.UTF8))
-            {
-                // veriyi döndür
-                return sRead.ReadToEnd();
-            }
-        }
 
     }
 
 
-   
+
 
 
 
