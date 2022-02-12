@@ -60,21 +60,26 @@ namespace Materyall
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            lbl_bekleyin.Text = "Veriler alınıyor...";
+               
+
             SunucuSnf sunucuSnf = new SunucuSnf ();
 
             sunucuSnf.sunucudanTalepleriAl_Listele(datagridSunucuTalepleri);
+
+
+            lbl_bekleyin.Text = "İşlem bitti. (" + datagridSunucuTalepleri.Rows.Count + ")";
+
         }
 
+        private void btn_varsayilanlariguncelle_Click(object sender, EventArgs e)
+        {
+
+           
 
 
-
-
-
-
-
-
-
-
+        }
     }
 
 
