@@ -90,7 +90,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tb_bilgi_bayikodu = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.linkLabel12 = new System.Windows.Forms.LinkLabel();
+            this.linklbl_kurumkodundanbul = new System.Windows.Forms.LinkLabel();
             this.cb_bilgi_sinifi = new System.Windows.Forms.ComboBox();
             this.tb_bilgi_okulkodu = new System.Windows.Forms.TextBox();
             this.lbl_bilgi_kayittarihi = new System.Windows.Forms.Label();
@@ -115,7 +115,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tb_bilgi_okulu = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.ctb_bilgi_ilcesi = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -126,6 +125,11 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btn_varsayilanlariguncelle = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.cb_bilgi_ilcesi = new System.Windows.Forms.ComboBox();
+            this.tb_bilgi_musterino = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.cb_bilgi_musterinokilitli = new System.Windows.Forms.CheckBox();
+            this.linklbl_musteri_no_ogrt_bilgisi_getir = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -759,9 +763,14 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.linklbl_musteri_no_ogrt_bilgisi_getir);
+            this.groupBox2.Controls.Add(this.cb_bilgi_musterinokilitli);
+            this.groupBox2.Controls.Add(this.label20);
+            this.groupBox2.Controls.Add(this.tb_bilgi_musterino);
+            this.groupBox2.Controls.Add(this.cb_bilgi_ilcesi);
             this.groupBox2.Controls.Add(this.tb_bilgi_bayikodu);
             this.groupBox2.Controls.Add(this.label29);
-            this.groupBox2.Controls.Add(this.linkLabel12);
+            this.groupBox2.Controls.Add(this.linklbl_kurumkodundanbul);
             this.groupBox2.Controls.Add(this.cb_bilgi_sinifi);
             this.groupBox2.Controls.Add(this.tb_bilgi_okulkodu);
             this.groupBox2.Controls.Add(this.lbl_bilgi_kayittarihi);
@@ -786,7 +795,6 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.tb_bilgi_okulu);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.ctb_bilgi_ilcesi);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
@@ -803,7 +811,7 @@
             // 
             this.tb_bilgi_bayikodu.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tb_bilgi_bayikodu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_bilgi_bayikodu.Location = new System.Drawing.Point(87, 600);
+            this.tb_bilgi_bayikodu.Location = new System.Drawing.Point(87, 631);
             this.tb_bilgi_bayikodu.Name = "tb_bilgi_bayikodu";
             this.tb_bilgi_bayikodu.Size = new System.Drawing.Size(143, 32);
             this.tb_bilgi_bayikodu.TabIndex = 35;
@@ -811,28 +819,29 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(6, 612);
+            this.label29.Location = new System.Drawing.Point(6, 643);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(60, 13);
             this.label29.TabIndex = 36;
             this.label29.Text = "Bayi Koduı:";
             // 
-            // linkLabel12
+            // linklbl_kurumkodundanbul
             // 
-            this.linkLabel12.AutoSize = true;
-            this.linkLabel12.Location = new System.Drawing.Point(344, 249);
-            this.linkLabel12.Name = "linkLabel12";
-            this.linkLabel12.Size = new System.Drawing.Size(28, 13);
-            this.linkLabel12.TabIndex = 34;
-            this.linkLabel12.TabStop = true;
-            this.linkLabel12.Text = "BUL";
-            this.toolTip1.SetToolTip(this.linkLabel12, "Okul kodundan il, ilçe, kurum adı bilgilerini getirir.");
+            this.linklbl_kurumkodundanbul.AutoSize = true;
+            this.linklbl_kurumkodundanbul.Location = new System.Drawing.Point(344, 280);
+            this.linklbl_kurumkodundanbul.Name = "linklbl_kurumkodundanbul";
+            this.linklbl_kurumkodundanbul.Size = new System.Drawing.Size(28, 13);
+            this.linklbl_kurumkodundanbul.TabIndex = 34;
+            this.linklbl_kurumkodundanbul.TabStop = true;
+            this.linklbl_kurumkodundanbul.Text = "BUL";
+            this.toolTip1.SetToolTip(this.linklbl_kurumkodundanbul, "Okul kodundan il, ilçe, kurum adı bilgilerini getirir.");
+            this.linklbl_kurumkodundanbul.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_kurumkodundanbul_LinkClicked);
             // 
             // cb_bilgi_sinifi
             // 
             this.cb_bilgi_sinifi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_sinifi.FormattingEnabled = true;
-            this.cb_bilgi_sinifi.Location = new System.Drawing.Point(87, 237);
+            this.cb_bilgi_sinifi.Location = new System.Drawing.Point(87, 268);
             this.cb_bilgi_sinifi.Name = "cb_bilgi_sinifi";
             this.cb_bilgi_sinifi.Size = new System.Drawing.Size(66, 33);
             this.cb_bilgi_sinifi.TabIndex = 6;
@@ -841,7 +850,7 @@
             // 
             this.tb_bilgi_okulkodu.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tb_bilgi_okulkodu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_bilgi_okulkodu.Location = new System.Drawing.Point(236, 238);
+            this.tb_bilgi_okulkodu.Location = new System.Drawing.Point(236, 269);
             this.tb_bilgi_okulkodu.Name = "tb_bilgi_okulkodu";
             this.tb_bilgi_okulkodu.Size = new System.Drawing.Size(108, 32);
             this.tb_bilgi_okulkodu.TabIndex = 8;
@@ -858,9 +867,10 @@
             // 
             // cb_bilgi_bayiadi
             // 
+            this.cb_bilgi_bayiadi.Enabled = false;
             this.cb_bilgi_bayiadi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_bayiadi.FormattingEnabled = true;
-            this.cb_bilgi_bayiadi.Location = new System.Drawing.Point(87, 638);
+            this.cb_bilgi_bayiadi.Location = new System.Drawing.Point(87, 669);
             this.cb_bilgi_bayiadi.Name = "cb_bilgi_bayiadi";
             this.cb_bilgi_bayiadi.Size = new System.Drawing.Size(285, 33);
             this.cb_bilgi_bayiadi.TabIndex = 15;
@@ -868,7 +878,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 650);
+            this.label14.Location = new System.Drawing.Point(6, 681);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(48, 13);
             this.label14.TabIndex = 29;
@@ -877,7 +887,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(152, 248);
+            this.label13.Location = new System.Drawing.Point(152, 279);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(10, 13);
             this.label13.TabIndex = 28;
@@ -887,7 +897,7 @@
             // 
             this.cb_bilgi_mudurunvani.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_mudurunvani.FormattingEnabled = true;
-            this.cb_bilgi_mudurunvani.Location = new System.Drawing.Point(87, 313);
+            this.cb_bilgi_mudurunvani.Location = new System.Drawing.Point(87, 344);
             this.cb_bilgi_mudurunvani.Name = "cb_bilgi_mudurunvani";
             this.cb_bilgi_mudurunvani.Size = new System.Drawing.Size(285, 33);
             this.cb_bilgi_mudurunvani.TabIndex = 10;
@@ -896,7 +906,7 @@
             // 
             this.tb_bilgi_subesi.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tb_bilgi_subesi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_bilgi_subesi.Location = new System.Drawing.Point(162, 237);
+            this.tb_bilgi_subesi.Location = new System.Drawing.Point(162, 268);
             this.tb_bilgi_subesi.Name = "tb_bilgi_subesi";
             this.tb_bilgi_subesi.Size = new System.Drawing.Size(68, 32);
             this.tb_bilgi_subesi.TabIndex = 7;
@@ -905,7 +915,7 @@
             // 
             this.cb_bilgi_ili.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_ili.FormattingEnabled = true;
-            this.cb_bilgi_ili.Location = new System.Drawing.Point(87, 90);
+            this.cb_bilgi_ili.Location = new System.Drawing.Point(87, 121);
             this.cb_bilgi_ili.Name = "cb_bilgi_ili";
             this.cb_bilgi_ili.Size = new System.Drawing.Size(285, 33);
             this.cb_bilgi_ili.TabIndex = 3;
@@ -914,7 +924,7 @@
             // 
             this.cb_bilgi_bransi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_bransi.FormattingEnabled = true;
-            this.cb_bilgi_bransi.Location = new System.Drawing.Point(87, 54);
+            this.cb_bilgi_bransi.Location = new System.Drawing.Point(87, 85);
             this.cb_bilgi_bransi.Name = "cb_bilgi_bransi";
             this.cb_bilgi_bransi.Size = new System.Drawing.Size(285, 33);
             this.cb_bilgi_bransi.TabIndex = 2;
@@ -923,7 +933,7 @@
             // 
             this.tb_bilgi_aciklama.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tb_bilgi_aciklama.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_bilgi_aciklama.Location = new System.Drawing.Point(87, 495);
+            this.tb_bilgi_aciklama.Location = new System.Drawing.Point(87, 526);
             this.tb_bilgi_aciklama.Multiline = true;
             this.tb_bilgi_aciklama.Name = "tb_bilgi_aciklama";
             this.tb_bilgi_aciklama.Size = new System.Drawing.Size(285, 99);
@@ -932,7 +942,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 507);
+            this.label12.Location = new System.Drawing.Point(6, 538);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(53, 13);
             this.label12.TabIndex = 22;
@@ -942,7 +952,7 @@
             // 
             this.tb_bilgi_adres.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tb_bilgi_adres.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_bilgi_adres.Location = new System.Drawing.Point(87, 428);
+            this.tb_bilgi_adres.Location = new System.Drawing.Point(87, 459);
             this.tb_bilgi_adres.Multiline = true;
             this.tb_bilgi_adres.Name = "tb_bilgi_adres";
             this.tb_bilgi_adres.Size = new System.Drawing.Size(285, 56);
@@ -951,7 +961,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 440);
+            this.label11.Location = new System.Drawing.Point(6, 471);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(37, 13);
             this.label11.TabIndex = 20;
@@ -961,7 +971,7 @@
             // 
             this.tb_bilgi_telefon.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tb_bilgi_telefon.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_bilgi_telefon.Location = new System.Drawing.Point(87, 390);
+            this.tb_bilgi_telefon.Location = new System.Drawing.Point(87, 421);
             this.tb_bilgi_telefon.Name = "tb_bilgi_telefon";
             this.tb_bilgi_telefon.Size = new System.Drawing.Size(285, 32);
             this.tb_bilgi_telefon.TabIndex = 12;
@@ -969,7 +979,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 402);
+            this.label10.Location = new System.Drawing.Point(6, 433);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(46, 13);
             this.label10.TabIndex = 18;
@@ -979,7 +989,7 @@
             // 
             this.tb_bilgi_eposta.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tb_bilgi_eposta.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_bilgi_eposta.Location = new System.Drawing.Point(87, 352);
+            this.tb_bilgi_eposta.Location = new System.Drawing.Point(87, 383);
             this.tb_bilgi_eposta.Name = "tb_bilgi_eposta";
             this.tb_bilgi_eposta.Size = new System.Drawing.Size(285, 32);
             this.tb_bilgi_eposta.TabIndex = 11;
@@ -987,7 +997,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 364);
+            this.label9.Location = new System.Drawing.Point(6, 395);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(46, 13);
             this.label9.TabIndex = 16;
@@ -996,7 +1006,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 326);
+            this.label8.Location = new System.Drawing.Point(6, 357);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 13);
             this.label8.TabIndex = 14;
@@ -1006,7 +1016,7 @@
             // 
             this.tb_bilgi_muduradi.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tb_bilgi_muduradi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_bilgi_muduradi.Location = new System.Drawing.Point(87, 276);
+            this.tb_bilgi_muduradi.Location = new System.Drawing.Point(87, 307);
             this.tb_bilgi_muduradi.Name = "tb_bilgi_muduradi";
             this.tb_bilgi_muduradi.Size = new System.Drawing.Size(285, 32);
             this.tb_bilgi_muduradi.TabIndex = 9;
@@ -1014,7 +1024,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 288);
+            this.label7.Location = new System.Drawing.Point(3, 319);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 13);
             this.label7.TabIndex = 12;
@@ -1023,7 +1033,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1, 243);
+            this.label6.Location = new System.Drawing.Point(1, 274);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 26);
             this.label6.TabIndex = 10;
@@ -1033,7 +1043,7 @@
             // 
             this.tb_bilgi_okulu.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tb_bilgi_okulu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_bilgi_okulu.Location = new System.Drawing.Point(87, 169);
+            this.tb_bilgi_okulu.Location = new System.Drawing.Point(87, 200);
             this.tb_bilgi_okulu.Multiline = true;
             this.tb_bilgi_okulu.Name = "tb_bilgi_okulu";
             this.tb_bilgi_okulu.Size = new System.Drawing.Size(285, 63);
@@ -1042,25 +1052,16 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 180);
+            this.label5.Location = new System.Drawing.Point(6, 211);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "Okulu:";
             // 
-            // ctb_bilgi_ilcesi
-            // 
-            this.ctb_bilgi_ilcesi.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ctb_bilgi_ilcesi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.ctb_bilgi_ilcesi.Location = new System.Drawing.Point(87, 130);
-            this.ctb_bilgi_ilcesi.Name = "ctb_bilgi_ilcesi";
-            this.ctb_bilgi_ilcesi.Size = new System.Drawing.Size(285, 32);
-            this.ctb_bilgi_ilcesi.TabIndex = 4;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 142);
+            this.label4.Location = new System.Drawing.Point(6, 173);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(27, 13);
             this.label4.TabIndex = 6;
@@ -1069,7 +1070,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 104);
+            this.label3.Location = new System.Drawing.Point(6, 135);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(17, 13);
             this.label3.TabIndex = 4;
@@ -1078,7 +1079,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 66);
+            this.label2.Location = new System.Drawing.Point(6, 97);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 2;
@@ -1088,7 +1089,7 @@
             // 
             this.tb_bilgi_adisoyadi.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tb_bilgi_adisoyadi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_bilgi_adisoyadi.Location = new System.Drawing.Point(87, 16);
+            this.tb_bilgi_adisoyadi.Location = new System.Drawing.Point(87, 47);
             this.tb_bilgi_adisoyadi.Name = "tb_bilgi_adisoyadi";
             this.tb_bilgi_adisoyadi.Size = new System.Drawing.Size(285, 32);
             this.tb_bilgi_adisoyadi.TabIndex = 0;
@@ -1096,7 +1097,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 28);
+            this.label1.Location = new System.Drawing.Point(6, 59);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 0;
@@ -1107,25 +1108,26 @@
             // 
             this.bt_yenikayit.Location = new System.Drawing.Point(171, 45);
             this.bt_yenikayit.Name = "bt_yenikayit";
-            this.bt_yenikayit.Size = new System.Drawing.Size(125, 40);
+            this.bt_yenikayit.Size = new System.Drawing.Size(91, 40);
             this.bt_yenikayit.TabIndex = 29;
             this.bt_yenikayit.Text = "Yeni Kayıt";
             this.bt_yenikayit.UseVisualStyleBackColor = true;
+            this.bt_yenikayit.Click += new System.EventHandler(this.bt_yenikayit_Click);
             // 
             // bt_guncelle
             // 
             this.bt_guncelle.Location = new System.Drawing.Point(171, 12);
             this.bt_guncelle.Name = "bt_guncelle";
-            this.bt_guncelle.Size = new System.Drawing.Size(125, 27);
+            this.bt_guncelle.Size = new System.Drawing.Size(91, 27);
             this.bt_guncelle.TabIndex = 30;
             this.bt_guncelle.Text = "Güncelle";
             this.bt_guncelle.UseVisualStyleBackColor = true;
             // 
             // btn_varsayilanlariguncelle
             // 
-            this.btn_varsayilanlariguncelle.Location = new System.Drawing.Point(322, 28);
+            this.btn_varsayilanlariguncelle.Location = new System.Drawing.Point(302, 12);
             this.btn_varsayilanlariguncelle.Name = "btn_varsayilanlariguncelle";
-            this.btn_varsayilanlariguncelle.Size = new System.Drawing.Size(65, 41);
+            this.btn_varsayilanlariguncelle.Size = new System.Drawing.Size(85, 37);
             this.btn_varsayilanlariguncelle.TabIndex = 31;
             this.btn_varsayilanlariguncelle.Text = "Varsayılan Yenile";
             this.toolTip1.SetToolTip(this.btn_varsayilanlariguncelle, "Yıl, branşlar, sınıflar, nöbet şablonları gibi otomatik gelen bilgileri yeni kayı" +
@@ -1136,6 +1138,58 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // cb_bilgi_ilcesi
+            // 
+            this.cb_bilgi_ilcesi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.cb_bilgi_ilcesi.FormattingEnabled = true;
+            this.cb_bilgi_ilcesi.Location = new System.Drawing.Point(87, 161);
+            this.cb_bilgi_ilcesi.Name = "cb_bilgi_ilcesi";
+            this.cb_bilgi_ilcesi.Size = new System.Drawing.Size(285, 33);
+            this.cb_bilgi_ilcesi.TabIndex = 4;
+            // 
+            // tb_bilgi_musterino
+            // 
+            this.tb_bilgi_musterino.Enabled = false;
+            this.tb_bilgi_musterino.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_bilgi_musterino.Location = new System.Drawing.Point(87, 10);
+            this.tb_bilgi_musterino.Name = "tb_bilgi_musterino";
+            this.tb_bilgi_musterino.Size = new System.Drawing.Size(85, 31);
+            this.tb_bilgi_musterino.TabIndex = 37;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(6, 22);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(61, 13);
+            this.label20.TabIndex = 38;
+            this.label20.Text = "Müşteri No:";
+            // 
+            // cb_bilgi_musterinokilitli
+            // 
+            this.cb_bilgi_musterinokilitli.AutoSize = true;
+            this.cb_bilgi_musterinokilitli.Checked = true;
+            this.cb_bilgi_musterinokilitli.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_bilgi_musterinokilitli.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.cb_bilgi_musterinokilitli.Location = new System.Drawing.Point(178, 17);
+            this.cb_bilgi_musterinokilitli.Name = "cb_bilgi_musterinokilitli";
+            this.cb_bilgi_musterinokilitli.Size = new System.Drawing.Size(56, 22);
+            this.cb_bilgi_musterinokilitli.TabIndex = 39;
+            this.cb_bilgi_musterinokilitli.Text = "Kilitli";
+            this.cb_bilgi_musterinokilitli.UseVisualStyleBackColor = true;
+            this.cb_bilgi_musterinokilitli.CheckedChanged += new System.EventHandler(this.cb_bilgi_musterinokilitli_CheckedChanged);
+            // 
+            // linklbl_musteri_no_ogrt_bilgisi_getir
+            // 
+            this.linklbl_musteri_no_ogrt_bilgisi_getir.AutoSize = true;
+            this.linklbl_musteri_no_ogrt_bilgisi_getir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.linklbl_musteri_no_ogrt_bilgisi_getir.Location = new System.Drawing.Point(277, 17);
+            this.linklbl_musteri_no_ogrt_bilgisi_getir.Name = "linklbl_musteri_no_ogrt_bilgisi_getir";
+            this.linklbl_musteri_no_ogrt_bilgisi_getir.Size = new System.Drawing.Size(95, 24);
+            this.linklbl_musteri_no_ogrt_bilgisi_getir.TabIndex = 40;
+            this.linklbl_musteri_no_ogrt_bilgisi_getir.TabStop = true;
+            this.linklbl_musteri_no_ogrt_bilgisi_getir.Text = "GÖSTER";
             // 
             // Form1
             // 
@@ -1213,7 +1267,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tb_bilgi_okulu;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox ctb_bilgi_ilcesi;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -1259,7 +1312,7 @@
         private System.Windows.Forms.Label lbl_talep_sosyalkuluptaleptatihi;
         private System.Windows.Forms.CheckBox cb_talep_pdf;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.LinkLabel linkLabel12;
+        private System.Windows.Forms.LinkLabel linklbl_kurumkodundanbul;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.LinkLabel linklbl_talep_defterekle;
@@ -1288,6 +1341,11 @@
         private System.Windows.Forms.Button btn_taleplerial_excelden;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btn_varsayilanlariguncelle;
+        private System.Windows.Forms.ComboBox cb_bilgi_ilcesi;
+        private System.Windows.Forms.TextBox tb_bilgi_musterino;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.CheckBox cb_bilgi_musterinokilitli;
+        private System.Windows.Forms.LinkLabel linklbl_musteri_no_ogrt_bilgisi_getir;
     }
 }
 
