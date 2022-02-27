@@ -184,7 +184,9 @@ namespace Materyall
         public int anaderskimliktablo { get; set; }
         public int anadersid { get; set; }
         public string dersadi { get; set; }
-        
+        public string bolum { get; set; }
+        public double fiyat { get; set; }
+
     }
 
 
@@ -193,6 +195,8 @@ namespace Materyall
         public int kulupkimliktablo { get; set; }
         public int kulupkodu { get; set; }
         public string kulupadi { get; set; }
+        public string bolum { get; set; }
+        public double fiyat { get; set; }
 
     }
 

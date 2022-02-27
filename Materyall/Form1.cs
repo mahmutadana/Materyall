@@ -35,7 +35,7 @@ namespace Materyall
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            varsayilanDegerleriGuncelleAsync();
+            _ = varsayilanDegerleriGuncelleAsync();
 
         }
 
@@ -97,8 +97,10 @@ namespace Materyall
             await varsayilanDegerler_5_siniflar();
 
             //Sosyal kulüpleri kendi tablosundan alacağız.
-            await varsayilanDegerler_6_sosyalkulupler();
-
+            //Bu bilgileri bayi ve il seçildiğinde yeniden çağırabiliriz.
+            if (BirOgt != null && BirOgt.bayibilgileri != null && BirOgt.bayibilgileri.ucretgrubu != null) { 
+                await varsayilanDegerler_6_sosyalkulupler();
+            }
 
 
 
@@ -230,7 +232,7 @@ namespace Materyall
 
            // string[] veriler = vtislemleri.filtre_sosyalkulupler();
 
-            filtrelenenSosyalKuluplers = vtislemleri.filtre_sosyalkulupler();
+            filtrelenenSosyalKuluplers = vtislemleri.filtre_sosyalkulupler(BirOgt.bayibilgileri.ucretgrubu.ToString());
 
 
             foreach (FiltrelenenSosyalKulupler s in filtrelenenSosyalKuluplers)
@@ -387,7 +389,7 @@ namespace Materyall
             cb_bilgi_bayiadi.Text = ogrblg.bayibilgileri.bayiadi;
 
 
-
+            BirOgt = ogrblg;
 
 
         }

@@ -244,11 +244,10 @@ namespace Materyall
         }
 
 
-        public List<FiltrelenenSosyalKulupler> filtre_sosyalkulupler()
+        public List<FiltrelenenSosyalKulupler> filtre_sosyalkulupler(string ucretgrubu)
         {
 
-            //bUNU İLLER TABLOSUNDAN ALALIM. Tüm iller olsun. Elle yanlış yazılabilir.
-            // List<string> list = new List<string>();
+            //Bayi kodundan fiyat bölümünü alacağız.
 
             List<FiltrelenenSosyalKulupler> list = new List<FiltrelenenSosyalKulupler>();
 
@@ -273,6 +272,13 @@ namespace Materyall
                 oge.kulupkimliktablo = int.Parse( oku["id"].ToString());
                 oge.kulupkodu = int.Parse(oku["kulupkodu"].ToString());
                 oge.kulupadi = oku["kulupadi"].ToString();
+                oge.bolum = oku["bolum"].ToString();
+
+
+                string fiyatgrubu = "grup" + ucretgrubu;
+
+                oge.fiyat = double.Parse(oku[fiyatgrubu].ToString());
+
 
                 list.Add(oge);
             }
