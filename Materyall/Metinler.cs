@@ -9,6 +9,9 @@ namespace Materyall
     internal class Metinler
     {
 
+
+        public string ogretmenlogo_ustyolu = @"C:\Materyall\Logolar";
+
         public string islembasarili = "Başarılı";
         public string mukerrerkayitbilgisi = "Bu okul, sınıf, şube ve öğretmen adına daha önce açılmış bir hesap bulunmaktadır.";
         public string yenikayit_bilinmeyenhata = "Bilgiler kaydedilemedi.";

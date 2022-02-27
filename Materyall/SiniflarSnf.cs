@@ -16,7 +16,7 @@ namespace Materyall
 
 
     //Bunun içine alt sınıflar ekleyeceğiz. Mesela anaderslerSnf ögesi ekleyip verileri orada tutacağız. (İnşallah)
-    public class ogretmenBilgileriSnf
+    public class OgretmenBilgileriSnf
     {
         public int oid { get; set; }
         public string yili { get; set; }
@@ -33,15 +33,21 @@ namespace Materyall
         public string eposta { get; set; }
         public string telefon { get; set; }
         public string adres { get; set; }
-        public string bayikodu { get; set; }
-        public string bayiadi { get; set; }
+       
+       
         public string aciklama { get; set; }
         public string kayittarihi { get; set; }
-        public string bayilogo { get; set; }
 
+        public string ogretmenlogo { get; set; }
+
+        public string bayikodu { get; set; }
 
         public bool cd_istiyor { get; set; }
         public bool pdf_istiyor { get; set; }
+
+
+        public Bayibilgileri bayibilgileri { get; set; }
+
 
       //Buna gerek olmayabilir. Sadece bilgileri hafızada tutup diğerlerini öğretmen id'si ile çekeceğiz.
       //public talepedilenAnaDerslerYillik[] anaDerslers { get; set; }
@@ -56,7 +62,7 @@ namespace Materyall
 
 
 
-    public class talepedilenAnaDerslerYillik
+    public class TalepedilenAnaDerslerYillik
     {
         public int anaderskimliktablo { get; set; }
         public int anadersid { get; set; }
@@ -67,7 +73,7 @@ namespace Materyall
 
     }
 
-    public class talepedilenAnaDerslerGunluk
+    public class TalepedilenAnaDerslerGunluk
     {
         public int anaderskimliktablo { get; set; }
         public int anadersid { get; set; }
@@ -79,7 +85,7 @@ namespace Materyall
     }
 
 
-    public class talepedilenSerbestDerslerYillik
+    public class TalepedilenSerbestDerslerYillik
     {
         public int serbestderskimliktablo { get; set; }
         public int serbestdersid { get; set; }
@@ -91,7 +97,7 @@ namespace Materyall
     }
 
 
-    public class talepedilensosyalKulup
+    public class TalepedilensosyalKulup
     {
         public int sosyalkulupkimliktablo { get; set; }
         public int kulupid { get; set; }
@@ -105,7 +111,7 @@ namespace Materyall
 
 
 
-    public class digerZumreOgretmenlerininAdlari
+    public class DigerZumreOgretmenlerininAdlari
     {
         public int serbestderskimliktablo { get; set; }
         public string digerogretmeninadi { get; set; }
@@ -115,7 +121,7 @@ namespace Materyall
 
 
 
-    public class talepedilendefterler
+    public class Talepedilendefterler
     {
         public int defterkimliktablo { get; set; }
         public int defterid { get; set; }
@@ -128,7 +134,7 @@ namespace Materyall
 
 
 
-    public class nobetyeribilgisi
+    public class Nobetyeribilgisi
     {
         public int nobetyerikimliktablo { get; set; }
         public string sablonadi { get; set; }
@@ -137,7 +143,7 @@ namespace Materyall
 
 
 
-    public class okulbilgileri
+    public class Okulbilgileri
     {
       
         public string kurumkodu { get; set; }
@@ -151,6 +157,44 @@ namespace Materyall
     }
 
 
+
+
+    public class Bayibilgileri
+    {
+
+        public string bayikodu { get; set; }
+        public string bayiadi { get; set; }
+        public string iladi { get; set; }
+        public string ilceadi { get; set; }
+        public string ucretgrubu { get; set; }
+       
+
+    }
+
+
+
+
+
+
+    //Ana ekranda listelenenverilerle ilgili sınıflar.
+
+
+    public class FiltrelenenAnaDersler
+    {
+        public int anaderskimliktablo { get; set; }
+        public int anadersid { get; set; }
+        public string dersadi { get; set; }
+        
+    }
+
+
+    public class FiltrelenenSosyalKulupler
+    {
+        public int kulupkimliktablo { get; set; }
+        public int kulupkodu { get; set; }
+        public string kulupadi { get; set; }
+
+    }
 
 
 
