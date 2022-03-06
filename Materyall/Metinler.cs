@@ -16,6 +16,10 @@ namespace Materyall
         public string mukerrerkayitbilgisi = "Bu okul, sınıf, şube ve öğretmen adına daha önce açılmış bir hesap bulunmaktadır.";
         public string yenikayit_bilinmeyenhata = "Bilgiler kaydedilemedi.";
 
+        public string veribulunamadi = "BULUNAMADI"; //İsim düzeltmeye çalıştığında hata vermesin diye 2 kelime. Arada boşluk var.
+        public string ogretmenverisiyok = "Öğretmen bilgilerini kaydetmeden talep işlemi yapılamaz.";
+        public string ogretmenverisivar = "İşlem için hazır.";
+
 
     }
 }

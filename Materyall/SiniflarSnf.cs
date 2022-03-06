@@ -189,6 +189,33 @@ namespace Materyall
 
     }
 
+        public class FiltrelenenGunlukPlaniOlanDersler
+        {
+        public int gunlukkimliktablo { get; set; }
+        public int gunlukdersid { get; set; }
+        public string dersadi { get; set; }
+        public string bolum { get; set; }
+        public double fiyat { get; set; }
+
+    }
+
+
+
+    public class FiltrelenenSerbestEtkinlikDersleri
+    {
+        public int serbestkimliktablo { get; set; }
+        public int serbestdersid { get; set; }
+        public string serbestdersadi { get; set; }
+
+        //Bu derslerde bölüm ve ücret yok. Yıllık planda SERBEST ETKİNLİKLER seçilince fiyatlandırmayı oradan yapıyor.
+      //  public string bolum { get; set; }
+      //  public double fiyat { get; set; }
+
+    }
+
+
+
+
 
     public class FiltrelenenSosyalKulupler
     {
@@ -200,6 +227,21 @@ namespace Materyall
 
     }
 
+
+
+    public class FiltrelenenDefterler
+    {
+        public int defterkimliktablo { get; set; }
+        public int defterkodu { get; set; }
+        public string defteradi { get; set; }
+        public string sayfasayisi { get; set; }
+        public string sinif { get; set; }
+        public int derssayisi { get; set; }
+        public string ozellik { get; set; }
+        public string kapak { get; set; }
+        public double fiyat { get; set; }
+
+    }
 
 
 }

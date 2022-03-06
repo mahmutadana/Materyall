@@ -30,12 +30,19 @@ namespace Materyall
 
             int sonbosluk = isim.LastIndexOf(" ");
 
+            if (sonbosluk != -1) {
+
             ad = isim.Substring(0, sonbosluk);
             soyad = isim.Substring(sonbosluk);
 
             soyad = soyad.ToUpper();
+           
 
             return ad + soyad;
+            } else
+            {
+                return isim;
+            }
 
         }
 

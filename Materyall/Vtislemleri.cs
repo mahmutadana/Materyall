@@ -244,7 +244,50 @@ namespace Materyall
         }
 
 
-        public List<FiltrelenenSosyalKulupler> filtre_sosyalkulupler(string ucretgrubu)
+        public List<Bayibilgileri> getir_bayiler()
+        {
+            List<Bayibilgileri> list = new List<Bayibilgileri>();
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            string sql = "SELECT * FROM sis_bayiler_tbl ORDER BY bayiadi";
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+
+                Bayibilgileri oge = new Bayibilgileri();
+
+                oge.bayikodu = oku["bayikodu"].ToString();
+                oge.bayiadi = oku["bayiadi"].ToString();
+                oge.iladi = oku["iladi"].ToString();
+                oge.ilceadi = oku["ilceadi"].ToString();
+                oge.ucretgrubu = oku["ucretgrubu"].ToString();
+
+
+                list.Add(oge);
+
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return list;
+
+        }
+
+
+
+
+
+        public List<FiltrelenenSosyalKulupler> filtre_sosyalkulupler(string yil, string ucretgrubu)
         {
 
             //Bayi kodundan fiyat bölümünü alacağız.
@@ -256,7 +299,7 @@ namespace Materyall
             baglantiKur();
 
             //  string sql = "SELECT DISTINCT(il) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
-            string sql = "SELECT * FROM sis_sosyalkulupler_tbl ORDER BY kulupadi";
+            string sql = "SELECT * FROM sis_sosyalkulupler_tbl WHERE yil='" + yil + "'  ORDER BY kulupadi";
 
 
 
@@ -296,14 +339,72 @@ namespace Materyall
 
 
 
+        public List<FiltrelenenDefterler> filtre_defterler(string yil, string ucretgrubu)
+        {
+
+            //Bayi kodundan fiyat bölümünü alacağız.
+
+            List<FiltrelenenDefterler> list = new List<FiltrelenenDefterler>();
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  string sql = "SELECT DISTINCT(il) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
+            string sql = "SELECT * FROM sis_defterler_tbl WHERE yil='" + yil + "' ORDER BY defteradi";
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+
+                FiltrelenenDefterler oge = new FiltrelenenDefterler();
+                //list.Add(oku["kulupadi"].ToString());
+                oge.defterkimliktablo = int.Parse(oku["id"].ToString());
+                oge.defterkodu = int.Parse(oku["defterkodu"].ToString());
+                oge.defteradi = oku["defteradi"].ToString();
+                oge.sayfasayisi = oku["sayfasayisi"].ToString();
+                oge.sinif = oku["sinif"].ToString();
+                oge.derssayisi = int.Parse(oku["derssayisi"].ToString());
+                oge.ozellik = oku["ozellik"].ToString();
+                oge.kapak = oku["kapak"].ToString();
+
+                string fiyatgrubu = "grup" + ucretgrubu;
+                oge.fiyat = double.Parse(oku[fiyatgrubu].ToString());
+
+                list.Add(oge);
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return list; //.ToArray();
+
+        }
+
+
+
+     //   Filtrelenendersler tüm dersler için aşağıdaki sorguyu değiştireceğiz. filtreli sınıftan alacağız.
+
+    /*
         public string[] filtre_tumdersler(string yil, string iladi)
         {
 
             if (yil == "" || iladi == "")
             {
+                MessageBox.Show("Yıl, şehir ve bayi seçimi zorunludur.");
                 return new List<string>().ToArray();
             }
            
+
+
+
             //Önce hangi il ise o isim ilgili yıla ait ders grubunu alacağız.
             //Sonra o ders grubundaki dersleri listeleyeceğiz.
 
@@ -340,6 +441,202 @@ namespace Materyall
             return list.ToArray();
 
         }
+    */
+
+
+        public List<FiltrelenenAnaDersler> filtre_tumdersler(string yil, string iladi, string ucretgrubu)
+        {
+
+            List<FiltrelenenAnaDersler> list = new List<FiltrelenenAnaDersler>();
+
+            if (yil == "" || iladi == "")
+            {
+                MessageBox.Show("Yıl, şehir ve bayi seçimi zorunludur.");
+                return list;
+            }
+
+
+
+
+            //Önce hangi il ise o isim ilgili yıla ait ders grubunu alacağız.
+            //Sonra o ders grubundaki dersleri listeleyeceğiz.
+
+
+            string dersgrubu = ilindersgurubunuGetir(yil, iladi);
+
+
+           
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  string sql = "SELECT DISTINCT(il) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
+            string sql = "SELECT * FROM sis_tumdersler_tbl WHERE dersid IN (SELECT " + dersgrubu + " FROM sis_dersdagilim_gruplari) ORDER BY dersid";
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+
+                FiltrelenenAnaDersler oge = new FiltrelenenAnaDersler();
+
+                oge.anaderskimliktablo = int.Parse(oku["id"].ToString());
+                oge.anadersid = int.Parse(oku["dersid"].ToString());
+                oge.dersadi = oku["dersadi"].ToString();
+                oge.bolum = oku["bolum"].ToString();
+
+                string fiyatgrubu = "grup" + ucretgrubu;
+                oge.fiyat = double.Parse(oku[fiyatgrubu].ToString());
+
+                list.Add(oge);
+
+
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return list;
+
+        }
+
+
+        //Günlük planı olan dersler.
+
+        public List<FiltrelenenGunlukPlaniOlanDersler> filtre_gunlukplaniolandersler(string yil, string iladi, string ucretgrubu)
+        {
+
+            List<FiltrelenenGunlukPlaniOlanDersler> list = new List<FiltrelenenGunlukPlaniOlanDersler>();
+
+            if (yil == "" || iladi == "")
+            {
+                MessageBox.Show("Yıl, şehir ve bayi seçimi zorunludur.");
+                return list;
+            }
+
+
+
+
+            //Önce hangi il ise o isim ilgili yıla ait ders grubunu alacağız.
+            //Sonra o ders grubundaki dersleri listeleyeceğiz.
+
+
+            string dersgrubu = ilindersgurubunuGetir(yil, iladi);
+
+
+
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  string sql = "SELECT DISTINCT(il) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
+            string sql = "SELECT * FROM sis_gunlukplandersler_tbl WHERE yil='" + yil + "' and dersid IN (SELECT " + dersgrubu + " FROM sis_dersdagilim_gruplari) ORDER BY dersid";
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+
+                FiltrelenenGunlukPlaniOlanDersler oge = new FiltrelenenGunlukPlaniOlanDersler();
+
+                oge.gunlukkimliktablo = int.Parse(oku["id"].ToString());
+                oge.gunlukdersid = int.Parse(oku["dersid"].ToString());
+                oge.dersadi = oku["dersadi"].ToString();
+                oge.bolum = oku["bolum"].ToString();
+
+                string fiyatgrubu = "grup" + ucretgrubu;
+                oge.fiyat = double.Parse(oku[fiyatgrubu].ToString());
+
+                list.Add(oge);
+
+
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return list;
+
+        }
+
+
+        //Günlük planı olan dersler.
+
+        public List<FiltrelenenSerbestEtkinlikDersleri> filtre_serbestetkinlikdersleri(string yil, string iladi, string ucretgrubu)
+        {
+
+            List<FiltrelenenSerbestEtkinlikDersleri> list = new List<FiltrelenenSerbestEtkinlikDersleri>();
+
+            if (yil == "" || iladi == "")
+            {
+                MessageBox.Show("Yıl, şehir ve bayi seçimi zorunludur.");
+                return list;
+            }
+
+
+
+
+            //Önce hangi il ise o isim ilgili yıla ait ders grubunu alacağız.
+            //Sonra o ders grubundaki dersleri listeleyeceğiz.
+
+
+            string dersgrubu = ilindersgurubunuGetir(yil, iladi);
+
+
+
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  string sql = "SELECT DISTINCT(il) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
+            string sql = "SELECT * FROM sis_serbestetkinlikler_tbl WHERE yil='" + yil + "' ORDER BY dersadi";
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+
+                FiltrelenenSerbestEtkinlikDersleri oge = new FiltrelenenSerbestEtkinlikDersleri();
+
+                oge.serbestkimliktablo = int.Parse(oku["id"].ToString());
+                oge.serbestdersid = int.Parse(oku["dersid"].ToString());
+                oge.serbestdersadi = oku["dersadi"].ToString();
+                
+               
+
+                list.Add(oge);
+
+
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return list;
+
+        }
+
 
 
         public string ilindersgurubunuGetir(string yil, string iladi)
@@ -491,9 +788,24 @@ namespace Materyall
         public OgretmenBilgileriSnf ogretmenBilgisiGetir(string musterino)
         {
 
+
+            
+
+
             OgretmenBilgileriSnf ogrblg = new OgretmenBilgileriSnf();
 
-            ogrblg.adisoyadi = "KAYIT BULUNAMADI";
+            ogrblg.adisoyadi = metinler.veribulunamadi;
+
+
+            if (musterino == null || musterino == "")
+            {
+                //Null gitmesin diye...
+                //Bayi bilgilerini alıyoruz.
+                ogrblg.bayibilgileri = bayiaBilgileriniGetir_bayikodundan(ogrblg.bayikodu);
+
+                return ogrblg;
+            }
+
 
 
             baglantiKur();

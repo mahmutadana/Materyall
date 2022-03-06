@@ -17,10 +17,21 @@ namespace Materyall
         OgretmenBilgileriSnf BirOgt;
         Bayibilgileri BirBayi;
 
+
+        //Üstteki seçili bayinin bilgisini tutuyor. Buradaki tüm bayilerin bilgilerini tutuyor.
+        List<Bayibilgileri> tum_bayi_bilgileris;
+
+
         //Filtrelenen verilerle ilgili id vs bilgileri tutan sınıflar.
         List<FiltrelenenAnaDersler> filtrelenenAnaDerslers = new List<FiltrelenenAnaDersler>();
-        List<FiltrelenenSosyalKulupler> filtrelenenSosyalKuluplers = new List<FiltrelenenSosyalKulupler>();
+        List<FiltrelenenGunlukPlaniOlanDersler> filtrelenenGunlukPlaniOlanDerslers = new List<FiltrelenenGunlukPlaniOlanDersler>();
+        List<FiltrelenenSerbestEtkinlikDersleri> filtrelenenSerbestEtkinlikDerslers = new List<FiltrelenenSerbestEtkinlikDersleri>();
 
+
+        List<FiltrelenenSosyalKulupler> filtrelenenSosyalKuluplers = new List<FiltrelenenSosyalKulupler>();
+        List<FiltrelenenDefterler> filtrelenenDefterlers = new List<FiltrelenenDefterler>();
+
+        
 
 
         Vtislemleri vtislemleri = new Vtislemleri();
@@ -35,7 +46,7 @@ namespace Materyall
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            _ = varsayilanDegerleriGuncelleAsync();
+            varsayilanDegerleriGuncelleAsync();
 
         }
 
@@ -77,31 +88,19 @@ namespace Materyall
         private void btn_varsayilanlariguncelle_Click(object sender, EventArgs e)
         {
 
-            _ = varsayilanDegerleriGuncelleAsync();
+             varsayilanDegerleriGuncelleAsync();
 
 
         }
 
 
-        private async Task varsayilanDegerleriGuncelleAsync()
+        private void varsayilanDegerleriGuncelleAsync()
         {
             //Yıl, il, ilçe, müdür adı, unvanlar, nönet yerleri vs için distinc güncellemesi yaparak açılan kutulara veri atacağız.
 
-            //Eğitim öğretim yılı.
-           
-            //Bu veriler daha önce girişi yapılmış kayıtlardan alındı. (tlp_ogretmenverileri_tbl)
-            await varsayilanDegerler_1_yil();
-            await varsayilanDegerler_2_brans();
-            await varsayilanDegerler_3_iller(); //Bu sis_iller_tbl tablosundan alıyor.
-            await varsayilanDegerler_4_mudurunvani();
-            await varsayilanDegerler_5_siniflar();
+             vars_bilgiBolumu();
 
-            //Sosyal kulüpleri kendi tablosundan alacağız.
-            //Bu bilgileri bayi ve il seçildiğinde yeniden çağırabiliriz.
-            if (BirOgt != null && BirOgt.bayibilgileri != null && BirOgt.bayibilgileri.ucretgrubu != null) { 
-                await varsayilanDegerler_6_sosyalkulupler();
-            }
-
+             vars_talepBolumu();
 
 
 
@@ -110,8 +109,56 @@ namespace Materyall
         }
 
 
+        private void vars_bilgiBolumu()
+        {
+
+
+            //Bu veriler daha önce girişi yapılmış kayıtlardan alındı. (tlp_ogretmenverileri_tbl)
+             varsayilanDegerler_1_yil();
+             varsayilanDegerler_2_brans();
+             varsayilanDegerler_3_iller(); //Bu sis_iller_tbl tablosundan alıyor.
+             varsayilanDegerler_4_mudurunvani();
+             varsayilanDegerler_5_siniflar();
+
+            varsayilanDegerler_bayiler();
+
+
+        }
+
+
+        private void vars_talepBolumu()
+        {
+
+            //Sosyal kulüpleri kendi tablosundan alacağız.
+            //Bu bilgileri bayi ve il seçildiğinde yeniden çağırabiliriz.
+            if (BirOgt != null && BirOgt.bayibilgileri != null && BirOgt.bayibilgileri.ucretgrubu != null)
+            {
+
+                varsayilanDegerler_tumdersler();
+                varsayilanDegerler_gunlukplaniolandersler();
+                varsayilanDegerler_serbestetkinlikdersler();
+
+
+                varsayilanDegerler_6_sosyalkulupler();
+                varsayilanDegerler_7_defterler();
+
+                lbl_bilgi.Text = metinler.ogretmenverisivar;
+
+            } else
+            {
+
+                lbl_bilgi.Text = metinler.ogretmenverisiyok;
+
+            }
+
+
+        }
+
+
+
+
         //1. eğitim öğretim yılı.
-        private Task varsayilanDegerler_1_yil()
+        private void varsayilanDegerler_1_yil()
         {
             //Yıl, il, ilçe, müdür adı, unvanlar, nönet yerleri vs için distinc güncellemesi yaparak açılan kutulara veri atacağız.
 
@@ -127,10 +174,10 @@ namespace Materyall
                 cb_yili.Items.Add(s);
             }
 
-            return Task.CompletedTask;
+           
         }
 
-        private Task varsayilanDegerler_2_brans()
+        private void varsayilanDegerler_2_brans()
         {
             //Yıl, il, ilçe, müdür adı, unvanlar, nönet yerleri vs için distinc güncellemesi yaparak açılan kutulara veri atacağız.
 
@@ -146,15 +193,15 @@ namespace Materyall
                 cb_bilgi_bransi.Items.Add(s);
             }
 
-            return Task.CompletedTask;
+           
         }
 
-        private Task varsayilanDegerler_3_iller()
+        private void varsayilanDegerler_3_iller()
         {
             //Yıl, il, ilçe, müdür adı, unvanlar, nönet yerleri vs için distinc güncellemesi yaparak açılan kutulara veri atacağız.
 
             //Eğitim öğretim yılı.
-
+            
             cb_bilgi_ili.Items.Clear();
 
             string[] veriler = vtislemleri.filtre_iller();
@@ -165,10 +212,12 @@ namespace Materyall
                 cb_bilgi_ili.Items.Add(s);
             }
 
-            return Task.CompletedTask;
+
+
+            
         }
 
-        private Task varsayilanDegerler_3_1_ilceler()
+        private void varsayilanDegerler_3_1_ilceler()
         {
             //Yıl, il, ilçe, müdür adı, unvanlar, nönet yerleri vs için distinc güncellemesi yaparak açılan kutulara veri atacağız.
 
@@ -184,10 +233,9 @@ namespace Materyall
                 cb_bilgi_ilcesi.Items.Add(s);
             }
 
-            return Task.CompletedTask;
         }
 
-        private Task varsayilanDegerler_4_mudurunvani()
+        private void varsayilanDegerler_4_mudurunvani()
         {
             //Yıl, il, ilçe, müdür adı, unvanlar, nönet yerleri vs için distinc güncellemesi yaparak açılan kutulara veri atacağız.
 
@@ -203,10 +251,10 @@ namespace Materyall
                 cb_bilgi_mudurunvani.Items.Add(s);
             }
 
-            return Task.CompletedTask;
+            
         }
 
-        private Task varsayilanDegerler_5_siniflar()
+        private void varsayilanDegerler_5_siniflar()
         {
             //Yıl, il, ilçe, müdür adı, unvanlar, nönet yerleri vs için distinc güncellemesi yaparak açılan kutulara veri atacağız.
 
@@ -222,17 +270,39 @@ namespace Materyall
                 cb_bilgi_sinifi.Items.Add(s);
             }
 
-            return Task.CompletedTask;
+         
         }
 
-        private Task varsayilanDegerler_6_sosyalkulupler()
+
+
+        private void varsayilanDegerler_bayiler()
+        {
+            //Bayi bilgilerini hafızada tutalım.
+
+            cb_bilgi_bayiadi.Items.Clear();
+
+            tum_bayi_bilgileris = vtislemleri.getir_bayiler();
+
+            foreach (Bayibilgileri s in tum_bayi_bilgileris)
+            {
+
+                cb_bilgi_bayiadi.Items.Add(s.bayiadi + "-" + s.bayikodu);
+            }
+
+
+        }
+
+
+
+
+        private void varsayilanDegerler_6_sosyalkulupler()
         {
            
             cb_talep_sosyalkulupadi.Items.Clear();
 
            // string[] veriler = vtislemleri.filtre_sosyalkulupler();
 
-            filtrelenenSosyalKuluplers = vtislemleri.filtre_sosyalkulupler(BirOgt.bayibilgileri.ucretgrubu.ToString());
+            filtrelenenSosyalKuluplers = vtislemleri.filtre_sosyalkulupler(BirOgt.yili, BirOgt.bayibilgileri.ucretgrubu.ToString());
 
 
             foreach (FiltrelenenSosyalKulupler s in filtrelenenSosyalKuluplers)
@@ -241,31 +311,83 @@ namespace Materyall
                 cb_talep_sosyalkulupadi.Items.Add(s.kulupadi);
             }
 
-            return Task.CompletedTask;
+           
         }
 
+
+        private void varsayilanDegerler_7_defterler()
+        {
+
+            cb_talep_defter.Items.Clear();
+
+            // string[] veriler = vtislemleri.filtre_sosyalkulupler();
+
+            filtrelenenDefterlers = vtislemleri.filtre_defterler(BirOgt.yili, BirOgt.bayibilgileri.ucretgrubu.ToString());
+
+
+            foreach (FiltrelenenDefterler s in filtrelenenDefterlers)
+            {
+
+                cb_talep_defter.Items.Add(s.defteradi + " (" + s.defterkodu + ") " + s.sinif + " - " + s.ozellik);
+            }
+
+
+        }
 
 
 
         //Tüm dersleri listeleyelim.
-        private Task varsayilanDegerler_tumdersler()
+        private void varsayilanDegerler_tumdersler()
         {
 
             cb_talep_anadersler_yillik.Items.Clear();
 
-            string[] veriler = vtislemleri.filtre_tumdersler(cb_yili.Text, cb_bilgi_ili.Text);
+            filtrelenenAnaDerslers = vtislemleri.filtre_tumdersler(BirOgt.yili, BirOgt.ili, BirOgt.bayibilgileri.ucretgrubu.ToString());
 
-            foreach (string s in veriler)
+            foreach (FiltrelenenAnaDersler s in filtrelenenAnaDerslers)
             {
 
-                cb_talep_anadersler_yillik.Items.Add(s);
+                cb_talep_anadersler_yillik.Items.Add(s.dersadi);
             }
 
-            return Task.CompletedTask;
+          
         }
 
 
+        //Günlük planı olan dersleri ilgili yere ekleyelim.
+        private void varsayilanDegerler_gunlukplaniolandersler()
+        {
 
+            cb_talep_anadersler_gunluk.Items.Clear();
+
+            filtrelenenGunlukPlaniOlanDerslers = vtislemleri.filtre_gunlukplaniolandersler(BirOgt.yili, BirOgt.ili, BirOgt.bayibilgileri.ucretgrubu.ToString());
+
+            foreach (FiltrelenenGunlukPlaniOlanDersler s in filtrelenenGunlukPlaniOlanDerslers)
+            {
+
+                cb_talep_anadersler_gunluk.Items.Add(s.dersadi);
+            }
+
+
+        }
+
+
+        //Serbest etkinlik yıllık planı olan dersleri ilgili yere ekleyelim.
+        private void varsayilanDegerler_serbestetkinlikdersler()
+        {
+
+            cb_talep_serbestdersler_yillik.Items.Clear();
+
+            filtrelenenSerbestEtkinlikDerslers = vtislemleri.filtre_serbestetkinlikdersleri(BirOgt.yili, BirOgt.ili, BirOgt.bayibilgileri.ucretgrubu.ToString());
+
+            foreach (FiltrelenenSerbestEtkinlikDersleri s in filtrelenenSerbestEtkinlikDerslers)
+            {
+
+                cb_talep_serbestdersler_yillik.Items.Add(s.serbestdersadi);
+            }
+
+
+        }
 
 
 
@@ -345,6 +467,32 @@ namespace Materyall
         }
 
 
+        private void tumTalepverileriniTemizle()
+        {
+
+            BirOgt = null;
+
+            cb_talep_anadersler_yillik.Text = "";
+            cb_talep_anadersler_yillik.Items.Clear();
+
+            cb_talep_anadersler_gunluk.Text = "";
+            cb_talep_anadersler_gunluk.Items.Clear();
+
+            cb_talep_serbestdersler_yillik.Text = "";
+            cb_talep_serbestdersler_yillik.Items.Clear();
+
+
+            filtrelenenSosyalKuluplers.Clear();
+            cb_talep_sosyalkulupadi.Text = "";
+            cb_talep_sosyalkulupadi.Items.Clear();
+
+
+
+
+
+        }
+
+
         private void musteriBilgisiGetir()
         {
 
@@ -360,6 +508,7 @@ namespace Materyall
 
             tb_bilgi_adisoyadi.Text = ogrblg.adisoyadi;
             cb_bilgi_bransi.Text = ogrblg.bransi;
+            
 
             cb_bilgi_ili.Text = ogrblg.ili;
             cb_bilgi_ilcesi.Text = ogrblg.ilcesi;
@@ -440,7 +589,26 @@ namespace Materyall
 
         private void linklbl_musteri_no_ogrt_bilgisi_getir_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+
+            //Tüm getirme işlemleri. Varsayılan talep verilerini temizleme hariç.
+            //Fiyat ve ders farklıkları olduğu için her ilin ve bayinin fiyat ve dersleri farklı oluyor. Bulunamayan veri olursa önceki kayıt kalmasın.
+
+
+            //Ana dersler(yıllık, günlük), seçmeli dersler, kulüpler, derfterler vs.
+            tumTalepverileriniTemizle();
+
             musteriBilgisiGetir();
+
+
+            if (cb_bilgi_bayiadi.Text == metinler.veribulunamadi)
+            {
+                return;
+            }
+
+
+
+            vars_talepBolumu();
+
         }
 
        
@@ -493,30 +661,62 @@ namespace Materyall
         }
 
 
-        private void bayidundanBayiBilgileriniGetir()
+        private void bayikodundanBayiBilgileriniGetir()
         {
             
-            BirBayi = vtislemleri.bayiaBilgileriniGetir_bayikodundan(tb_bilgi_bayikodu.Text);
+            int indeks = tum_bayi_bilgileris.FindIndex(a => a.bayikodu == tb_bilgi_bayikodu.Text);
 
-            cb_bilgi_bayiadi.Text = BirBayi.bayiadi;
+            //  BirBayi = vtislemleri.bayiaBilgileriniGetir_bayikodundan(tb_bilgi_bayikodu.Text);
+
+            if (indeks != -1)
+            {
+
+                BirBayi = tum_bayi_bilgileris[indeks];
+                cb_bilgi_bayiadi.Text = BirBayi.bayiadi + "-" + BirBayi.bayikodu;
+
+            } else
+            {
+                BirBayi = null;
+                cb_bilgi_bayiadi.Text = metinler.veribulunamadi;
+            }
+
+           
 
         }
 
         private void tb_bilgi_bayikodu_TextChanged(object sender, EventArgs e)
         {
 
-            bayidundanBayiBilgileriniGetir();
+            bayikodundanBayiBilgileriniGetir();
 
         }
 
         private void cb_bilgi_ili_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            varsayilanDegerler_3_1_ilceler();
+           if (BirOgt != null) {
+                BirOgt.ili = cb_bilgi_ili.Text;
+            }
 
-            varsayilanDegerler_tumdersler();
+            varayilanTalepleilgiliVeriler();
 
         }
+
+
+        private void varayilanTalepleilgiliVeriler()
+        {
+
+
+            varsayilanDegerler_3_1_ilceler();
+
+            vars_talepBolumu();
+
+
+
+
+        }
+
+
 
         private void cb_talep_sosyalkulupadi_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -532,6 +732,24 @@ namespace Materyall
             MessageBox.Show(filtrelenenSosyalKuluplers[indeks].kulupadi + " " + filtrelenenSosyalKuluplers[indeks].kulupkimliktablo);
 
 
+        }
+
+        private void cb_yili_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (BirOgt != null)
+            {
+                BirOgt.yili = cb_yili.Text;
+            }
+
+        }
+
+        private void cb_bilgi_bayiadi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tb_bilgi_bayikodu.Text = tum_bayi_bilgileris[cb_bilgi_bayiadi.SelectedIndex].bayikodu;
+
+            //Test ettik, kısır döngüye girmiyor. Bayi kodu değşince burayı tetikliyor çünkü.
+           
         }
 
 

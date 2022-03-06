@@ -134,6 +134,7 @@
             this.bt_guncelle = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btn_varsayilanlariguncelle = new System.Windows.Forms.Button();
+            this.lbl_bilgi = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -178,6 +179,7 @@
             this.cb_yili.Name = "cb_yili";
             this.cb_yili.Size = new System.Drawing.Size(121, 32);
             this.cb_yili.TabIndex = 99;
+            this.cb_yili.SelectedIndexChanged += new System.EventHandler(this.cb_yili_SelectedIndexChanged);
             // 
             // tabControl1
             // 
@@ -483,6 +485,7 @@
             // 
             this.cb_talep_serbestdersler_yillik.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_talep_serbestdersler_yillik.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_talep_serbestdersler_yillik.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_talep_serbestdersler_yillik.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_talep_serbestdersler_yillik.FormattingEnabled = true;
             this.cb_talep_serbestdersler_yillik.Location = new System.Drawing.Point(6, 22);
@@ -614,6 +617,7 @@
             // 
             this.cb_talep_anadersler_yillik.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_talep_anadersler_yillik.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_talep_anadersler_yillik.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_talep_anadersler_yillik.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_talep_anadersler_yillik.FormattingEnabled = true;
             this.cb_talep_anadersler_yillik.Location = new System.Drawing.Point(6, 22);
@@ -1004,13 +1008,13 @@
             // cb_bilgi_bayiadi
             // 
             this.cb_bilgi_bayiadi.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cb_bilgi_bayiadi.Enabled = false;
             this.cb_bilgi_bayiadi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_bayiadi.FormattingEnabled = true;
             this.cb_bilgi_bayiadi.Location = new System.Drawing.Point(88, 723);
             this.cb_bilgi_bayiadi.Name = "cb_bilgi_bayiadi";
             this.cb_bilgi_bayiadi.Size = new System.Drawing.Size(285, 33);
             this.cb_bilgi_bayiadi.TabIndex = 15;
+            this.cb_bilgi_bayiadi.SelectedIndexChanged += new System.EventHandler(this.cb_bilgi_bayiadi_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -1056,6 +1060,8 @@
             // cb_bilgi_ili
             // 
             this.cb_bilgi_ili.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cb_bilgi_ili.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_bilgi_ili.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_bilgi_ili.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_bilgi_ili.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_ili.FormattingEnabled = true;
@@ -1064,7 +1070,6 @@
             this.cb_bilgi_ili.Size = new System.Drawing.Size(285, 33);
             this.cb_bilgi_ili.TabIndex = 3;
             this.cb_bilgi_ili.SelectedIndexChanged += new System.EventHandler(this.cb_bilgi_ili_SelectedIndexChanged);
-            this.cb_bilgi_ili.TextChanged += new System.EventHandler(this.cb_bilgi_ili_SelectedIndexChanged);
             // 
             // cb_bilgi_bransi
             // 
@@ -1269,7 +1274,7 @@
             // 
             this.bt_yenikayit.Location = new System.Drawing.Point(171, 45);
             this.bt_yenikayit.Name = "bt_yenikayit";
-            this.bt_yenikayit.Size = new System.Drawing.Size(91, 40);
+            this.bt_yenikayit.Size = new System.Drawing.Size(91, 32);
             this.bt_yenikayit.TabIndex = 29;
             this.bt_yenikayit.Text = "Yeni Kayıt";
             this.bt_yenikayit.UseVisualStyleBackColor = true;
@@ -1296,11 +1301,23 @@
             this.btn_varsayilanlariguncelle.UseVisualStyleBackColor = true;
             this.btn_varsayilanlariguncelle.Click += new System.EventHandler(this.btn_varsayilanlariguncelle_Click);
             // 
+            // lbl_bilgi
+            // 
+            this.lbl_bilgi.AutoSize = true;
+            this.lbl_bilgi.ForeColor = System.Drawing.Color.Red;
+            this.lbl_bilgi.Location = new System.Drawing.Point(93, 80);
+            this.lbl_bilgi.Name = "lbl_bilgi";
+            this.lbl_bilgi.Size = new System.Drawing.Size(35, 13);
+            this.lbl_bilgi.TabIndex = 32;
+            this.lbl_bilgi.Text = "Bilgi...";
+            this.lbl_bilgi.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1617, 893);
+            this.Controls.Add(this.lbl_bilgi);
             this.Controls.Add(this.btn_varsayilanlariguncelle);
             this.Controls.Add(this.bt_yenikayit);
             this.Controls.Add(this.bt_guncelle);
@@ -1346,6 +1363,7 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_logo)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1456,6 +1474,7 @@
         private System.Windows.Forms.TextBox tb_bilgi_logo;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.Label lbl_bilgi;
     }
 }
 
