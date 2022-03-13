@@ -62,7 +62,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT DISTINCT(yili) as yil FROM tlp_ogretmenbilgileri_tbl ORDER BY yil";
+            string sql = "SELECT yiladi FROM sis_yillar_tbl ORDER BY yiladi";
 
             MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
 
@@ -70,7 +70,7 @@ namespace Materyall
 
             while (oku.Read())
             {
-                list.Add (oku["yil"].ToString());
+                list.Add (oku["yiladi"].ToString());
 
             }
 
@@ -93,7 +93,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT DISTINCT(brans) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
+            string sql = "SELECT bransadi FROM sis_branslar_tbl ORDER BY bransadi";
 
             MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
 
@@ -101,7 +101,7 @@ namespace Materyall
 
             while (oku.Read())
             {
-                list.Add(oku["veri"].ToString());
+                list.Add(oku["bransadi"].ToString());
 
             }
 
@@ -191,7 +191,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT DISTINCT(mudurunvani) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
+            string sql = "SELECT unvan FROM sis_mudurunvan_tbl ORDER BY unvan";
 
             MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
 
@@ -199,7 +199,7 @@ namespace Materyall
 
             while (oku.Read())
             {
-                list.Add(oku["veri"].ToString());
+                list.Add(oku["unvan"].ToString());
 
             }
 
@@ -222,7 +222,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT DISTINCT(sinif) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
+            string sql = "SELECT sinifadi FROM sis_siniflar_tbl ORDER BY sinifkodu";
 
             MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
 
@@ -230,7 +230,7 @@ namespace Materyall
 
             while (oku.Read())
             {
-                list.Add(oku["veri"].ToString());
+                list.Add(oku["sinifadi"].ToString());
 
             }
 
