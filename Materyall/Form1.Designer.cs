@@ -173,9 +173,6 @@
             // 
             // cb_yili
             // 
-            this.cb_yili.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_yili.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_yili.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_yili.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_yili.FormattingEnabled = true;
             this.cb_yili.Location = new System.Drawing.Point(13, 24);
@@ -938,8 +935,6 @@
             // cb_bilgi_ilcesi
             // 
             this.cb_bilgi_ilcesi.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cb_bilgi_ilcesi.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_bilgi_ilcesi.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_bilgi_ilcesi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_ilcesi.FormattingEnabled = true;
             this.cb_bilgi_ilcesi.Location = new System.Drawing.Point(87, 160);
@@ -983,7 +978,6 @@
             // cb_bilgi_sinifi
             // 
             this.cb_bilgi_sinifi.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cb_bilgi_sinifi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_bilgi_sinifi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_sinifi.FormattingEnabled = true;
             this.cb_bilgi_sinifi.Location = new System.Drawing.Point(87, 267);
@@ -1013,7 +1007,6 @@
             // cb_bilgi_bayiadi
             // 
             this.cb_bilgi_bayiadi.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cb_bilgi_bayiadi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_bilgi_bayiadi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_bayiadi.FormattingEnabled = true;
             this.cb_bilgi_bayiadi.Location = new System.Drawing.Point(88, 723);
@@ -1045,9 +1038,6 @@
             // cb_bilgi_mudurunvani
             // 
             this.cb_bilgi_mudurunvani.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cb_bilgi_mudurunvani.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_bilgi_mudurunvani.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_bilgi_mudurunvani.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_bilgi_mudurunvani.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_mudurunvani.FormattingEnabled = true;
             this.cb_bilgi_mudurunvani.Location = new System.Drawing.Point(87, 343);
@@ -1067,9 +1057,6 @@
             // cb_bilgi_ili
             // 
             this.cb_bilgi_ili.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cb_bilgi_ili.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_bilgi_ili.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_bilgi_ili.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_bilgi_ili.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_ili.FormattingEnabled = true;
             this.cb_bilgi_ili.Location = new System.Drawing.Point(87, 120);
@@ -1081,9 +1068,6 @@
             // cb_bilgi_bransi
             // 
             this.cb_bilgi_bransi.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cb_bilgi_bransi.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_bilgi_bransi.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_bilgi_bransi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_bilgi_bransi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_bransi.FormattingEnabled = true;
             this.cb_bilgi_bransi.Location = new System.Drawing.Point(87, 84);
@@ -1296,6 +1280,7 @@
             this.bt_guncelle.TabIndex = 30;
             this.bt_guncelle.Text = "Güncelle";
             this.bt_guncelle.UseVisualStyleBackColor = true;
+            this.bt_guncelle.Click += new System.EventHandler(this.bt_guncelle_Click);
             // 
             // btn_varsayilanlariguncelle
             // 

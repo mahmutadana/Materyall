@@ -14,6 +14,7 @@ namespace Materyall
 
         public string islembasarili = "Başarılı";
         public string mukerrerkayitbilgisi = "Bu okul, sınıf, şube ve öğretmen adına daha önce açılmış bir hesap bulunmaktadır.";
+        public string guncellemeyapacakidyokuyarisi = "Bu müşteri numarasına ait herhangi bir kayıt bulunamadığı için işlem yapılamadı.";
         public string yenikayit_bilinmeyenhata = "Bilgiler kaydedilemedi.";
 
         public string veribulunamadi = "BULUNAMADI"; //İsim düzeltmeye çalıştığında hata vermesin diye 2 kelime. Arada boşluk var.

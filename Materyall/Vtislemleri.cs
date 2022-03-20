@@ -751,6 +751,85 @@ namespace Materyall
         }
 
 
+
+        public string kaydiGuncelle(OgretmenBilgileriSnf ogtblg)
+        {
+
+            string sonuc = metinler.islembasarili;
+
+
+            long musterikayitno_oid = ogtblg.oid;
+
+            if (!bu_oid_dahaoncedenvarmi(musterikayitno_oid))
+            {
+                sonuc = metinler.guncellemeyapacakidyokuyarisi;
+
+                return sonuc;
+            }
+
+
+            //Mükerrer değil, devam edelim. (Yeni kayıt)
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "UPDATE tlp_ogretmenbilgileri_tbl SET " +
+                    "yili='" + ogtblg.yili + "', " +
+                    "adisoyadi='" + ogtblg.adisoyadi + "', " +
+                    "brans='" + ogtblg.bransi + "', " +
+                    "il='" + ogtblg.ili + "', " +
+                    "ilce='" + ogtblg.ilcesi + "', " +
+                    "kurumkodu='" + ogtblg.kurumkodu + "', " +
+                    "okuladi='" + ogtblg.okuladi + "', " +
+                    "sinif=" + ogtblg.sinifi + ", " +
+                    "sube='" + ogtblg.subesi + "', " +
+                    "muduradi='" + ogtblg.muduradi + "', " +
+                    "mudurunvani='" + ogtblg.mudurunvani + "', " +
+                    "cep='" + ogtblg.telefon + "', " +
+                    "eposta='" + ogtblg.eposta + "', " +
+                    "adres='" + ogtblg.adres + "', " +
+                    "aciklama='" + ogtblg.aciklama + "', " +
+                    "bayi=" + ogtblg.bayikodu + ", " +
+                    "logoadi='" + ogtblg.ogretmenlogo + "' " +
+                    "WHERE oid=" + musterikayitno_oid;
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+                
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return sonuc;
+
+        }
+
+
+
+
+
         private bool bukayitdahaoncedenvarmi(string kurumkodu, int sinif, string sube, string adisoyadi)
         {
 
@@ -769,6 +848,36 @@ namespace Materyall
             while (oku.Read())
             {
                  adet = oku["adet"].ToString();
+
+            }
+
+            baglantikapat(mysqlbaglantisi);
+
+            return adet != "0";
+
+        }
+
+
+
+
+        private bool bu_oid_dahaoncedenvarmi(long oid)
+        {
+            //Güncelleme yapacağımız için daha önceden var olan bir id olması gerekiyor. Olmayan bir id yazılırsa güncelleme yapmayacağız.
+            string adet = "0";
+
+            baglantiKur();
+
+            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE oid=" + oid;
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+                adet = oku["adet"].ToString();
 
             }
 
@@ -872,6 +981,8 @@ namespace Materyall
 
         public Okulbilgileri okulbilgisinigetir_kurumkodundan(string kurumkodu)
         {
+
+            //Okul bilgileri daha önce girilmiş kayıtların sonuncusundan alınmaktadır. Tüm Türkiye'nin kurum kodları mevcut değil.
 
             Okulbilgileri okulbilgisi = new Okulbilgileri();
 

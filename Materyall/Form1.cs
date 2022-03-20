@@ -395,13 +395,35 @@ namespace Materyall
 
         private void bt_yenikayit_Click(object sender, EventArgs e)
         {
-            yeniKayitYap();
+            yeniKayitYapveyaGuncelle(true);
         }
 
 
 
-        private void yeniKayitYap()
+        private void yeniKayitYapveyaGuncelle(bool yenikayitmi)
         {
+
+
+            if (!tumAlanlarDoldurulmusmu())
+            {
+                MessageBox.Show("Öğretmen bilgilerinde tüm alanların doldurulmuş olması gerekir.");
+                return;
+            }
+
+
+            //Eğer güncelleme işlemi yapılacaksa müşreti numarası girilmiş mi diye kontrol ediyoruz. Güncelleme bu müşreti numarası üzerinden yapılacak.
+            if (!yenikayitmi)
+            {
+
+                if (tb_bilgi_musterino.Text == "")
+                {
+                    MessageBox.Show("Güncelleme yapmak için bir müşteri kaydı çağırmış olmanız gerekir.");
+                    return;
+                }
+
+            }
+
+
 
             OgretmenBilgileriSnf ogrblg = new OgretmenBilgileriSnf ();
             
@@ -442,16 +464,36 @@ namespace Materyall
            
 
 
-            string kayitsonucu = vtislemleri.yeniKayit(ogrblg);
-
-            if (kayitsonucu.All(char.IsNumber))
+            if (yenikayitmi)
             {
-                tb_bilgi_musterino.Text = kayitsonucu;
+
+                string kayitsonucu = vtislemleri.yeniKayit(ogrblg);
+
+                if (kayitsonucu.All(char.IsNumber))
+                {
+                    tb_bilgi_musterino.Text = kayitsonucu;
+
+                }
+                else
+                {
+                    MessageBox.Show(kayitsonucu);
+                }
 
             } else
             {
-                MessageBox.Show(vtislemleri.yeniKayit(ogrblg));
+                //Yeni kayıt değil, yani güncelleme ise...
+
+                ogrblg.oid = int.Parse( tb_bilgi_musterino.Text);
+
+                string kayitsonucu = vtislemleri.kaydiGuncelle(ogrblg);
+
+                    MessageBox.Show(kayitsonucu);
+                
+
             }
+
+           
+
 
 
 
@@ -465,6 +507,32 @@ namespace Materyall
 
 
         }
+
+
+        // Tüm alanlar doldurulmuş mu diye bakıyoruz.
+
+        private bool tumAlanlarDoldurulmusmu ()
+        {
+
+            //Telefon, adres ve açıklama zorunlu değil.
+          //  || tb_bilgi_telefon.Text == "" || tb_bilgi_eposta.Text == "" || tb_bilgi_adres.Text == "" || tb_bilgi_aciklama.Text == ""
+
+
+          if  (cb_yili.Text == "" || tb_bilgi_adisoyadi.Text == "" || cb_bilgi_bransi.Text == "" || cb_bilgi_ili.Text == "" ||
+               cb_bilgi_ilcesi.Text == "" || tb_bilgi_okulkodu.Text == "" || tb_bilgi_okulu.Text == "" || cb_bilgi_sinifi.Text == "" ||
+               tb_bilgi_subesi.Text == "" || tb_bilgi_muduradi.Text == "" || cb_bilgi_mudurunvani.Text == "" || tb_bilgi_bayikodu.Text == "" || lbl_bilgi_kayittarihi.Text == "")
+            {
+                return false;  
+            } else
+            {
+                return true;
+            }
+
+            
+
+        }
+
+
 
 
         private void tumTalepverileriniTemizle()
@@ -508,13 +576,22 @@ namespace Materyall
 
             tb_bilgi_adisoyadi.Text = ogrblg.adisoyadi;
             cb_bilgi_bransi.Text = ogrblg.bransi;
-            
-
             cb_bilgi_ili.Text = ogrblg.ili;
             cb_bilgi_ilcesi.Text = ogrblg.ilcesi;
+            
+
             tb_bilgi_okulkodu.Text = ogrblg.kurumkodu;
             tb_bilgi_okulu.Text = ogrblg.okuladi;
-            cb_bilgi_sinifi.Text = ogrblg.sinifi.ToString();
+
+            if (ogrblg.sinifi != 0)
+            {
+                cb_bilgi_sinifi.Text = ogrblg.sinifi.ToString();
+            } else
+            {
+                cb_bilgi_sinifi.Text = "";
+            }
+           
+
             tb_bilgi_subesi.Text = ogrblg.subesi;
 
             tb_bilgi_muduradi.Text = ogrblg.muduradi;
@@ -541,9 +618,27 @@ namespace Materyall
             BirOgt = ogrblg;
 
 
+            secimizrenginikaldir();
+
         }
 
+        private void secimizrenginikaldir()
+        {
 
+            this.BeginInvoke(new Action(() => {
+
+                cb_bilgi_bransi.Select(0, 0);
+                cb_bilgi_ili.Select(0, 0);
+                cb_bilgi_ilcesi.Select(0, 0);
+                cb_bilgi_sinifi.Select(0, 0);
+                cb_bilgi_mudurunvani.Select(0, 0);
+                cb_bilgi_bayiadi.Select(0, 0);
+
+                cb_yili.Select(0, 0);
+
+            }));
+
+        }
 
         private void linklbl_kurumkodundanbul_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -589,6 +684,13 @@ namespace Materyall
 
         private void linklbl_musteri_no_ogrt_bilgisi_getir_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+
+            if (tb_bilgi_musterino.Text == "")
+            {
+                MessageBox.Show("Müşteri numarası girmelisiniz.");
+                return;
+            }
+                
 
             //Tüm getirme işlemleri. Varsayılan talep verilerini temizleme hariç.
             //Fiyat ve ders farklıkları olduğu için her ilin ve bayinin fiyat ve dersleri farklı oluyor. Bulunamayan veri olursa önceki kayıt kalmasın.
@@ -751,6 +853,17 @@ namespace Materyall
             //Test ettik, kısır döngüye girmiyor. Bayi kodu değşince burayı tetikliyor çünkü.
            
         }
+
+        private void bt_guncelle_Click(object sender, EventArgs e)
+        {
+
+            //Güncelleme işlemi yapılacak.
+           yeniKayitYapveyaGuncelle(false);
+
+        }
+
+
+       
 
 
 
