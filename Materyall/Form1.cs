@@ -31,7 +31,8 @@ namespace Materyall
         List<FiltrelenenSosyalKulupler> filtrelenenSosyalKuluplers = new List<FiltrelenenSosyalKulupler>();
         List<FiltrelenenDefterler> filtrelenenDefterlers = new List<FiltrelenenDefterler>();
 
-        
+        List<FiltrelenenEkUrunler> filtrelenenEkUrunler = new List<FiltrelenenEkUrunler>();
+
 
 
         Vtislemleri vtislemleri = new Vtislemleri();
@@ -100,7 +101,7 @@ namespace Materyall
 
              vars_bilgiBolumu();
 
-             vars_talepBolumu();
+             varsa_talepBolumu();
 
 
 
@@ -126,7 +127,7 @@ namespace Materyall
         }
 
 
-        private void vars_talepBolumu()
+        private void varsa_talepBolumu()
         {
 
             //Sosyal kulüpleri kendi tablosundan alacağız.
@@ -138,11 +139,16 @@ namespace Materyall
                 varsayilanDegerler_gunlukplaniolandersler();
                 varsayilanDegerler_serbestetkinlikdersler();
 
-
                 varsayilanDegerler_6_sosyalkulupler();
                 varsayilanDegerler_7_defterler();
 
+                varsayilanDegerlerEkUrunler();
+
                 lbl_bilgi.Text = metinler.ogretmenverisivar;
+
+
+                //Grid viewlerde ve ilgili yerlerde girilen talepleri göstereceğiz.
+                talepleri_goster_gridViewlerde();
 
             } else
             {
@@ -153,6 +159,39 @@ namespace Materyall
 
 
         }
+
+
+        private void talepleri_goster_gridViewlerde()
+        {
+
+
+            //Ek ürünleri en başa alıyoruz. Aradan çıkarmak için. Aşağıdakiler birbirine benzer kodlar olduğu için bir arada tutuyoruz.
+            //CD ve PDF var mı diye bakacağız.
+
+            foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunler)
+            {
+                //Şimdilik 2 ürün. Daha sonra eklenirse ekürünler buraya eklenecek.
+
+                if (urun.urunadi == "CD") {
+                    cb_talep_CD.Checked = vtislemleri.ek_urun_talepEdilmismi(BirOgt.oid, urun.urunkodu);
+                }
+                else if (urun.urunadi == "PDF")
+                {
+                    cb_talep_pdf.Checked = vtislemleri.ek_urun_talepEdilmismi(BirOgt.oid, urun.urunkodu);
+                }
+
+
+            }
+
+
+
+
+            //Yıllık plan ana dersleri göster.
+            dgv_talep_anadersler_yillik.DataSource = vtislemleri.dgv_icin_y_anaderleri_getir(BirOgt.oid, BirOgt.yili);
+
+
+        }
+
 
 
 
@@ -336,6 +375,18 @@ namespace Materyall
 
 
 
+        private void varsayilanDegerlerEkUrunler()
+        {
+
+           //Ek ürünlerin bilgilerini bellekte tutuyoruz.
+
+            filtrelenenEkUrunler = vtislemleri.filtre_ekurunler(BirOgt.yili, BirOgt.bayibilgileri.ucretgrubu.ToString());
+
+
+        }
+
+
+
         //Tüm dersleri listeleyelim.
         private void varsayilanDegerler_tumdersler()
         {
@@ -471,6 +522,7 @@ namespace Materyall
 
                 if (kayitsonucu.All(char.IsNumber))
                 {
+                    ogrblg.oid = int.Parse(kayitsonucu);
                     tb_bilgi_musterino.Text = kayitsonucu;
 
                 }
@@ -572,6 +624,7 @@ namespace Materyall
 
             cb_yili.Text = ogrblg.yili;
 
+            ogrblg.oid = int.Parse(tb_bilgi_musterino.Text);
             ogrblg.adisoyadi = yrdsnf.ismiduzelt(ogrblg.adisoyadi, "isim");
 
             tb_bilgi_adisoyadi.Text = ogrblg.adisoyadi;
@@ -709,7 +762,7 @@ namespace Materyall
 
 
 
-            vars_talepBolumu();
+            varsa_talepBolumu();
 
         }
 
@@ -811,7 +864,7 @@ namespace Materyall
 
             varsayilanDegerler_3_1_ilceler();
 
-            vars_talepBolumu();
+            varsa_talepBolumu();
 
 
 
@@ -862,8 +915,198 @@ namespace Materyall
 
         }
 
+        private void linklbl_talep_anadersler_secimiekle_yillik_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
 
-       
+            //Yıllık ana dersler ekle.
+            y_anaders_ekle_secim();
+
+        }
+
+        private void y_anaders_ekle_secim()
+        {
+
+
+            //  MessageBox.Show(filtrelenenAnaDerslers[cb_talep_anadersler_yillik.SelectedIndex].anadersid.ToString() + " " + filtrelenenAnaDerslers[cb_talep_anadersler_yillik.SelectedIndex].dersadi);
+
+
+         string kayitsonucu = vtislemleri.ekle_y_anaders(BirOgt.oid, filtrelenenAnaDerslers[cb_talep_anadersler_yillik.SelectedIndex].anadersid, filtrelenenAnaDerslers[cb_talep_anadersler_yillik.SelectedIndex].fiyat);
+
+            if (kayitsonucu.All(char.IsNumber))
+            {
+
+              //  MessageBox.Show("başarılı: " + kayitsonucu);
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(kayitsonucu);
+            }
+
+
+        }
+
+        private void dgv_talep_anadersler_yillik_doubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            string dersid = dgv_talep_anadersler_yillik.Rows[e.RowIndex].Cells[metinler.neyebakalim_y_anaders_urunid_adi].Value.ToString();
+
+          //  MessageBox.Show(dersid);
+
+            anaders_yillik_plan_talep_sil(dersid);
+
+        }
+
+
+
+        private void anaders_yillik_plan_talep_sil (string dersid)
+        {
+
+            if (dersid.Length < 1)
+            {
+                return;
+            }
+
+            string sonuc = vtislemleri.sil_y_anaders(BirOgt.oid, int.Parse(dersid));
+
+           if (sonuc == metinler.islembasarili)
+            {
+
+                varsa_talepBolumu();
+
+            } else
+            {
+                MessageBox.Show(dersid + " silinemedi.");
+            }
+
+
+        }
+
+        private void linklabel_talep_tumanadersleriekle_yillik_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            y_anaders_ekle_sinif_duzeyi_tum_dersler();
+        }
+
+
+        private void y_anaders_ekle_sinif_duzeyi_tum_dersler()
+        {
+
+
+            //Döngü ile sınıf düzeylerine bakalım ve seçili sınıf düzeyine uygun olan ana dersleri ekleyelim.
+
+            int derssayac = 0;    
+
+            foreach (FiltrelenenAnaDersler drs in filtrelenenAnaDerslers)
+            {
+
+                if (drs.anadersmi && drs.dersadi.Substring(0,BirOgt.sinifi.ToString().Length) == BirOgt.sinifi.ToString())
+                {
+
+                    string kayitsonucu = vtislemleri.ekle_y_anaders(BirOgt.oid, filtrelenenAnaDerslers[derssayac].anadersid, filtrelenenAnaDerslers[derssayac].fiyat);
+
+                    if (!kayitsonucu.All(char.IsNumber))
+                  
+                    {
+                        MessageBox.Show(kayitsonucu);
+                    }
+
+
+                }
+
+                derssayac++;
+            }
+
+
+            //  MessageBox.Show("başarılı: " + kayitsonucu);
+            varsa_talepBolumu();
+
+
+
+        }
+
+        //Change olayı gibi olsa da click olayına tanımla.
+        private void cb_talep_CD_CheckedChanged(object sender, EventArgs e)
+        {
+
+            CD_PDF_islemi_yap(cb_talep_CD.Checked, "CD");
+
+        }
+
+        private void cb_talep_pdf_CheckedChanged(object sender, EventArgs e)
+        {
+
+            CD_PDF_islemi_yap(cb_talep_pdf.Checked, "PDF");
+
+        }
+
+        private void CD_PDF_islemi_yap(bool eklensinmi, string urunadi)
+        {
+
+            foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunler)
+            {
+
+
+                    if (urun.urunadi == urunadi)
+                    {
+
+                         if (eklensinmi)
+                         {
+
+
+                            string kayitsonucu = vtislemleri.ekle_ek_urunler(BirOgt.oid, urun.urunkodu, urun.fiyat);
+
+                            if (kayitsonucu.All(char.IsNumber))
+                            {
+
+                                //  MessageBox.Show("başarılı: " + kayitsonucu);
+                                varsa_talepBolumu();
+
+                            }
+                            else
+                            {
+                                MessageBox.Show(kayitsonucu);
+                            }
+
+
+
+                        }
+                        else
+                        {
+                        //Silinsin.
+
+                            string kayitsonucu = vtislemleri.sil_ekurunler(BirOgt.oid, urun.urunkodu);
+
+                            if (kayitsonucu == metinler.islembasarili)
+                            {
+
+                                //  MessageBox.Show("başarılı: " + kayitsonucu);
+                                varsa_talepBolumu();
+
+                            }
+                            else
+                            {
+                                MessageBox.Show(kayitsonucu);
+                            }
+
+
+                        }
+
+
+
+
+
+                    //Ürünü bulduysak işlem yapıp çıkıyoruz.
+                    return;
+
+                    }
+
+
+
+            }
+
+
+        }
 
 
 

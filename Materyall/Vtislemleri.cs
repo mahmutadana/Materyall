@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -390,36 +391,20 @@ namespace Materyall
 
 
 
-     //   Filtrelenendersler tüm dersler için aşağıdaki sorguyu değiştireceğiz. filtreli sınıftan alacağız.
 
-    /*
-        public string[] filtre_tumdersler(string yil, string iladi)
+        public List<FiltrelenenEkUrunler> filtre_ekurunler(string yil, string ucretgrubu)
         {
 
-            if (yil == "" || iladi == "")
-            {
-                MessageBox.Show("Yıl, şehir ve bayi seçimi zorunludur.");
-                return new List<string>().ToArray();
-            }
-           
+            //Bayi kodundan fiyat bölümünü alacağız.
 
-
-
-            //Önce hangi il ise o isim ilgili yıla ait ders grubunu alacağız.
-            //Sonra o ders grubundaki dersleri listeleyeceğiz.
-
-
-            string dersgrubu = ilindersgurubunuGetir(yil , iladi);
-
-
-            List<string> list = new List<string>();
+            List<FiltrelenenEkUrunler> list = new List<FiltrelenenEkUrunler>();
 
             //Bağlantı kısmı.
 
             baglantiKur();
 
             //  string sql = "SELECT DISTINCT(il) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
-            string sql = "SELECT dersadi as veri FROM sis_tumdersler_tbl WHERE dersid IN (SELECT " + dersgrubu + " FROM sis_dersdagilim_gruplari) ORDER BY dersid";
+            string sql = "SELECT * FROM sis_ekurunler_tbl WHERE yil='" + yil + "' ORDER BY urunkodu";
 
 
 
@@ -429,8 +414,18 @@ namespace Materyall
 
             while (oku.Read())
             {
-                list.Add(oku["veri"].ToString());
 
+                FiltrelenenEkUrunler oge = new FiltrelenenEkUrunler();
+                //list.Add(oku["kulupadi"].ToString());
+                oge.ekurunkimliktablo = int.Parse(oku["id"].ToString());
+                oge.urunkodu = int.Parse(oku["urunkodu"].ToString());
+                oge.urunadi = oku["urunadi"].ToString();
+                
+
+                string fiyatgrubu = "grup" + ucretgrubu;
+                oge.fiyat = double.Parse(oku[fiyatgrubu].ToString());
+
+                list.Add(oge);
             }
 
 
@@ -438,10 +433,65 @@ namespace Materyall
 
             //Bağlantı kısımları.
 
-            return list.ToArray();
+            return list; //.ToArray();
 
         }
-    */
+
+
+
+
+        //   Filtrelenendersler tüm dersler için aşağıdaki sorguyu değiştireceğiz. filtreli sınıftan alacağız.
+
+        /*
+            public string[] filtre_tumdersler(string yil, string iladi)
+            {
+
+                if (yil == "" || iladi == "")
+                {
+                    MessageBox.Show("Yıl, şehir ve bayi seçimi zorunludur.");
+                    return new List<string>().ToArray();
+                }
+
+
+
+
+                //Önce hangi il ise o isim ilgili yıla ait ders grubunu alacağız.
+                //Sonra o ders grubundaki dersleri listeleyeceğiz.
+
+
+                string dersgrubu = ilindersgurubunuGetir(yil , iladi);
+
+
+                List<string> list = new List<string>();
+
+                //Bağlantı kısmı.
+
+                baglantiKur();
+
+                //  string sql = "SELECT DISTINCT(il) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
+                string sql = "SELECT dersadi as veri FROM sis_tumdersler_tbl WHERE dersid IN (SELECT " + dersgrubu + " FROM sis_dersdagilim_gruplari) ORDER BY dersid";
+
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                MySqlDataReader oku = cmd.ExecuteReader();
+
+                while (oku.Read())
+                {
+                    list.Add(oku["veri"].ToString());
+
+                }
+
+
+                baglantikapat(mysqlbaglantisi);
+
+                //Bağlantı kısımları.
+
+                return list.ToArray();
+
+            }
+        */
 
 
         public List<FiltrelenenAnaDersler> filtre_tumdersler(string yil, string iladi, string ucretgrubu)
@@ -492,6 +542,8 @@ namespace Materyall
 
                 string fiyatgrubu = "grup" + ucretgrubu;
                 oge.fiyat = double.Parse(oku[fiyatgrubu].ToString());
+
+                oge.anadersmi = (oku["anadersmi"].ToString().Length > 0);
 
                 list.Add(oge);
 
@@ -692,7 +744,7 @@ namespace Materyall
 
            if (bukayitdahaoncedenvarmi(ogtblg.kurumkodu, ogtblg.sinifi, ogtblg.subesi, ogtblg.adisoyadi))
             {
-                sonuc = metinler.mukerrerkayitbilgisi;
+                sonuc = metinler.mukerrerkayitbilgisiogretmen;
 
                 return sonuc;
             }
@@ -1076,7 +1128,343 @@ namespace Materyall
 
 
 
+        //Talep bilgilerinin girilmesine başlandı.
 
+        //Farklı bir işlem girişi olduğu için başa aldık. Diğerleri benzer kodlar olduğu için aşağıda olacak. Kopyala yapıştır mantığıylr yapacağız onları.
+
+        public string ekle_ek_urunler(int oid, int urunkodu, double fiyat)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+            long sonid = 0;
+
+            if (bu_talep_dahaoncedenvarmi(oid, urunkodu, metinler.neyebakalim_ekurunler_cd_pdf_tablo, metinler.neyebakalim_ekurunler_cd_pdf_urunid_adi))
+            {
+                sonuc = metinler.mukerrerkayitbilgisitalep;
+
+                return sonuc;
+            }
+
+
+            //Mükerrer değil, devam edelim. (Yeni kayıt)
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "INSERT INTO " + metinler.neyebakalim_ekurunler_cd_pdf_tablo + " " +
+                    "(oid, urunkodu, fiyat, taleptarihi) " +
+                    "VALUES (" + oid + "," + urunkodu + "," + fiyat + ", now())";
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+                else
+                {
+
+                }
+
+                sonid = cmd.LastInsertedId;
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            if (sonid > 0)
+            {
+                return sonid.ToString();
+            }
+
+            return sonuc;
+
+        }
+
+
+        public string sil_ekurunler(int oid, int urunkodu)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "DELETE FROM " + metinler.neyebakalim_ekurunler_cd_pdf_tablo + " " +
+                    "WHERE oid=" + oid + " AND urunkodu=" + urunkodu;
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+
+
+            return sonuc;
+
+        }
+
+
+
+        public bool ek_urun_talepEdilmismi(int oid, int urunkodu)
+        {
+
+            return bu_talep_dahaoncedenvarmi(oid, urunkodu, metinler.neyebakalim_ekurunler_cd_pdf_tablo, metinler.neyebakalim_ekurunler_cd_pdf_urunid_adi);
+
+        }
+
+
+
+
+
+
+
+
+
+        public string ekle_y_anaders(int oid, int dersid, double fiyat)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+            long sonid = 0;
+
+            if (bu_talep_dahaoncedenvarmi(oid, dersid, metinler.neyebakalim_y_anaders_tablo, metinler.neyebakalim_y_anaders_urunid_adi))
+            {
+                sonuc = metinler.mukerrerkayitbilgisitalep;
+
+                return sonuc;
+            }
+
+
+            //Mükerrer değil, devam edelim. (Yeni kayıt)
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "INSERT INTO " + metinler.neyebakalim_y_anaders_tablo + " " +
+                    "(oid, dersid, fiyat, taleptarihi) " +
+                    "VALUES (" + oid + "," + dersid + "," + fiyat + ", now())";
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+                else
+                {
+
+                }
+
+                sonid = cmd.LastInsertedId;
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            if (sonid > 0)
+            {
+                return sonid.ToString();
+            }
+
+            return sonuc;
+
+        }
+
+
+        public string sil_y_anaders(int oid, int dersid)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "DELETE FROM " + metinler.neyebakalim_y_anaders_tablo + " " +
+                    "WHERE oid=" + oid + " AND dersid=" + dersid;
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+                
+
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+           
+
+            return sonuc;
+
+        }
+
+
+
+        public DataTable dgv_icin_y_anaderleri_getir(int oid, String yili)
+        {
+
+           
+            baglantiKur();
+
+            //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
+            string sql = "SELECT b.dersadi, a.dersid, a.taleptarihi, a.basimtarihi, a.fiyat FROM " + metinler.neyebakalim_y_anaders_tablo + " a LEFT JOIN sis_tumdersler_tbl b ON a.dersid=b.dersid WHERE b.yil='" + yili +"' AND oid=" + oid;
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
+
+           
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private bool bu_talep_dahaoncedenvarmi(int oid, int urunid, string neyebakalim_tablo, string neyebakalim_urun)
+        {
+
+            //Ana ders, seçmeli ders, defter vs. için ayrı ayrı kod yazmayacağız. neyebakalım ile buradan halledeceğiz.
+            //Neye bakalım bilgileri istek tarafından Metinler sınıfından alınarak gönderilecek.
+
+            string adet = "0";
+
+            baglantiKur();
+
+
+
+            string sql = "SELECT COUNT(*) as adet FROM " + neyebakalim_tablo + " WHERE oid=" + oid + " AND " + neyebakalim_urun + "=" + urunid;
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+                adet = oku["adet"].ToString();
+
+            }
+
+            baglantikapat(mysqlbaglantisi);
+
+            return adet != "0";
+
+        }
 
 
 

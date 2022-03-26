@@ -10,10 +10,25 @@ namespace Materyall
     {
 
 
+        //Tablo adları ve ürünid isimleri. neyebakalim bölümü için.
+        public string neyebakalim_y_anaders_tablo = "tlp_y_anadersler_tbl";
+        public string neyebakalim_y_anaders_urunid_adi = "dersid";
+
+        public string neyebakalim_ekurunler_cd_pdf_tablo = "tlp_ekurunler_tbl";
+        public string neyebakalim_ekurunler_cd_pdf_urunid_adi = "urunkodu";
+
+
+
+
+
+
+
+
         public string ogretmenlogo_ustyolu = @"C:\Materyall\Logolar";
 
         public string islembasarili = "Başarılı";
-        public string mukerrerkayitbilgisi = "Bu okul, sınıf, şube ve öğretmen adına daha önce açılmış bir hesap bulunmaktadır.";
+        public string mukerrerkayitbilgisiogretmen = "Bu okul, sınıf, şube ve öğretmen adına daha önce açılmış bir hesap bulunmaktadır.";
+        public string mukerrerkayitbilgisitalep = "Bu daha önce eklenmiş.";
         public string guncellemeyapacakidyokuyarisi = "Bu müşteri numarasına ait herhangi bir kayıt bulunamadığı için işlem yapılamadı.";
         public string yenikayit_bilinmeyenhata = "Bilgiler kaydedilemedi.";
 

@@ -135,6 +135,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btn_varsayilanlariguncelle = new System.Windows.Forms.Button();
             this.lbl_bilgi = new System.Windows.Forms.Label();
+            this.tab_muhasebe = new System.Windows.Forms.TabPage();
+            this.label22 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -187,6 +189,7 @@
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tab_muhasebe);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(393, 13);
             this.tabControl1.Name = "tabControl1";
@@ -214,9 +217,9 @@
             // 
             // groupBox11
             // 
-            this.groupBox11.Location = new System.Drawing.Point(494, 464);
+            this.groupBox11.Location = new System.Drawing.Point(488, 472);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(690, 359);
+            this.groupBox11.Size = new System.Drawing.Size(696, 351);
             this.groupBox11.TabIndex = 7;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Müşteri Ara";
@@ -567,52 +570,58 @@
             // 
             this.cb_talep_pdf.AutoSize = true;
             this.cb_talep_pdf.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.cb_talep_pdf.Location = new System.Drawing.Point(384, 142);
+            this.cb_talep_pdf.Location = new System.Drawing.Point(386, 159);
             this.cb_talep_pdf.Name = "cb_talep_pdf";
             this.cb_talep_pdf.Size = new System.Drawing.Size(75, 30);
             this.cb_talep_pdf.TabIndex = 33;
             this.cb_talep_pdf.Text = "PDF";
             this.cb_talep_pdf.UseVisualStyleBackColor = true;
+            this.cb_talep_pdf.Click += new System.EventHandler(this.cb_talep_pdf_CheckedChanged);
             // 
             // cb_talep_CD
             // 
             this.cb_talep_CD.AutoSize = true;
             this.cb_talep_CD.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.cb_talep_CD.Location = new System.Drawing.Point(386, 104);
+            this.cb_talep_CD.Location = new System.Drawing.Point(386, 134);
             this.cb_talep_CD.Name = "cb_talep_CD";
             this.cb_talep_CD.Size = new System.Drawing.Size(63, 30);
             this.cb_talep_CD.TabIndex = 32;
             this.cb_talep_CD.Text = "CD";
             this.cb_talep_CD.UseVisualStyleBackColor = true;
+            this.cb_talep_CD.Click += new System.EventHandler(this.cb_talep_CD_CheckedChanged);
             // 
             // linklabel_talep_tumanadersleriekle_yillik
             // 
             this.linklabel_talep_tumanadersleriekle_yillik.AutoSize = true;
-            this.linklabel_talep_tumanadersleriekle_yillik.Location = new System.Drawing.Point(397, 67);
+            this.linklabel_talep_tumanadersleriekle_yillik.Location = new System.Drawing.Point(396, 75);
             this.linklabel_talep_tumanadersleriekle_yillik.Name = "linklabel_talep_tumanadersleriekle_yillik";
-            this.linklabel_talep_tumanadersleriekle_yillik.Size = new System.Drawing.Size(66, 26);
+            this.linklabel_talep_tumanadersleriekle_yillik.Size = new System.Drawing.Size(66, 39);
             this.linklabel_talep_tumanadersleriekle_yillik.TabIndex = 31;
             this.linklabel_talep_tumanadersleriekle_yillik.TabStop = true;
-            this.linklabel_talep_tumanadersleriekle_yillik.Text = "Tüm Ana\r\nDersleri Ekle";
+            this.linklabel_talep_tumanadersleriekle_yillik.Text = "Sınıf Düzeyi\r\nTüm Ana\r\nDersleri Ekle";
             this.linklabel_talep_tumanadersleriekle_yillik.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linklabel_talep_tumanadersleriekle_yillik.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklabel_talep_tumanadersleriekle_yillik_LinkClicked);
             // 
             // linklbl_talep_anadersler_secimiekle_yillik
             // 
             this.linklbl_talep_anadersler_secimiekle_yillik.AutoSize = true;
-            this.linklbl_talep_anadersler_secimiekle_yillik.Location = new System.Drawing.Point(397, 32);
+            this.linklbl_talep_anadersler_secimiekle_yillik.Location = new System.Drawing.Point(393, 27);
             this.linklbl_talep_anadersler_secimiekle_yillik.Name = "linklbl_talep_anadersler_secimiekle_yillik";
             this.linklbl_talep_anadersler_secimiekle_yillik.Size = new System.Drawing.Size(62, 13);
             this.linklbl_talep_anadersler_secimiekle_yillik.TabIndex = 30;
             this.linklbl_talep_anadersler_secimiekle_yillik.TabStop = true;
             this.linklbl_talep_anadersler_secimiekle_yillik.Text = "Seçimi Ekle";
+            this.linklbl_talep_anadersler_secimiekle_yillik.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_talep_anadersler_secimiekle_yillik_LinkClicked);
             // 
             // dgv_talep_anadersler_yillik
             // 
+            this.dgv_talep_anadersler_yillik.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv_talep_anadersler_yillik.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_talep_anadersler_yillik.Location = new System.Drawing.Point(6, 67);
             this.dgv_talep_anadersler_yillik.Name = "dgv_talep_anadersler_yillik";
             this.dgv_talep_anadersler_yillik.Size = new System.Drawing.Size(374, 133);
             this.dgv_talep_anadersler_yillik.TabIndex = 29;
+            this.dgv_talep_anadersler_yillik.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_talep_anadersler_yillik_doubleClick);
             // 
             // cb_talep_anadersler_yillik
             // 
@@ -700,6 +709,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.label22);
             this.tabPage5.Controls.Add(this.groupBox10);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
@@ -1305,6 +1315,26 @@
             this.lbl_bilgi.Text = "Bilgi...";
             this.lbl_bilgi.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // tab_muhasebe
+            // 
+            this.tab_muhasebe.Location = new System.Drawing.Point(4, 22);
+            this.tab_muhasebe.Name = "tab_muhasebe";
+            this.tab_muhasebe.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_muhasebe.Size = new System.Drawing.Size(1204, 842);
+            this.tab_muhasebe.TabIndex = 5;
+            this.tab_muhasebe.Text = "Muhasebe";
+            this.tab_muhasebe.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(16, 610);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(583, 13);
+            this.label22.TabIndex = 7;
+            this.label22.Text = "Bilgi: CD vr PDF ek ürünler olarak geçmektedir. (VT\'de) Bu tabloya bakarken yılı " +
+    "esas alıp ürün adını /CD ve PDF) esas alır.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1349,6 +1379,7 @@
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridSunucuTalepleri)).EndInit();
             this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_sablon_nobetyeri)).EndInit();
@@ -1468,6 +1499,8 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.Label lbl_bilgi;
+        private System.Windows.Forms.TabPage tab_muhasebe;
+        private System.Windows.Forms.Label label22;
     }
 }
 

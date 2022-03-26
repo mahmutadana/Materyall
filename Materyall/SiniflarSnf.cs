@@ -187,6 +187,8 @@ namespace Materyall
         public string bolum { get; set; }
         public double fiyat { get; set; }
 
+        public bool anadersmi { get; set; }
+
     }
 
         public class FiltrelenenGunlukPlaniOlanDersler
@@ -239,6 +241,19 @@ namespace Materyall
         public int derssayisi { get; set; }
         public string ozellik { get; set; }
         public string kapak { get; set; }
+        public double fiyat { get; set; }
+
+    }
+
+
+
+
+
+    public class FiltrelenenEkUrunler
+    {
+        public int ekurunkimliktablo { get; set; }
+        public int urunkodu { get; set; }
+        public string urunadi { get; set; }
         public double fiyat { get; set; }
 
     }
