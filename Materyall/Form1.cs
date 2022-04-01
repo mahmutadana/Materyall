@@ -189,6 +189,18 @@ namespace Materyall
             //Yıllık plan ana dersleri göster.
             dgv_talep_anadersler_yillik.DataSource = vtislemleri.dgv_icin_y_anaderleri_getir(BirOgt.oid, BirOgt.yili);
 
+            //Günlük plan ana dersleri göster.
+            dgv_talep_anadersler_gunluk.DataSource = vtislemleri.dgv_icin_g_anaderleri_getir(BirOgt.oid, BirOgt.yili);
+
+
+            //Serbest etkinlik derslerini göster.
+            dgv_talep_serbestdersler_yillik.DataSource = vtislemleri.dgv_icin_s_dersleri_getir(BirOgt.oid, BirOgt.yili);
+
+
+            //Defter taleplerini göster.
+            dgv_talep_defterler.DataSource = vtislemleri.dgv_icin_defterleri_getir(BirOgt.oid, BirOgt.yili);
+
+
 
         }
 
@@ -918,6 +930,12 @@ namespace Materyall
         private void linklbl_talep_anadersler_secimiekle_yillik_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
+            if (cb_talep_anadersler_yillik.SelectedIndex < 0)
+            {
+                MessageBox.Show("Ders seçmelisiniz.");
+                return;
+            }
+
             //Yıllık ana dersler ekle.
             y_anaders_ekle_secim();
 
@@ -949,6 +967,10 @@ namespace Materyall
 
         private void dgv_talep_anadersler_yillik_doubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
 
             string dersid = dgv_talep_anadersler_yillik.Rows[e.RowIndex].Cells[metinler.neyebakalim_y_anaders_urunid_adi].Value.ToString();
 
@@ -957,6 +979,8 @@ namespace Materyall
             anaders_yillik_plan_talep_sil(dersid);
 
         }
+
+
 
 
 
@@ -1094,8 +1118,6 @@ namespace Materyall
 
 
 
-
-
                     //Ürünü bulduysak işlem yapıp çıkıyoruz.
                     return;
 
@@ -1110,13 +1132,384 @@ namespace Materyall
 
 
 
+        private void linklbl_talep_secimiekle_anadersler_gunluk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            if (cb_talep_anadersler_gunluk.SelectedIndex < 0)
+            {
+                MessageBox.Show("Ders seçmelisiniz.");
+                return;
+            }
+
+
+            g_anaders_ekle_secim();
+
+        }
+
+
+
+        private void g_anaders_ekle_secim()
+        {
+
+
+
+            string kayitsonucu = vtislemleri.ekle_g_anaders(BirOgt.oid, filtrelenenGunlukPlaniOlanDerslers[cb_talep_anadersler_gunluk.SelectedIndex].gunlukdersid, filtrelenenGunlukPlaniOlanDerslers[cb_talep_anadersler_gunluk.SelectedIndex].fiyat);
+
+            if (kayitsonucu.All(char.IsNumber))
+            {
+
+                //  MessageBox.Show("başarılı: " + kayitsonucu);
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(kayitsonucu);
+            }
+
+
+        }
+
+
+
+
+
+        private void linklbl_talep_tumanadersleriekle_gunluk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+
+            g_anaders_ekle_sinif_duzeyi_tum_dersler();
+
+
+        }
+
+
+
+        private void dgv_talep_anadersler_gunluk_doubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+
+            string dersid = dgv_talep_anadersler_gunluk.Rows[e.RowIndex].Cells[metinler.neyebakalim_g_anaders_urunid_adi].Value.ToString();
+
+            //  MessageBox.Show(dersid);
+
+            anaders_gunluk_plan_talep_sil(dersid);
+
+        }
+
+
+
+        private void anaders_gunluk_plan_talep_sil(string dersid)
+        {
+
+            if (dersid.Length < 1)
+            {
+                return;
+            }
+
+            string sonuc = vtislemleri.sil_g_anaders(BirOgt.oid, int.Parse(dersid));
+
+            if (sonuc == metinler.islembasarili)
+            {
+
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(dersid + " silinemedi.");
+            }
+
+
+        }
+
+
+
+        private void g_anaders_ekle_sinif_duzeyi_tum_dersler()
+        {
+
+
+            //Döngü ile sınıf düzeylerine bakalım ve seçili sınıf düzeyine uygun olan ana dersleri ekleyelim.
+
+            int derssayac = 0;
+
+            foreach (FiltrelenenGunlukPlaniOlanDersler drs in filtrelenenGunlukPlaniOlanDerslers)
+            {
+
+                if (drs.dersadi.Substring(0, BirOgt.sinifi.ToString().Length) == BirOgt.sinifi.ToString())
+                {
+
+                    string kayitsonucu = vtislemleri.ekle_g_anaders(BirOgt.oid, filtrelenenGunlukPlaniOlanDerslers[derssayac].gunlukdersid, filtrelenenGunlukPlaniOlanDerslers[derssayac].fiyat);
+
+                    if (!kayitsonucu.All(char.IsNumber))
+
+                    {
+                        MessageBox.Show(kayitsonucu);
+                    }
+
+
+                }
+
+                derssayac++;
+            }
+
+
+            //  MessageBox.Show("başarılı: " + kayitsonucu);
+            varsa_talepBolumu();
+
+
+
+        }
+
+
+
+
+
+
+        //serbest etkinliklerle ilgili işlemler.
+
+
+        private void linklbl_talep_secimiekle_serbest_yillik_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (cb_talep_serbestdersler_yillik.SelectedIndex < 0)
+            {
+                MessageBox.Show("Ders seçmelisiniz.");
+                return;
+            }
+
+
+            serbest_etkinlik_ekle_secim();
+        }
+
+
+
+        private void serbest_etkinlik_ekle_secim()
+        {
+
+
+
+            string kayitsonucu = vtislemleri.ekle_s_ders(BirOgt.oid, filtrelenenSerbestEtkinlikDerslers[cb_talep_serbestdersler_yillik.SelectedIndex].serbestdersid);
+
+            if (kayitsonucu.All(char.IsNumber))
+            {
+
+                //  MessageBox.Show("başarılı: " + kayitsonucu);
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(kayitsonucu);
+            }
+
+
+        }
+
+        private void linklbl_talep_tumdersleriekle_serbest_yillik_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            serbest_ders_ekle_tum_dersler();
+
+        }
+
+
+        private void serbest_ders_ekle_tum_dersler()
+        {
+
+
+            //Döngü ile sınıf düzeylerine bakalım ve seçili sınıf düzeyine uygun olan ana dersleri ekleyelim.
+
+            int derssayac = 0;
+
+            foreach (FiltrelenenSerbestEtkinlikDersleri drs in filtrelenenSerbestEtkinlikDerslers)
+            {
+
+                
+
+                    string kayitsonucu = vtislemleri.ekle_s_ders(BirOgt.oid, filtrelenenSerbestEtkinlikDerslers[derssayac].serbestdersid);
+
+                    if (!kayitsonucu.All(char.IsNumber))
+
+                    {
+                        MessageBox.Show(kayitsonucu);
+                    }
+
+
+                derssayac++;
+            }
+
+
+            //  MessageBox.Show("başarılı: " + kayitsonucu);
+            varsa_talepBolumu();
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+        private void dgv_talep_serbestdersler_doubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+
+            string dersid = dgv_talep_serbestdersler_yillik.Rows[e.RowIndex].Cells[metinler.neyebakalim_s_ders_urunid_adi].Value.ToString();
+
+            //  MessageBox.Show(dersid);
+
+            serbest_dersler_talep_sil(dersid);
+
+        }
+
+
+
+        private void serbest_dersler_talep_sil(string dersid)
+        {
+
+            if (dersid.Length < 1)
+            {
+                return;
+            }
+
+            string sonuc = vtislemleri.sil_s_anaders(BirOgt.oid, int.Parse(dersid));
+
+            if (sonuc == metinler.islembasarili)
+            {
+
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(dersid + " silinemedi.");
+            }
+
+
+        }
+
+        private void linklbl_talep_defterekle_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (cb_talep_defter.SelectedIndex < 0)
+            {
+                MessageBox.Show("Ders seçmelisiniz.");
+                return;
+            }
+
+
+            defter_ekle_secim();
+
+        
+        }
+
+
+        
+           
+
+
+
+        private void defter_ekle_secim()
+        {
+
+
+
+            string kayitsonucu = vtislemleri.ekle_defter(BirOgt.oid, filtrelenenDefterlers[cb_talep_defter.SelectedIndex].defterkodu, filtrelenenDefterlers[cb_talep_defter.SelectedIndex].fiyat);
+
+            if (kayitsonucu.All(char.IsNumber))
+            {
+
+                //  MessageBox.Show("başarılı: " + kayitsonucu);
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(kayitsonucu);
+            }
+
+
+        }
+
+
+
+
+
+        private void dgv_talep_defter_doubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+            string dersid = dgv_talep_defterler.Rows[e.RowIndex].Cells[metinler.neyebakalim_defter_urunid_adi].Value.ToString();
+
+            //  MessageBox.Show(dersid);
+
+            defter_talep_sil(dersid);
+
+        }
+
+
+
+        private void defter_talep_sil(string dersid)
+        {
+
+            if (dersid.Length < 1)
+            {
+                return;
+            }
+
+            string sonuc = vtislemleri.sil_defter(BirOgt.oid, int.Parse(dersid));
+
+            if (sonuc == metinler.islembasarili)
+            {
+
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(dersid + " silinemedi.");
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //Sınıf sonu.
     }
-
-
-
-
 
 
 }

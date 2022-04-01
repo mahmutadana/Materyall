@@ -17,8 +17,16 @@ namespace Materyall
         public string neyebakalim_ekurunler_cd_pdf_tablo = "tlp_ekurunler_tbl";
         public string neyebakalim_ekurunler_cd_pdf_urunid_adi = "urunkodu";
 
+        public string neyebakalim_g_anaders_tablo = "tlp_g_anadersler_tbl";
+        public string neyebakalim_g_anaders_urunid_adi = "dersid";
 
 
+        public string neyebakalim_s_ders_tablo = "tlp_y_serbestler_tbl";
+        public string neyebakalim_s_ders_urunid_adi = "dersid";
+
+
+        public string neyebakalim_defter_tablo = "tlp_defterler_tbl";
+        public string neyebakalim_defter_urunid_adi = "defterkodu";
 
 
 

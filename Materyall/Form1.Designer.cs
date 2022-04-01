@@ -79,7 +79,9 @@
             this.btn_taleplerial_sunucudan = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tab_muhasebe = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label22 = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.tb_sablon_nobetyeri_sablonadi = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -135,8 +137,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btn_varsayilanlariguncelle = new System.Windows.Forms.Button();
             this.lbl_bilgi = new System.Windows.Forms.Label();
-            this.tab_muhasebe = new System.Windows.Forms.TabPage();
-            this.label22 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -245,6 +246,7 @@
             this.linklbl_talep_defterekle.TabIndex = 30;
             this.linklbl_talep_defterekle.TabStop = true;
             this.linklbl_talep_defterekle.Text = "Seçimi Ekle";
+            this.linklbl_talep_defterekle.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_talep_defterekle_LinkClicked);
             // 
             // dgv_talep_defterler
             // 
@@ -253,6 +255,7 @@
             this.dgv_talep_defterler.Name = "dgv_talep_defterler";
             this.dgv_talep_defterler.Size = new System.Drawing.Size(374, 133);
             this.dgv_talep_defterler.TabIndex = 29;
+            this.dgv_talep_defterler.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_talep_defter_doubleClick);
             // 
             // cb_talep_defter
             // 
@@ -329,6 +332,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.linkLabel1);
             this.groupBox7.Controls.Add(this.lbl_talep_sosyalkulupbasimtarihi);
             this.groupBox7.Controls.Add(this.lbl_talep_sosyalkuluptaleptatihi);
             this.groupBox7.Controls.Add(this.tb_talep_sosyalkulupikinciogretmen);
@@ -466,6 +470,7 @@
             this.linklbl_talep_tumdersleriekle_serbest_yillik.TabStop = true;
             this.linklbl_talep_tumdersleriekle_serbest_yillik.Text = "Tümünü Ekle";
             this.linklbl_talep_tumdersleriekle_serbest_yillik.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linklbl_talep_tumdersleriekle_serbest_yillik.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_talep_tumdersleriekle_serbest_yillik_LinkClicked);
             // 
             // linklbl_talep_secimiekle_serbest_yillik
             // 
@@ -476,6 +481,7 @@
             this.linklbl_talep_secimiekle_serbest_yillik.TabIndex = 30;
             this.linklbl_talep_secimiekle_serbest_yillik.TabStop = true;
             this.linklbl_talep_secimiekle_serbest_yillik.Text = "Seçimi Ekle";
+            this.linklbl_talep_secimiekle_serbest_yillik.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_talep_secimiekle_serbest_yillik_LinkClicked);
             // 
             // dgv_talep_serbestdersler_yillik
             // 
@@ -484,6 +490,7 @@
             this.dgv_talep_serbestdersler_yillik.Name = "dgv_talep_serbestdersler_yillik";
             this.dgv_talep_serbestdersler_yillik.Size = new System.Drawing.Size(374, 133);
             this.dgv_talep_serbestdersler_yillik.TabIndex = 29;
+            this.dgv_talep_serbestdersler_yillik.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_talep_serbestdersler_doubleClick);
             // 
             // cb_talep_serbestdersler_yillik
             // 
@@ -520,6 +527,7 @@
             this.linklbl_talep_tumanadersleriekle_gunluk.TabStop = true;
             this.linklbl_talep_tumanadersleriekle_gunluk.Text = "Tüm Ana\r\nDersleri Ekle";
             this.linklbl_talep_tumanadersleriekle_gunluk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linklbl_talep_tumanadersleriekle_gunluk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_talep_tumanadersleriekle_gunluk_LinkClicked);
             // 
             // linklbl_talep_secimiekle_anadersler_gunluk
             // 
@@ -530,6 +538,7 @@
             this.linklbl_talep_secimiekle_anadersler_gunluk.TabIndex = 30;
             this.linklbl_talep_secimiekle_anadersler_gunluk.TabStop = true;
             this.linklbl_talep_secimiekle_anadersler_gunluk.Text = "Seçimi Ekle";
+            this.linklbl_talep_secimiekle_anadersler_gunluk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_talep_secimiekle_anadersler_gunluk_LinkClicked);
             // 
             // dgv_talep_anadersler_gunluk
             // 
@@ -538,6 +547,7 @@
             this.dgv_talep_anadersler_gunluk.Name = "dgv_talep_anadersler_gunluk";
             this.dgv_talep_anadersler_gunluk.Size = new System.Drawing.Size(374, 133);
             this.dgv_talep_anadersler_gunluk.TabIndex = 29;
+            this.dgv_talep_anadersler_gunluk.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_talep_anadersler_gunluk_doubleClick);
             // 
             // cb_talep_anadersler_gunluk
             // 
@@ -707,6 +717,16 @@
             this.tabPage2.Text = "Defter Basım İşlemleri";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // tab_muhasebe
+            // 
+            this.tab_muhasebe.Location = new System.Drawing.Point(4, 22);
+            this.tab_muhasebe.Name = "tab_muhasebe";
+            this.tab_muhasebe.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_muhasebe.Size = new System.Drawing.Size(1204, 842);
+            this.tab_muhasebe.TabIndex = 5;
+            this.tab_muhasebe.Text = "Muhasebe";
+            this.tab_muhasebe.UseVisualStyleBackColor = true;
+            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.label22);
@@ -718,6 +738,16 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Diğer İşlemler";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(16, 610);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(583, 13);
+            this.label22.TabIndex = 7;
+            this.label22.Text = "Bilgi: CD vr PDF ek ürünler olarak geçmektedir. (VT\'de) Bu tabloya bakarken yılı " +
+    "esas alıp ürün adını /CD ve PDF) esas alır.";
             // 
             // groupBox10
             // 
@@ -1315,25 +1345,19 @@
             this.lbl_bilgi.Text = "Bilgi...";
             this.lbl_bilgi.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // tab_muhasebe
+            // linkLabel1
             // 
-            this.tab_muhasebe.Location = new System.Drawing.Point(4, 22);
-            this.tab_muhasebe.Name = "tab_muhasebe";
-            this.tab_muhasebe.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_muhasebe.Size = new System.Drawing.Size(1204, 842);
-            this.tab_muhasebe.TabIndex = 5;
-            this.tab_muhasebe.Text = "Muhasebe";
-            this.tab_muhasebe.UseVisualStyleBackColor = true;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(16, 610);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(583, 13);
-            this.label22.TabIndex = 7;
-            this.label22.Text = "Bilgi: CD vr PDF ek ürünler olarak geçmektedir. (VT\'de) Bu tabloya bakarken yılı " +
-    "esas alıp ürün adını /CD ve PDF) esas alır.";
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.linkLabel1.ForeColor = System.Drawing.Color.Red;
+            this.linkLabel1.LinkColor = System.Drawing.Color.Red;
+            this.linkLabel1.Location = new System.Drawing.Point(5, 92);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(72, 20);
+            this.linkLabel1.TabIndex = 35;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Talebi Sil";
+            this.toolTip1.SetToolTip(this.linkLabel1, "Kulüp talebini veritabanından siler.");
             // 
             // Form1
             // 
@@ -1501,6 +1525,7 @@
         private System.Windows.Forms.Label lbl_bilgi;
         private System.Windows.Forms.TabPage tab_muhasebe;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 

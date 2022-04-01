@@ -1417,6 +1417,312 @@ namespace Materyall
 
 
 
+        //günlük plan için 3 komut 
+
+        public string ekle_g_anaders(int oid, int dersid, double fiyat)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+            long sonid = 0;
+
+            if (bu_talep_dahaoncedenvarmi(oid, dersid, metinler.neyebakalim_g_anaders_tablo, metinler.neyebakalim_g_anaders_urunid_adi))
+            {
+                sonuc = metinler.mukerrerkayitbilgisitalep;
+
+                return sonuc;
+            }
+
+
+            //Mükerrer değil, devam edelim. (Yeni kayıt)
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "INSERT INTO " + metinler.neyebakalim_g_anaders_tablo + " " +
+                    "(oid, dersid, fiyat, taleptarihi) " +
+                    "VALUES (" + oid + "," + dersid + "," + fiyat + ", now())";
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+                else
+                {
+
+                }
+
+                sonid = cmd.LastInsertedId;
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            if (sonid > 0)
+            {
+                return sonid.ToString();
+            }
+
+            return sonuc;
+
+        }
+
+
+        public string sil_g_anaders(int oid, int dersid)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "DELETE FROM " + metinler.neyebakalim_g_anaders_tablo + " " +
+                    "WHERE oid=" + oid + " AND dersid=" + dersid;
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+
+
+            return sonuc;
+
+        }
+
+
+
+        public DataTable dgv_icin_g_anaderleri_getir(int oid, String yili)
+        {
+
+
+            baglantiKur();
+
+            //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
+            string sql = "SELECT b.dersadi, a.dersid, a.taleptarihi, a.basimtarihi, a.fiyat FROM " + metinler.neyebakalim_g_anaders_tablo + " a LEFT JOIN sis_tumdersler_tbl b ON a.dersid=b.dersid WHERE b.yil='" + yili + "' AND oid=" + oid;
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
+
+
+
+
+
+
+        //SERBEST ETKİNLİK İŞLEMLERİ VT
+
+        
+        public string ekle_s_ders(int oid, int dersid)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+            long sonid = 0;
+
+            if (bu_talep_dahaoncedenvarmi(oid, dersid, metinler.neyebakalim_s_ders_tablo, metinler.neyebakalim_s_ders_urunid_adi))
+            {
+                sonuc = metinler.mukerrerkayitbilgisitalep;
+
+                return sonuc;
+            }
+
+
+            //Mükerrer değil, devam edelim. (Yeni kayıt)
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "INSERT INTO " + metinler.neyebakalim_s_ders_tablo + " " +
+                    "(oid, dersid, taleptarihi) " +
+                    "VALUES (" + oid + "," + dersid + ", now())";
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+                else
+                {
+
+                }
+
+                sonid = cmd.LastInsertedId;
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            if (sonid > 0)
+            {
+                return sonid.ToString();
+            }
+
+            return sonuc;
+
+        }
+
+
+        public string sil_s_anaders(int oid, int dersid)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "DELETE FROM " + metinler.neyebakalim_s_ders_tablo + " " +
+                    "WHERE oid=" + oid + " AND dersid=" + dersid;
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+
+
+            return sonuc;
+
+        }
+
+
+
+        public DataTable dgv_icin_s_dersleri_getir(int oid, String yili)
+        {
+
+
+            baglantiKur();
+
+            //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
+            string sql = "SELECT b.dersadi, a.dersid, a.taleptarihi, a.basimtarihi FROM " + metinler.neyebakalim_s_ders_tablo + " a LEFT JOIN sis_serbestetkinlikler_tbl b ON a.dersid=b.dersid WHERE b.yil='" + yili + "' AND oid=" + oid;
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
+
+
+
+
+
+
+
 
 
 
@@ -1468,6 +1774,152 @@ namespace Materyall
 
 
 
+
+
+        //DEFTERLERİ EKLE.
+        //
+
+        public string ekle_defter(int oid, int dersid, double fiyat)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+            long sonid = 0;
+
+            if (bu_talep_dahaoncedenvarmi(oid, dersid, metinler.neyebakalim_defter_tablo, metinler.neyebakalim_defter_urunid_adi))
+            {
+                sonuc = metinler.mukerrerkayitbilgisitalep;
+
+                return sonuc;
+            }
+
+
+            //Mükerrer değil, devam edelim. (Yeni kayıt)
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "INSERT INTO " + metinler.neyebakalim_defter_tablo + " " +
+                    "(oid, defterkodu, fiyat, taleptarihi) " +
+                    "VALUES (" + oid + "," + dersid + "," + fiyat + ", now())";
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+                else
+                {
+
+                }
+
+                sonid = cmd.LastInsertedId;
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            if (sonid > 0)
+            {
+                return sonid.ToString();
+            }
+
+            return sonuc;
+
+        }
+
+
+        public string sil_defter(int oid, int dersid)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "DELETE FROM " + metinler.neyebakalim_defter_tablo + " " +
+                    "WHERE oid=" + oid + " AND defterkodu=" + dersid;
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return sonuc;
+
+        }
+
+
+
+        public DataTable dgv_icin_defterleri_getir(int oid, String yili)
+        {
+
+
+            baglantiKur();
+
+            //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
+            string sql = "SELECT b.defteradi, a.defterkodu, a.taleptarihi, a.basimtarihi, a.fiyat FROM " + metinler.neyebakalim_defter_tablo + " a LEFT JOIN sis_defterler_tbl b ON a.defterkodu=b.defterkodu WHERE b.yil='" + yili + "' AND oid=" + oid;
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
 
 
 
