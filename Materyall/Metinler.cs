@@ -28,8 +28,11 @@ namespace Materyall
         public string neyebakalim_defter_tablo = "tlp_defterler_tbl";
         public string neyebakalim_defter_urunid_adi = "defterkodu";
 
+        public string neyebakalim_sosyalkulup_tablo = "tlp_sosyalkulup_tbl";
+        public string neyebakalim_sosyalkulup_urunid_adi = "kulupkodu";
 
-
+        //Bunda id yok. Sadece bağladığımız öğretmen id'si var.
+        public string neyebakalim_digerzumreogretmenleri_tablo = "tlp_zumreogretmenleri_tbl";
 
 
         public string ogretmenlogo_ustyolu = @"C:\Materyall\Logolar";

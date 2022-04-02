@@ -33,7 +33,6 @@
             this.cb_yili = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.linklbl_talep_defterekle = new System.Windows.Forms.LinkLabel();
             this.dgv_talep_defterler = new System.Windows.Forms.DataGridView();
@@ -45,6 +44,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.dgv_talep_nobetyerleri = new System.Windows.Forms.DataGridView();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.linklbl_talep_kulup_sil = new System.Windows.Forms.LinkLabel();
             this.lbl_talep_sosyalkulupbasimtarihi = new System.Windows.Forms.Label();
             this.lbl_talep_sosyalkuluptaleptatihi = new System.Windows.Forms.Label();
             this.tb_talep_sosyalkulupikinciogretmen = new System.Windows.Forms.TextBox();
@@ -137,6 +137,10 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btn_varsayilanlariguncelle = new System.Windows.Forms.Button();
             this.lbl_bilgi = new System.Windows.Forms.Label();
+            this.linklbl_talep_kulup = new System.Windows.Forms.LinkLabel();
+            this.linklbl_zumre_otomatikgetir = new System.Windows.Forms.LinkLabel();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -162,6 +166,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_sablon_nobetyeri)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_logo)).BeginInit();
+            this.groupBox11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -195,12 +201,11 @@
             this.tabControl1.Location = new System.Drawing.Point(393, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1212, 868);
+            this.tabControl1.Size = new System.Drawing.Size(1467, 570);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.groupBox11);
             this.tabPage3.Controls.Add(this.groupBox9);
             this.tabPage3.Controls.Add(this.groupBox8);
             this.tabPage3.Controls.Add(this.groupBox7);
@@ -210,20 +215,11 @@
             this.tabPage3.Controls.Add(this.groupBox3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1204, 842);
+            this.tabPage3.Size = new System.Drawing.Size(1459, 544);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Talep Girişleri";
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
-            // 
-            // groupBox11
-            // 
-            this.groupBox11.Location = new System.Drawing.Point(488, 472);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(696, 351);
-            this.groupBox11.TabIndex = 7;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Müşteri Ara";
             // 
             // groupBox9
             // 
@@ -250,6 +246,7 @@
             // 
             // dgv_talep_defterler
             // 
+            this.dgv_talep_defterler.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv_talep_defterler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_talep_defterler.Location = new System.Drawing.Point(6, 67);
             this.dgv_talep_defterler.Name = "dgv_talep_defterler";
@@ -276,9 +273,9 @@
             this.groupBox8.Controls.Add(this.lbl_talep_nobet_secilensablon);
             this.groupBox8.Controls.Add(this.label17);
             this.groupBox8.Controls.Add(this.dgv_talep_nobetyerleri);
-            this.groupBox8.Location = new System.Drawing.Point(964, 18);
+            this.groupBox8.Location = new System.Drawing.Point(970, 239);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(227, 431);
+            this.groupBox8.Size = new System.Drawing.Size(464, 210);
             this.groupBox8.TabIndex = 5;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Nöbet Yerleri (Nöbet Defteri İçin)";
@@ -287,7 +284,7 @@
             // linklbl_talep_nobetyeri_temizle
             // 
             this.linklbl_talep_nobetyeri_temizle.AutoSize = true;
-            this.linklbl_talep_nobetyeri_temizle.Location = new System.Drawing.Point(167, 408);
+            this.linklbl_talep_nobetyeri_temizle.Location = new System.Drawing.Point(394, 173);
             this.linklbl_talep_nobetyeri_temizle.Name = "linklbl_talep_nobetyeri_temizle";
             this.linklbl_talep_nobetyeri_temizle.Size = new System.Drawing.Size(53, 13);
             this.linklbl_talep_nobetyeri_temizle.TabIndex = 54;
@@ -296,10 +293,11 @@
             // 
             // dgv_talep_nobetsablonlari
             // 
+            this.dgv_talep_nobetsablonlari.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv_talep_nobetsablonlari.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_talep_nobetsablonlari.Location = new System.Drawing.Point(6, 288);
+            this.dgv_talep_nobetsablonlari.Location = new System.Drawing.Point(278, 38);
             this.dgv_talep_nobetsablonlari.Name = "dgv_talep_nobetsablonlari";
-            this.dgv_talep_nobetsablonlari.Size = new System.Drawing.Size(212, 117);
+            this.dgv_talep_nobetsablonlari.Size = new System.Drawing.Size(173, 117);
             this.dgv_talep_nobetsablonlari.TabIndex = 53;
             // 
             // lbl_talep_nobet_secilensablon
@@ -316,7 +314,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label17.Location = new System.Drawing.Point(6, 272);
+            this.label17.Location = new System.Drawing.Point(275, 19);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(126, 13);
             this.label17.TabIndex = 51;
@@ -324,33 +322,50 @@
             // 
             // dgv_talep_nobetyerleri
             // 
+            this.dgv_talep_nobetyerleri.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv_talep_nobetyerleri.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_talep_nobetyerleri.Location = new System.Drawing.Point(6, 38);
             this.dgv_talep_nobetyerleri.Name = "dgv_talep_nobetyerleri";
-            this.dgv_talep_nobetyerleri.Size = new System.Drawing.Size(214, 231);
+            this.dgv_talep_nobetyerleri.Size = new System.Drawing.Size(266, 162);
             this.dgv_talep_nobetyerleri.TabIndex = 48;
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.linkLabel1);
+            this.groupBox7.Controls.Add(this.linklbl_talep_kulup);
+            this.groupBox7.Controls.Add(this.linklbl_talep_kulup_sil);
             this.groupBox7.Controls.Add(this.lbl_talep_sosyalkulupbasimtarihi);
             this.groupBox7.Controls.Add(this.lbl_talep_sosyalkuluptaleptatihi);
             this.groupBox7.Controls.Add(this.tb_talep_sosyalkulupikinciogretmen);
             this.groupBox7.Controls.Add(this.label16);
             this.groupBox7.Controls.Add(this.label15);
             this.groupBox7.Controls.Add(this.cb_talep_sosyalkulupadi);
-            this.groupBox7.Location = new System.Drawing.Point(5, 666);
+            this.groupBox7.Location = new System.Drawing.Point(12, 455);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(476, 115);
+            this.groupBox7.Size = new System.Drawing.Size(946, 84);
             this.groupBox7.TabIndex = 4;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Sosyal Kulüp";
+            // 
+            // linklbl_talep_kulup_sil
+            // 
+            this.linklbl_talep_kulup_sil.AutoSize = true;
+            this.linklbl_talep_kulup_sil.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.linklbl_talep_kulup_sil.ForeColor = System.Drawing.Color.Red;
+            this.linklbl_talep_kulup_sil.LinkColor = System.Drawing.Color.Red;
+            this.linklbl_talep_kulup_sil.Location = new System.Drawing.Point(12, 48);
+            this.linklbl_talep_kulup_sil.Name = "linklbl_talep_kulup_sil";
+            this.linklbl_talep_kulup_sil.Size = new System.Drawing.Size(65, 18);
+            this.linklbl_talep_kulup_sil.TabIndex = 35;
+            this.linklbl_talep_kulup_sil.TabStop = true;
+            this.linklbl_talep_kulup_sil.Text = "Kulüp Sil";
+            this.toolTip1.SetToolTip(this.linklbl_talep_kulup_sil, "Kulüp talebini veritabanından siler.");
+            this.linklbl_talep_kulup_sil.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_talep_kulup_sil_LinkClicked);
             // 
             // lbl_talep_sosyalkulupbasimtarihi
             // 
             this.lbl_talep_sosyalkulupbasimtarihi.AutoSize = true;
             this.lbl_talep_sosyalkulupbasimtarihi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lbl_talep_sosyalkulupbasimtarihi.Location = new System.Drawing.Point(395, 99);
+            this.lbl_talep_sosyalkulupbasimtarihi.Location = new System.Drawing.Point(550, 51);
             this.lbl_talep_sosyalkulupbasimtarihi.Name = "lbl_talep_sosyalkulupbasimtarihi";
             this.lbl_talep_sosyalkulupbasimtarihi.Size = new System.Drawing.Size(64, 13);
             this.lbl_talep_sosyalkulupbasimtarihi.TabIndex = 34;
@@ -360,7 +375,7 @@
             // 
             this.lbl_talep_sosyalkuluptaleptatihi.AutoSize = true;
             this.lbl_talep_sosyalkuluptaleptatihi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lbl_talep_sosyalkuluptaleptatihi.Location = new System.Drawing.Point(83, 99);
+            this.lbl_talep_sosyalkuluptaleptatihi.Location = new System.Drawing.Point(83, 52);
             this.lbl_talep_sosyalkuluptaleptatihi.Name = "lbl_talep_sosyalkuluptaleptatihi";
             this.lbl_talep_sosyalkuluptaleptatihi.Size = new System.Drawing.Size(63, 13);
             this.lbl_talep_sosyalkuluptaleptatihi.TabIndex = 33;
@@ -370,15 +385,15 @@
             // 
             this.tb_talep_sosyalkulupikinciogretmen.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tb_talep_sosyalkulupikinciogretmen.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_talep_sosyalkulupikinciogretmen.Location = new System.Drawing.Point(86, 59);
+            this.tb_talep_sosyalkulupikinciogretmen.Location = new System.Drawing.Point(553, 14);
             this.tb_talep_sosyalkulupikinciogretmen.Name = "tb_talep_sosyalkulupikinciogretmen";
-            this.tb_talep_sosyalkulupikinciogretmen.Size = new System.Drawing.Size(380, 32);
+            this.tb_talep_sosyalkulupikinciogretmen.Size = new System.Drawing.Size(301, 32);
             this.tb_talep_sosyalkulupikinciogretmen.TabIndex = 32;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 67);
+            this.label16.Location = new System.Drawing.Point(479, 28);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(68, 13);
             this.label16.TabIndex = 31;
@@ -404,14 +419,15 @@
             this.cb_talep_sosyalkulupadi.Name = "cb_talep_sosyalkulupadi";
             this.cb_talep_sosyalkulupadi.Size = new System.Drawing.Size(380, 33);
             this.cb_talep_sosyalkulupadi.TabIndex = 29;
-            this.cb_talep_sosyalkulupadi.SelectedIndexChanged += new System.EventHandler(this.cb_talep_sosyalkulupadi_SelectedIndexChanged);
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.linkLabel1);
+            this.groupBox6.Controls.Add(this.linklbl_zumre_otomatikgetir);
             this.groupBox6.Controls.Add(this.tb_talep_digerzumreogretmenleri);
             this.groupBox6.Controls.Add(this.linklbl_talep_digerzumreogretmeniekle);
             this.groupBox6.Controls.Add(this.dgv_talep_digerzumreogretmenleri);
-            this.groupBox6.Location = new System.Drawing.Point(488, 18);
+            this.groupBox6.Location = new System.Drawing.Point(964, 18);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(470, 210);
             this.groupBox6.TabIndex = 3;
@@ -424,28 +440,30 @@
             this.tb_talep_digerzumreogretmenleri.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tb_talep_digerzumreogretmenleri.Location = new System.Drawing.Point(6, 26);
             this.tb_talep_digerzumreogretmenleri.Name = "tb_talep_digerzumreogretmenleri";
-            this.tb_talep_digerzumreogretmenleri.Size = new System.Drawing.Size(374, 32);
+            this.tb_talep_digerzumreogretmenleri.Size = new System.Drawing.Size(272, 32);
             this.tb_talep_digerzumreogretmenleri.TabIndex = 20;
             // 
             // linklbl_talep_digerzumreogretmeniekle
             // 
             this.linklbl_talep_digerzumreogretmeniekle.AutoSize = true;
-            this.linklbl_talep_digerzumreogretmeniekle.Location = new System.Drawing.Point(400, 25);
+            this.linklbl_talep_digerzumreogretmeniekle.Location = new System.Drawing.Point(354, 31);
             this.linklbl_talep_digerzumreogretmeniekle.Name = "linklbl_talep_digerzumreogretmeniekle";
-            this.linklbl_talep_digerzumreogretmeniekle.Size = new System.Drawing.Size(53, 26);
+            this.linklbl_talep_digerzumreogretmeniekle.Size = new System.Drawing.Size(77, 13);
             this.linklbl_talep_digerzumreogretmeniekle.TabIndex = 30;
             this.linklbl_talep_digerzumreogretmeniekle.TabStop = true;
-            this.linklbl_talep_digerzumreogretmeniekle.Text = "Öğretmen\r\nEkle";
+            this.linklbl_talep_digerzumreogretmeniekle.Text = "Öğretmen Ekle";
             this.linklbl_talep_digerzumreogretmeniekle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.linklbl_talep_digerzumreogretmeniekle.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel8_LinkClicked);
+            this.linklbl_talep_digerzumreogretmeniekle.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_talep_digerzumreogretmeniekle_LinkClicked);
             // 
             // dgv_talep_digerzumreogretmenleri
             // 
+            this.dgv_talep_digerzumreogretmenleri.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv_talep_digerzumreogretmenleri.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_talep_digerzumreogretmenleri.Location = new System.Drawing.Point(6, 67);
             this.dgv_talep_digerzumreogretmenleri.Name = "dgv_talep_digerzumreogretmenleri";
-            this.dgv_talep_digerzumreogretmenleri.Size = new System.Drawing.Size(374, 133);
+            this.dgv_talep_digerzumreogretmenleri.Size = new System.Drawing.Size(272, 133);
             this.dgv_talep_digerzumreogretmenleri.TabIndex = 29;
+            this.dgv_talep_digerzumreogretmenleri.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_talep_digerzumreogretmenleri_doubleClick);
             // 
             // groupBox5
             // 
@@ -485,6 +503,7 @@
             // 
             // dgv_talep_serbestdersler_yillik
             // 
+            this.dgv_talep_serbestdersler_yillik.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv_talep_serbestdersler_yillik.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_talep_serbestdersler_yillik.Location = new System.Drawing.Point(6, 67);
             this.dgv_talep_serbestdersler_yillik.Name = "dgv_talep_serbestdersler_yillik";
@@ -510,7 +529,7 @@
             this.groupBox4.Controls.Add(this.linklbl_talep_secimiekle_anadersler_gunluk);
             this.groupBox4.Controls.Add(this.dgv_talep_anadersler_gunluk);
             this.groupBox4.Controls.Add(this.cb_talep_anadersler_gunluk);
-            this.groupBox4.Location = new System.Drawing.Point(11, 450);
+            this.groupBox4.Location = new System.Drawing.Point(488, 18);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(470, 210);
             this.groupBox4.TabIndex = 1;
@@ -542,6 +561,7 @@
             // 
             // dgv_talep_anadersler_gunluk
             // 
+            this.dgv_talep_anadersler_gunluk.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv_talep_anadersler_gunluk.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_talep_anadersler_gunluk.Location = new System.Drawing.Point(6, 67);
             this.dgv_talep_anadersler_gunluk.Name = "dgv_talep_anadersler_gunluk";
@@ -629,6 +649,7 @@
             this.dgv_talep_anadersler_yillik.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_talep_anadersler_yillik.Location = new System.Drawing.Point(6, 67);
             this.dgv_talep_anadersler_yillik.Name = "dgv_talep_anadersler_yillik";
+            this.dgv_talep_anadersler_yillik.ReadOnly = true;
             this.dgv_talep_anadersler_yillik.Size = new System.Drawing.Size(374, 133);
             this.dgv_talep_anadersler_yillik.TabIndex = 29;
             this.dgv_talep_anadersler_yillik.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_talep_anadersler_yillik_doubleClick);
@@ -1345,25 +1366,68 @@
             this.lbl_bilgi.Text = "Bilgi...";
             this.lbl_bilgi.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // linklbl_talep_kulup
+            // 
+            this.linklbl_talep_kulup.AutoSize = true;
+            this.linklbl_talep_kulup.Location = new System.Drawing.Point(873, 28);
+            this.linklbl_talep_kulup.Name = "linklbl_talep_kulup";
+            this.linklbl_talep_kulup.Size = new System.Drawing.Size(50, 13);
+            this.linklbl_talep_kulup.TabIndex = 36;
+            this.linklbl_talep_kulup.TabStop = true;
+            this.linklbl_talep_kulup.Text = "KAYDET";
+            this.linklbl_talep_kulup.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_talep_kulup_LinkClicked);
+            // 
+            // linklbl_zumre_otomatikgetir
+            // 
+            this.linklbl_zumre_otomatikgetir.AutoSize = true;
+            this.linklbl_zumre_otomatikgetir.Location = new System.Drawing.Point(354, 87);
+            this.linklbl_zumre_otomatikgetir.Name = "linklbl_zumre_otomatikgetir";
+            this.linklbl_zumre_otomatikgetir.Size = new System.Drawing.Size(84, 13);
+            this.linklbl_zumre_otomatikgetir.TabIndex = 31;
+            this.linklbl_zumre_otomatikgetir.TabStop = true;
+            this.linklbl_zumre_otomatikgetir.Text = "Kayıtlardan Getir";
+            this.linklbl_zumre_otomatikgetir.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.linklbl_zumre_otomatikgetir, "Daha önceki talep kayıtlarına bakarak bu okul ve sınıf seviyesindeki öğretmen isi" +
+        "mlerini otomatik yazar.");
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.dataGridView1);
+            this.groupBox11.Location = new System.Drawing.Point(394, 589);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(1454, 292);
+            this.groupBox11.TabIndex = 33;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Listeleme Bölümü";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(7, 20);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(954, 266);
+            this.dataGridView1.TabIndex = 0;
+            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.linkLabel1.ForeColor = System.Drawing.Color.Red;
-            this.linkLabel1.LinkColor = System.Drawing.Color.Red;
-            this.linkLabel1.Location = new System.Drawing.Point(5, 92);
+            this.linkLabel1.Location = new System.Drawing.Point(360, 147);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(72, 20);
-            this.linkLabel1.TabIndex = 35;
+            this.linkLabel1.Size = new System.Drawing.Size(71, 39);
+            this.linkLabel1.TabIndex = 32;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Talebi Sil";
-            this.toolTip1.SetToolTip(this.linkLabel1, "Kulüp talebini veritabanından siler.");
+            this.linkLabel1.Text = "Zumre\r\nYıllık Plan\r\nTalebi Hazırla";
+            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.linkLabel1, "Okula verilmek üzere ekrandaki öğretmen bilgileri esas alınarak plan talebi olan " +
+        "öğretmen isimlerine uygun okul adına otomatik olarak yıllık plan talebi oluşturu" +
+        "r.");
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1617, 893);
+            this.ClientSize = new System.Drawing.Size(1864, 893);
+            this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.lbl_bilgi);
             this.Controls.Add(this.btn_varsayilanlariguncelle);
             this.Controls.Add(this.bt_yenikayit);
@@ -1410,6 +1474,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_logo)).EndInit();
+            this.groupBox11.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1521,10 +1587,14 @@
         private System.Windows.Forms.LinkLabel linklbl_logo_gozat;
         private System.Windows.Forms.TextBox tb_bilgi_logo;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.Label lbl_bilgi;
         private System.Windows.Forms.TabPage tab_muhasebe;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.LinkLabel linklbl_talep_kulup_sil;
+        private System.Windows.Forms.LinkLabel linklbl_talep_kulup;
+        private System.Windows.Forms.LinkLabel linklbl_zumre_otomatikgetir;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

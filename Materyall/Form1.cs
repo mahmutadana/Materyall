@@ -49,6 +49,12 @@ namespace Materyall
 
             varsayilanDegerleriGuncelleAsync();
 
+            dgv_talep_anadersler_yillik.Font = linklbl_talep_kulup_sil.Font;
+            dgv_talep_anadersler_gunluk.Font = linklbl_talep_kulup_sil.Font;
+            dgv_talep_serbestdersler_yillik.Font = linklbl_talep_kulup_sil.Font;
+            dgv_talep_defterler.Font = linklbl_talep_kulup_sil.Font;
+            dgv_talep_digerzumreogretmenleri.Font = linklbl_talep_kulup_sil.Font;
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -56,10 +62,9 @@ namespace Materyall
 
         }
 
-        private void linkLabel8_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
 
-        }
+      
+
 
         private void tabPage3_Click(object sender, EventArgs e)
         {
@@ -173,15 +178,60 @@ namespace Materyall
                 //Şimdilik 2 ürün. Daha sonra eklenirse ekürünler buraya eklenecek.
 
                 if (urun.urunadi == "CD") {
-                    cb_talep_CD.Checked = vtislemleri.ek_urun_talepEdilmismi(BirOgt.oid, urun.urunkodu);
+
+                    bool cddurumu = vtislemleri.ek_urun_talepEdilmismi(BirOgt.oid, urun.urunkodu);
+                    cb_talep_CD.Checked = cddurumu;
+                    BirOgt.cd_istiyor = cddurumu;
                 }
                 else if (urun.urunadi == "PDF")
                 {
-                    cb_talep_pdf.Checked = vtislemleri.ek_urun_talepEdilmismi(BirOgt.oid, urun.urunkodu);
+
+                    bool pdfdurumu = vtislemleri.ek_urun_talepEdilmismi(BirOgt.oid, urun.urunkodu);
+                    cb_talep_pdf.Checked = pdfdurumu;
+                    BirOgt.pdf_istiyor = pdfdurumu;
+
                 }
 
 
             }
+
+
+
+            //Sosyal kulüp bilgisini çekiyoruz.
+            BirOgt.sosyalkuluptalebi = vtislemleri.talepedilensosyalKulup(BirOgt.oid);
+
+            //Kulüp adını bulacağız ve ikinci öğretmenin adını yazacağız.
+            lbl_talep_sosyalkuluptaleptatihi.Text = "Talep Tarihi:";
+            lbl_talep_sosyalkulupbasimtarihi.Text = "Basım Tarihi:";
+
+            if (BirOgt.sosyalkuluptalebi.kulupkodu > -1)
+            {
+                int cbindeksi = 0;
+
+                foreach (FiltrelenenSosyalKulupler urun in filtrelenenSosyalKuluplers)
+                {
+
+                    if (urun.kulupkodu == BirOgt.sosyalkuluptalebi.kulupkodu)
+                    {
+
+                        cb_talep_sosyalkulupadi.SelectedIndex = cbindeksi;
+                        break;
+                    }
+
+                    cbindeksi++;
+                }
+
+                lbl_talep_sosyalkuluptaleptatihi.Text = "Talep Tarihi: " + BirOgt.sosyalkuluptalebi.taleptarihi;
+                lbl_talep_sosyalkulupbasimtarihi.Text = "Basım Tarihi: " + BirOgt.sosyalkuluptalebi.basimtarihi;
+
+
+            } else
+            {
+                cb_talep_sosyalkulupadi.SelectedIndex = -1;
+            }
+
+            //Öğretmen adını her türlü yazıyoruz.
+            tb_talep_sosyalkulupikinciogretmen.Text = BirOgt.sosyalkuluptalebi.sosyalkulupikinciogretmen;
 
 
 
@@ -200,6 +250,8 @@ namespace Materyall
             //Defter taleplerini göster.
             dgv_talep_defterler.DataSource = vtislemleri.dgv_icin_defterleri_getir(BirOgt.oid, BirOgt.yili);
 
+            //Diğer zümre öğretmenlerinin isimlerini göster.
+            dgv_talep_digerzumreogretmenleri.DataSource = vtislemleri.dgv_icin_digerzumreogretmenlerini_getir(BirOgt.oid);
 
 
         }
@@ -885,21 +937,8 @@ namespace Materyall
 
 
 
-        private void cb_talep_sosyalkulupadi_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SosyalKulupSecildi();
-        }
 
-
-        private void SosyalKulupSecildi ()
-        {
-
-            int indeks = cb_talep_sosyalkulupadi.SelectedIndex;
-
-            MessageBox.Show(filtrelenenSosyalKuluplers[indeks].kulupadi + " " + filtrelenenSosyalKuluplers[indeks].kulupkimliktablo);
-
-
-        }
+      
 
         private void cb_yili_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1489,13 +1528,151 @@ namespace Materyall
 
         }
 
+        private void linklbl_talep_kulup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            kulup_talebi_kaydet();
+        }
+
+
+        private void kulup_talebi_kaydet()
+        {
+
+            int indeks = cb_talep_sosyalkulupadi.SelectedIndex;
+
+            //  MessageBox.Show(filtrelenenSosyalKuluplers[indeks].kulupadi + " " + filtrelenenSosyalKuluplers[indeks].kulupkimliktablo);
+
+
+            string kayitsonucu = vtislemleri.ekle_sosyalkulup(BirOgt.oid, filtrelenenSosyalKuluplers[indeks].kulupkodu, tb_talep_sosyalkulupikinciogretmen.Text, filtrelenenSosyalKuluplers[indeks].fiyat);
+
+            if (kayitsonucu.All(char.IsNumber))
+            {
+
+                //  MessageBox.Show("başarılı: " + kayitsonucu);
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(kayitsonucu);
+            }
+
+
+
+        }
+
+        private void linklbl_talep_kulup_sil_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (BirOgt == null || tb_bilgi_adisoyadi.Text.Trim() == "")
+            {
+              
+                return;
+            }
+
+            sosyal_kulup_talebi_sil();
+        }
+
+        private void sosyal_kulup_talebi_sil()
+        {
+
+            string islemsonucu = vtislemleri.sil_sosyalkulup(BirOgt.oid);
+
+            if (islemsonucu == metinler.islembasarili)
+            {
+                cb_talep_sosyalkulupadi.SelectedIndex = -1;
+                tb_talep_sosyalkulupikinciogretmen.Text = "";
+
+                varsa_talepBolumu();
+
+            } else
+            {
+
+                MessageBox.Show(islemsonucu);
+
+            }
+
+        }
+
+        private void linklbl_talep_digerzumreogretmeniekle_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            diger_zumre_ogretmeni_ekle();
+
+        }
+
+
+        private void diger_zumre_ogretmeni_ekle()
+        {
+
+            if (BirOgt == null || tb_bilgi_adisoyadi.Text.Trim() == "")
+            {
+                MessageBox.Show("Bir müşteri oluşturun veya seçin.");
+                return;
+            }
+
+
+
+            string kayitsonucu = vtislemleri.ekle_digerzumreogretmeni(BirOgt.oid,  tb_talep_digerzumreogretmenleri.Text);
+
+            if (kayitsonucu.All(char.IsNumber))
+            {
+
+                //  MessageBox.Show("başarılı: " + kayitsonucu);
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(kayitsonucu);
+            }
+
+
+
+        }
 
 
 
 
+        private void dgv_talep_digerzumreogretmenleri_doubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+            string dersid = dgv_talep_digerzumreogretmenleri.Rows[e.RowIndex].Cells["ogretmenadi"].Value.ToString();
+
+            //  MessageBox.Show(dersid);
+
+            digerzumreogretmenleri_talep_sil(dersid);
+
+        }
 
 
 
+        private void digerzumreogretmenleri_talep_sil(string ogretmenadi)
+        {
+
+            if (ogretmenadi.Length < 1)
+            {
+                return;
+            }
+
+            string sonuc = vtislemleri.sil_digerzumreogretmeni(BirOgt.oid, ogretmenadi);
+
+            if (sonuc == metinler.islembasarili)
+            {
+
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(ogretmenadi + " silinemedi.");
+            }
+
+
+        }
 
 
 

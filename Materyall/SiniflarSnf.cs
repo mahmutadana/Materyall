@@ -52,12 +52,12 @@ namespace Materyall
       //Buna gerek olmayabilir. Sadece bilgileri hafızada tutup diğerlerini öğretmen id'si ile çekeceğiz.
       //public talepedilenAnaDerslerYillik[] anaDerslers { get; set; }
 
+        public TalepedilensosyalKulup sosyalkuluptalebi { get; set; }
 
 
 
 
 
-        
     }
 
 
@@ -100,7 +100,7 @@ namespace Materyall
     public class TalepedilensosyalKulup
     {
         public int sosyalkulupkimliktablo { get; set; }
-        public int kulupid { get; set; }
+        public int kulupkodu { get; set; }
         public string sosyalkulupikinciogretmen { get; set; }
         public double fiyat { get; set; }
         public string taleptarihi { get; set; }
