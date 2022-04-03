@@ -31,8 +31,9 @@ namespace Materyall
         List<FiltrelenenSosyalKulupler> filtrelenenSosyalKuluplers = new List<FiltrelenenSosyalKulupler>();
         List<FiltrelenenDefterler> filtrelenenDefterlers = new List<FiltrelenenDefterler>();
 
-        List<FiltrelenenEkUrunler> filtrelenenEkUrunler = new List<FiltrelenenEkUrunler>();
+        List<FiltrelenenEkUrunler> filtrelenenEkUrunlers = new List<FiltrelenenEkUrunler>();
 
+        List<FiltrelenenNobetYeriSablonlari> filtrelenenNobetyerisablonlars = new List<FiltrelenenNobetYeriSablonlari>();
 
 
         Vtislemleri vtislemleri = new Vtislemleri();
@@ -57,24 +58,12 @@ namespace Materyall
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
 
       
 
 
-        private void tabPage3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox8_Enter(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -149,6 +138,10 @@ namespace Materyall
 
                 varsayilanDegerlerEkUrunler();
 
+
+                varsayilanNobetYeriSablonlari();
+
+
                 lbl_bilgi.Text = metinler.ogretmenverisivar;
 
 
@@ -173,7 +166,7 @@ namespace Materyall
             //Ek ürünleri en başa alıyoruz. Aradan çıkarmak için. Aşağıdakiler birbirine benzer kodlar olduğu için bir arada tutuyoruz.
             //CD ve PDF var mı diye bakacağız.
 
-            foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunler)
+            foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
             {
                 //Şimdilik 2 ürün. Daha sonra eklenirse ekürünler buraya eklenecek.
 
@@ -234,6 +227,22 @@ namespace Materyall
             tb_talep_sosyalkulupikinciogretmen.Text = BirOgt.sosyalkuluptalebi.sosyalkulupikinciogretmen;
 
 
+
+            //Nöbet yeri şablon bilgisine bakıyoruz.
+            string talepedilen_nobetyeri_sablonu_adi = vtislemleri.talepedilennobetyerisablonunugetir(BirOgt.oid);
+            dgv_talep_nobetyerleri.DataSource = null;
+            int nbtsblsayac = 0;
+            foreach (FiltrelenenNobetYeriSablonlari s in filtrelenenNobetyerisablonlars)
+            {
+
+                if (s.nobetyerisablonadi == talepedilen_nobetyeri_sablonu_adi)
+                {
+                    cb_talep_nobetyerisablon.SelectedIndex = nbtsblsayac;
+                }
+
+                nbtsblsayac++;
+
+            }
 
 
             //Yıllık plan ana dersleri göster.
@@ -444,7 +453,7 @@ namespace Materyall
 
            //Ek ürünlerin bilgilerini bellekte tutuyoruz.
 
-            filtrelenenEkUrunler = vtislemleri.filtre_ekurunler(BirOgt.yili, BirOgt.bayibilgileri.ucretgrubu.ToString());
+            filtrelenenEkUrunlers = vtislemleri.filtre_ekurunler(BirOgt.yili, BirOgt.bayibilgileri.ucretgrubu.ToString());
 
 
         }
@@ -504,6 +513,25 @@ namespace Materyall
 
         }
 
+
+
+        private void varsayilanNobetYeriSablonlari()
+        {
+
+            //Ek ürünlerin bilgilerini bellekte tutuyoruz.
+
+            filtrelenenNobetyerisablonlars = vtislemleri.filtre_nobetyerisablonlari();
+
+            cb_talep_nobetyerisablon.Items.Clear();
+
+            foreach (FiltrelenenNobetYeriSablonlari s in filtrelenenNobetyerisablonlars)
+            {
+
+                cb_talep_nobetyerisablon.Items.Add(s.nobetyerisablonadi);
+            }
+
+
+        }
 
 
 
@@ -1106,7 +1134,7 @@ namespace Materyall
         private void CD_PDF_islemi_yap(bool eklensinmi, string urunadi)
         {
 
-            foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunler)
+            foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
             {
 
 
@@ -1674,11 +1702,96 @@ namespace Materyall
 
         }
 
+        private void linklbl_talep_nobetyeri_ekle_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
 
 
 
 
+            if (cb_talep_nobetyerisablon.SelectedIndex < 0)
+            {
+                dgv_talep_nobetyerleri.DataSource = null;
+                // MessageBox.Show("Nöbet yeri şablonu seçmelisiniz.");
+                return;
+            }
 
+            nobetSablonu_talep_kaydet();
+        }
+
+        private void nobetSablonu_talep_kaydet()
+        {
+
+
+            string kayitsonucu = vtislemleri.ekle_nobetyerisablonu(BirOgt.oid, filtrelenenNobetyerisablonlars[cb_talep_nobetyerisablon.SelectedIndex].nobetyerisablonadi);
+
+            if (kayitsonucu.All(char.IsNumber))
+            {
+
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(kayitsonucu);
+            }
+
+
+
+        }
+
+
+
+
+        private void nobetyeriSablonu_talep_sil()
+        {
+
+            if (BirOgt == null || BirOgt.oid < 1)
+            {
+                return;
+            }
+
+
+            cb_talep_nobetyerisablon.SelectedIndex = -1;
+
+
+            string sonuc = vtislemleri.sil_nobetyerisablonu(BirOgt.oid);
+
+            if (sonuc == metinler.islembasarili)
+            {
+
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(" silinemedi.");
+            }
+
+
+        }
+
+        private void cb_talep_nobetyerisablon_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (cb_talep_nobetyerisablon.SelectedIndex < 0)
+            {
+                dgv_talep_nobetyerleri.DataSource = null;
+                // MessageBox.Show("Nöbet yeri şablonu seçmelisiniz.");
+                return;
+            }
+
+            int indeks = cb_talep_nobetyerisablon.SelectedIndex;
+
+
+            dgv_talep_nobetyerleri.DataSource = vtislemleri.dgv_icin_nobetyerisablondetayi_getir(filtrelenenNobetyerisablonlars[indeks].nobetyerisablonadi);
+
+
+        }
+
+        private void linklbl_talep_nobetyeri_sil_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            nobetyeriSablonu_talep_sil();
+        }
 
 
 

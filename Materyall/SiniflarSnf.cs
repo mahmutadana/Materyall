@@ -259,4 +259,28 @@ namespace Materyall
     }
 
 
+    public class FiltrelenenNobetYeriSablonlari
+    {
+        public int nobetyerikimliktablo { get; set; }
+        public string nobetyerisablonadi { get; set; }
+        public string nobetyeri_1 { get; set; }
+        public string nobetyeri_2 { get; set; }
+        public string nobetyeri_3 { get; set; }
+        public string nobetyeri_4 { get; set; }
+        public string nobetyeri_5 { get; set; }
+        public string nobetyeri_6 { get; set; }
+        public string nobetyeri_7 { get; set; }
+        public string nobetyeri_8 { get; set; }
+        public string nobetyeri_9 { get; set; }
+        public string nobetyeri_10 { get; set; }
+        public string nobetyeri_11 { get; set; }
+        public string nobetyeri_12 { get; set; }
+
+
+    }
+
+
+
+
+
 }

@@ -34,6 +34,15 @@ namespace Materyall
         //Bunda id yok. Sadece bağladığımız öğretmen id'si var.
         public string neyebakalim_digerzumreogretmenleri_tablo = "tlp_zumreogretmenleri_tbl";
 
+        //Bunda id yok. Sadece bağladığımız öğretmen id'si var.
+        public string neyebakalim_nobetyerisablonu_tablo = "tlp_nobetyeri_tbl";
+
+
+
+
+
+
+
 
         public string ogretmenlogo_ustyolu = @"C:\Materyall\Logolar";
 

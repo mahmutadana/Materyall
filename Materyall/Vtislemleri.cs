@@ -440,6 +440,67 @@ namespace Materyall
 
 
 
+
+
+
+        public List<FiltrelenenNobetYeriSablonlari> filtre_nobetyerisablonlari()
+        {
+
+            //Bayi kodundan fiyat bölümünü alacağız.
+
+            List<FiltrelenenNobetYeriSablonlari> list = new List<FiltrelenenNobetYeriSablonlari>();
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  string sql = "SELECT DISTINCT(il) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
+            string sql = "SELECT * FROM sis_nobetyerisablon_tbl ORDER BY sablon_adi";
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+
+                FiltrelenenNobetYeriSablonlari oge = new FiltrelenenNobetYeriSablonlari();
+                
+                oge.nobetyerikimliktablo = int.Parse(oku["id"].ToString());
+                oge.nobetyerisablonadi = oku["sablon_adi"].ToString();
+
+                oge.nobetyeri_1 = oku["n1"].ToString();
+                oge.nobetyeri_2 = oku["n2"].ToString();
+                oge.nobetyeri_3 = oku["n3"].ToString();
+                oge.nobetyeri_4 = oku["n4"].ToString();
+                oge.nobetyeri_5 = oku["n5"].ToString();
+                oge.nobetyeri_6 = oku["n6"].ToString();
+                oge.nobetyeri_7 = oku["n7"].ToString();
+                oge.nobetyeri_8 = oku["n8"].ToString();
+                oge.nobetyeri_9 = oku["n9"].ToString();
+                oge.nobetyeri_10 = oku["n10"].ToString();
+                oge.nobetyeri_11 = oku["n11"].ToString();
+                oge.nobetyeri_12 = oku["n12"].ToString();
+
+
+
+                list.Add(oge);
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return list; //.ToArray();
+
+        }
+
+
+
+
         //   Filtrelenendersler tüm dersler için aşağıdaki sorguyu değiştireceğiz. filtreli sınıftan alacağız.
 
         /*
@@ -2229,6 +2290,181 @@ namespace Materyall
 
 
 
+
+        // NÖBET YERİ ŞABLONU KAYIT, SİLME VE LİSTELEME İŞLEMLERİ.
+
+
+        public string ekle_nobetyerisablonu(int oid, string sablon_adi)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+            long sonid = 0;
+
+
+            //Varsa önceki kaydı sileceğiz.
+            sil_nobetyerisablonu(oid);
+
+            //Mükerrer değil, devam edelim. (Yeni kayıt)
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "INSERT INTO " + metinler.neyebakalim_nobetyerisablonu_tablo + " " +
+                    "(oid, sablon_adi) " +
+                    "VALUES (" + oid + ",'" + sablon_adi + "')";
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+                else
+                {
+
+                }
+
+                sonid = cmd.LastInsertedId;
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            if (sonid > 0)
+            {
+                return sonid.ToString();
+            }
+
+            return sonuc;
+
+        }
+
+
+        public string sil_nobetyerisablonu(int oid)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "DELETE FROM " + metinler.neyebakalim_nobetyerisablonu_tablo + " " +
+                    "WHERE oid=" + oid;
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return sonuc;
+
+        }
+
+
+
+        public DataTable dgv_icin_nobetyerisablondetayi_getir(string sablon_adi)
+        {
+            //Bu diğerlerinden farklı. Doğrudan nöbet yeri şablon adıyla bilgileri getirecek. Şablon adını talep tablosundan alacağız.
+
+            baglantiKur();
+
+            //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
+            string sql = "SELECT * FROM sis_nobetyerisablon_tbl WHERE sablon_adi='" + sablon_adi + "' LIMIT 1";
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
+
+
+
+        public string talepedilennobetyerisablonunugetir(int oid)
+        {
+
+            string sablonadi = "";
+
+
+            baglantiKur();
+
+            string sql = "SELECT * FROM " + metinler.neyebakalim_nobetyerisablonu_tablo + "  WHERE oid=" + oid + " LIMIT 1";
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+                
+                sablonadi = oku["sablon_adi"].ToString();
+                
+
+            }
+
+            baglantikapat(mysqlbaglantisi);
+
+
+
+            return sablonadi;
+
+        }
 
 
 
