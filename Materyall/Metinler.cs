@@ -57,5 +57,8 @@ namespace Materyall
         public string ogretmenverisivar = "İşlem için hazır.";
 
 
+
+        public string bilgi_metni_ogrenci_listesi = "Her kaydetme işleminde öğretmene (müşteri no) kayıtlı tüm öğrenci listesi silinir ve buradaki liste kaydedilir. Değişiklikleri buradaki liste üzerinde yapıp kaydedebilirsiniz. Listeyi silip kaydederseniz tüm liste silinmiş olur.";
+
     }
 }

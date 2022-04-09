@@ -39,6 +39,7 @@
             this.dgv_talep_defterler = new System.Windows.Forms.DataGridView();
             this.cb_talep_defter = new System.Windows.Forms.ComboBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.linklbl_talep_nobetyeri_ekle = new System.Windows.Forms.LinkLabel();
             this.cb_talep_nobetyerisablon = new System.Windows.Forms.ComboBox();
             this.linklbl_talep_nobetyeri_sil = new System.Windows.Forms.LinkLabel();
             this.dgv_talep_nobetyerleri = new System.Windows.Forms.DataGridView();
@@ -83,14 +84,39 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tab_muhasebe = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.linklbl_ogrencilistesikaydet = new System.Windows.Forms.LinkLabel();
+            this.tb_ogrencilistesi_multiline = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.tb_sablon_nobetyeri_sablonadi = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_12 = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.linklbl_sablon_nobetyeri_ekle = new System.Windows.Forms.LinkLabel();
-            this.tb_sablon_nobetyeri = new System.Windows.Forms.TextBox();
-            this.dgv_sablon_nobetyeri = new System.Windows.Forms.DataGridView();
+            this.label33 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_11 = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_10 = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_9 = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_8 = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_7 = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_6 = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_5 = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_4 = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_3 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_2 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_yeni_sablonadi = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tb_sablon_nobetyeri_1 = new System.Windows.Forms.TextBox();
             this.linklbl_sablon_nobetyeri_sablonukaydet = new System.Windows.Forms.LinkLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pb_logo = new System.Windows.Forms.PictureBox();
@@ -141,7 +167,8 @@
             this.lbl_bilgi = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.linklbl_talep_nobetyeri_ekle = new System.Windows.Forms.LinkLabel();
+            this.btn_bilgi_ogrencilistesi = new System.Windows.Forms.Button();
+            this.lbl_ogrencilistesikaydedildi = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -161,8 +188,8 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridSunucuTalepleri)).BeginInit();
             this.tabPage5.SuspendLayout();
+            this.groupBox13.SuspendLayout();
             this.groupBox10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_sablon_nobetyeri)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_logo)).BeginInit();
             this.groupBox11.SuspendLayout();
@@ -286,6 +313,18 @@
             this.groupBox8.TabIndex = 5;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Nöbet Yerleri (Nöbet Defteri İçin)";
+            // 
+            // linklbl_talep_nobetyeri_ekle
+            // 
+            this.linklbl_talep_nobetyeri_ekle.AutoSize = true;
+            this.linklbl_talep_nobetyeri_ekle.Location = new System.Drawing.Point(296, 28);
+            this.linklbl_talep_nobetyeri_ekle.Name = "linklbl_talep_nobetyeri_ekle";
+            this.linklbl_talep_nobetyeri_ekle.Size = new System.Drawing.Size(57, 26);
+            this.linklbl_talep_nobetyeri_ekle.TabIndex = 56;
+            this.linklbl_talep_nobetyeri_ekle.TabStop = true;
+            this.linklbl_talep_nobetyeri_ekle.Text = "Nöbet Yeri\r\nKaydet";
+            this.linklbl_talep_nobetyeri_ekle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linklbl_talep_nobetyeri_ekle.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_talep_nobetyeri_ekle_LinkClicked);
             // 
             // cb_talep_nobetyerisablon
             // 
@@ -779,6 +818,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.groupBox13);
             this.tabPage5.Controls.Add(this.label22);
             this.tabPage5.Controls.Add(this.groupBox10);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
@@ -788,6 +828,50 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Diğer İşlemler";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.lbl_ogrencilistesikaydedildi);
+            this.groupBox13.Controls.Add(this.btn_bilgi_ogrencilistesi);
+            this.groupBox13.Controls.Add(this.linklbl_ogrencilistesikaydet);
+            this.groupBox13.Controls.Add(this.tb_ogrencilistesi_multiline);
+            this.groupBox13.Controls.Add(this.label35);
+            this.groupBox13.Location = new System.Drawing.Point(298, 11);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(315, 528);
+            this.groupBox13.TabIndex = 8;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "Öğreci Listesi (Yoklama, Okuma Defteri vb için)";
+            // 
+            // linklbl_ogrencilistesikaydet
+            // 
+            this.linklbl_ogrencilistesikaydet.AutoSize = true;
+            this.linklbl_ogrencilistesikaydet.Location = new System.Drawing.Point(157, 503);
+            this.linklbl_ogrencilistesikaydet.Name = "linklbl_ogrencilistesikaydet";
+            this.linklbl_ogrencilistesikaydet.Size = new System.Drawing.Size(144, 13);
+            this.linklbl_ogrencilistesikaydet.TabIndex = 54;
+            this.linklbl_ogrencilistesikaydet.TabStop = true;
+            this.linklbl_ogrencilistesikaydet.Text = "BU MÜŞTERİ İÇİN KAYDET";
+            this.linklbl_ogrencilistesikaydet.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_ogrencilistesikaydet_LinkClicked);
+            // 
+            // tb_ogrencilistesi_multiline
+            // 
+            this.tb_ogrencilistesi_multiline.Location = new System.Drawing.Point(6, 66);
+            this.tb_ogrencilistesi_multiline.Multiline = true;
+            this.tb_ogrencilistesi_multiline.Name = "tb_ogrencilistesi_multiline";
+            this.tb_ogrencilistesi_multiline.Size = new System.Drawing.Size(295, 431);
+            this.tb_ogrencilistesi_multiline.TabIndex = 53;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.label35.Location = new System.Drawing.Point(6, 24);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(209, 39);
+            this.label35.TabIndex = 52;
+            this.label35.Text = "*Müşteri no esas alınır.\r\n(Excelden Numara ve AdıSoyadı sütunlarını\r\nbaşlık satır" +
+    "ı olmadan kopyalayıp yapıştırın.)";
             // 
             // label22
             // 
@@ -801,88 +885,311 @@
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_sablonadi);
-            this.groupBox10.Controls.Add(this.label19);
+            this.groupBox10.Controls.Add(this.label34);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_12);
             this.groupBox10.Controls.Add(this.label18);
-            this.groupBox10.Controls.Add(this.linklbl_sablon_nobetyeri_ekle);
-            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri);
-            this.groupBox10.Controls.Add(this.dgv_sablon_nobetyeri);
+            this.groupBox10.Controls.Add(this.label33);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_11);
+            this.groupBox10.Controls.Add(this.label32);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_10);
+            this.groupBox10.Controls.Add(this.label31);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_9);
+            this.groupBox10.Controls.Add(this.label30);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_8);
+            this.groupBox10.Controls.Add(this.label28);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_7);
+            this.groupBox10.Controls.Add(this.label27);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_6);
+            this.groupBox10.Controls.Add(this.label26);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_5);
+            this.groupBox10.Controls.Add(this.label25);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_4);
+            this.groupBox10.Controls.Add(this.label24);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_3);
+            this.groupBox10.Controls.Add(this.label23);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_2);
+            this.groupBox10.Controls.Add(this.label17);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_yeni_sablonadi);
+            this.groupBox10.Controls.Add(this.label19);
+            this.groupBox10.Controls.Add(this.tb_sablon_nobetyeri_1);
             this.groupBox10.Controls.Add(this.linklbl_sablon_nobetyeri_sablonukaydet);
             this.groupBox10.Location = new System.Drawing.Point(6, 11);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(227, 529);
+            this.groupBox10.Size = new System.Drawing.Size(277, 529);
             this.groupBox10.TabIndex = 6;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Nöbet Yerleri Şablonu Oluştur";
+            this.groupBox10.Enter += new System.EventHandler(this.groupBox10_Enter);
             // 
-            // tb_sablon_nobetyeri_sablonadi
+            // label34
             // 
-            this.tb_sablon_nobetyeri_sablonadi.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tb_sablon_nobetyeri_sablonadi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_sablon_nobetyeri_sablonadi.Location = new System.Drawing.Point(7, 469);
-            this.tb_sablon_nobetyeri_sablonadi.Name = "tb_sablon_nobetyeri_sablonadi";
-            this.tb_sablon_nobetyeri_sablonadi.Size = new System.Drawing.Size(210, 32);
-            this.tb_sablon_nobetyeri_sablonadi.TabIndex = 53;
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(10, 397);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(57, 26);
+            this.label34.TabIndex = 76;
+            this.label34.Text = "12.\r\nNöbet Yeri";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label19
+            // tb_sablon_nobetyeri_12
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(16, 453);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(61, 13);
-            this.label19.TabIndex = 52;
-            this.label19.Text = "Şablon Adı:";
+            this.tb_sablon_nobetyeri_12.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_12.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_12.Location = new System.Drawing.Point(73, 392);
+            this.tb_sablon_nobetyeri_12.Name = "tb_sablon_nobetyeri_12";
+            this.tb_sablon_nobetyeri_12.Size = new System.Drawing.Size(198, 32);
+            this.tb_sablon_nobetyeri_12.TabIndex = 75;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label18.Location = new System.Drawing.Point(6, 402);
+            this.label18.Location = new System.Drawing.Point(68, 427);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(209, 39);
             this.label18.TabIndex = 51;
             this.label18.Text = "*En fazla 12 tane nöbet yeri ekleyebilirsiniz.\r\nTalepler şablon adıyla yapılmakta" +
     "dır.\r\nDeğişiklikler önceki kayıtları etkiler.";
             // 
-            // linklbl_sablon_nobetyeri_ekle
+            // label33
             // 
-            this.linklbl_sablon_nobetyeri_ekle.AutoSize = true;
-            this.linklbl_sablon_nobetyeri_ekle.Location = new System.Drawing.Point(71, 66);
-            this.linklbl_sablon_nobetyeri_ekle.Name = "linklbl_sablon_nobetyeri_ekle";
-            this.linklbl_sablon_nobetyeri_ekle.Size = new System.Drawing.Size(81, 13);
-            this.linklbl_sablon_nobetyeri_ekle.TabIndex = 50;
-            this.linklbl_sablon_nobetyeri_ekle.TabStop = true;
-            this.linklbl_sablon_nobetyeri_ekle.Text = "Nöbet Yeri Ekle";
-            this.linklbl_sablon_nobetyeri_ekle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(10, 364);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(57, 26);
+            this.label33.TabIndex = 74;
+            this.label33.Text = "11.\r\nNöbet Yeri";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tb_sablon_nobetyeri
+            // tb_sablon_nobetyeri_11
             // 
-            this.tb_sablon_nobetyeri.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tb_sablon_nobetyeri.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_sablon_nobetyeri.Location = new System.Drawing.Point(7, 23);
-            this.tb_sablon_nobetyeri.Name = "tb_sablon_nobetyeri";
-            this.tb_sablon_nobetyeri.Size = new System.Drawing.Size(210, 32);
-            this.tb_sablon_nobetyeri.TabIndex = 49;
+            this.tb_sablon_nobetyeri_11.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_11.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_11.Location = new System.Drawing.Point(73, 359);
+            this.tb_sablon_nobetyeri_11.Name = "tb_sablon_nobetyeri_11";
+            this.tb_sablon_nobetyeri_11.Size = new System.Drawing.Size(198, 32);
+            this.tb_sablon_nobetyeri_11.TabIndex = 73;
             // 
-            // dgv_sablon_nobetyeri
+            // label32
             // 
-            this.dgv_sablon_nobetyeri.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_sablon_nobetyeri.Location = new System.Drawing.Point(7, 94);
-            this.dgv_sablon_nobetyeri.Name = "dgv_sablon_nobetyeri";
-            this.dgv_sablon_nobetyeri.Size = new System.Drawing.Size(214, 305);
-            this.dgv_sablon_nobetyeri.TabIndex = 48;
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(10, 330);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(57, 26);
+            this.label32.TabIndex = 72;
+            this.label32.Text = "10.\r\nNöbet Yeri";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_sablon_nobetyeri_10
+            // 
+            this.tb_sablon_nobetyeri_10.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_10.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_10.Location = new System.Drawing.Point(73, 325);
+            this.tb_sablon_nobetyeri_10.Name = "tb_sablon_nobetyeri_10";
+            this.tb_sablon_nobetyeri_10.Size = new System.Drawing.Size(198, 32);
+            this.tb_sablon_nobetyeri_10.TabIndex = 71;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(10, 296);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(57, 26);
+            this.label31.TabIndex = 70;
+            this.label31.Text = "9.\r\nNöbet Yeri";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_sablon_nobetyeri_9
+            // 
+            this.tb_sablon_nobetyeri_9.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_9.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_9.Location = new System.Drawing.Point(73, 291);
+            this.tb_sablon_nobetyeri_9.Name = "tb_sablon_nobetyeri_9";
+            this.tb_sablon_nobetyeri_9.Size = new System.Drawing.Size(198, 32);
+            this.tb_sablon_nobetyeri_9.TabIndex = 69;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(10, 262);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(57, 26);
+            this.label30.TabIndex = 68;
+            this.label30.Text = "8.\r\nNöbet Yeri";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_sablon_nobetyeri_8
+            // 
+            this.tb_sablon_nobetyeri_8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_8.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_8.Location = new System.Drawing.Point(73, 257);
+            this.tb_sablon_nobetyeri_8.Name = "tb_sablon_nobetyeri_8";
+            this.tb_sablon_nobetyeri_8.Size = new System.Drawing.Size(198, 32);
+            this.tb_sablon_nobetyeri_8.TabIndex = 67;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(10, 228);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(57, 26);
+            this.label28.TabIndex = 66;
+            this.label28.Text = "7.\r\nNöbet Yeri";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_sablon_nobetyeri_7
+            // 
+            this.tb_sablon_nobetyeri_7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_7.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_7.Location = new System.Drawing.Point(73, 223);
+            this.tb_sablon_nobetyeri_7.Name = "tb_sablon_nobetyeri_7";
+            this.tb_sablon_nobetyeri_7.Size = new System.Drawing.Size(198, 32);
+            this.tb_sablon_nobetyeri_7.TabIndex = 65;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(10, 194);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(57, 26);
+            this.label27.TabIndex = 64;
+            this.label27.Text = "6.\r\nNöbet Yeri";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_sablon_nobetyeri_6
+            // 
+            this.tb_sablon_nobetyeri_6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_6.Location = new System.Drawing.Point(73, 189);
+            this.tb_sablon_nobetyeri_6.Name = "tb_sablon_nobetyeri_6";
+            this.tb_sablon_nobetyeri_6.Size = new System.Drawing.Size(198, 32);
+            this.tb_sablon_nobetyeri_6.TabIndex = 63;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(10, 160);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(57, 26);
+            this.label26.TabIndex = 62;
+            this.label26.Text = "5.\r\nNöbet Yeri";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_sablon_nobetyeri_5
+            // 
+            this.tb_sablon_nobetyeri_5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_5.Location = new System.Drawing.Point(73, 155);
+            this.tb_sablon_nobetyeri_5.Name = "tb_sablon_nobetyeri_5";
+            this.tb_sablon_nobetyeri_5.Size = new System.Drawing.Size(198, 32);
+            this.tb_sablon_nobetyeri_5.TabIndex = 61;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(10, 126);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(57, 26);
+            this.label25.TabIndex = 60;
+            this.label25.Text = "4.\r\nNöbet Yeri";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_sablon_nobetyeri_4
+            // 
+            this.tb_sablon_nobetyeri_4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_4.Location = new System.Drawing.Point(73, 121);
+            this.tb_sablon_nobetyeri_4.Name = "tb_sablon_nobetyeri_4";
+            this.tb_sablon_nobetyeri_4.Size = new System.Drawing.Size(198, 32);
+            this.tb_sablon_nobetyeri_4.TabIndex = 59;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(10, 92);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(57, 26);
+            this.label24.TabIndex = 58;
+            this.label24.Text = "3.\r\nNöbet Yeri";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_sablon_nobetyeri_3
+            // 
+            this.tb_sablon_nobetyeri_3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_3.Location = new System.Drawing.Point(73, 87);
+            this.tb_sablon_nobetyeri_3.Name = "tb_sablon_nobetyeri_3";
+            this.tb_sablon_nobetyeri_3.Size = new System.Drawing.Size(198, 32);
+            this.tb_sablon_nobetyeri_3.TabIndex = 57;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(10, 58);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(57, 26);
+            this.label23.TabIndex = 56;
+            this.label23.Text = "2.\r\nNöbet Yeri";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_sablon_nobetyeri_2
+            // 
+            this.tb_sablon_nobetyeri_2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_2.Location = new System.Drawing.Point(73, 53);
+            this.tb_sablon_nobetyeri_2.Name = "tb_sablon_nobetyeri_2";
+            this.tb_sablon_nobetyeri_2.Size = new System.Drawing.Size(198, 32);
+            this.tb_sablon_nobetyeri_2.TabIndex = 55;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(10, 24);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(57, 26);
+            this.label17.TabIndex = 54;
+            this.label17.Text = "1.\r\nNöbet Yeri";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_sablon_nobetyeri_yeni_sablonadi
+            // 
+            this.tb_sablon_nobetyeri_yeni_sablonadi.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_yeni_sablonadi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_yeni_sablonadi.Location = new System.Drawing.Point(71, 469);
+            this.tb_sablon_nobetyeri_yeni_sablonadi.Name = "tb_sablon_nobetyeri_yeni_sablonadi";
+            this.tb_sablon_nobetyeri_yeni_sablonadi.Size = new System.Drawing.Size(171, 32);
+            this.tb_sablon_nobetyeri_yeni_sablonadi.TabIndex = 53;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(4, 477);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(61, 13);
+            this.label19.TabIndex = 52;
+            this.label19.Text = "Şablon Adı:";
+            // 
+            // tb_sablon_nobetyeri_1
+            // 
+            this.tb_sablon_nobetyeri_1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_sablon_nobetyeri_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_sablon_nobetyeri_1.Location = new System.Drawing.Point(73, 19);
+            this.tb_sablon_nobetyeri_1.Name = "tb_sablon_nobetyeri_1";
+            this.tb_sablon_nobetyeri_1.Size = new System.Drawing.Size(198, 32);
+            this.tb_sablon_nobetyeri_1.TabIndex = 49;
             // 
             // linklbl_sablon_nobetyeri_sablonukaydet
             // 
             this.linklbl_sablon_nobetyeri_sablonukaydet.AutoSize = true;
             this.linklbl_sablon_nobetyeri_sablonukaydet.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.linklbl_sablon_nobetyeri_sablonukaydet.LinkColor = System.Drawing.Color.Red;
-            this.linklbl_sablon_nobetyeri_sablonukaydet.Location = new System.Drawing.Point(25, 502);
+            this.linklbl_sablon_nobetyeri_sablonukaydet.Location = new System.Drawing.Point(69, 502);
             this.linklbl_sablon_nobetyeri_sablonukaydet.Name = "linklbl_sablon_nobetyeri_sablonukaydet";
             this.linklbl_sablon_nobetyeri_sablonukaydet.Size = new System.Drawing.Size(179, 24);
             this.linklbl_sablon_nobetyeri_sablonukaydet.TabIndex = 47;
             this.linklbl_sablon_nobetyeri_sablonukaydet.TabStop = true;
             this.linklbl_sablon_nobetyeri_sablonukaydet.Text = "ŞABLONU KAYDET";
+            this.linklbl_sablon_nobetyeri_sablonukaydet.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_sablon_nobetyeri_sablonukaydet_LinkClicked);
             // 
             // groupBox2
             // 
@@ -1416,17 +1723,24 @@
             this.dataGridView1.Size = new System.Drawing.Size(954, 266);
             this.dataGridView1.TabIndex = 0;
             // 
-            // linklbl_talep_nobetyeri_ekle
+            // btn_bilgi_ogrencilistesi
             // 
-            this.linklbl_talep_nobetyeri_ekle.AutoSize = true;
-            this.linklbl_talep_nobetyeri_ekle.Location = new System.Drawing.Point(296, 28);
-            this.linklbl_talep_nobetyeri_ekle.Name = "linklbl_talep_nobetyeri_ekle";
-            this.linklbl_talep_nobetyeri_ekle.Size = new System.Drawing.Size(57, 26);
-            this.linklbl_talep_nobetyeri_ekle.TabIndex = 56;
-            this.linklbl_talep_nobetyeri_ekle.TabStop = true;
-            this.linklbl_talep_nobetyeri_ekle.Text = "Nöbet Yeri\r\nKaydet";
-            this.linklbl_talep_nobetyeri_ekle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.linklbl_talep_nobetyeri_ekle.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_talep_nobetyeri_ekle_LinkClicked);
+            this.btn_bilgi_ogrencilistesi.Location = new System.Drawing.Point(9, 500);
+            this.btn_bilgi_ogrencilistesi.Name = "btn_bilgi_ogrencilistesi";
+            this.btn_bilgi_ogrencilistesi.Size = new System.Drawing.Size(22, 19);
+            this.btn_bilgi_ogrencilistesi.TabIndex = 55;
+            this.btn_bilgi_ogrencilistesi.Text = "!";
+            this.btn_bilgi_ogrencilistesi.UseVisualStyleBackColor = true;
+            this.btn_bilgi_ogrencilistesi.Click += new System.EventHandler(this.btn_bilgi_ogrencilistesi_Click);
+            // 
+            // lbl_ogrencilistesikaydedildi
+            // 
+            this.lbl_ogrencilistesikaydedildi.AutoSize = true;
+            this.lbl_ogrencilistesikaydedildi.Location = new System.Drawing.Point(64, 506);
+            this.lbl_ogrencilistesikaydedildi.Name = "lbl_ogrencilistesikaydedildi";
+            this.lbl_ogrencilistesikaydedildi.Size = new System.Drawing.Size(16, 13);
+            this.lbl_ogrencilistesikaydedildi.TabIndex = 56;
+            this.lbl_ogrencilistesikaydedildi.Text = "...";
             // 
             // Form1
             // 
@@ -1473,9 +1787,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.datagridSunucuTalepleri)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_sablon_nobetyeri)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_logo)).EndInit();
@@ -1571,11 +1886,9 @@
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.LinkLabel linklbl_sablon_nobetyeri_ekle;
-        private System.Windows.Forms.TextBox tb_sablon_nobetyeri;
-        private System.Windows.Forms.DataGridView dgv_sablon_nobetyeri;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_1;
         private System.Windows.Forms.LinkLabel linklbl_sablon_nobetyeri_sablonukaydet;
-        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_sablonadi;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_yeni_sablonadi;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.LinkLabel linklbl_talep_nobetyeri_sil;
         private System.Windows.Forms.Button btn_taleplerial_excelden;
@@ -1601,6 +1914,35 @@
         private System.Windows.Forms.ComboBox cb_talep_nobetyerisablon;
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.LinkLabel linklbl_talep_nobetyeri_ekle;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_11;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_10;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_9;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_8;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_7;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_6;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_5;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_4;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_3;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_2;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox tb_sablon_nobetyeri_12;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.TextBox tb_ogrencilistesi_multiline;
+        private System.Windows.Forms.LinkLabel linklbl_ogrencilistesikaydet;
+        private System.Windows.Forms.Button btn_bilgi_ogrencilistesi;
+        private System.Windows.Forms.Label lbl_ogrencilistesikaydedildi;
     }
 }
 

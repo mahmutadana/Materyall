@@ -8,6 +8,7 @@ using System.Linq;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace Materyall
 {
@@ -34,6 +35,10 @@ namespace Materyall
         List<FiltrelenenEkUrunler> filtrelenenEkUrunlers = new List<FiltrelenenEkUrunler>();
 
         List<FiltrelenenNobetYeriSablonlari> filtrelenenNobetyerisablonlars = new List<FiltrelenenNobetYeriSablonlari>();
+
+        List<OgrenciListesiSnf> talepOgrencilistesis = new List<OgrenciListesiSnf>();
+
+
 
 
         Vtislemleri vtislemleri = new Vtislemleri();
@@ -261,6 +266,27 @@ namespace Materyall
 
             //Diğer zümre öğretmenlerinin isimlerini göster.
             dgv_talep_digerzumreogretmenleri.DataSource = vtislemleri.dgv_icin_digerzumreogretmenlerini_getir(BirOgt.oid);
+
+
+
+
+
+
+            //Öğrenci Listesi gridde değil. Burada alınıp işlem yapılacak.
+            talepOgrencilistesis = vtislemleri.getirOgrenciListesi(BirOgt.oid);
+
+            //Öğrenci bilgilerini aralarına TAB koyarak ilgili textbox içinde satır satır göstereceğiz.
+            tb_ogrencilistesi_multiline.Text = "";
+            StringBuilder sb = new StringBuilder();
+            foreach (OgrenciListesiSnf s in talepOgrencilistesis)
+            {
+               sb.Append(s.numara).Append("\t").Append(s.adisoyadi);
+                sb.AppendLine();
+
+            }
+
+            tb_ogrencilistesi_multiline.Text = sb.ToString();
+
 
 
         }
@@ -1793,7 +1819,116 @@ namespace Materyall
             nobetyeriSablonu_talep_sil();
         }
 
+        private void groupBox10_Enter(object sender, EventArgs e)
+        {
 
+        }
+
+        private void linklbl_sablon_nobetyeri_sablonukaydet_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            yeni_bir_nobet_sablonu_olustur();
+        }
+
+        private void yeni_bir_nobet_sablonu_olustur()
+        {
+
+            //Şablon adı daha önceden var mı diye bakacağız. Şablon isminin olması zorunlu.
+
+            if (tb_sablon_nobetyeri_yeni_sablonadi.Text.Trim().Length < 1)
+            {
+                MessageBox.Show("Bu nöbet düzeni için bir şablon adı girmelisiniz.");
+                return;
+            }
+
+            //Birinci sırada şablon adı olacak.
+            string[] sablonbilgisi = new string[13];
+
+            sablonbilgisi[0] = tb_sablon_nobetyeri_yeni_sablonadi.Text;
+            sablonbilgisi[1] = tb_sablon_nobetyeri_1.Text;
+            sablonbilgisi[2] = tb_sablon_nobetyeri_2.Text;
+            sablonbilgisi[3] = tb_sablon_nobetyeri_3.Text;
+            sablonbilgisi[4] = tb_sablon_nobetyeri_4.Text;
+            sablonbilgisi[5] = tb_sablon_nobetyeri_5.Text;
+            sablonbilgisi[6] = tb_sablon_nobetyeri_6.Text;
+            sablonbilgisi[7] = tb_sablon_nobetyeri_7.Text;
+            sablonbilgisi[8] = tb_sablon_nobetyeri_8.Text;
+            sablonbilgisi[9] = tb_sablon_nobetyeri_9.Text;
+            sablonbilgisi[10] = tb_sablon_nobetyeri_10.Text;
+            sablonbilgisi[11] = tb_sablon_nobetyeri_11.Text;
+            sablonbilgisi [12] = tb_sablon_nobetyeri_12.Text;
+                
+
+            string kayitsonucu = vtislemleri.ekle_yeni_nobet_sablonu_olustur(sablonbilgisi);
+
+            if (kayitsonucu.All(char.IsNumber))
+            {
+
+                //  MessageBox.Show("başarılı: " + kayitsonucu);
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(kayitsonucu);
+            }
+
+
+
+
+        }
+
+
+
+        private void linklbl_ogrencilistesikaydet_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ogrenciListesiKontrolveAktarma();
+
+            ogrencilistesikaydedildiyaz();
+        }
+
+
+        private async void ogrencilistesikaydedildiyaz()
+        {
+            //Kaydedildi yazısı sürekli ekranda kalmayacak.
+            lbl_ogrencilistesikaydedildi.Text = "Kaydedildi";
+
+            await Task.Delay(TimeSpan.FromSeconds(1));
+
+            lbl_ogrencilistesikaydedildi.Text = "";
+
+        }
+
+        private void ogrenciListesiKontrolveAktarma()
+        {
+
+            //Öncelikle öğretmene kayıtlı tüm öğrencileri siliyoruz.
+            vtislemleri.sil_ogrencilistesi(BirOgt.oid);
+
+            for (int i = 0;i < tb_ogrencilistesi_multiline.Lines.Length; i++)
+            {
+                string[] bilgi = tb_ogrencilistesi_multiline.Lines[i].Split('\t');
+
+                if (bilgi.Length == 2)
+                {
+
+                    //  MessageBox.Show("Adı: " + bilgi[1] + " ve numarası: " + bilgi[0]);
+
+                    vtislemleri.ekle_ogrencilistesi(BirOgt.oid, int.Parse(bilgi[0]), bilgi[1]);
+
+                }
+
+               
+
+            }
+
+            varsa_talepBolumu();
+
+        }
+
+        private void btn_bilgi_ogrencilistesi_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(metinler.bilgi_metni_ogrenci_listesi);
+        }
 
 
 

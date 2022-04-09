@@ -282,5 +282,14 @@ namespace Materyall
 
 
 
+    public class OgrenciListesiSnf
+    {
+        public int ogrencikimliktablo { get; set; }
+        public int numara { get; set; }
+        public string adisoyadi { get; set; }
+       
+
+    }
+
 
 }

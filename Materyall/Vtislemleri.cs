@@ -1835,6 +1835,38 @@ namespace Materyall
 
 
 
+        private bool bu_nobetsablonu_dahaoncedenvarmi(string sablonadi)
+        {
+
+          
+
+            string adet = "0";
+
+            baglantiKur();
+
+
+
+            string sql = "SELECT COUNT(*) as adet FROM sis_nobetyerisablon_tbl WHERE sablon_adi='" + sablonadi + "'";
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+                adet = oku["adet"].ToString();
+
+            }
+
+            baglantikapat(mysqlbaglantisi);
+
+            return adet != "0";
+
+        }
+
+
 
 
         //DEFTERLERİ EKLE.
@@ -2468,5 +2500,271 @@ namespace Materyall
 
 
 
+
+
+
+
+
+        //YENİ BİR NÖBET ŞABLONU OLUŞTURUYORUZ.
+
+        public string ekle_yeni_nobet_sablonu_olustur(string[] nobetsablondizisi)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+            long sonid = 0;
+
+            if (bu_nobetsablonu_dahaoncedenvarmi(nobetsablondizisi[0]))
+            {
+                sonuc = metinler.mukerrerkayitbilgisitalep;
+
+                return sonuc;
+            }
+
+
+            //Mükerrer değil, devam edelim. (Yeni kayıt)
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "INSERT INTO sis_nobetyerisablon_tbl " +
+                    "(sablon_adi, n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12) " +
+                    "VALUES ('" + nobetsablondizisi[0] + "','" + nobetsablondizisi[1] + "','" + nobetsablondizisi[2] + "','" + nobetsablondizisi[3] + "'," +
+                    "'" + nobetsablondizisi[4] + "','" + nobetsablondizisi[5] + "','" + nobetsablondizisi[6] + "','" + nobetsablondizisi[7] + "'," +
+                    "'" + nobetsablondizisi[8] + "','" + nobetsablondizisi[9] + "','" + nobetsablondizisi[10] + "','" + nobetsablondizisi[11] + "','" + nobetsablondizisi[12] + "')";
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+                else
+                {
+
+                }
+
+                sonid = cmd.LastInsertedId;
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            if (sonid > 0)
+            {
+                return sonid.ToString();
+            }
+
+            return sonuc;
+
+        }
+
+
+
+
+
+        //ÖĞRENCİ LİSTESİ EKLEME, DEĞİŞTİRME, SİLME VS İŞLEMLERİ.
+
+        public List<OgrenciListesiSnf> getirOgrenciListesi(int oid)
+        {
+
+            List<OgrenciListesiSnf> list = new List<OgrenciListesiSnf>();
+
+
+
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  string sql = "SELECT DISTINCT(il) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
+            string sql = "SELECT * FROM tlp_ogrencilistesi_tbl WHERE oid=" + oid + " ORDER BY numara";
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+
+                OgrenciListesiSnf oge = new OgrenciListesiSnf();
+
+                oge.ogrencikimliktablo = int.Parse(oku["id"].ToString());
+                oge.numara = int.Parse(oku["numara"].ToString());
+                oge.adisoyadi = oku["adisoyadi"].ToString();
+
+                list.Add(oge);
+
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return list;
+
+
+        }
+
+
+
+        public string sil_ogrencilistesi(int oid)
+        {
+            //Tabloda öğretmene tanımlı öğrenci listesini siler.
+
+            string sonuc = metinler.islembasarili;
+
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "DELETE FROM tlp_ogrencilistesi_tbl " +
+                    "WHERE oid=" + oid;
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return sonuc;
+
+        }
+
+
+
+        public string ekle_ogrencilistesi(int oid, int numara, string adisoyadi)
+        {
+            
+
+            string sonuc = metinler.islembasarili;
+
+            long sonid = 0;
+
+            
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "INSERT INTO tlp_ogrencilistesi_tbl " +
+                    "(oid, numara, adisoyadi) " +
+                    "VALUES (" + oid + "," + numara + ",'" + adisoyadi + "')";
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+                else
+                {
+
+                }
+
+                sonid = cmd.LastInsertedId;
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            if (sonid > 0)
+            {
+                return sonid.ToString();
+            }
+
+            return sonuc;
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ///Sınıf sonu.
     }
 }
