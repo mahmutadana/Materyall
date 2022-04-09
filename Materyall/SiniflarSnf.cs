@@ -292,4 +292,16 @@ namespace Materyall
     }
 
 
+
+    public class MuhasebeGenelDurumSnf
+    {
+       
+        public double toplamborc { get; set; }
+        public double toplamodeme { get; set; }
+        public double toplambakiye { get; set; }
+
+
+    }
+
+
 }

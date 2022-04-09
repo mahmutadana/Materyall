@@ -215,6 +215,39 @@ namespace Materyall
 
 
 
+
+        public string[] filtre_odemeturleri()
+        {
+            List<string> list = new List<string>();
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            string sql = "SELECT odemeturu FROM sis_odemeturu_tbl";
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+                list.Add(oku["odemeturu"].ToString());
+
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return list.ToArray();
+
+        }
+
+
+
+
         public string[] filtre_siniflar()
         {
             List<string> list = new List<string>();
@@ -2744,9 +2777,126 @@ namespace Materyall
 
 
 
+        //MUHASEBE İŞLEMLERİ (Yeniden Bismillah)
+
+
+        public MuhasebeGenelDurumSnf getirMuhasebeGenelDurum(int oid)
+        {
 
 
 
+            MuhasebeGenelDurumSnf oge = new MuhasebeGenelDurumSnf();
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  string sql = "SELECT DISTINCT(il) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
+            string sql = "SELECT SUM(t.fiyat) as toplamborc, (SELECT SUM(tutar) FROM odemeler_tbl WHERE oid=" + oid + ") as toplamodeme FROM (" +
+                "SELECT fiyat FROM tlp_defterler_tbl WHERE oid=" + oid + " " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_ekurunler_tbl WHERE oid=" + oid + " " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_g_anadersler_tbl WHERE oid=" + oid + " " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_g_serbestler_tbl WHERE oid=" + oid + " " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_sosyalkulup_tbl WHERE oid=" + oid + " " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_y_anadersler_tbl WHERE oid=" + oid + " ) t"; ;
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+
+               
+
+                oge.toplamborc = double.Parse("0" + oku["toplamborc"].ToString());
+                oge.toplamodeme = double.Parse("0" + oku["toplamodeme"].ToString()); ;
+                oge.toplambakiye = oge.toplamborc - oge.toplamodeme;
+
+               
+
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return oge;
+
+
+        }
+
+
+
+
+        public string ekle_odeme(int oid, string odenenmiktar, string odemeturu, string odemezamani, string aciklama)
+        {
+            //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
+
+            string sonuc = metinler.islembasarili;
+
+            long sonid = 0;
+
+
+            //Mükerrer kontrolü yapmıyoruz.
+
+            baglantiKur();
+
+
+            try
+            {
+
+                string sql = "INSERT INTO " + metinler.neyebakalim_muhasebe_odeme_tablo + " " +
+                    "(oid, islemturu, tutar, aciklama, odemetarihi, otomatiktarih) " +
+                    "VALUES (" + oid + ",'" + odemeturu + "'," + odenenmiktar + ",'" + aciklama + "', STR_TO_DATE('" + odemezamani + "', '%d.%m.%Y %H:%i:%s'), now())";
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+                else
+                {
+
+                }
+
+                sonid = cmd.LastInsertedId;
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            if (sonid > 0)
+            {
+                return sonid.ToString();
+            }
+
+            return sonuc;
+
+        }
 
 
 

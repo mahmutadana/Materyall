@@ -37,6 +37,7 @@ namespace Materyall
         //Bunda id yok. Sadece bağladığımız öğretmen id'si var.
         public string neyebakalim_nobetyerisablonu_tablo = "tlp_nobetyeri_tbl";
 
+        public string neyebakalim_muhasebe_odeme_tablo = "odemeler_tbl";
 
 
 

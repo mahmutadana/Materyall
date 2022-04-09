@@ -53,20 +53,66 @@ namespace Materyall
         private void Form1_Load(object sender, EventArgs e)
         {
 
+          //  sekmeRengiAyarla();
+
             varsayilanDegerleriGuncelleAsync();
 
+            /*
+             * Muhasebe sekmesinin rengini kırmızı yapmak için kullanmak istedik ama görünrü kötüleşti. Vazgeçtik.
             dgv_talep_anadersler_yillik.Font = linklbl_talep_kulup_sil.Font;
             dgv_talep_anadersler_gunluk.Font = linklbl_talep_kulup_sil.Font;
             dgv_talep_serbestdersler_yillik.Font = linklbl_talep_kulup_sil.Font;
             dgv_talep_defterler.Font = linklbl_talep_kulup_sil.Font;
             dgv_talep_digerzumreogretmenleri.Font = linklbl_talep_kulup_sil.Font;
+            */
 
         }
 
-        
+        /*
+        private void sekmeRengiAyarla()
+        {
+
+            SetTabHeader(tab_planbasim, Form1.DefaultBackColor);
+            SetTabHeader(tab_defterbasim, Form1.DefaultBackColor);
+            SetTabHeader(tab_talepgiris, Form1.DefaultBackColor);
+            SetTabHeader(tab_hizlitalep, Form1.DefaultBackColor);
+            SetTabHeader(tab_digerislemler, Form1.DefaultBackColor);
+            SetTabHeader(tab_muhasebe, Form1.DefaultBackColor);
 
 
-      
+
+           this.tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
+           this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
+
+        }
+        */
+        private Dictionary<TabPage, Color> TabColors = new Dictionary<TabPage, Color>();
+        private void SetTabHeader(TabPage page, Color color)
+        {
+            TabColors[page] = color;
+            tabControl1.Invalidate();
+        }
+
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            //e.DrawBackground();
+            using (Brush br = new SolidBrush(TabColors[tabControl1.TabPages[e.Index]]))
+            {
+                e.Graphics.FillRectangle(br, e.Bounds);
+                SizeF sz = e.Graphics.MeasureString(tabControl1.TabPages[e.Index].Text, e.Font);
+                e.Graphics.DrawString(tabControl1.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + (e.Bounds.Width - sz.Width) / 2, e.Bounds.Top + (e.Bounds.Height - sz.Height) / 2 + 1);
+
+             //   Rectangle rect = e.Bounds;
+             //   rect.Offset(0, 1);
+             //   rect.Inflate(0, -1);
+              //  e.Graphics.DrawRectangle(Pens.DarkGray, rect);
+             //   e.DrawFocusRectangle();
+            }
+        }
+
+
+
 
 
 
@@ -143,8 +189,9 @@ namespace Materyall
 
                 varsayilanDegerlerEkUrunler();
 
-
                 varsayilanNobetYeriSablonlari();
+
+                varsayilanDegerler_Odemeturleri();
 
 
                 lbl_bilgi.Text = metinler.ogretmenverisivar;
@@ -289,9 +336,44 @@ namespace Materyall
 
 
 
+            //Muhasebe bölümünü ayrı bir yöntem içinde göstereceğiz.
+            muhasebe_durumunu_goster();
+
         }
 
 
+
+        private void muhasebe_durumunu_goster()
+        {
+
+            MuhasebeGenelDurumSnf geneldurum = vtislemleri.getirMuhasebeGenelDurum(BirOgt.oid);
+
+            tb_muhasebe_toplam_borc.Text = geneldurum.toplamborc.ToString();
+            tb_muhasebe_toplam_odeme.Text = geneldurum.toplamodeme.ToString();
+            tb_muhasebe_toplam_bakiye.Text = geneldurum.toplambakiye.ToString();
+
+
+            //Aynı verileri hesap özeti bölümünde de gösterelim.
+
+            tb_hesapozeti_toplamborc.Text = tb_muhasebe_toplam_borc.Text;
+            tb_hesapozeti_toplamodeme.Text = tb_muhasebe_toplam_odeme.Text;
+            tb_hesapozeti_toplambakiye.Text = tb_muhasebe_toplam_bakiye.Text;
+
+
+
+
+            if (tb_muhasebe_toplam_bakiye.Text != "0")
+            {
+               btn_ikaz_lambasi.BackColor = Color.Red;
+               toolTip1.SetToolTip(btn_ikaz_lambasi,"Bakiye: " + tb_muhasebe_toplam_bakiye.Text);
+
+            } else
+            {
+                btn_ikaz_lambasi.BackColor = DefaultBackColor;
+                toolTip1.SetToolTip(btn_ikaz_lambasi, "İkaz yok.");
+            }
+
+        }
 
 
 
@@ -554,6 +636,27 @@ namespace Materyall
             {
 
                 cb_talep_nobetyerisablon.Items.Add(s.nobetyerisablonadi);
+            }
+
+
+        }
+
+
+
+
+        private void varsayilanDegerler_Odemeturleri()
+        {
+            
+            //Eğitim öğretim yılı.
+
+            cb_muhasebe_odemeal_odeme_turu.Items.Clear();
+
+            string[] veriler = vtislemleri.filtre_odemeturleri();
+
+            foreach (string s in veriler)
+            {
+
+                cb_muhasebe_odemeal_odeme_turu.Items.Add(s);
             }
 
 
@@ -1929,6 +2032,68 @@ namespace Materyall
         {
             MessageBox.Show(metinler.bilgi_metni_ogrenci_listesi);
         }
+
+        private void tb_muhasebe_odemeal_odeme_tarihi_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+            tb_muhasebe_odemeal_odeme_tarihi.Text = DateTime.Now.ToString();
+
+        }
+
+        private void linklbl_muhasebe_odemeal_odeme_kaydet_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Odeme_Kaydet();
+        }
+
+        private void Odeme_Kaydet()
+        {
+
+            //Virgül girilmişse onu noktaya çevirelim.
+            string odenentutarnoktali = tb_muhasebe_odemeal_odenen_miktar.Text.Replace(",", ".");
+
+
+            string kayitsonucu = vtislemleri.ekle_odeme(BirOgt.oid, odenentutarnoktali, cb_muhasebe_odemeal_odeme_turu.Text, tb_muhasebe_odemeal_odeme_tarihi.Text, tb_muhasebe_odemeal_aciklama.Text);
+
+
+            if (kayitsonucu.All(char.IsNumber))
+            {
+
+                //  MessageBox.Show("başarılı: " + kayitsonucu);
+                varsa_talepBolumu();
+
+            }
+            else
+            {
+                MessageBox.Show(kayitsonucu);
+            }
+
+
+
+        }
+
+        private void btn_muhasebe_miktar_uyari_bilgi_Click(object sender, EventArgs e)
+        {
+
+            MessageBox.Show("Binlik ayırıcısı KULLANMAYIN. Ondalık değerler için virgül veya nokta kullanın.");
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
