@@ -2900,6 +2900,128 @@ namespace Materyall
 
 
 
+        public DataTable dgv_icin_muhasebe_tum_odemeleri_getir(int oid)
+        {
+
+
+            baglantiKur();
+
+            //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
+            string sql = "SELECT b.odemeturu, a.tutar, a.odemetarihi, a.aciklama FROM " + metinler.neyebakalim_muhasebe_odeme_tablo + " a LEFT JOIN sis_odemeturu_tbl b ON a.odemekodu=b.odemekodu WHERE a.oid=" + oid + " ORDER BY a.odemetarihi";
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
+
+
+
+
+        public DataTable dgv_icin_muhasebe_tum_borclanmalari_getir(int oid)
+        {
+
+
+
+            DataTable dt = new DataTable();
+
+            //Kendimiz datatable oluşturup dgv'ye onu göndereceğiz. Alt alta olması için.
+            dt.Columns.Add("Materyal Türü");
+            dt.Columns.Add("Toplam Tutar");
+
+
+
+            baglantiKur();
+
+            //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
+            string sql = "SELECT SUM(fiyat) as Y_Plan," +
+                " (SELECT SUM(fiyat) FROM tlp_g_anadersler_tbl WHERE oid=" + oid + ") as G_Plan," +
+                " (SELECT SUM(fiyat) FROM tlp_g_serbestler_tbl WHERE oid=" + oid + ") as G_Secmeli," +
+                " (SELECT SUM(fiyat) FROM tlp_ekurunler_tbl WHERE oid=" + oid + ") as EK_CD_PDF," +
+                " (SELECT SUM(fiyat) FROM tlp_sosyalkulup_tbl WHERE oid=" + oid + ") as Kulup," +
+                " (SELECT SUM(fiyat) FROM tlp_defterler_tbl WHERE oid=" + oid + ") as Defterler " +
+                "FROM tlp_y_anadersler_tbl WHERE oid=" + oid;
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+
+                var dr = dt.NewRow();
+
+                dr[0] = "Yıllık Plan";
+                dr[1] = oku["Y_Plan"].ToString();
+
+                dt.Rows.Add(dr);
+
+                //__
+
+                var dr2 = dt.NewRow();
+
+                dr2[0] = "Günlük Plan";
+                dr2[1] = oku["G_Plan"].ToString();
+
+                dt.Rows.Add(dr2);
+
+                //__
+
+                var dr3 = dt.NewRow();
+
+                dr3[0] = "Seçmeli Dersler";
+                dr3[1] = oku["G_Secmeli"].ToString();
+
+                dt.Rows.Add(dr3);
+
+                //__
+
+                var dr4 = dt.NewRow();
+
+                dr4[0] = "Ek Ürünler (CD,PDF)";
+                dr4[1] = oku["EK_CD_PDF"].ToString();
+
+                dt.Rows.Add(dr4);
+
+                //__
+
+                var dr5 = dt.NewRow();
+
+                dr5[0] = "Sosyal Kulüp";
+                dr5[1] = oku["Kulup"].ToString();
+
+                dt.Rows.Add(dr5);
+
+
+                //__
+
+                var dr6 = dt.NewRow();
+
+                dr6[0] = "Defterler";
+                dr6[1] = oku["Defterler"].ToString();
+
+                dt.Rows.Add(dr6);
+
+
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
 
 
 

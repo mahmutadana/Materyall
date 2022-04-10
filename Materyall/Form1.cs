@@ -15,6 +15,8 @@ namespace Materyall
     public partial class Form1 : Form
     {
 
+        string ikaz_metni;
+
         OgretmenBilgileriSnf BirOgt;
         Bayibilgileri BirBayi;
 
@@ -174,6 +176,11 @@ namespace Materyall
 
         private void varsa_talepBolumu()
         {
+
+            //İkazı sıfırlayalım.
+            ikaz_metni = "İkaz";
+            btn_ikaz_lambasi.BackColor = DefaultBackColor;
+            toolTip1.SetToolTip(btn_ikaz_lambasi, ikaz_metni);
 
             //Sosyal kulüpleri kendi tablosundan alacağız.
             //Bu bilgileri bayi ve il seçildiğinde yeniden çağırabiliriz.
@@ -364,14 +371,32 @@ namespace Materyall
 
             if (tb_muhasebe_toplam_bakiye.Text != "0")
             {
+                //Bunu görüntülerken sıfırlıyoruz. Birden fazla ikazı aynı yerde gösterebiliriz.
+                ikaz_metni += "\n" + "Bakiye: " + tb_muhasebe_toplam_bakiye.Text;
                btn_ikaz_lambasi.BackColor = Color.Red;
-               toolTip1.SetToolTip(btn_ikaz_lambasi,"Bakiye: " + tb_muhasebe_toplam_bakiye.Text);
+               toolTip1.SetToolTip(btn_ikaz_lambasi,ikaz_metni);
 
-            } else
-            {
-                btn_ikaz_lambasi.BackColor = DefaultBackColor;
-                toolTip1.SetToolTip(btn_ikaz_lambasi, "İkaz yok.");
             }
+
+
+
+
+            //Ödemelerin DGV'si. (Data Grid View)
+
+            //Yapılan tüm ödemeleri göster.
+            dgv_muhasebe_odemeler.DataSource = vtislemleri.dgv_icin_muhasebe_tum_odemeleri_getir(BirOgt.oid);
+
+            //Borçlanmaları göster.
+            dgv_muhasebe_borclanmalar.DataSource = vtislemleri.dgv_icin_muhasebe_tum_borclanmalari_getir(BirOgt.oid);
+
+
+
+
+
+
+
+
+
 
         }
 
