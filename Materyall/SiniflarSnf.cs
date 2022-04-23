@@ -14,6 +14,21 @@ namespace Materyall
     }
 
 
+    public class VarsayilanYilBayivbBossaSnf
+    {
+        //Eğer yıl veya bayi seçilmezse varsayılan olarak bu değerler yazılacak.
+
+        public int varsayilankimliktablo { get; set; }
+        public int yilkodu { get; set; }
+        public string yilgorunen { get; set; }
+
+
+        public int bayikodu { get; set; }
+        public string bayigorunen { get; set; }
+
+
+    }
+
 
     //Bunun içine alt sınıflar ekleyeceğiz. Mesela anaderslerSnf ögesi ekleyip verileri orada tutacağız. (İnşallah)
     public class OgretmenBilgileriSnf

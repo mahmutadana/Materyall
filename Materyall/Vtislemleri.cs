@@ -53,6 +53,48 @@ namespace Materyall
         }
 
 
+
+
+        //Eğer yıl, bayi kodu seçilmemişse (ileride varsayılanlar artabilir.) buradaki değerleri kullanacağız.
+        public VarsayilanYilBayivbBossaSnf varsayilanlar_bossa()
+        {
+            
+            VarsayilanYilBayivbBossaSnf veriler = new VarsayilanYilBayivbBossaSnf();
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //Zaten 1 satır ama yine de limit koyduk.
+            string sql = "SELECT V.*, Y.yiladi, B.bayiadi FROM sis_varsayilanlar_tbl V LEFT JOIN sis_yillar_tbl Y ON Y.yilkodu=V.yilkodu " +
+                "LEFT JOIN sis_bayiler_tbl B ON B.bayikodu=V.bayikodu LIMIT 1";
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+                veriler.yilkodu = int.Parse("0" + oku["yilkodu"].ToString());
+                veriler.yilgorunen = oku["yiladi"].ToString();
+
+                veriler.bayikodu = int.Parse("0" + oku["bayikodu"].ToString());
+                veriler.bayigorunen = oku["bayiadi"].ToString();
+
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return veriler;
+
+        }
+
+
+
+
         //_____Eğitim öğretim yılı bilgilerini alalım.
 
         public string[] filtre_eoyillari()
