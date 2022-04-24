@@ -85,7 +85,7 @@ namespace Materyall
 
 
 
-            verileriVtYeKaydet(dgv);
+            
 
         }
 
@@ -93,26 +93,7 @@ namespace Materyall
 
 
 
-        private void verileriVtYeKaydet(DataGridView dgv)
-        {
-
-            MessageBox.Show(dgv.Rows.Count.ToString(), "Satır");
-
-
-            for (int i = 0; i < dgv.Rows.Count; i++)
-            {
-                DataGridViewRow dr = dgv.Rows[i];
-                if (dr.Cells[1].ToString() != "")
-                {
-                    MessageBox.Show(dr.Cells[1].Value.ToString(), "1. hücre");
-                }
-            }
-
-
-
-
-        }
-
+       
 
 
 

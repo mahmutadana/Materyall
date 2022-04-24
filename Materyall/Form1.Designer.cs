@@ -198,6 +198,7 @@
             this.lbl_bilgi = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -838,6 +839,7 @@
             // 
             // tab_hizlitalep
             // 
+            this.tab_hizlitalep.Controls.Add(this.groupBox18);
             this.tab_hizlitalep.Controls.Add(this.btn_taleplerial_excelden);
             this.tab_hizlitalep.Controls.Add(this.lbl_bekleyin);
             this.tab_hizlitalep.Controls.Add(this.datagridSunucuTalepleri);
@@ -852,7 +854,7 @@
             // 
             // btn_taleplerial_excelden
             // 
-            this.btn_taleplerial_excelden.Location = new System.Drawing.Point(978, 22);
+            this.btn_taleplerial_excelden.Location = new System.Drawing.Point(16, 29);
             this.btn_taleplerial_excelden.Name = "btn_taleplerial_excelden";
             this.btn_taleplerial_excelden.Size = new System.Drawing.Size(220, 37);
             this.btn_taleplerial_excelden.TabIndex = 3;
@@ -865,7 +867,7 @@
             this.lbl_bekleyin.AutoSize = true;
             this.lbl_bekleyin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lbl_bekleyin.ForeColor = System.Drawing.Color.Red;
-            this.lbl_bekleyin.Location = new System.Drawing.Point(263, 25);
+            this.lbl_bekleyin.Location = new System.Drawing.Point(743, 5);
             this.lbl_bekleyin.Name = "lbl_bekleyin";
             this.lbl_bekleyin.Size = new System.Drawing.Size(18, 25);
             this.lbl_bekleyin.TabIndex = 2;
@@ -877,12 +879,12 @@
             this.datagridSunucuTalepleri.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagridSunucuTalepleri.Location = new System.Drawing.Point(16, 72);
             this.datagridSunucuTalepleri.Name = "datagridSunucuTalepleri";
-            this.datagridSunucuTalepleri.Size = new System.Drawing.Size(1182, 270);
+            this.datagridSunucuTalepleri.Size = new System.Drawing.Size(942, 270);
             this.datagridSunucuTalepleri.TabIndex = 1;
             // 
             // btn_taleplerial_sunucudan
             // 
-            this.btn_taleplerial_sunucudan.Location = new System.Drawing.Point(16, 19);
+            this.btn_taleplerial_sunucudan.Location = new System.Drawing.Point(738, 30);
             this.btn_taleplerial_sunucudan.Name = "btn_taleplerial_sunucudan";
             this.btn_taleplerial_sunucudan.Size = new System.Drawing.Size(220, 37);
             this.btn_taleplerial_sunucudan.TabIndex = 0;
@@ -1689,7 +1691,7 @@
             this.tb_bilgi_bayikodu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tb_bilgi_bayikodu.Location = new System.Drawing.Point(88, 685);
             this.tb_bilgi_bayikodu.Name = "tb_bilgi_bayikodu";
-            this.tb_bilgi_bayikodu.Size = new System.Drawing.Size(143, 32);
+            this.tb_bilgi_bayikodu.Size = new System.Drawing.Size(187, 32);
             this.tb_bilgi_bayikodu.TabIndex = 35;
             this.tb_bilgi_bayikodu.TextChanged += new System.EventHandler(this.tb_bilgi_bayikodu_TextChanged);
             // 
@@ -2076,6 +2078,15 @@
             this.dataGridView1.Size = new System.Drawing.Size(954, 266);
             this.dataGridView1.TabIndex = 0;
             // 
+            // groupBox18
+            // 
+            this.groupBox18.Location = new System.Drawing.Point(976, 34);
+            this.groupBox18.Name = "groupBox18";
+            this.groupBox18.Size = new System.Drawing.Size(372, 492);
+            this.groupBox18.TabIndex = 4;
+            this.groupBox18.TabStop = false;
+            this.groupBox18.Text = "Talep Exceli Sütun Eşleştirmeleri";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2318,6 +2329,7 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.TextBox tb_hesapozeti_toplamborc;
         private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.GroupBox groupBox18;
     }
 }
 

@@ -14,8 +14,8 @@ namespace Materyall
         {
 
 
-            //Türü isim ise son kelime büyük, ilçr ise sadece ilk harfi büyük olacak.
-
+            //Türü isim ise son kelime büyük, ilçr ise sadece ilk harfi büyük olacak. Tamamı büyükse işlem yapmıyor. O yüzden önce küçüğe çevirdik.
+            isim = CultureInfo.CurrentCulture.TextInfo.ToLower(isim.Trim());
             isim = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(isim.Trim());
 
             if (turu == "ilce")

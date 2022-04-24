@@ -78,7 +78,7 @@ namespace Materyall
                 veriler.yilkodu = int.Parse("0" + oku["yilkodu"].ToString());
                 veriler.yilgorunen = oku["yiladi"].ToString();
 
-                veriler.bayikodu = int.Parse("0" + oku["bayikodu"].ToString());
+                veriler.bayikodu = oku["bayikodu"].ToString();
                 veriler.bayigorunen = oku["bayiadi"].ToString();
 
             }
@@ -897,7 +897,7 @@ namespace Materyall
                 string sql = "INSERT INTO tlp_ogretmenbilgileri_tbl (yili, adisoyadi, brans, il, ilce, kurumkodu, okuladi, sinif, sube, " +
                     "muduradi, mudurunvani, cep, eposta, adres, aciklama, bayi,logoadi) " +
                     "VALUES ('" + ogtblg.yili + "','" + ogtblg.adisoyadi + "','" + ogtblg.bransi + "','" + ogtblg.ili + "','" + ogtblg.ilcesi + "','" +
-                    ogtblg.kurumkodu + "','" + ogtblg.okuladi + "'," + ogtblg.sinifi + ",'" + ogtblg.subesi + "','" + ogtblg.muduradi + "','" + ogtblg.mudurunvani
+                    ogtblg.kurumkodu + "','" + ogtblg.okuladi + "','" + ogtblg.sinifi + "','" + ogtblg.subesi + "','" + ogtblg.muduradi + "','" + ogtblg.mudurunvani
                     + "','" + ogtblg.telefon + "','" + ogtblg.eposta + "','" + ogtblg.adres + "','" + ogtblg.aciklama + "'," + ogtblg.bayikodu + ",'" + ogtblg.ogretmenlogo + "')";
 
 
@@ -972,7 +972,7 @@ namespace Materyall
                     "ilce='" + ogtblg.ilcesi + "', " +
                     "kurumkodu='" + ogtblg.kurumkodu + "', " +
                     "okuladi='" + ogtblg.okuladi + "', " +
-                    "sinif=" + ogtblg.sinifi + ", " +
+                    "sinif='" + ogtblg.sinifi + "', " +
                     "sube='" + ogtblg.subesi + "', " +
                     "muduradi='" + ogtblg.muduradi + "', " +
                     "mudurunvani='" + ogtblg.mudurunvani + "', " +
@@ -1018,14 +1018,14 @@ namespace Materyall
 
 
 
-        private bool bukayitdahaoncedenvarmi(string kurumkodu, int sinif, string sube, string adisoyadi)
+        private bool bukayitdahaoncedenvarmi(string kurumkodu, string sinif, string sube, string adisoyadi)
         {
 
             string adet = "0";
 
             baglantiKur();
 
-            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE kurumkodu='" + kurumkodu + "' AND sinif=" + sinif + " AND sube='" + sube + "' AND adisoyadi='" + adisoyadi + "'";
+            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE kurumkodu='" + kurumkodu + "' AND sinif='" + sinif + "' AND sube='" + sube + "' AND adisoyadi='" + adisoyadi + "'";
 
 
 
@@ -1129,7 +1129,7 @@ namespace Materyall
                 ogrblg.ilcesi = oku["ilce"].ToString();
                 ogrblg.kurumkodu = oku["kurumkodu"].ToString();
                 ogrblg.okuladi = oku["okuladi"].ToString();
-                ogrblg.sinifi = int.Parse(oku["sinif"].ToString());
+                ogrblg.sinifi = oku["sinif"].ToString();
                 ogrblg.subesi = oku["sube"].ToString();
 
                 ogrblg.muduradi = oku["muduradi"].ToString();
@@ -3068,6 +3068,53 @@ namespace Materyall
 
 
 
+
+
+
+
+        //Excelden bilgi verileri için sütun başlıklarını VT'den okuyalım.
+
+        public ExcelSutunEslestir_Bilgi_Snf excelsutunbasliklari_bilgi()
+        {
+
+            ExcelSutunEslestir_Bilgi_Snf verisnf = new ExcelSutunEslestir_Bilgi_Snf();
+
+            baglantiKur();
+
+            string sql = "SELECT * FROM sis_excel_bilgisutunlari_tbl";
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+            
+                verisnf.bayikodu_stn = int.Parse(oku["bayikodu"].ToString());
+                verisnf.aciklama_stn = int.Parse(oku["bayikodu"].ToString());
+                verisnf.okulkodu_stn = int.Parse(oku["okulkodu"].ToString());
+                verisnf.il_stn = int.Parse(oku["il"].ToString());
+                verisnf.ilce_stn = int.Parse(oku["ilce"].ToString());
+                verisnf.okuladi_stn = int.Parse(oku["okuladi"].ToString());
+                verisnf.sinif_stn = int.Parse(oku["sinif"].ToString());
+                verisnf.sube_stn = int.Parse(oku["sube"].ToString());
+                verisnf.adisoyadi_stn = int.Parse(oku["adisoyadi"].ToString());
+                verisnf.bransgorevi_stn = int.Parse(oku["gorevi"].ToString());
+                verisnf.muduradi_stn = int.Parse(oku["muduradi"].ToString());
+                verisnf.mudurunvani_stn = int.Parse(oku["mudurunvani"].ToString());
+                verisnf.eposta_stn = int.Parse(oku["eposta"].ToString());
+                verisnf.telefon_stn = int.Parse(oku["telefon"].ToString());
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            return verisnf;
+
+        }
 
 
 

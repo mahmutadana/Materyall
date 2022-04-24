@@ -45,6 +45,8 @@ namespace Materyall
         List<OgrenciListesiSnf> talepOgrencilistesis = new List<OgrenciListesiSnf>();
 
 
+        //Excelden veri alırken hangi bilginin hangi sütunda olduğuna dair bilgileri tutacağız. İleride değişirse sadece VT'de değişiklik yapmak yeterli olsun.
+        ExcelSutunEslestir_Bilgi_Snf excelbilgisutunlari = new ExcelSutunEslestir_Bilgi_Snf();
 
 
         Vtislemleri vtislemleri = new Vtislemleri();
@@ -741,7 +743,7 @@ namespace Materyall
                 foreach (Bayibilgileri s in tum_bayi_bilgileris)
                 {
 
-                   if (s.bayikodu == varsayilanbossa.bayikodu.ToString())
+                   if (s.bayikodu == varsayilanbossa.bayikodu)
                     {
                         tb_bilgi_bayikodu.Text = s.bayikodu;
                         break;
@@ -798,7 +800,7 @@ namespace Materyall
             ogrblg.ilcesi = cb_bilgi_ilcesi.Text;
             ogrblg.kurumkodu = tb_bilgi_okulkodu.Text;
             ogrblg.okuladi = tb_bilgi_okulu.Text;
-            ogrblg.sinifi = int.Parse(cb_bilgi_sinifi.Text);
+            ogrblg.sinifi = cb_bilgi_sinifi.Text;
             ogrblg.subesi = tb_bilgi_subesi.Text;
 
             ogrblg.muduradi = tb_bilgi_muduradi.Text;
@@ -937,7 +939,7 @@ namespace Materyall
             tb_bilgi_okulkodu.Text = ogrblg.kurumkodu;
             tb_bilgi_okulu.Text = ogrblg.okuladi;
 
-            if (ogrblg.sinifi != 0)
+            if (ogrblg.sinifi != "")
             {
                 cb_bilgi_sinifi.Text = ogrblg.sinifi.ToString();
             } else
@@ -2188,12 +2190,146 @@ namespace Materyall
 
             excelSnf.excelHizliSiparisAl(secilentalepexceli, datagridSunucuTalepleri);
 
+            //Talepler gridviewe alındı. Şimdi oradan ilgili yerlere yazarak işleme devam edelim.
+            //1. Adım: Öğretmen bilgilerini gireceğiz. 2.adım olarak bilgi girişinin hemen sonrasında taleplerini ekleyeceğiz.
+
+
+            if (datagridSunucuTalepleri.Rows.Count > 1)
+            {
+                //Veri var, işleme devam edelim.
+
+                //Başlıkları içeren bilgileri alalım.
+                excelbilgisutunlari = vtislemleri.excelsutunbasliklari_bilgi();
+
+                verileriVtYeKaydet();
+
+
+
+
+            } else
+            {
+                MessageBox.Show("Hiçbir veri yok. İşlem yapılmadı");
+            }
+
+
         }
 
 
+        private void verileriVtYeKaydet()
+        {
+
+          //  MessageBox.Show(datagridSunucuTalepleri.Rows.Count.ToString(), "Satır");
+
+
+            for (int i = 0; i < datagridSunucuTalepleri.Rows.Count; i++)
+            {
+                DataGridViewRow dr = datagridSunucuTalepleri.Rows[i];
+
+                if (dr.Cells[excelbilgisutunlari.adisoyadi_stn].Value.ToString() != "")
+                {
+                  
+
+                    //1. Adım- Öğretmen bilgilerini kaydet.
+
+                    int ogretmenKayitID = vtYeKaydet_adim_1(dr);
+
+                    if (ogretmenKayitID > 0)
+                    {
+
+                        bool talepkaydisonucu = vtYeKaydet_adim_2(dr);
+
+                        if (!talepkaydisonucu)
+                        {
+                            MessageBox.Show("Öğretmen talepleri kaydedilemedi. Satır: " + i);
+                        }
+
+                       
+
+                    } else
+                    {
+                        MessageBox.Show("Öğretmen bilgisi kaydedilemedi. Satır: " + i);
+                    }
+
+                    //Denemek için tek kayıt ile yerlerine yazıp görme işlemi yapıyoruz. sonra çıkıyoruz.
+                    return;
+
+
+                }
+            }
 
 
 
+
+        }
+
+
+        //Bu bize yeni kaydolan öğretmenin kimlikno'sunu döndürecek ve o kayıt ile sipariş taleplerini gireceğiz.
+        private int vtYeKaydet_adim_1(DataGridViewRow dr)
+        {
+            //Excelden alınan verilere göre bilgilerin hangi sütunlardan alınacağına VT'den bakacağız. (Sayı olarak) ilk sütun 1 gireceğiz, kodlarda -1 yaparız.
+
+            //Eğer sınıf alanında 1-2-3 gibi bir giriş varsa sadece birincisini alacağız ama dersleri tüm sınıflara göre atayacağız. Döngü oradaki sınıf sayısı olacak.
+
+            tb_bilgi_adisoyadi.Text = yrdsnf.ismiduzelt(dr.Cells[excelbilgisutunlari.adisoyadi_stn - 1].Value.ToString(), "isim");
+           
+            cb_bilgi_bransi.Text = dr.Cells[excelbilgisutunlari.bransgorevi_stn - 1].Value.ToString();
+            cb_bilgi_ili.Text = dr.Cells[excelbilgisutunlari.il_stn - 1].Value.ToString();
+            cb_bilgi_ilcesi.Text = dr.Cells[excelbilgisutunlari.ilce_stn - 1].Value.ToString();
+
+
+            tb_bilgi_okulkodu.Text = dr.Cells[excelbilgisutunlari.okulkodu_stn - 1].Value.ToString();
+            tb_bilgi_okulu.Text = dr.Cells[excelbilgisutunlari.okuladi_stn - 1].Value.ToString();
+
+            //Sınıfı burada olduğu gibi alıyoruz.
+            cb_bilgi_sinifi.Text = dr.Cells[excelbilgisutunlari.sinif_stn - 1].Value.ToString();
+            
+            tb_bilgi_subesi.Text = dr.Cells[excelbilgisutunlari.sube_stn - 1].Value.ToString();
+
+            tb_bilgi_muduradi.Text = yrdsnf.ismiduzelt(dr.Cells[excelbilgisutunlari.muduradi_stn - 1].Value.ToString(), "isim");
+            cb_bilgi_mudurunvani.Text = dr.Cells[excelbilgisutunlari.mudurunvani_stn - 1].Value.ToString();
+
+            tb_bilgi_telefon.Text = dr.Cells[excelbilgisutunlari.telefon_stn - 1].Value.ToString();
+            tb_bilgi_eposta.Text = dr.Cells[excelbilgisutunlari.eposta_stn - 1].Value.ToString();
+
+            //Excelden adres bilgis gelmiyor.
+            //  tb_bilgi_adres.Text = dr.Cells[excelbilgisutunlari.aciklama_stn - 1].Value.ToString();
+
+            tb_bilgi_aciklama.Text = dr.Cells[excelbilgisutunlari.aciklama_stn - 1].Value.ToString();
+
+
+           
+            tb_bilgi_bayikodu.Text = dr.Cells[excelbilgisutunlari.bayikodu_stn - 1].Value.ToString();
+            //Bayi adı otomatik gelecek inşallah.
+           
+
+
+
+
+            return 0;
+        }
+
+
+        private bool vtYeKaydet_adim_2(DataGridViewRow dr)
+        {
+            //Eğer sınıf alanında 1-2-3 gibi bir giriş varsa sadece birincisini alacağız ama dersleri tüm sınıflara göre atayacağız. Döngü oradaki sınıf sayısı olacak.
+
+            /*
+            string[] siniflar = dr.Cells[excelbilgisutunlari.sinif_stn - 1].Value.ToString().Split('-');
+
+            if (siniflar.Length != 0)
+            {
+                cb_bilgi_sinifi.Text = siniflar[0];
+            }
+            else
+            {
+                cb_bilgi_sinifi.Text = "";
+            }
+            */
+
+
+
+            return false;
+        }
 
 
 

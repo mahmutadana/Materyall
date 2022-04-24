@@ -23,7 +23,7 @@ namespace Materyall
         public string yilgorunen { get; set; }
 
 
-        public int bayikodu { get; set; }
+        public string bayikodu { get; set; }
         public string bayigorunen { get; set; }
 
 
@@ -41,7 +41,7 @@ namespace Materyall
         public string ilcesi { get; set; }
         public string kurumkodu { get; set; }
         public string okuladi { get; set; }
-        public int sinifi { get; set; }
+        public string sinifi { get; set; }
         public string subesi { get; set; }
         public string muduradi { get; set; }
         public string mudurunvani { get; set; }
@@ -317,6 +317,33 @@ namespace Materyall
 
 
     }
+
+
+
+    public class ExcelSutunEslestir_Bilgi_Snf
+    {
+        //Eğer yıl veya bayi seçilmezse varsayılan olarak bu değerler yazılacak.
+
+       
+        public int bayikodu_stn { get; set; }
+        public int aciklama_stn { get; set; }
+        public int okulkodu_stn { get; set; }
+        public int il_stn { get; set; }
+        public int ilce_stn { get; set; }
+        public int okuladi_stn { get; set; }
+        public int sinif_stn { get; set; }
+        public int sube_stn { get; set; }
+        public int adisoyadi_stn { get; set; }
+        public int bransgorevi_stn { get; set; }
+        public int muduradi_stn { get; set; }
+        public int mudurunvani_stn { get; set; }
+        public int eposta_stn { get; set; }
+        public int telefon_stn { get; set; }
+
+
+    }
+
+
 
 
 }
