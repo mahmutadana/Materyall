@@ -825,6 +825,7 @@ namespace Materyall
 
                 if (kayitsonucu.All(char.IsNumber))
                 {
+                    //Kayıt sonucu başarılı ise müşteri numarasına id yazıyoruz, mesaj kutusu göstermiyoruz.
                     ogrblg.oid = int.Parse(kayitsonucu);
                     tb_bilgi_musterino.Text = kayitsonucu;
 
@@ -2251,7 +2252,7 @@ namespace Materyall
                     }
 
                     //Denemek için tek kayıt ile yerlerine yazıp görme işlemi yapıyoruz. sonra çıkıyoruz.
-                    return;
+                   // return;
 
 
                 }
@@ -2303,9 +2304,9 @@ namespace Materyall
            
 
 
+            //HENÜZ KAYDETMİYORUZ. VERİLERİN DOĞRU İŞLENDİĞİNDEN EMİN OLALIM. TALEP KISMININ KONTROLÜNÜ YAPIYORUZ. TAMAMLANINCA AÇIP DENEME YAPACAĞIZ İNŞALLAH.
 
-
-            return 0;
+            return 1;
         }
 
 
@@ -2313,18 +2314,98 @@ namespace Materyall
         {
             //Eğer sınıf alanında 1-2-3 gibi bir giriş varsa sadece birincisini alacağız ama dersleri tüm sınıflara göre atayacağız. Döngü oradaki sınıf sayısı olacak.
 
-            /*
+            //Yıllıkların başında Yıllık veya Y yazıyor. Günlüklerin başında da Günlük veya G. Ona göre işlem yapacağız.
+
+            //Yıllık plan sütun başlangıç 15-29 arası 14 sütun. Bunlar excel sütunları, yani burada -1 kullanmak gerekir.
+            int yillik_ders_ilk = 15;
+            int yillik_ders_adet = 14;
+
+            int gunluk_ders_ilk = 32;
+            int gunluk_ders_adet = 14;
+
+            //Şimdi yıllık planı istenen derslerin adlarını EVET yazan sütunların ilk satırındaki güncel isimden alarak aralarında - ile birleştirelim.
+
+            string yillikplanistenedersler = "";
+            for (int i = 0; i < yillik_ders_adet; i++)
+            {
+
+                if (dr.Cells[i + yillik_ders_ilk - 1].Value.ToString().Trim() == "Evet")
+                {
+                    yillikplanistenedersler = yillikplanistenedersler + "-" + datagridSunucuTalepleri.Columns[i + yillik_ders_ilk - 1].HeaderText;
+                }
+
+            }
+
+
+            //Günlük plan için istenen dersleri de aralarında tire - işaretiyle birleştirelim.
+            string gunlukplanistenedersler = "";
+            for (int i = 0; i < gunluk_ders_adet; i++)
+            {
+
+                if (dr.Cells[i + gunluk_ders_ilk - 1].Value.ToString().Trim() == "Evet")
+                {
+                    gunlukplanistenedersler = gunlukplanistenedersler + "-" + datagridSunucuTalepleri.Columns[i + gunluk_ders_ilk - 1].HeaderText;
+                }
+
+            }
+
+            MessageBox.Show(yillikplanistenedersler);
+            MessageBox.Show(gunlukplanistenedersler);
+
+            return false;
+
+
+             DERSLERİ YILLIK VE GÜNLÜK OLARAK ARALARINA ÇİZGİ KOAYARAK BİRLEŞTİREBİLDİK. SINIF SEVİYESİ DÖNGÜSÜNÜN İÇİNE DERS SEVİYESİ DÖNGÜSÜ EKLEYİP
+             DERSLERİN BAŞINA SINIFLARI EKLETİP FİLTRELENEN DERSLERDEN EŞLEŞENİ BULUP TEK TEK EKLEYECEĞİZ İNŞALLAH.
+
+
+         //   şimdilik kaydetmeden çıkıyoruz. Önce görelim.
+            //YILLIK ANA DERS EKLEMEK İÇİN İŞLEM YAPIYORUZ. Burada sınıf sayısı kadar döngü kuracağız.
+
             string[] siniflar = dr.Cells[excelbilgisutunlari.sinif_stn - 1].Value.ToString().Split('-');
 
-            if (siniflar.Length != 0)
+
+            foreach (string s in siniflar)
             {
-                cb_bilgi_sinifi.Text = siniflar[0];
+
+                //Seçilen dersi ve sınıfı birleştirip filtrelenlerde var mı diye bakacağız. filtrelenlerde ders adı sınıfla birlikte geliyor. 1-Hayat Bilgisi-MEB gibi
+                foreach(FiltrelenenAnaDersler f in filtrelenenAnaDerslers)
+                {
+
+
+
+                }
+
+
+
+
+            }
+
+
+            string kayitsonucu = vtislemleri.ekle_y_anaders(BirOgt.oid, filtrelenenAnaDerslers[cb_talep_anadersler_yillik.SelectedIndex].anadersid, filtrelenenAnaDerslers[cb_talep_anadersler_yillik.SelectedIndex].fiyat);
+
+            if (kayitsonucu.All(char.IsNumber))
+            {
+                //Kayıt başarılı.
+
             }
             else
             {
-                cb_bilgi_sinifi.Text = "";
+                MessageBox.Show(kayitsonucu);
             }
-            */
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
