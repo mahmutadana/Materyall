@@ -910,7 +910,7 @@ namespace Materyall
                     "muduradi, mudurunvani, cep, eposta, adres, aciklama, bayi,logoadi) " +
                     "VALUES ('" + ogtblg.yili + "','" + ogtblg.adisoyadi + "','" + ogtblg.bransi + "','" + ogtblg.ili + "','" + ogtblg.ilcesi + "','" +
                     ogtblg.kurumkodu + "','" + ogtblg.okuladi + "','" + ogtblg.sinifi + "','" + ogtblg.subesi + "','" + ogtblg.muduradi + "','" + ogtblg.mudurunvani
-                    + "','" + ogtblg.telefon + "','" + ogtblg.eposta + "','" + ogtblg.adres + "','" + ogtblg.aciklama + "'," + ogtblg.bayikodu + ",'" + ogtblg.ogretmenlogo + "')";
+                    + "','" + ogtblg.telefon + "','" + ogtblg.eposta + "','" + ogtblg.adres + "','" + ogtblg.aciklama + "','" + ogtblg.bayikodu + "','" + ogtblg.ogretmenlogo + "')";
 
 
                 MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);

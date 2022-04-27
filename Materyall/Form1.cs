@@ -764,6 +764,15 @@ namespace Materyall
 
 
 
+            //Bayi adı kısmında bulunamadı yazıyorsa ona göre uyarı verip işlemi sonlandıracağız.
+            if (cb_bilgi_bayiadi.Text == metinler.veribulunamadi)
+            {
+
+
+                MessageBox.Show(tb_bilgi_bayikodu.Text + " kodlu bayi bulunamadı. İşlem yapılamadı. Öğretmen Adı: " + tb_bilgi_adisoyadi);
+                return;
+            }
+
 
 
 
@@ -885,7 +894,7 @@ namespace Materyall
 
             if (cb_yili.Text == "" || tb_bilgi_adisoyadi.Text == "" || cb_bilgi_bransi.Text == "" || cb_bilgi_ili.Text == "" ||
                  cb_bilgi_ilcesi.Text == "" || tb_bilgi_okulkodu.Text == "" || tb_bilgi_okulu.Text == "" || cb_bilgi_sinifi.Text == "" ||
-                 tb_bilgi_subesi.Text == "" || tb_bilgi_muduradi.Text == "" || cb_bilgi_mudurunvani.Text == "" || tb_bilgi_bayikodu.Text == "" || lbl_bilgi_kayittarihi.Text == "")
+                 tb_bilgi_subesi.Text == "" || tb_bilgi_muduradi.Text == "" || cb_bilgi_mudurunvani.Text == "" || tb_bilgi_bayikodu.Text == "" )
             {
                 return false;
             } else
@@ -919,8 +928,12 @@ namespace Materyall
             cb_talep_sosyalkulupadi.Text = "";
             cb_talep_sosyalkulupadi.Items.Clear();
 
-
-
+            dgv_talep_anadersler_yillik.DataSource = null;
+            dgv_talep_anadersler_gunluk.DataSource = null;
+            dgv_talep_serbestdersler_yillik.DataSource = null;
+            dgv_talep_nobetyerleri.DataSource = null;
+            dgv_talep_defterler.DataSource = null;
+            dgv_talep_digerzumreogretmenleri.DataSource = null;
 
 
         }
@@ -2190,11 +2203,49 @@ namespace Materyall
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 yrdsnf.log_yaz("Excel hızlı talep. " + ofd.FileName);
-                excelSecildiTalepleriGoster(ofd.FileName);
+                datagridSunucuTalepleri.DataSource = excelSecildiTalepleriGetir(ofd.FileName);
+
+
+                if (datagridSunucuTalepleri.Rows.Count > 1)
+                {
+                    //Veri var, işleme devam edelim.
+
+                    //Başlıkları içeren bilgileri alalım.
+                    excelbilgisutunlari = vtislemleri.excelsutunbasliklari_bilgi();
+
+                    lbl_bekleyin.Text = "Verileri kaydediliyor.";
+
+                    verileriVtYeKaydet();
+
+                    lbl_bekleyin.Text = "Tamamlandı. Adet: " + datagridSunucuTalepleri.RowCount;
+
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Hiçbir veri yok. İşlem yapılmadı");
+                }
 
             }
 
         }
+
+
+
+        public static DataTable excelSecildiTalepleriGetir(string strFileName)
+        {
+            string Table = "talep";
+
+            OleDbConnection conn = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + strFileName + ";Extended Properties=Excel 12.0;");
+            conn.Open();
+            string strQuery = "SELECT * FROM [" + Table + "$]";
+            OleDbDataAdapter adapter = new OleDbDataAdapter(strQuery, conn);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            return ds.Tables[0];
+        }
+
 
         private void excelSecildiTalepleriGoster(string secilentalepexceli)
         {
@@ -2256,14 +2307,18 @@ namespace Materyall
 
                         if (!talepkaydisonucu)
                         {
-                            MessageBox.Show("Öğretmen talepleri kaydedilemedi. Satır: " + i);
+                            string msjmtn = "Öğretmen talepleri kaydedilemedi. Satır: " + i;
+                            yrdsnf.log_yaz(msjmtn);
+                            MessageBox.Show(msjmtn);
                         }
 
                        
 
                     } else
                     {
-                        MessageBox.Show("Öğretmen bilgisi kaydedilemedi. Satır: " + i);
+                        string msjmtn = "Öğretmen talepleri kaydedilemedi. Satır: " + i;
+                        yrdsnf.log_yaz(msjmtn);
+                        MessageBox.Show(msjmtn);
                     }
 
                     //Denemek için tek kayıt ile yerlerine yazıp görme işlemi yapıyoruz. sonra çıkıyoruz.
@@ -2316,11 +2371,11 @@ namespace Materyall
            
             tb_bilgi_bayikodu.Text = dr.Cells[excelbilgisutunlari.bayikodu_stn - 1].Value.ToString();
             //Bayi adı otomatik gelecek inşallah.
-
+           // bayikodundanBayiBilgileriniGetir();
 
 
             //Öğretmen bilgisi kaydedelim. //Bilgileri forma yazmıştık, bilgileri oradan okutup kaydettiyoruz.
-                yeniKayitYapveyaGuncelle(true);
+            yeniKayitYapveyaGuncelle(true);
 
             //Dersleri vs getirelim. (ile, bayiye göre...)
             varayilanTalepleilgiliVeriler();
@@ -2370,7 +2425,7 @@ namespace Materyall
             }
 
             //Aynı dizinin devamına 5-6-7-8 seçmeli dersleri ekleyelim. Peygambermimizin hayatı gibi ortaokul seçmeli dersleri.
-            yillikplanistenedersler = yillikplanistenedersler + "-" + dr.Cells[yillik_secmeliders_sutun].Value.ToString().Trim();
+            yillikplanistenedersler = yillikplanistenedersler + "-" + dr.Cells[yillik_secmeliders_sutun - 1].Value.ToString().Trim();
 
 
 
@@ -2530,6 +2585,7 @@ namespace Materyall
 
             // SERBEST ETKİNLİK DERSLERİ.
 
+        //AÇ KAPA    return true;
 
             //Serbest etkinlik derslerini girelim.
 
