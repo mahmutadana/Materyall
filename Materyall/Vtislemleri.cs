@@ -14,6 +14,7 @@ namespace Materyall
     internal class Vtislemleri
     {
 
+        YardimciSnf yrdsnf = new YardimciSnf();
 
         Metinler metinler = new Metinler();
 
@@ -651,7 +652,12 @@ namespace Materyall
             string dersgrubu = ilindersgurubunuGetir(yil, iladi);
 
 
-           
+           if (dersgrubu == "")
+            {
+               //Formadaki nesneye başka sınıftan ulaşma çabasındayız. lbl_bilgi.text = "Bu eğitim öğretim yılı, şehir için ders grubu oluşturulmamış.";
+                return list;
+            }
+
 
             //Bağlantı kısmı.
 
@@ -718,7 +724,11 @@ namespace Materyall
 
             string dersgrubu = ilindersgurubunuGetir(yil, iladi);
 
-
+            if (dersgrubu == "")
+            {
+         //Ana derslerde mesaj gösterilmesi yeterli.       MessageBox.Show("Bu eğitim öğretim yılı, şehir için ders grubu oluşturulmamış.");
+                return list;
+            }
 
 
             //Bağlantı kısmı.
@@ -878,9 +888,11 @@ namespace Materyall
 
             long sonid = 0;
 
-           if (bukayitdahaoncedenvarmi(ogtblg.kurumkodu, ogtblg.sinifi, ogtblg.subesi, ogtblg.adisoyadi))
+           if (bukayitdahaoncedenvarmi(ogtblg.yili, ogtblg.kurumkodu, ogtblg.sinifi, ogtblg.subesi, ogtblg.adisoyadi))
             {
                 sonuc = metinler.mukerrerkayitbilgisiogretmen;
+
+                yrdsnf.log_yaz(ogtblg.adisoyadi + "- " + sonuc);
 
                 return sonuc;
             }
@@ -928,6 +940,7 @@ namespace Materyall
 
             baglantikapat(mysqlbaglantisi);
 
+            yrdsnf.log_yaz(ogtblg.adisoyadi + "- " + sonuc + " Oluşan Müşteri No:" + sonid);
 
             if ( sonid > 0)
             {
@@ -1018,14 +1031,14 @@ namespace Materyall
 
 
 
-        private bool bukayitdahaoncedenvarmi(string kurumkodu, string sinif, string sube, string adisoyadi)
+        private bool bukayitdahaoncedenvarmi(string yili, string kurumkodu, string sinif, string sube, string adisoyadi)
         {
 
             string adet = "0";
 
             baglantiKur();
 
-            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE kurumkodu='" + kurumkodu + "' AND sinif='" + sinif + "' AND sube='" + sube + "' AND adisoyadi='" + adisoyadi + "'";
+            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE yili='" + yili + "' AND kurumkodu='" + kurumkodu + "' AND sinif='" + sinif + "' AND sube='" + sube + "' AND adisoyadi='" + adisoyadi + "'";
 
 
 

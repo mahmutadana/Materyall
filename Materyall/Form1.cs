@@ -61,6 +61,10 @@ namespace Materyall
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            YardimciSnf.TB_LOG_KAYITLARI = tb_logkayitlari;
+
+            yrdsnf.log_yaz("Program başlatıldı.");
+
             //  sekmeRengiAyarla();
 
             varsayilanDegerleriGuncelleAsync();
@@ -625,6 +629,11 @@ namespace Materyall
             }
 
 
+            if (filtrelenenAnaDerslers == null)
+            {
+                lbl_bilgi.Text = "Bu eğitim öğretim yılı, şehir için ders grubu oluşturulmamış.";
+            }
+
         }
 
 
@@ -940,7 +949,7 @@ namespace Materyall
             tb_bilgi_okulkodu.Text = ogrblg.kurumkodu;
             tb_bilgi_okulu.Text = ogrblg.okuladi;
 
-            if (ogrblg.sinifi != "")
+            if (ogrblg.sinifi != null && ogrblg.sinifi != "")
             {
                 cb_bilgi_sinifi.Text = ogrblg.sinifi.ToString();
             } else
@@ -1041,6 +1050,8 @@ namespace Materyall
 
         private void linklbl_musteri_no_ogrt_bilgisi_getir_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+
+            yrdsnf.log_yaz("GÖSTER komutu çalıştırıldı. Müşteri No:" + tb_bilgi_musterino.Text);
 
             if (tb_bilgi_musterino.Text == "")
             {
@@ -2178,6 +2189,7 @@ namespace Materyall
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                yrdsnf.log_yaz("Excel hızlı talep. " + ofd.FileName);
                 excelSecildiTalepleriGoster(ofd.FileName);
 
             }
@@ -2328,8 +2340,21 @@ namespace Materyall
             int yillik_ders_ilk = 15;
             int yillik_ders_adet = 14;
 
+            int yillik_secmeliders_sutun = 31;
+
             int gunluk_ders_ilk = 32;
             int gunluk_ders_adet = 14;
+
+        //PLANI YOK    int gunluk_secmeliders_sutun = 48;
+
+            int serbest_etkinlik_dersleri_sutun = 30;
+
+
+            int okumadefteri_talep_sutun = 51;
+            int sosyalkulup_talep_sutun = 52;
+            int cd_talep_sutun = 53;
+
+
 
             //Şimdi yıllık planı istenen derslerin adlarını EVET yazan sütunların ilk satırındaki güncel isimden alarak aralarında - ile birleştirelim.
 
@@ -2343,6 +2368,10 @@ namespace Materyall
                 }
 
             }
+
+            //Aynı dizinin devamına 5-6-7-8 seçmeli dersleri ekleyelim. Peygambermimizin hayatı gibi ortaokul seçmeli dersleri.
+            yillikplanistenedersler = yillikplanistenedersler + "-" + dr.Cells[yillik_secmeliders_sutun].Value.ToString().Trim();
+
 
 
             //Günlük plan için istenen dersleri de aralarında tire - işaretiyle birleştirelim.
@@ -2388,7 +2417,7 @@ namespace Materyall
                             for (int i = 0; i < filtrelenenAnaDerslers.Count; i++)
                             {
 
-                                if (filtrelenenAnaDerslers[i].dersadi.Contains(eklenecekolanders))
+                                if (filtrelenenAnaDerslers[i].dersadi.Contains(eklenecekolanders) || filtrelenenAnaDerslers[i].dersadi.Contains(eklenecekolanders.ToUpper()))
                                 {
 
                                     //Dersi bulduysak ekliyoruz.
@@ -2443,7 +2472,7 @@ namespace Materyall
                             //Seçilen dersi ve sınıfı birleştirip filtrelenlerde var mı diye bakacağız. (İçeriyor mu diye bakacağız. Sonundaki yayınevi olmayacak çünkü.)
                             //filtrelenlerde ders adı sınıfla birlikte geliyor. 1-Hayat Bilgisi-MEB gibi
 
-                            for (int i = 0; i < filtrelenenAnaDerslers.Count; i++)
+                            for (int i = 0; i < filtrelenenGunlukPlaniOlanDerslers.Count; i++)
                             {
 
                                 if (filtrelenenGunlukPlaniOlanDerslers[i].dersadi.Contains(eklenecekolanders))
@@ -2487,21 +2516,167 @@ namespace Materyall
                     }
                 }
 
+
+
+
                 //Birden fazla sınıf seçilmişse onun döngüsü.
             }
 
 
             //Ana ders yılllık ve günlük kayıtları tamamlandı.
 
+            
+            // SERBEST ETKİNLİK DERSLERİ.
+
+
+            //Serbest etkinlik derslerini girelim.
+
+            string[] yillik_istenen_serbestler_dizi = dr.Cells[serbest_etkinlik_dersleri_sutun - 1].Value.ToString().Split('-');
+
+            foreach (string birders in yillik_istenen_serbestler_dizi)
+            {
+
+                //Eğer ders varsa işlem yapıyoruz. En başa çizgi konmuş olabilir.
+                if (birders.Trim().Length > 0)
+                {
+
+
+                    //Döngüde bu dersin adının bulunup bulunmadığına bakmak için kullanacağız.
+                    bool ders_bulunup_islendimi = false;
+                    string eklenecekolanders = birders;
+
+                    //Seçilen dersi ve sınıfı birleştirip filtrelenlerde var mı diye bakacağız. (İçeriyor mu diye bakacağız. Sonundaki yayınevi olmayacak çünkü.)
+                    //filtrelenlerde ders adı sınıfla birlikte geliyor. 1-Hayat Bilgisi-MEB gibi
+
+                    for (int i = 0; i < filtrelenenSerbestEtkinlikDerslers.Count; i++)
+                    {
+
+                        //Burada contains demiyoruz, doğrudan aynı olmasını istiyoruz. ==
+                        if (filtrelenenSerbestEtkinlikDerslers[i].serbestdersadi == eklenecekolanders.ToUpper())
+                        {
+
+                            //Dersi bulduysak ekliyoruz.
+                            ders_bulunup_islendimi = true;
+
+
+                            string kayitsonucu = vtislemleri.ekle_s_ders(BirOgt.oid, filtrelenenSerbestEtkinlikDerslers[i].serbestdersid);
+
+                            if (kayitsonucu.All(char.IsNumber))
+                            {
+
+                                
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("İşlem tamamlanmadı Serbest ders. Çıkılıyor. Öğretmen: " + BirOgt.adisoyadi + " Hata: " + kayitsonucu);
+                                return false;
+                            }
 
 
 
+                            //Bu dersi bulduysak kaydediyoruz ve döngüden çıkıp diğer derse geçiyoruz.
+                            break;
+
+                        }
+
+                    }
+
+                    if (!ders_bulunup_islendimi)
+                    {
+                        MessageBox.Show("İşlem tamamlanmadı. Ders bulunamadı: " + eklenecekolanders);
+                    }
+
+                }
 
 
-           
-           
+            }
 
-            return true;
+
+
+            //EK ÜRÜN İŞLEMLERİ. CD-PDF
+
+
+            //Kulüp kaydı
+            string kulupAdi = dr.Cells[sosyalkulup_talep_sutun - 1].Value.ToString();
+
+            //Kulüp adı girilmişse işlem yapacağız.
+            if (kulupAdi.Length > 0)
+            {
+
+                string ikinciogretmen = "...";
+                bool kulupbulundumu = false;
+
+                for (int i = 0; i < filtrelenenSosyalKuluplers.Count; i++)
+                {
+
+                    if (filtrelenenSosyalKuluplers[i].kulupadi.Contains(kulupAdi))
+                    {
+                        kulupbulundumu = true;
+
+                        string kayitsonucu = vtislemleri.ekle_sosyalkulup(BirOgt.oid, filtrelenenSosyalKuluplers[i].kulupkodu, ikinciogretmen, filtrelenenSosyalKuluplers[i].fiyat);
+
+                        if (kayitsonucu.All(char.IsNumber))
+                        {
+
+                            //  MessageBox.Show("başarılı: " + kayitsonucu);
+                            // varsa_talepBolumu();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sosyal kulüp hızlı kaydı yapılamadı. " + kayitsonucu);
+                        }
+
+                        break;
+                    }
+
+                }
+
+                if (!kulupbulundumu)
+                {
+                    MessageBox.Show("Sosyal kulüp bulunamadı. " + kulupAdi);
+                }
+
+            }
+
+
+
+            // PDF kaydına ait excelde veri yok.
+
+            // CD İŞLEMİ. Evet yazıyorsa işlem yapacağız.
+
+            string cdTalebi = dr.Cells[cd_talep_sutun - 1].Value.ToString();
+
+            if (cdTalebi.Length > 0)
+            {
+                foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
+                {
+
+                    if (urun.urunadi == "CD")
+                    {
+
+
+                        string kayitsonucu = vtislemleri.ekle_ek_urunler(BirOgt.oid, urun.urunkodu, urun.fiyat);
+
+                        if (kayitsonucu.All(char.IsNumber))
+                        {
+
+                            //  MessageBox.Show("başarılı: " + kayitsonucu);
+                           // varsa_talepBolumu();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show(kayitsonucu);
+                        }
+
+
+                        break;
+
+                    }
+                }
+                       
         }
 
 

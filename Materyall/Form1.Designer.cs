@@ -197,8 +197,12 @@
             this.btn_varsayilanlariguncelle = new System.Windows.Forms.Button();
             this.btn_ikaz_lambasi = new System.Windows.Forms.Button();
             this.lbl_bilgi = new System.Windows.Forms.Label();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tab_alt_arama = new System.Windows.Forms.TabPage();
+            this.tab_alt_loglar = new System.Windows.Forms.TabPage();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv_alt_aramavelisteleme = new System.Windows.Forms.DataGridView();
+            this.tb_logkayitlari = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -230,8 +234,11 @@
             this.groupBox10.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_logo)).BeginInit();
+            this.tabControl2.SuspendLayout();
+            this.tab_alt_arama.SuspendLayout();
+            this.tab_alt_loglar.SuspendLayout();
             this.groupBox11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -2065,35 +2072,79 @@
             this.lbl_bilgi.Text = "Bilgi...";
             this.lbl_bilgi.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // tabControl2
+            // 
+            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl2.Controls.Add(this.tab_alt_arama);
+            this.tabControl2.Controls.Add(this.tab_alt_loglar);
+            this.tabControl2.Location = new System.Drawing.Point(399, 588);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(1362, 304);
+            this.tabControl2.TabIndex = 35;
+            // 
+            // tab_alt_arama
+            // 
+            this.tab_alt_arama.Controls.Add(this.groupBox11);
+            this.tab_alt_arama.Location = new System.Drawing.Point(4, 22);
+            this.tab_alt_arama.Name = "tab_alt_arama";
+            this.tab_alt_arama.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_alt_arama.Size = new System.Drawing.Size(1354, 278);
+            this.tab_alt_arama.TabIndex = 0;
+            this.tab_alt_arama.Text = "Arama ve Listeleme";
+            this.tab_alt_arama.UseVisualStyleBackColor = true;
+            // 
+            // tab_alt_loglar
+            // 
+            this.tab_alt_loglar.Controls.Add(this.tb_logkayitlari);
+            this.tab_alt_loglar.Location = new System.Drawing.Point(4, 22);
+            this.tab_alt_loglar.Name = "tab_alt_loglar";
+            this.tab_alt_loglar.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_alt_loglar.Size = new System.Drawing.Size(1354, 278);
+            this.tab_alt_loglar.TabIndex = 1;
+            this.tab_alt_loglar.Text = "İşlem kayıtları";
+            this.tab_alt_loglar.UseVisualStyleBackColor = true;
+            // 
             // groupBox11
             // 
             this.groupBox11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox11.Controls.Add(this.dataGridView1);
-            this.groupBox11.Location = new System.Drawing.Point(394, 589);
+            this.groupBox11.Controls.Add(this.dgv_alt_aramavelisteleme);
+            this.groupBox11.Location = new System.Drawing.Point(6, 6);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(1367, 292);
-            this.groupBox11.TabIndex = 33;
+            this.groupBox11.Size = new System.Drawing.Size(969, 265);
+            this.groupBox11.TabIndex = 34;
             this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Listeleme Bölümü";
             // 
-            // dataGridView1
+            // dgv_alt_aramavelisteleme
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgv_alt_aramavelisteleme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(7, 20);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(954, 266);
-            this.dataGridView1.TabIndex = 0;
+            this.dgv_alt_aramavelisteleme.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_alt_aramavelisteleme.Location = new System.Drawing.Point(7, 12);
+            this.dgv_alt_aramavelisteleme.Name = "dgv_alt_aramavelisteleme";
+            this.dgv_alt_aramavelisteleme.Size = new System.Drawing.Size(954, 247);
+            this.dgv_alt_aramavelisteleme.TabIndex = 0;
+            // 
+            // tb_logkayitlari
+            // 
+            this.tb_logkayitlari.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tb_logkayitlari.Location = new System.Drawing.Point(6, 7);
+            this.tb_logkayitlari.Multiline = true;
+            this.tb_logkayitlari.Name = "tb_logkayitlari";
+            this.tb_logkayitlari.Size = new System.Drawing.Size(1230, 264);
+            this.tb_logkayitlari.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1772, 893);
+            this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.btn_ikaz_lambasi);
-            this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.lbl_bilgi);
             this.Controls.Add(this.btn_varsayilanlariguncelle);
             this.Controls.Add(this.bt_yenikayit);
@@ -2151,8 +2202,12 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_logo)).EndInit();
+            this.tabControl2.ResumeLayout(false);
+            this.tab_alt_arama.ResumeLayout(false);
+            this.tab_alt_loglar.ResumeLayout(false);
+            this.tab_alt_loglar.PerformLayout();
             this.groupBox11.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2265,8 +2320,6 @@
         private System.Windows.Forms.LinkLabel linklbl_talep_kulup_sil;
         private System.Windows.Forms.LinkLabel linklbl_talep_kulup;
         private System.Windows.Forms.LinkLabel linklbl_zumre_otomatikgetir;
-        private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.ComboBox cb_talep_nobetyerisablon;
         private System.Windows.Forms.GroupBox groupBox12;
@@ -2330,6 +2383,12 @@
         private System.Windows.Forms.TextBox tb_hesapozeti_toplamborc;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.GroupBox groupBox18;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tab_alt_arama;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.DataGridView dgv_alt_aramavelisteleme;
+        private System.Windows.Forms.TabPage tab_alt_loglar;
+        private System.Windows.Forms.TextBox tb_logkayitlari;
     }
 }
 

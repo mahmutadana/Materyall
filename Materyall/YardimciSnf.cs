@@ -4,11 +4,23 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Materyall
 {
     internal class YardimciSnf
     {
+
+
+        public static TextBox TB_LOG_KAYITLARI;
+
+        public void log_yaz(string metin)
+        {
+            TB_LOG_KAYITLARI.Text = DateTime.Now.ToString() + "     " +  metin  + Environment.NewLine + TB_LOG_KAYITLARI.Text;
+        }
+
+
+
 
         public string ismiduzelt(string isim, string turu)
         {
