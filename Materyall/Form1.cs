@@ -2202,8 +2202,11 @@ namespace Materyall
                 //Başlıkları içeren bilgileri alalım.
                 excelbilgisutunlari = vtislemleri.excelsutunbasliklari_bilgi();
 
+                lbl_bekleyin.Text = "Verileri kaydediliyor.";
+
                 verileriVtYeKaydet();
 
+                lbl_bekleyin.Text = "Tamamlandı. Adet: " + datagridSunucuTalepleri.RowCount;
 
 
 
@@ -2301,12 +2304,17 @@ namespace Materyall
            
             tb_bilgi_bayikodu.Text = dr.Cells[excelbilgisutunlari.bayikodu_stn - 1].Value.ToString();
             //Bayi adı otomatik gelecek inşallah.
-           
 
 
-            //HENÜZ KAYDETMİYORUZ. VERİLERİN DOĞRU İŞLENDİĞİNDEN EMİN OLALIM. TALEP KISMININ KONTROLÜNÜ YAPIYORUZ. TAMAMLANINCA AÇIP DENEME YAPACAĞIZ İNŞALLAH.
 
-            return 1;
+            //Öğretmen bilgisi kaydedelim. //Bilgileri forma yazmıştık, bilgileri oradan okutup kaydettiyoruz.
+                yeniKayitYapveyaGuncelle(true);
+
+            //Dersleri vs getirelim. (ile, bayiye göre...)
+            varayilanTalepleilgiliVeriler();
+
+            //Yeni kayıt soununda oluşan müşteri numarasını döndürüyoruz.
+            return int.Parse(tb_bilgi_musterino.Text);
         }
 
 
@@ -2331,7 +2339,7 @@ namespace Materyall
 
                 if (dr.Cells[i + yillik_ders_ilk - 1].Value.ToString().Trim() == "Evet")
                 {
-                    yillikplanistenedersler = yillikplanistenedersler + "-" + datagridSunucuTalepleri.Columns[i + yillik_ders_ilk - 1].HeaderText;
+                    yillikplanistenedersler = yillikplanistenedersler + "-" + datagridSunucuTalepleri.Columns[i + yillik_ders_ilk - 1].HeaderText.Replace("Yıllık", "").Trim();
                 }
 
             }
@@ -2344,72 +2352,156 @@ namespace Materyall
 
                 if (dr.Cells[i + gunluk_ders_ilk - 1].Value.ToString().Trim() == "Evet")
                 {
-                    gunlukplanistenedersler = gunlukplanistenedersler + "-" + datagridSunucuTalepleri.Columns[i + gunluk_ders_ilk - 1].HeaderText;
+                    gunlukplanistenedersler = gunlukplanistenedersler + "-" + datagridSunucuTalepleri.Columns[i + gunluk_ders_ilk - 1].HeaderText.Replace("Günlük","").Trim();
                 }
 
             }
 
-            MessageBox.Show(yillikplanistenedersler);
-            MessageBox.Show(gunlukplanistenedersler);
-
-            return false;
-
-
-             DERSLERİ YILLIK VE GÜNLÜK OLARAK ARALARINA ÇİZGİ KOAYARAK BİRLEŞTİREBİLDİK. SINIF SEVİYESİ DÖNGÜSÜNÜN İÇİNE DERS SEVİYESİ DÖNGÜSÜ EKLEYİP
-             DERSLERİN BAŞINA SINIFLARI EKLETİP FİLTRELENEN DERSLERDEN EŞLEŞENİ BULUP TEK TEK EKLEYECEĞİZ İNŞALLAH.
-
-
-         //   şimdilik kaydetmeden çıkıyoruz. Önce görelim.
+           
             //YILLIK ANA DERS EKLEMEK İÇİN İŞLEM YAPIYORUZ. Burada sınıf sayısı kadar döngü kuracağız.
 
             string[] siniflar = dr.Cells[excelbilgisutunlari.sinif_stn - 1].Value.ToString().Split('-');
+            string[] yillik_istenen_dersler_dizi = yillikplanistenedersler.Split('-');
+            string[] gunluk_istenen_dersler_dizi = gunlukplanistenedersler.Split('-');
 
-
-            foreach (string s in siniflar)
+            foreach (string snf in siniflar)
             {
-
-                //Seçilen dersi ve sınıfı birleştirip filtrelenlerde var mı diye bakacağız. filtrelenlerde ders adı sınıfla birlikte geliyor. 1-Hayat Bilgisi-MEB gibi
-                foreach(FiltrelenenAnaDersler f in filtrelenenAnaDerslers)
+                if (snf.Trim().Length > 0)
                 {
 
 
+                    foreach (string birders in yillik_istenen_dersler_dizi)
+                    {
 
+                        //Eğer ders varsa işlem yapıyoruz. En başa çizgi konmuş olabilir.
+                        if (birders.Trim().Length > 0)
+                        {
+
+
+                            //Döngüde bu dersin adının bulunup bulunmadığına bakmak için kullanacağız.
+                            bool ders_bulunup_islendimi = false;
+                            string eklenecekolanders = snf + "-" + birders;
+
+                            //Seçilen dersi ve sınıfı birleştirip filtrelenlerde var mı diye bakacağız. (İçeriyor mu diye bakacağız. Sonundaki yayınevi olmayacak çünkü.)
+                            //filtrelenlerde ders adı sınıfla birlikte geliyor. 1-Hayat Bilgisi-MEB gibi
+
+                            for (int i = 0; i < filtrelenenAnaDerslers.Count; i++)
+                            {
+
+                                if (filtrelenenAnaDerslers[i].dersadi.Contains(eklenecekolanders))
+                                {
+
+                                    //Dersi bulduysak ekliyoruz.
+                                    ders_bulunup_islendimi = true;
+
+                                    string kayitsonucu = vtislemleri.ekle_y_anaders(BirOgt.oid, filtrelenenAnaDerslers[i].anadersid, filtrelenenAnaDerslers[i].fiyat);
+
+                                    if (kayitsonucu.All(char.IsNumber))
+                                    {
+                                        //Kayıt başarılı.
+
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("İşlem tamamlanmadı. Çıkılıyor. Öğretmen: " + BirOgt.adisoyadi + " Hata: " + kayitsonucu);
+                                        return false;
+                                    }
+
+                                    //Bu dersi bulduysak kaydediyoruz ve döngüden çıkıp diğer derse geçiyoruz.
+                                    break;
+
+                                }
+
+                            }
+
+                            if (!ders_bulunup_islendimi)
+                            {
+                                MessageBox.Show("İşlem tamamlanmadı. Ders bulunamadı: " + eklenecekolanders);
+                            }
+
+                        }
+
+
+                    }
+
+                    //Aynı Sınıf döngüsü içindeyiz. Günlük planı da bu döngü içinde halledelim.
+                    //GÜNLÜK PLAN EKLEME KISMI.
+
+
+                    foreach (string birders in gunluk_istenen_dersler_dizi)
+                    {
+
+                        //Eğer ders varsa işlem yapıyoruz. En başa çizgi konmuş olabilir.
+                        if (birders.Trim().Length > 0)
+                        {
+
+
+                            //Döngüde bu dersin adının bulunup bulunmadığına bakmak için kullanacağız.
+                            bool ders_bulunup_islendimi = false;
+                            string eklenecekolanders = snf + "-" + birders;
+
+                            //Seçilen dersi ve sınıfı birleştirip filtrelenlerde var mı diye bakacağız. (İçeriyor mu diye bakacağız. Sonundaki yayınevi olmayacak çünkü.)
+                            //filtrelenlerde ders adı sınıfla birlikte geliyor. 1-Hayat Bilgisi-MEB gibi
+
+                            for (int i = 0; i < filtrelenenAnaDerslers.Count; i++)
+                            {
+
+                                if (filtrelenenGunlukPlaniOlanDerslers[i].dersadi.Contains(eklenecekolanders))
+                                {
+
+                                    //Dersi bulduysak ekliyoruz.
+                                    ders_bulunup_islendimi = true;
+
+
+                                    string kayitsonucu = vtislemleri.ekle_g_anaders(BirOgt.oid, filtrelenenGunlukPlaniOlanDerslers[i].gunlukdersid, filtrelenenGunlukPlaniOlanDerslers[i].fiyat);
+
+                                    if (kayitsonucu.All(char.IsNumber))
+                                    {
+
+                                        //Kayıt işlemi başarılı.
+
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("İşlem tamamlanmadı. Çıkılıyor. Öğretmen: " + BirOgt.adisoyadi + " Hata: " + kayitsonucu);
+                                        return false;
+                                    }
+
+
+
+                                    //Bu dersi bulduysak kaydediyoruz ve döngüden çıkıp diğer derse geçiyoruz.
+                                    break;
+
+                                }
+
+                            }
+
+                            if (!ders_bulunup_islendimi)
+                            {
+                                MessageBox.Show("İşlem tamamlanmadı. Ders bulunamadı: " + eklenecekolanders);
+                            }
+
+                        }
+
+
+                    }
                 }
 
-
-
-
+                //Birden fazla sınıf seçilmişse onun döngüsü.
             }
 
 
-            string kayitsonucu = vtislemleri.ekle_y_anaders(BirOgt.oid, filtrelenenAnaDerslers[cb_talep_anadersler_yillik.SelectedIndex].anadersid, filtrelenenAnaDerslers[cb_talep_anadersler_yillik.SelectedIndex].fiyat);
-
-            if (kayitsonucu.All(char.IsNumber))
-            {
-                //Kayıt başarılı.
-
-            }
-            else
-            {
-                MessageBox.Show(kayitsonucu);
-            }
+            //Ana ders yılllık ve günlük kayıtları tamamlandı.
 
 
 
 
 
 
+           
+           
 
-
-
-
-
-
-
-
-
-
-            return false;
+            return true;
         }
 
 

@@ -82,6 +82,7 @@
             this.dgv_talep_anadersler_yillik = new System.Windows.Forms.DataGridView();
             this.cb_talep_anadersler_yillik = new System.Windows.Forms.ComboBox();
             this.tab_hizlitalep = new System.Windows.Forms.TabPage();
+            this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.btn_taleplerial_excelden = new System.Windows.Forms.Button();
             this.lbl_bekleyin = new System.Windows.Forms.Label();
             this.datagridSunucuTalepleri = new System.Windows.Forms.DataGridView();
@@ -198,7 +199,6 @@
             this.lbl_bilgi = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -852,6 +852,15 @@
             this.tab_hizlitalep.Text = "Hızlı Talep";
             this.tab_hizlitalep.UseVisualStyleBackColor = true;
             // 
+            // groupBox18
+            // 
+            this.groupBox18.Location = new System.Drawing.Point(976, 34);
+            this.groupBox18.Name = "groupBox18";
+            this.groupBox18.Size = new System.Drawing.Size(372, 492);
+            this.groupBox18.TabIndex = 4;
+            this.groupBox18.TabStop = false;
+            this.groupBox18.Text = "Talep Exceli Sütun Eşleştirmeleri";
+            // 
             // btn_taleplerial_excelden
             // 
             this.btn_taleplerial_excelden.Location = new System.Drawing.Point(16, 29);
@@ -867,7 +876,7 @@
             this.lbl_bekleyin.AutoSize = true;
             this.lbl_bekleyin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lbl_bekleyin.ForeColor = System.Drawing.Color.Red;
-            this.lbl_bekleyin.Location = new System.Drawing.Point(743, 5);
+            this.lbl_bekleyin.Location = new System.Drawing.Point(437, 36);
             this.lbl_bekleyin.Name = "lbl_bekleyin";
             this.lbl_bekleyin.Size = new System.Drawing.Size(18, 25);
             this.lbl_bekleyin.TabIndex = 2;
@@ -2077,15 +2086,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(954, 266);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // groupBox18
-            // 
-            this.groupBox18.Location = new System.Drawing.Point(976, 34);
-            this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(372, 492);
-            this.groupBox18.TabIndex = 4;
-            this.groupBox18.TabStop = false;
-            this.groupBox18.Text = "Talep Exceli Sütun Eşleştirmeleri";
             // 
             // Form1
             // 
