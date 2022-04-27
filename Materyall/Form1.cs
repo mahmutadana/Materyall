@@ -2345,7 +2345,7 @@ namespace Materyall
             int gunluk_ders_ilk = 32;
             int gunluk_ders_adet = 14;
 
-        //PLANI YOK    int gunluk_secmeliders_sutun = 48;
+            //PLANI YOK    int gunluk_secmeliders_sutun = 48;
 
             int serbest_etkinlik_dersleri_sutun = 30;
 
@@ -2381,12 +2381,12 @@ namespace Materyall
 
                 if (dr.Cells[i + gunluk_ders_ilk - 1].Value.ToString().Trim() == "Evet")
                 {
-                    gunlukplanistenedersler = gunlukplanistenedersler + "-" + datagridSunucuTalepleri.Columns[i + gunluk_ders_ilk - 1].HeaderText.Replace("Günlük","").Trim();
+                    gunlukplanistenedersler = gunlukplanistenedersler + "-" + datagridSunucuTalepleri.Columns[i + gunluk_ders_ilk - 1].HeaderText.Replace("Günlük", "").Trim();
                 }
 
             }
 
-           
+
             //YILLIK ANA DERS EKLEMEK İÇİN İŞLEM YAPIYORUZ. Burada sınıf sayısı kadar döngü kuracağız.
 
             string[] siniflar = dr.Cells[excelbilgisutunlari.sinif_stn - 1].Value.ToString().Split('-');
@@ -2446,6 +2446,7 @@ namespace Materyall
                             if (!ders_bulunup_islendimi)
                             {
                                 MessageBox.Show("İşlem tamamlanmadı. Ders bulunamadı: " + eklenecekolanders);
+                                return false;
                             }
 
                         }
@@ -2508,6 +2509,7 @@ namespace Materyall
                             if (!ders_bulunup_islendimi)
                             {
                                 MessageBox.Show("İşlem tamamlanmadı. Ders bulunamadı: " + eklenecekolanders);
+                                return false;
                             }
 
                         }
@@ -2525,7 +2527,7 @@ namespace Materyall
 
             //Ana ders yılllık ve günlük kayıtları tamamlandı.
 
-            
+
             // SERBEST ETKİNLİK DERSLERİ.
 
 
@@ -2564,7 +2566,7 @@ namespace Materyall
                             if (kayitsonucu.All(char.IsNumber))
                             {
 
-                                
+
 
                             }
                             else
@@ -2585,6 +2587,7 @@ namespace Materyall
                     if (!ders_bulunup_islendimi)
                     {
                         MessageBox.Show("İşlem tamamlanmadı. Ders bulunamadı: " + eklenecekolanders);
+                        return false;
                     }
 
                 }
@@ -2626,6 +2629,7 @@ namespace Materyall
                         else
                         {
                             MessageBox.Show("Sosyal kulüp hızlı kaydı yapılamadı. " + kayitsonucu);
+                            return false;
                         }
 
                         break;
@@ -2636,6 +2640,7 @@ namespace Materyall
                 if (!kulupbulundumu)
                 {
                     MessageBox.Show("Sosyal kulüp bulunamadı. " + kulupAdi);
+                    return false;
                 }
 
             }
@@ -2663,12 +2668,13 @@ namespace Materyall
                         {
 
                             //  MessageBox.Show("başarılı: " + kayitsonucu);
-                           // varsa_talepBolumu();
+                            // varsa_talepBolumu();
 
                         }
                         else
                         {
                             MessageBox.Show(kayitsonucu);
+                            return false;
                         }
 
 
@@ -2676,14 +2682,11 @@ namespace Materyall
 
                     }
                 }
-                       
+            }
+
+
+            return true;
         }
-
-
-
-
-
-
 
 
 
