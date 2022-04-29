@@ -1729,7 +1729,7 @@ namespace Materyall
 
             long sonid = 0;
 
-            if (bu_talep_dahaoncedenvarmi(oid, dersid, metinler.neyebakalim_s_ders_tablo, metinler.neyebakalim_s_ders_urunid_adi))
+            if (bu_talep_dahaoncedenvarmi(oid, dersid, metinler.neyebakalim_serbest_ders_tablo, metinler.neyebakalim_s_ders_urunid_adi))
             {
                 sonuc = metinler.mukerrerkayitbilgisitalep;
 
@@ -1745,7 +1745,7 @@ namespace Materyall
             try
             {
 
-                string sql = "INSERT INTO " + metinler.neyebakalim_s_ders_tablo + " " +
+                string sql = "INSERT INTO " + metinler.neyebakalim_serbest_ders_tablo + " " +
                     "(oid, dersid, taleptarihi) " +
                     "VALUES (" + oid + "," + dersid + ", now())";
 
@@ -1803,7 +1803,7 @@ namespace Materyall
             try
             {
 
-                string sql = "DELETE FROM " + metinler.neyebakalim_s_ders_tablo + " " +
+                string sql = "DELETE FROM " + metinler.neyebakalim_serbest_ders_tablo + " " +
                     "WHERE oid=" + oid + " AND dersid=" + dersid;
 
 
@@ -1848,7 +1848,7 @@ namespace Materyall
             baglantiKur();
 
             //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
-            string sql = "SELECT b.dersadi, a.dersid, a.taleptarihi, a.basimtarihi FROM " + metinler.neyebakalim_s_ders_tablo + " a LEFT JOIN sis_serbestetkinlikler_tbl b ON a.dersid=b.dersid WHERE b.yil='" + yili + "' AND oid=" + oid;
+            string sql = "SELECT b.dersadi, a.dersid, a.taleptarihi, a.basimtarihi FROM " + metinler.neyebakalim_serbest_ders_tablo + " a LEFT JOIN sis_serbestetkinlikler_tbl b ON a.dersid=b.dersid WHERE b.yil='" + yili + "' AND oid=" + oid;
 
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
@@ -2858,7 +2858,7 @@ namespace Materyall
                 "UNION ALL " +
                 "SELECT fiyat FROM tlp_sosyalkulup_tbl WHERE oid=" + oid + " " +
                 "UNION ALL " +
-                "SELECT fiyat FROM tlp_y_anadersler_tbl WHERE oid=" + oid + " ) t"; ;
+                "SELECT fiyat FROM tlp_y_anadersler_tbl WHERE oid=" + oid + " ) t";
 
 
 
@@ -3106,7 +3106,7 @@ namespace Materyall
             {
             
                 verisnf.bayikodu_stn = int.Parse(oku["bayikodu"].ToString());
-                verisnf.aciklama_stn = int.Parse(oku["bayikodu"].ToString());
+                verisnf.aciklama_stn = int.Parse(oku["aciklama"].ToString());
                 verisnf.okulkodu_stn = int.Parse(oku["okulkodu"].ToString());
                 verisnf.il_stn = int.Parse(oku["il"].ToString());
                 verisnf.ilce_stn = int.Parse(oku["ilce"].ToString());
@@ -3119,6 +3119,8 @@ namespace Materyall
                 verisnf.mudurunvani_stn = int.Parse(oku["mudurunvani"].ToString());
                 verisnf.eposta_stn = int.Parse(oku["eposta"].ToString());
                 verisnf.telefon_stn = int.Parse(oku["telefon"].ToString());
+
+
             }
 
 
@@ -3129,6 +3131,264 @@ namespace Materyall
 
         }
 
+
+
+
+
+        public string tamamen_sil_secili_tablodaki_verileri(int oid, string tablo_adi)
+        {
+
+            string sonuc = metinler.islembasarili;
+
+            baglantiKur();
+            
+
+            try
+            {
+
+                string sql = "DELETE FROM " + tablo_adi + " " +
+                    "WHERE oid=" + oid;
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+
+            return sonuc;
+        }
+
+
+
+
+
+        //ARAMA İŞLEMLERİ.
+        public DataTable ara_dgv_icin_plan_turune_gore_XX(String yili, bool yillik, bool gunluk, bool basilmis, bool basilmamis)
+        {
+
+            // muhasebeeklemedenemesi yaptık. 
+
+            /*
+            string sqlmuhasebe = "SELECT SUM(t.fiyat) as toplamborc, (SELECT SUM(tutar) FROM odemeler_tbl WHERE oid=" + oid + ") as toplamodeme FROM (" +
+               "SELECT fiyat FROM tlp_defterler_tbl WHERE oid=" + oid + " " +
+               "UNION ALL " +
+               "SELECT fiyat FROM tlp_ekurunler_tbl WHERE oid=" + oid + " " +
+               "UNION ALL " +
+               "SELECT fiyat FROM tlp_g_anadersler_tbl WHERE oid=" + oid + " " +
+               "UNION ALL " +
+               "SELECT fiyat FROM tlp_g_serbestler_tbl WHERE oid=" + oid + " " +
+               "UNION ALL " +
+               "SELECT fiyat FROM tlp_sosyalkulup_tbl WHERE oid=" + oid + " " +
+               "UNION ALL " +
+               "SELECT fiyat FROM tlp_y_anadersler_tbl WHERE oid=" + oid + " ) t";
+            */
+
+
+            baglantiKur();
+
+            //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
+            // string sql1 = "SELECT b.dersadi, a.dersid, a.taleptarihi, a.basimtarihi FROM " + metinler.neyebakalim_y_anaders_tablo + " a LEFT JOIN sis_serbestetkinlikler_tbl b ON a.dersid=b.dersid WHERE b.yil='" + yili + "' AND oid=" + oid;
+
+            /*
+            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                "LEFT JOIN " + metinler.neyebakalim_y_anaders_tablo  + " y ON y.oid=b.oid " +
+                "LEFT JOIN " +  metinler.neyebakalim_g_anaders_tablo + " g ON g.oid=b.oid " +
+                " WHERE b.yili='" + yili + "' GROUP BY b.oid";
+            */
+
+
+            /*
+             LEFT JOIN (SELECT (toplamborc) as bakiye FROM SELECT SUM(t.fiyat) as toplamborc, (SELECT SUM(tutar) FROM odemeler_tbl WHERE oid=b.oid) as toplamodeme FROM (" +
+               "SELECT fiyat FROM tlp_defterler_tbl WHERE oid=b.oid " +
+               "UNION ALL " +
+               "SELECT fiyat FROM tlp_ekurunler_tbl WHERE oid=b.oid " +
+               "UNION ALL " +
+               "SELECT fiyat FROM tlp_g_anadersler_tbl WHERE oid=b.oid " +
+               "UNION ALL " +
+               "SELECT fiyat FROM tlp_g_serbestler_tbl WHERE oid=b.oid " +
+               "UNION ALL " +
+               "SELECT fiyat FROM tlp_sosyalkulup_tbl WHERE oid=b.oid " +
+               "UNION ALL " +
+               "SELECT fiyat FROM tlp_y_anadersler_tbl WHERE oid=b.oid) t) x ON x.bakiye>-1
+            */
+
+
+
+            /*
+
+            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube, (SELECT SUM(tutar) FROM odemeler_tbl WHERE oid=b.oid) as toplamodeme, (SELECT SUM(t.fiyat) FROM (" +
+   "SELECT fiyat FROM tlp_defterler_tbl WHERE oid=96 " +
+   "UNION ALL " +
+   "SELECT fiyat FROM tlp_ekurunler_tbl WHERE oid=96 " +
+   "UNION ALL " +
+   "SELECT fiyat FROM tlp_g_anadersler_tbl WHERE oid=96 " +
+   "UNION ALL " +
+   "SELECT fiyat FROM tlp_g_serbestler_tbl WHERE oid=96 " +
+   "UNION ALL " +
+   "SELECT fiyat FROM tlp_sosyalkulup_tbl WHERE oid=96 " +
+   "UNION ALL " +
+   "SELECT fiyat FROM tlp_y_anadersler_tbl WHERE oid=96) t) as toplamborc FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+   "LEFT JOIN " + metinler.neyebakalim_y_anaders_tablo + " y ON y.oid=b.oid " +
+   "LEFT JOIN " + metinler.neyebakalim_g_anaders_tablo + " g ON g.oid=b.oid " +
+   " WHERE b.yili='" + yili + "' GROUP BY b.oid";
+
+            */
+
+            /*
+    string sql = "SELECT b.oid, (SELECT SUM(tutar) FROM odemeler_tbl WHERE oid=b.oid) as totalpaid, (SELECT SUM(t.fiyat) FROM (" +
+   "SELECT fiyat FROM tlp_defterler_tbl WHERE oid=96 " +
+   "UNION ALL " +
+   "SELECT fiyat FROM tlp_ekurunler_tbl WHERE oid=96) t) as totalreceipt " +
+   "FROM table_info_b b " +
+   " WHERE b.yili='2022' GROUP BY b.oid";
+            */
+
+            /*
+            string sql1 = "SELECT b.oid, (SELECT SUM(tutar) FROM odemeler_tbl WHERE oid=b.oid) as totalpaid,  " +
+                " (SELECT SUM(fiyat) FROM tlp_defterler_tbl WHERE oid=b.oid) as f1," +
+   "(SELECT SUM(fiyat) FROM tlp_ekurunler_tbl WHERE oid=b.oid) as f2, " +
+   "(SELECT SUM(fiyat) FROM tlp_g_anadersler_tbl WHERE oid=b.oid) as f3, " +
+   "(SELECT SUM(fiyat) FROM tlp_g_serbestler_tbl WHERE oid=b.oid) as f4, " +
+   "(SELECT SUM(fiyat) FROM tlp_sosyalkulup_tbl WHERE oid=b.oid) as f5, " +
+   "(SELECT SUM(fiyat) FROM tlp_y_anadersler_tbl WHERE oid=b.oid) as f6   FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+   " WHERE b.yili='" + yili + "' GROUP BY b.oid";
+            */
+
+            
+            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                "LEFT JOIN " + metinler.neyebakalim_y_anaders_tablo + " y ON y.oid=b.oid " +
+                "LEFT JOIN " + metinler.neyebakalim_g_anaders_tablo + " g ON g.oid=b.oid " +
+                " WHERE b.yili='" + yili + "' GROUP BY b.oid";
+            
+
+                string sql2 = " ";
+    string sql3 = " ";
+    string sql4 = " ";
+
+    string sql_son = sql1;
+
+
+
+
+
+    MySqlDataAdapter da = new MySqlDataAdapter(sql_son, mysqlbaglantisi);
+
+
+
+    DataTable dt = new DataTable();
+    da.Fill(dt);
+
+
+    baglantikapat(mysqlbaglantisi);
+
+
+    return dt;
+
+    }
+
+
+        public DataTable ara_dgv_icin_plan_turune_gore(String yili, bool plantumu, bool planyillik, bool plangunluk, bool durumtumu, bool basilmis, bool basilmamis)
+        {
+
+
+           
+
+            string basimdurumu = " ";
+            
+            if (durumtumu)
+            {
+                basimdurumu = " ";
+
+            } else if (basilmis)
+            {
+                basimdurumu = " WHERE basimtarihi IS NOT NULL ";
+
+            } else
+            {
+                //Basılmamışlar isteniyorsa.
+                basimdurumu = " WHERE basimtarihi IS NULL ";
+            }
+
+
+
+            //Varsaılan olarak ikisi de seçili.
+            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+               " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " " +
+               " UNION " +
+               " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + " ) " +
+               "  GROUP BY b.oid";
+
+
+            if (planyillik)
+            {
+                sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                                " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + ") " +
+                                "  GROUP BY b.oid";
+
+            } else if (plangunluk)
+            {
+                sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                                " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + ") " +
+                                "  GROUP BY b.oid";
+            }
+
+           
+
+            /*
+            string sql1 = "SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " y WHERE y.basimtarihi IS NULL " +
+                " UNION " +
+                " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " g WHERE g.basimtarihi IS NOT NULL";
+
+            */
+
+            string sql2 = " ";
+            string sql3 = " ";
+            string sql4 = " ";
+
+            string sql_son = sql1;
+
+
+
+
+            baglantiKur();
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql_son, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
 
 
 

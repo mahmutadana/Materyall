@@ -340,7 +340,6 @@ namespace Materyall
         public int eposta_stn { get; set; }
         public int telefon_stn { get; set; }
 
-
     }
 
 

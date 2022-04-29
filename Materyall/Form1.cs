@@ -434,13 +434,16 @@ namespace Materyall
 
             string[] yillar = vtislemleri.filtre_eoyillari();
 
+           
             foreach (string s in yillar)
             {
                 //  MessageBox.Show(s, "yillar");
                 cb_yili.Items.Add(s);
+                cb_yil_ara.Items.Add(s);
             }
 
-
+            //Arama için varsayılanı yazalım.
+            cb_yil_ara.Text = varsayilanbossa.yilgorunen;
         }
 
         private void varsayilanDegerler_2_brans()
@@ -1062,6 +1065,15 @@ namespace Materyall
         }
 
         private void linklbl_musteri_no_ogrt_bilgisi_getir_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            gosterDugmesineBasildi();
+
+        }
+
+
+
+        private void gosterDugmesineBasildi()
         {
 
             yrdsnf.log_yaz("GÖSTER komutu çalıştırıldı. Müşteri No:" + tb_bilgi_musterino.Text);
@@ -2203,7 +2215,7 @@ namespace Materyall
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 yrdsnf.log_yaz("Excel hızlı talep. " + ofd.FileName);
-                datagridSunucuTalepleri.DataSource = excelSecildiTalepleriGetir(ofd.FileName);
+                datagridSunucuTalepleri.DataSource = excelSecildiTalepleriGetir(ofd.FileName, "talep");
 
 
                 if (datagridSunucuTalepleri.Rows.Count > 1)
@@ -2233,16 +2245,30 @@ namespace Materyall
 
 
 
-        public static DataTable excelSecildiTalepleriGetir(string strFileName)
+        public static DataTable excelSecildiTalepleriGetir(string strFileName, string tabloAdi)
         {
-            string Table = "talep";
+           // string Table = "talep";
 
             OleDbConnection conn = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + strFileName + ";Extended Properties=Excel 12.0;");
             conn.Open();
-            string strQuery = "SELECT * FROM [" + Table + "$]";
+            string strQuery = "SELECT * FROM [" + tabloAdi + "$]";
             OleDbDataAdapter adapter = new OleDbDataAdapter(strQuery, conn);
             DataSet ds = new DataSet();
-            adapter.Fill(ds);
+
+            try
+            {
+                adapter.Fill(ds);
+
+            } catch(Exception e) {
+                    
+                MessageBox.Show(e.Message);
+            
+                return null;
+            }
+            
+           
+            
+            
             return ds.Tables[0];
         }
 
@@ -2743,6 +2769,396 @@ namespace Materyall
 
             return true;
         }
+
+        private void bt_sil_seciliveriler_Click(object sender, EventArgs e)
+        {
+            sil_secilileri_sil();
+        }
+
+
+        private void sil_secilileri_sil()
+        {
+
+
+            if (tb_sil_sifre.Text != "1968")
+            {
+                MessageBox.Show("Şifreniz hatalı.)");
+                return;
+            }
+
+
+            if (cb_sil_yillikplanlar.Checked)
+            {
+                yrdsnf.log_yaz("Yıllık plan talepleri bilgileri silme işlemi tamamlandı");
+                string tablom = metinler.neyebakalim_y_anaders_tablo;
+                vtislemleri.tamamen_sil_secili_tablodaki_verileri(BirOgt.oid, tablom);
+            }
+
+            if (cb_sil_gunlukplanlar.Checked)
+            {
+                yrdsnf.log_yaz("Günlük plan talep bilgileri silme işlemi tamamlandı");
+                string tablom = metinler.neyebakalim_g_anaders_tablo;
+                vtislemleri.tamamen_sil_secili_tablodaki_verileri(BirOgt.oid, tablom);
+            }
+
+
+            if (cb_sil_serbestetkinlikler.Checked)
+            {
+                yrdsnf.log_yaz("Serbest etkinlik talep bilgileri silme işlemi tamamlandı");
+                string tablom = metinler.neyebakalim_serbest_ders_tablo;
+                vtislemleri.tamamen_sil_secili_tablodaki_verileri(BirOgt.oid, tablom);
+            }
+
+
+            if (cb_sil_defterler.Checked)
+            {
+                yrdsnf.log_yaz("Defter talep bilgileri silme işlemi tamamlandı");
+                string tablom = metinler.neyebakalim_defter_tablo;
+                vtislemleri.tamamen_sil_secili_tablodaki_verileri(BirOgt.oid, tablom);
+            }
+
+
+            if (cb_sil_zumreler.Checked)
+            {
+                yrdsnf.log_yaz("Diğer zümre öğretmenleri bilgileri silme işlemi tamamlandı");
+                string tablom = metinler.neyebakalim_digerzumreogretmenleri_tablo;
+                vtislemleri.tamamen_sil_secili_tablodaki_verileri(BirOgt.oid, tablom);
+            }
+
+
+            if (cb_sil_ogrencilistesi.Checked)
+            {
+                yrdsnf.log_yaz("Öğrenci listesi bilgileri silme işlemi tamamlandı");
+                string tablom = metinler.neyebakalim_ogrenci_listesi_tablo;
+                vtislemleri.tamamen_sil_secili_tablodaki_verileri(BirOgt.oid, tablom);
+            }
+
+            if (cb_sil_kuluptalebi.Checked)
+            {
+                yrdsnf.log_yaz("Sosyal Kulüp bilgileri silme işlemi tamamlandı");
+                string tablom = metinler.neyebakalim_sosyalkulup_tablo;
+                vtislemleri.tamamen_sil_secili_tablodaki_verileri(BirOgt.oid, tablom);
+            }
+
+
+            if (cb_sil_cdpdf.Checked)
+            {
+                yrdsnf.log_yaz("Ek ürünler (cd-pdf) bilgileri silme işlemi tamamlandı");
+                string tablom = metinler.neyebakalim_ekurunler_cd_pdf_tablo;
+                vtislemleri.tamamen_sil_secili_tablodaki_verileri(BirOgt.oid, tablom);
+            }
+
+            if (cb_sil_odemeler.Checked)
+            {
+                yrdsnf.log_yaz("Ödeme bilgileri silme işlemi tamamlandı");
+                string tablom = metinler.neyebakalim_muhasebe_odeme_tablo;
+                vtislemleri.tamamen_sil_secili_tablodaki_verileri(BirOgt.oid, tablom);
+            }
+
+
+
+            if (cb_sil_hersey.Checked)
+            {
+                yrdsnf.log_yaz("Öğretmen bilgileri silme işlemi tamamlandı");
+                string tablom = metinler.neyebakalim_bilgi_ogretmen_tablo;
+                vtislemleri.tamamen_sil_secili_tablodaki_verileri(BirOgt.oid, tablom);
+            }
+
+            yrdsnf.log_yaz("silme işlemi tamamlandı");
+            lbl_bilgi.Text = "Silme işlemi tamamlandı.";
+
+        }
+
+        private void lnklbl_ara_plan_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            ara_plan_turune_gore();
+
+        }
+
+
+        private void ara_plan_turune_gore()
+        {
+
+
+            dgv_alt_aramavelisteleme.DataSource = vtislemleri.ara_dgv_icin_plan_turune_gore(cb_yil_ara.Text, rb_ara_plantumu.Checked, rb_ara_planyillik.Checked, rb_ara_plangunluk.Checked,
+                rb_ara_durum_tumu.Checked, rb_ara_durum_basilmis.Checked, rb_ara_durum_basilmamis.Checked);
+
+
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            ara_ekUrunlervb();
+
+        }
+
+
+        private void ara_ekUrunlervb()
+        {
+
+
+            foreach (DataGridViewRow row in dgv_alt_aramavelisteleme.Rows)
+            {
+
+                if (row.Selected)
+                {
+                    MessageBox.Show(row.Cells[0].Value.ToString());
+                }
+
+            }
+
+        }
+
+
+
+
+
+        //DEFTER HIZLI TALEP İŞLEMLERİ.
+
+        private void dgv_ara_alttaki_cellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+
+            tb_bilgi_musterino.Text = dgv_alt_aramavelisteleme.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+            gosterDugmesineBasildi();
+
+        }
+
+        private void btn_defter_talepleriniHizliAl_Click(object sender, EventArgs e)
+        {
+
+            exceldenHizliDefterTalepleriniAl();
+
+        }
+
+        private void exceldenHizliDefterTalepleriniAl()
+        {
+
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "All files (*.*)|*.*| Excel Dosyası (xlsm) |*.xlsm| Excel Dosyası(xls) |*.xls| Excel Dosyası (xlsx)|*.xlsx";
+            ofd.RestoreDirectory = true;
+
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                yrdsnf.log_yaz("Excel hızlı talep. " + ofd.FileName);
+                datagridSunucuTalepleri.DataSource = excelSecildiTalepleriGetir(ofd.FileName, "defter");
+
+
+                if (datagridSunucuTalepleri.Rows.Count > 1)
+                {
+                    //Veri var, işleme devam edelim.
+
+                    //Başlıkları içeren bilgileri alalım. (Bilgi sütunlarının hangi sütun numarasına denk geldiğini alıyoruz. Bayikodu = 1 gibi.)
+                    excelbilgisutunlari = vtislemleri.excelsutunbasliklari_bilgi();
+
+                    lbl_bekleyin.Text = "Verileri kaydediliyor.";
+
+                    defterVerileriniVtYeKaydet();
+
+                    lbl_bekleyin.Text = "Tamamlandı. Adet: " + datagridSunucuTalepleri.RowCount;
+
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Hiçbir veri yok. İşlem yapılmadı");
+                }
+
+            }
+
+        }
+
+
+        //______________________________________________________________________________
+
+
+        private void defterVerileriniVtYeKaydet()
+        {
+
+            //  MessageBox.Show(datagridSunucuTalepleri.Rows.Count.ToString(), "Satır");
+
+
+            for (int i = 0; i < datagridSunucuTalepleri.Rows.Count; i++)
+            {
+                DataGridViewRow dr = datagridSunucuTalepleri.Rows[i];
+
+                if (dr.Cells[excelbilgisutunlari.adisoyadi_stn].Value.ToString() != "")
+                {
+
+
+                    //1. Adım- Öğretmen bilgilerini kaydet.
+
+                    int ogretmenKayitID = deftervtYeKaydet_adim_1(dr);
+
+                    if (ogretmenKayitID > 0)
+                    {
+
+                        bool talepkaydisonucu = deftervtYeKaydet_adim_2(dr);
+
+                        if (!talepkaydisonucu)
+                        {
+                            string msjmtn = "Öğretmen talepleri kaydedilemedi. Satır: " + i;
+                            yrdsnf.log_yaz(msjmtn);
+                            MessageBox.Show(msjmtn);
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        string msjmtn = "Öğretmen talepleri kaydedilemedi. Satır: " + i;
+                        yrdsnf.log_yaz(msjmtn);
+                        MessageBox.Show(msjmtn);
+                    }
+
+                    //Denemek için tek kayıt ile yerlerine yazıp görme işlemi yapıyoruz. sonra çıkıyoruz.
+                    // return;
+
+
+                }
+            }
+
+
+
+
+        }
+
+
+        //Bu bize yeni kaydolan öğretmenin kimlikno'sunu döndürecek ve o kayıt ile sipariş taleplerini gireceğiz.
+        //Bu kısım plan talepleriyle aynı. Öğretmen bilgilerini girerek yeni bir kayıt oluşturuyoruz ve o kayıt numarasına sipariş giriyoruz.
+        //Buradaki işlemden sonra, oluşan kayıt numarasına defter siparişi gireceğiz.
+        private int deftervtYeKaydet_adim_1(DataGridViewRow dr)
+        {
+            //Excelden alınan verilere göre bilgilerin hangi sütunlardan alınacağına VT'den bakacağız. (Sayı olarak) ilk sütun 1 gireceğiz, kodlarda -1 yaparız.
+
+            //Eğer sınıf alanında 1-2-3 gibi bir giriş varsa sadece birincisini alacağız ama dersleri tüm sınıflara göre atayacağız. Döngü oradaki sınıf sayısı olacak.
+
+            tb_bilgi_adisoyadi.Text = yrdsnf.ismiduzelt(dr.Cells[excelbilgisutunlari.adisoyadi_stn - 1].Value.ToString(), "isim");
+
+            cb_bilgi_bransi.Text = dr.Cells[excelbilgisutunlari.bransgorevi_stn - 1].Value.ToString();
+            cb_bilgi_ili.Text = dr.Cells[excelbilgisutunlari.il_stn - 1].Value.ToString();
+            cb_bilgi_ilcesi.Text = dr.Cells[excelbilgisutunlari.ilce_stn - 1].Value.ToString();
+
+
+            tb_bilgi_okulkodu.Text = dr.Cells[excelbilgisutunlari.okulkodu_stn - 1].Value.ToString();
+            tb_bilgi_okulu.Text = dr.Cells[excelbilgisutunlari.okuladi_stn - 1].Value.ToString();
+
+            //Sınıfı burada olduğu gibi alıyoruz.
+            cb_bilgi_sinifi.Text = dr.Cells[excelbilgisutunlari.sinif_stn - 1].Value.ToString();
+
+            tb_bilgi_subesi.Text = dr.Cells[excelbilgisutunlari.sube_stn - 1].Value.ToString();
+
+            tb_bilgi_muduradi.Text = yrdsnf.ismiduzelt(dr.Cells[excelbilgisutunlari.muduradi_stn - 1].Value.ToString(), "isim");
+            cb_bilgi_mudurunvani.Text = dr.Cells[excelbilgisutunlari.mudurunvani_stn - 1].Value.ToString();
+
+            tb_bilgi_telefon.Text = dr.Cells[excelbilgisutunlari.telefon_stn - 1].Value.ToString();
+            tb_bilgi_eposta.Text = dr.Cells[excelbilgisutunlari.eposta_stn - 1].Value.ToString();
+
+            //Excelden adres bilgis gelmiyor.
+            //  tb_bilgi_adres.Text = dr.Cells[excelbilgisutunlari.aciklama_stn - 1].Value.ToString();
+
+            tb_bilgi_aciklama.Text = dr.Cells[excelbilgisutunlari.aciklama_stn - 1].Value.ToString();
+
+
+
+            tb_bilgi_bayikodu.Text = dr.Cells[excelbilgisutunlari.bayikodu_stn - 1].Value.ToString();
+            //Bayi adı otomatik gelecek inşallah.
+            // bayikodundanBayiBilgileriniGetir();
+
+
+            //Öğretmen bilgisi kaydedelim. //Bilgileri forma yazmıştık, bilgileri oradan okutup kaydettiyoruz.
+            yeniKayitYapveyaGuncelle(true);
+
+            //Dersleri vs getirelim. (ile, bayiye göre...)
+            varayilanTalepleilgiliVeriler();
+
+            //Yeni kayıt soununda oluşan müşteri numarasını döndürüyoruz.
+            return int.Parse(tb_bilgi_musterino.Text);
+        }
+
+
+        private bool deftervtYeKaydet_adim_2(DataGridViewRow dr)
+        {
+            
+
+            int defter_talep_sutun = 54;
+
+
+
+            //EK ÜRÜN İŞLEMLERİ. CD-PDF
+
+
+            //Kulüp kaydı
+            string defterkodu = dr.Cells[defter_talep_sutun - 1].Value.ToString();
+
+            //Kulüp adı girilmişse işlem yapacağız.
+            if (defterkodu.Length > 0)
+            {
+
+               
+                bool defterbulundumu = false;
+
+                for (int i = 0; i < filtrelenenDefterlers.Count; i++)
+                {
+
+                    yrdsnf.log_yaz("defter kodu " + filtrelenenDefterlers[i].defterkodu);
+
+                    if (filtrelenenDefterlers[i].defterkodu == int.Parse(defterkodu))
+                    {
+                        defterbulundumu = true;
+
+                        string kayitsonucu = vtislemleri.ekle_defter(BirOgt.oid, filtrelenenDefterlers[i].defterkodu, filtrelenenDefterlers[i].fiyat);
+
+                        if (kayitsonucu.All(char.IsNumber))
+                        {
+
+                            //  MessageBox.Show("başarılı: " + kayitsonucu);
+                            //varsa_talepBolumu();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Defter talebi hızlı kaydı yapılamadı. " + kayitsonucu);
+                            return false;
+                        }
+
+                        break;
+                    }
+
+                }
+
+                if (!defterbulundumu)
+                {
+                    MessageBox.Show("Defter bulunamadı. " + defterkodu);
+                    return false;
+                }
+
+            }
+
+
+
+
+            return true;
+        }
+
+
+
+
+
+
+
+
+
 
 
 

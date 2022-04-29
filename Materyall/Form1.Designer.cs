@@ -82,7 +82,6 @@
             this.dgv_talep_anadersler_yillik = new System.Windows.Forms.DataGridView();
             this.cb_talep_anadersler_yillik = new System.Windows.Forms.ComboBox();
             this.tab_hizlitalep = new System.Windows.Forms.TabPage();
-            this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.btn_taleplerial_excelden = new System.Windows.Forms.Button();
             this.lbl_bekleyin = new System.Windows.Forms.Label();
             this.datagridSunucuTalepleri = new System.Windows.Forms.DataGridView();
@@ -113,6 +112,22 @@
             this.tb_muhasebe_toplam_borc = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
             this.tab_digerislemler = new System.Windows.Forms.TabPage();
+            this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.tb_sil_sifre = new System.Windows.Forms.TextBox();
+            this.bt_sil_seciliveriler = new System.Windows.Forms.Button();
+            this.cb_sil_bilgidisinda_hersey = new System.Windows.Forms.CheckBox();
+            this.cb_sil_odemeler = new System.Windows.Forms.CheckBox();
+            this.cb_sil_cdpdf = new System.Windows.Forms.CheckBox();
+            this.cb_sil_kuluptalebi = new System.Windows.Forms.CheckBox();
+            this.cb_sil_ogrencilistesi = new System.Windows.Forms.CheckBox();
+            this.cb_sil_zumreler = new System.Windows.Forms.CheckBox();
+            this.cb_sil_defterler = new System.Windows.Forms.CheckBox();
+            this.cb_sil_serbestetkinlikler = new System.Windows.Forms.CheckBox();
+            this.cb_sil_gunlukplanlar = new System.Windows.Forms.CheckBox();
+            this.cb_sil_yillikplanlar = new System.Windows.Forms.CheckBox();
+            this.cb_sil_hersey = new System.Windows.Forms.CheckBox();
+            this.label46 = new System.Windows.Forms.Label();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.lbl_ogrencilistesikaydedildi = new System.Windows.Forms.Label();
             this.btn_bilgi_ogrencilistesi = new System.Windows.Forms.Button();
@@ -196,13 +211,47 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btn_varsayilanlariguncelle = new System.Windows.Forms.Button();
             this.btn_ikaz_lambasi = new System.Windows.Forms.Button();
+            this.cb_yil_ara = new System.Windows.Forms.ComboBox();
             this.lbl_bilgi = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tab_alt_arama = new System.Windows.Forms.TabPage();
-            this.tab_alt_loglar = new System.Windows.Forms.TabPage();
+            this.tabControl3 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox27 = new System.Windows.Forms.GroupBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.groupBox26 = new System.Windows.Forms.GroupBox();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.rb_ara_plangunluk = new System.Windows.Forms.RadioButton();
+            this.rb_ara_planyillik = new System.Windows.Forms.RadioButton();
+            this.rb_ara_plantumu = new System.Windows.Forms.RadioButton();
+            this.lnklbl_ara_plan = new System.Windows.Forms.LinkLabel();
+            this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.rb_ara_durum_basilmamis = new System.Windows.Forms.RadioButton();
+            this.rb_ara_durum_basilmis = new System.Windows.Forms.RadioButton();
+            this.rb_ara_durum_tumu = new System.Windows.Forms.RadioButton();
+            this.groupBox23 = new System.Windows.Forms.GroupBox();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.groupBox25 = new System.Windows.Forms.GroupBox();
+            this.groupBox24 = new System.Windows.Forms.GroupBox();
+            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.radioButton9 = new System.Windows.Forms.RadioButton();
+            this.radioButton10 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.dgv_alt_aramavelisteleme = new System.Windows.Forms.DataGridView();
+            this.tab_alt_loglar = new System.Windows.Forms.TabPage();
             this.tb_logkayitlari = new System.Windows.Forms.TextBox();
+            this.btn_defter_talepleriniHizliAl = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -230,15 +279,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_muhasebe_borclanmalar)).BeginInit();
             this.groupBox14.SuspendLayout();
             this.tab_digerislemler.SuspendLayout();
+            this.groupBox19.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_logo)).BeginInit();
             this.tabControl2.SuspendLayout();
             this.tab_alt_arama.SuspendLayout();
-            this.tab_alt_loglar.SuspendLayout();
+            this.tabControl3.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.groupBox27.SuspendLayout();
+            this.groupBox26.SuspendLayout();
+            this.groupBox20.SuspendLayout();
+            this.groupBox21.SuspendLayout();
+            this.groupBox22.SuspendLayout();
+            this.groupBox23.SuspendLayout();
+            this.groupBox25.SuspendLayout();
+            this.groupBox24.SuspendLayout();
             this.groupBox11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).BeginInit();
+            this.tab_alt_loglar.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -846,7 +906,7 @@
             // 
             // tab_hizlitalep
             // 
-            this.tab_hizlitalep.Controls.Add(this.groupBox18);
+            this.tab_hizlitalep.Controls.Add(this.btn_defter_talepleriniHizliAl);
             this.tab_hizlitalep.Controls.Add(this.btn_taleplerial_excelden);
             this.tab_hizlitalep.Controls.Add(this.lbl_bekleyin);
             this.tab_hizlitalep.Controls.Add(this.datagridSunucuTalepleri);
@@ -859,22 +919,13 @@
             this.tab_hizlitalep.Text = "Hızlı Talep";
             this.tab_hizlitalep.UseVisualStyleBackColor = true;
             // 
-            // groupBox18
-            // 
-            this.groupBox18.Location = new System.Drawing.Point(976, 34);
-            this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(372, 492);
-            this.groupBox18.TabIndex = 4;
-            this.groupBox18.TabStop = false;
-            this.groupBox18.Text = "Talep Exceli Sütun Eşleştirmeleri";
-            // 
             // btn_taleplerial_excelden
             // 
-            this.btn_taleplerial_excelden.Location = new System.Drawing.Point(16, 29);
+            this.btn_taleplerial_excelden.Location = new System.Drawing.Point(17, 29);
             this.btn_taleplerial_excelden.Name = "btn_taleplerial_excelden";
             this.btn_taleplerial_excelden.Size = new System.Drawing.Size(220, 37);
             this.btn_taleplerial_excelden.TabIndex = 3;
-            this.btn_taleplerial_excelden.Text = "Talepleri Excelden Al";
+            this.btn_taleplerial_excelden.Text = "Plan Taleplerini Excelden Al";
             this.btn_taleplerial_excelden.UseVisualStyleBackColor = true;
             this.btn_taleplerial_excelden.Click += new System.EventHandler(this.btn_taleplerial_excelden_Click);
             // 
@@ -1161,6 +1212,7 @@
             // 
             // tab_digerislemler
             // 
+            this.tab_digerislemler.Controls.Add(this.groupBox19);
             this.tab_digerislemler.Controls.Add(this.groupBox13);
             this.tab_digerislemler.Controls.Add(this.label22);
             this.tab_digerislemler.Controls.Add(this.groupBox10);
@@ -1171,6 +1223,181 @@
             this.tab_digerislemler.TabIndex = 4;
             this.tab_digerislemler.Text = "Diğer İşlemler";
             this.tab_digerislemler.UseVisualStyleBackColor = true;
+            // 
+            // groupBox19
+            // 
+            this.groupBox19.Controls.Add(this.label47);
+            this.groupBox19.Controls.Add(this.tb_sil_sifre);
+            this.groupBox19.Controls.Add(this.bt_sil_seciliveriler);
+            this.groupBox19.Controls.Add(this.cb_sil_bilgidisinda_hersey);
+            this.groupBox19.Controls.Add(this.cb_sil_odemeler);
+            this.groupBox19.Controls.Add(this.cb_sil_cdpdf);
+            this.groupBox19.Controls.Add(this.cb_sil_kuluptalebi);
+            this.groupBox19.Controls.Add(this.cb_sil_ogrencilistesi);
+            this.groupBox19.Controls.Add(this.cb_sil_zumreler);
+            this.groupBox19.Controls.Add(this.cb_sil_defterler);
+            this.groupBox19.Controls.Add(this.cb_sil_serbestetkinlikler);
+            this.groupBox19.Controls.Add(this.cb_sil_gunlukplanlar);
+            this.groupBox19.Controls.Add(this.cb_sil_yillikplanlar);
+            this.groupBox19.Controls.Add(this.cb_sil_hersey);
+            this.groupBox19.Controls.Add(this.label46);
+            this.groupBox19.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.groupBox19.Location = new System.Drawing.Point(968, 9);
+            this.groupBox19.Name = "groupBox19";
+            this.groupBox19.Size = new System.Drawing.Size(377, 520);
+            this.groupBox19.TabIndex = 9;
+            this.groupBox19.TabStop = false;
+            this.groupBox19.Text = "Veri Silme";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(211, 458);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(31, 13);
+            this.label47.TabIndex = 14;
+            this.label47.Text = "Şifre:";
+            // 
+            // tb_sil_sifre
+            // 
+            this.tb_sil_sifre.Location = new System.Drawing.Point(258, 455);
+            this.tb_sil_sifre.Name = "tb_sil_sifre";
+            this.tb_sil_sifre.Size = new System.Drawing.Size(100, 20);
+            this.tb_sil_sifre.TabIndex = 13;
+            this.tb_sil_sifre.UseSystemPasswordChar = true;
+            // 
+            // bt_sil_seciliveriler
+            // 
+            this.bt_sil_seciliveriler.BackColor = System.Drawing.Color.Red;
+            this.bt_sil_seciliveriler.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.bt_sil_seciliveriler.ForeColor = System.Drawing.Color.White;
+            this.bt_sil_seciliveriler.Location = new System.Drawing.Point(195, 477);
+            this.bt_sil_seciliveriler.Name = "bt_sil_seciliveriler";
+            this.bt_sil_seciliveriler.Size = new System.Drawing.Size(176, 37);
+            this.bt_sil_seciliveriler.TabIndex = 12;
+            this.bt_sil_seciliveriler.Text = "Seçili Bilgileri Sil";
+            this.bt_sil_seciliveriler.UseVisualStyleBackColor = false;
+            this.bt_sil_seciliveriler.Click += new System.EventHandler(this.bt_sil_seciliveriler_Click);
+            // 
+            // cb_sil_bilgidisinda_hersey
+            // 
+            this.cb_sil_bilgidisinda_hersey.AutoSize = true;
+            this.cb_sil_bilgidisinda_hersey.Location = new System.Drawing.Point(22, 97);
+            this.cb_sil_bilgidisinda_hersey.Name = "cb_sil_bilgidisinda_hersey";
+            this.cb_sil_bilgidisinda_hersey.Size = new System.Drawing.Size(210, 17);
+            this.cb_sil_bilgidisinda_hersey.TabIndex = 11;
+            this.cb_sil_bilgidisinda_hersey.Text = "Öğretmen Bilgileri Dışındaki Her Şeyi Sil";
+            this.cb_sil_bilgidisinda_hersey.UseVisualStyleBackColor = true;
+            // 
+            // cb_sil_odemeler
+            // 
+            this.cb_sil_odemeler.AutoSize = true;
+            this.cb_sil_odemeler.Location = new System.Drawing.Point(22, 303);
+            this.cb_sil_odemeler.Name = "cb_sil_odemeler";
+            this.cb_sil_odemeler.Size = new System.Drawing.Size(99, 17);
+            this.cb_sil_odemeler.TabIndex = 10;
+            this.cb_sil_odemeler.Text = "Ödeme Kayıtları";
+            this.cb_sil_odemeler.UseVisualStyleBackColor = true;
+            // 
+            // cb_sil_cdpdf
+            // 
+            this.cb_sil_cdpdf.AutoSize = true;
+            this.cb_sil_cdpdf.Location = new System.Drawing.Point(22, 280);
+            this.cb_sil_cdpdf.Name = "cb_sil_cdpdf";
+            this.cb_sil_cdpdf.Size = new System.Drawing.Size(112, 17);
+            this.cb_sil_cdpdf.TabIndex = 9;
+            this.cb_sil_cdpdf.Text = "CD ve PDF Talebi";
+            this.cb_sil_cdpdf.UseVisualStyleBackColor = true;
+            // 
+            // cb_sil_kuluptalebi
+            // 
+            this.cb_sil_kuluptalebi.AutoSize = true;
+            this.cb_sil_kuluptalebi.Location = new System.Drawing.Point(22, 257);
+            this.cb_sil_kuluptalebi.Name = "cb_sil_kuluptalebi";
+            this.cb_sil_kuluptalebi.Size = new System.Drawing.Size(85, 17);
+            this.cb_sil_kuluptalebi.TabIndex = 8;
+            this.cb_sil_kuluptalebi.Text = "Kulüp Talebi";
+            this.cb_sil_kuluptalebi.UseVisualStyleBackColor = true;
+            // 
+            // cb_sil_ogrencilistesi
+            // 
+            this.cb_sil_ogrencilistesi.AutoSize = true;
+            this.cb_sil_ogrencilistesi.Location = new System.Drawing.Point(22, 234);
+            this.cb_sil_ogrencilistesi.Name = "cb_sil_ogrencilistesi";
+            this.cb_sil_ogrencilistesi.Size = new System.Drawing.Size(95, 17);
+            this.cb_sil_ogrencilistesi.TabIndex = 7;
+            this.cb_sil_ogrencilistesi.Text = "Öğrenci Listesi";
+            this.cb_sil_ogrencilistesi.UseVisualStyleBackColor = true;
+            // 
+            // cb_sil_zumreler
+            // 
+            this.cb_sil_zumreler.AutoSize = true;
+            this.cb_sil_zumreler.Location = new System.Drawing.Point(22, 211);
+            this.cb_sil_zumreler.Name = "cb_sil_zumreler";
+            this.cb_sil_zumreler.Size = new System.Drawing.Size(142, 17);
+            this.cb_sil_zumreler.TabIndex = 6;
+            this.cb_sil_zumreler.Text = "Zümre Öğretmeni Bilgileri";
+            this.cb_sil_zumreler.UseVisualStyleBackColor = true;
+            // 
+            // cb_sil_defterler
+            // 
+            this.cb_sil_defterler.AutoSize = true;
+            this.cb_sil_defterler.Location = new System.Drawing.Point(22, 188);
+            this.cb_sil_defterler.Name = "cb_sil_defterler";
+            this.cb_sil_defterler.Size = new System.Drawing.Size(98, 17);
+            this.cb_sil_defterler.TabIndex = 5;
+            this.cb_sil_defterler.Text = "Defter Talepleri";
+            this.cb_sil_defterler.UseVisualStyleBackColor = true;
+            // 
+            // cb_sil_serbestetkinlikler
+            // 
+            this.cb_sil_serbestetkinlikler.AutoSize = true;
+            this.cb_sil_serbestetkinlikler.Location = new System.Drawing.Point(22, 165);
+            this.cb_sil_serbestetkinlikler.Name = "cb_sil_serbestetkinlikler";
+            this.cb_sil_serbestetkinlikler.Size = new System.Drawing.Size(142, 17);
+            this.cb_sil_serbestetkinlikler.TabIndex = 4;
+            this.cb_sil_serbestetkinlikler.Text = "Serbest Etkinlik Talepleri";
+            this.cb_sil_serbestetkinlikler.UseVisualStyleBackColor = true;
+            // 
+            // cb_sil_gunlukplanlar
+            // 
+            this.cb_sil_gunlukplanlar.AutoSize = true;
+            this.cb_sil_gunlukplanlar.Location = new System.Drawing.Point(22, 143);
+            this.cb_sil_gunlukplanlar.Name = "cb_sil_gunlukplanlar";
+            this.cb_sil_gunlukplanlar.Size = new System.Drawing.Size(127, 17);
+            this.cb_sil_gunlukplanlar.TabIndex = 3;
+            this.cb_sil_gunlukplanlar.Text = "Günlük Plan Talepleri";
+            this.cb_sil_gunlukplanlar.UseVisualStyleBackColor = true;
+            // 
+            // cb_sil_yillikplanlar
+            // 
+            this.cb_sil_yillikplanlar.AutoSize = true;
+            this.cb_sil_yillikplanlar.Location = new System.Drawing.Point(22, 120);
+            this.cb_sil_yillikplanlar.Name = "cb_sil_yillikplanlar";
+            this.cb_sil_yillikplanlar.Size = new System.Drawing.Size(114, 17);
+            this.cb_sil_yillikplanlar.TabIndex = 2;
+            this.cb_sil_yillikplanlar.Text = "Yıllık Plan Talepleri";
+            this.cb_sil_yillikplanlar.UseVisualStyleBackColor = true;
+            // 
+            // cb_sil_hersey
+            // 
+            this.cb_sil_hersey.AutoSize = true;
+            this.cb_sil_hersey.Location = new System.Drawing.Point(22, 74);
+            this.cb_sil_hersey.Name = "cb_sil_hersey";
+            this.cb_sil_hersey.Size = new System.Drawing.Size(272, 17);
+            this.cb_sil_hersey.TabIndex = 1;
+            this.cb_sil_hersey.Text = "Öğretmen Bilgilerini Tamamen Sil (Talep, Ödeme vs.)";
+            this.cb_sil_hersey.UseVisualStyleBackColor = true;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.ForeColor = System.Drawing.Color.Red;
+            this.label46.Location = new System.Drawing.Point(12, 32);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(289, 13);
+            this.label46.TabIndex = 0;
+            this.label46.Text = "Ekrandaki Öğretmene Ait Kayıtları Sil (Müşteri No Esas Alınır)";
             // 
             // groupBox13
             // 
@@ -2061,6 +2288,17 @@
             this.toolTip1.SetToolTip(this.btn_ikaz_lambasi, "Bir ikaz yok!");
             this.btn_ikaz_lambasi.UseVisualStyleBackColor = true;
             // 
+            // cb_yil_ara
+            // 
+            this.cb_yil_ara.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.cb_yil_ara.FormattingEnabled = true;
+            this.cb_yil_ara.Location = new System.Drawing.Point(23, 22);
+            this.cb_yil_ara.Name = "cb_yil_ara";
+            this.cb_yil_ara.Size = new System.Drawing.Size(121, 32);
+            this.cb_yil_ara.TabIndex = 100;
+            this.toolTip1.SetToolTip(this.cb_yil_ara, "Yeni kayıt veya Güncelleme yaparken boş bırakılırsa varsayılan değeri alır. (Bayi" +
+        " de aynı şekilde varsayılan değeri alır.)");
+            // 
             // lbl_bilgi
             // 
             this.lbl_bilgi.AutoSize = true;
@@ -2087,6 +2325,7 @@
             // 
             // tab_alt_arama
             // 
+            this.tab_alt_arama.Controls.Add(this.tabControl3);
             this.tab_alt_arama.Controls.Add(this.groupBox11);
             this.tab_alt_arama.Location = new System.Drawing.Point(4, 22);
             this.tab_alt_arama.Name = "tab_alt_arama";
@@ -2095,6 +2334,370 @@
             this.tab_alt_arama.TabIndex = 0;
             this.tab_alt_arama.Text = "Arama ve Listeleme";
             this.tab_alt_arama.UseVisualStyleBackColor = true;
+            // 
+            // tabControl3
+            // 
+            this.tabControl3.Controls.Add(this.tabPage1);
+            this.tabControl3.Controls.Add(this.tabPage2);
+            this.tabControl3.Location = new System.Drawing.Point(884, 10);
+            this.tabControl3.Name = "tabControl3";
+            this.tabControl3.SelectedIndex = 0;
+            this.tabControl3.Size = new System.Drawing.Size(464, 265);
+            this.tabControl3.TabIndex = 37;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBox27);
+            this.tabPage1.Controls.Add(this.groupBox26);
+            this.tabPage1.Controls.Add(this.groupBox20);
+            this.tabPage1.Controls.Add(this.groupBox23);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(456, 239);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox27
+            // 
+            this.groupBox27.Controls.Add(this.textBox3);
+            this.groupBox27.Controls.Add(this.label50);
+            this.groupBox27.Controls.Add(this.textBox1);
+            this.groupBox27.Controls.Add(this.label48);
+            this.groupBox27.Controls.Add(this.textBox2);
+            this.groupBox27.Controls.Add(this.label49);
+            this.groupBox27.Location = new System.Drawing.Point(10, 82);
+            this.groupBox27.Name = "groupBox27";
+            this.groupBox27.Size = new System.Drawing.Size(148, 143);
+            this.groupBox27.TabIndex = 38;
+            this.groupBox27.TabStop = false;
+            this.groupBox27.Text = "Listeye Ait Hesap";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox3.Location = new System.Drawing.Point(54, 99);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(88, 32);
+            this.textBox3.TabIndex = 11;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(2, 99);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(42, 26);
+            this.label50.TabIndex = 10;
+            this.label50.Text = "Toplam\r\nAlacak";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox1.Location = new System.Drawing.Point(54, 57);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(88, 32);
+            this.textBox1.TabIndex = 9;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(2, 57);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(42, 26);
+            this.label48.TabIndex = 8;
+            this.label48.Text = "Toplam\r\nÖdeme";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox2.Location = new System.Drawing.Point(54, 19);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(87, 32);
+            this.textBox2.TabIndex = 7;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(6, 24);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(42, 26);
+            this.label49.TabIndex = 6;
+            this.label49.Text = "Toplam\r\nBorç";
+            // 
+            // groupBox26
+            // 
+            this.groupBox26.Controls.Add(this.cb_yil_ara);
+            this.groupBox26.Location = new System.Drawing.Point(6, 12);
+            this.groupBox26.Name = "groupBox26";
+            this.groupBox26.Size = new System.Drawing.Size(152, 64);
+            this.groupBox26.TabIndex = 37;
+            this.groupBox26.TabStop = false;
+            this.groupBox26.Text = "Yıl Seçimi";
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.groupBox21);
+            this.groupBox20.Controls.Add(this.lnklbl_ara_plan);
+            this.groupBox20.Controls.Add(this.groupBox22);
+            this.groupBox20.Location = new System.Drawing.Point(164, 6);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(273, 98);
+            this.groupBox20.TabIndex = 35;
+            this.groupBox20.TabStop = false;
+            this.groupBox20.Text = "Plan Türü ve Durumuna Göre Listele";
+            // 
+            // groupBox21
+            // 
+            this.groupBox21.Controls.Add(this.rb_ara_plangunluk);
+            this.groupBox21.Controls.Add(this.rb_ara_planyillik);
+            this.groupBox21.Controls.Add(this.rb_ara_plantumu);
+            this.groupBox21.Location = new System.Drawing.Point(6, 10);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.Size = new System.Drawing.Size(83, 82);
+            this.groupBox21.TabIndex = 3;
+            this.groupBox21.TabStop = false;
+            // 
+            // rb_ara_plangunluk
+            // 
+            this.rb_ara_plangunluk.AutoSize = true;
+            this.rb_ara_plangunluk.Location = new System.Drawing.Point(6, 59);
+            this.rb_ara_plangunluk.Name = "rb_ara_plangunluk";
+            this.rb_ara_plangunluk.Size = new System.Drawing.Size(59, 17);
+            this.rb_ara_plangunluk.TabIndex = 2;
+            this.rb_ara_plangunluk.Text = "Günlük";
+            this.rb_ara_plangunluk.UseVisualStyleBackColor = true;
+            // 
+            // rb_ara_planyillik
+            // 
+            this.rb_ara_planyillik.AutoSize = true;
+            this.rb_ara_planyillik.Location = new System.Drawing.Point(6, 36);
+            this.rb_ara_planyillik.Name = "rb_ara_planyillik";
+            this.rb_ara_planyillik.Size = new System.Drawing.Size(46, 17);
+            this.rb_ara_planyillik.TabIndex = 1;
+            this.rb_ara_planyillik.Text = "Yıllık";
+            this.rb_ara_planyillik.UseVisualStyleBackColor = true;
+            // 
+            // rb_ara_plantumu
+            // 
+            this.rb_ara_plantumu.AutoSize = true;
+            this.rb_ara_plantumu.Checked = true;
+            this.rb_ara_plantumu.Location = new System.Drawing.Point(6, 13);
+            this.rb_ara_plantumu.Name = "rb_ara_plantumu";
+            this.rb_ara_plantumu.Size = new System.Drawing.Size(52, 17);
+            this.rb_ara_plantumu.TabIndex = 0;
+            this.rb_ara_plantumu.TabStop = true;
+            this.rb_ara_plantumu.Text = "Tümü";
+            this.rb_ara_plantumu.UseVisualStyleBackColor = true;
+            // 
+            // lnklbl_ara_plan
+            // 
+            this.lnklbl_ara_plan.AutoSize = true;
+            this.lnklbl_ara_plan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lnklbl_ara_plan.Location = new System.Drawing.Point(204, 46);
+            this.lnklbl_ara_plan.Name = "lnklbl_ara_plan";
+            this.lnklbl_ara_plan.Size = new System.Drawing.Size(63, 17);
+            this.lnklbl_ara_plan.TabIndex = 2;
+            this.lnklbl_ara_plan.TabStop = true;
+            this.lnklbl_ara_plan.Text = "LİSTELE";
+            this.lnklbl_ara_plan.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklbl_ara_plan_LinkClicked);
+            // 
+            // groupBox22
+            // 
+            this.groupBox22.Controls.Add(this.rb_ara_durum_basilmamis);
+            this.groupBox22.Controls.Add(this.rb_ara_durum_basilmis);
+            this.groupBox22.Controls.Add(this.rb_ara_durum_tumu);
+            this.groupBox22.Location = new System.Drawing.Point(115, 10);
+            this.groupBox22.Name = "groupBox22";
+            this.groupBox22.Size = new System.Drawing.Size(83, 82);
+            this.groupBox22.TabIndex = 1;
+            this.groupBox22.TabStop = false;
+            // 
+            // rb_ara_durum_basilmamis
+            // 
+            this.rb_ara_durum_basilmamis.AutoSize = true;
+            this.rb_ara_durum_basilmamis.Location = new System.Drawing.Point(6, 59);
+            this.rb_ara_durum_basilmamis.Name = "rb_ara_durum_basilmamis";
+            this.rb_ara_durum_basilmamis.Size = new System.Drawing.Size(76, 17);
+            this.rb_ara_durum_basilmamis.TabIndex = 2;
+            this.rb_ara_durum_basilmamis.Text = "Basılmamış";
+            this.rb_ara_durum_basilmamis.UseVisualStyleBackColor = true;
+            // 
+            // rb_ara_durum_basilmis
+            // 
+            this.rb_ara_durum_basilmis.AutoSize = true;
+            this.rb_ara_durum_basilmis.Location = new System.Drawing.Point(6, 36);
+            this.rb_ara_durum_basilmis.Name = "rb_ara_durum_basilmis";
+            this.rb_ara_durum_basilmis.Size = new System.Drawing.Size(62, 17);
+            this.rb_ara_durum_basilmis.TabIndex = 1;
+            this.rb_ara_durum_basilmis.Text = "Basılmış";
+            this.rb_ara_durum_basilmis.UseVisualStyleBackColor = true;
+            // 
+            // rb_ara_durum_tumu
+            // 
+            this.rb_ara_durum_tumu.AutoSize = true;
+            this.rb_ara_durum_tumu.Checked = true;
+            this.rb_ara_durum_tumu.Location = new System.Drawing.Point(6, 13);
+            this.rb_ara_durum_tumu.Name = "rb_ara_durum_tumu";
+            this.rb_ara_durum_tumu.Size = new System.Drawing.Size(52, 17);
+            this.rb_ara_durum_tumu.TabIndex = 0;
+            this.rb_ara_durum_tumu.TabStop = true;
+            this.rb_ara_durum_tumu.Text = "Tümü";
+            this.rb_ara_durum_tumu.UseVisualStyleBackColor = true;
+            // 
+            // groupBox23
+            // 
+            this.groupBox23.Controls.Add(this.linkLabel3);
+            this.groupBox23.Controls.Add(this.groupBox25);
+            this.groupBox23.Location = new System.Drawing.Point(164, 110);
+            this.groupBox23.Name = "groupBox23";
+            this.groupBox23.Size = new System.Drawing.Size(273, 115);
+            this.groupBox23.TabIndex = 36;
+            this.groupBox23.TabStop = false;
+            this.groupBox23.Text = "Ek Ürünler";
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.linkLabel3.Location = new System.Drawing.Point(208, 53);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(63, 17);
+            this.linkLabel3.TabIndex = 2;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "LİSTELE";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+            // 
+            // groupBox25
+            // 
+            this.groupBox25.Controls.Add(this.groupBox24);
+            this.groupBox25.Controls.Add(this.radioButton4);
+            this.groupBox25.Controls.Add(this.radioButton3);
+            this.groupBox25.Controls.Add(this.radioButton2);
+            this.groupBox25.Controls.Add(this.radioButton1);
+            this.groupBox25.Location = new System.Drawing.Point(13, 16);
+            this.groupBox25.Name = "groupBox25";
+            this.groupBox25.Size = new System.Drawing.Size(192, 93);
+            this.groupBox25.TabIndex = 0;
+            this.groupBox25.TabStop = false;
+            // 
+            // groupBox24
+            // 
+            this.groupBox24.Controls.Add(this.radioButton8);
+            this.groupBox24.Controls.Add(this.radioButton9);
+            this.groupBox24.Controls.Add(this.radioButton10);
+            this.groupBox24.Location = new System.Drawing.Point(105, 8);
+            this.groupBox24.Name = "groupBox24";
+            this.groupBox24.Size = new System.Drawing.Size(83, 82);
+            this.groupBox24.TabIndex = 4;
+            this.groupBox24.TabStop = false;
+            // 
+            // radioButton8
+            // 
+            this.radioButton8.AutoSize = true;
+            this.radioButton8.Location = new System.Drawing.Point(6, 59);
+            this.radioButton8.Name = "radioButton8";
+            this.radioButton8.Size = new System.Drawing.Size(76, 17);
+            this.radioButton8.TabIndex = 2;
+            this.radioButton8.Text = "Basılmamış";
+            this.radioButton8.UseVisualStyleBackColor = true;
+            // 
+            // radioButton9
+            // 
+            this.radioButton9.AutoSize = true;
+            this.radioButton9.Location = new System.Drawing.Point(6, 36);
+            this.radioButton9.Name = "radioButton9";
+            this.radioButton9.Size = new System.Drawing.Size(62, 17);
+            this.radioButton9.TabIndex = 1;
+            this.radioButton9.Text = "Basılmış";
+            this.radioButton9.UseVisualStyleBackColor = true;
+            // 
+            // radioButton10
+            // 
+            this.radioButton10.AutoSize = true;
+            this.radioButton10.Checked = true;
+            this.radioButton10.Location = new System.Drawing.Point(6, 13);
+            this.radioButton10.Name = "radioButton10";
+            this.radioButton10.Size = new System.Drawing.Size(52, 17);
+            this.radioButton10.TabIndex = 0;
+            this.radioButton10.TabStop = true;
+            this.radioButton10.Text = "Tümü";
+            this.radioButton10.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(6, 65);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(93, 17);
+            this.radioButton4.TabIndex = 3;
+            this.radioButton4.Text = "Okuma Defteri";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(6, 41);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(86, 17);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.Text = "Sosyal Kulüp";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(53, 18);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(46, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.Text = "PDF";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 18);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(40, 17);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "CD";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(456, 239);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox11.Controls.Add(this.dgv_alt_aramavelisteleme);
+            this.groupBox11.Location = new System.Drawing.Point(6, 6);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(872, 265);
+            this.groupBox11.TabIndex = 34;
+            this.groupBox11.TabStop = false;
+            // 
+            // dgv_alt_aramavelisteleme
+            // 
+            this.dgv_alt_aramavelisteleme.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgv_alt_aramavelisteleme.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_alt_aramavelisteleme.Location = new System.Drawing.Point(7, 12);
+            this.dgv_alt_aramavelisteleme.Name = "dgv_alt_aramavelisteleme";
+            this.dgv_alt_aramavelisteleme.Size = new System.Drawing.Size(859, 247);
+            this.dgv_alt_aramavelisteleme.TabIndex = 0;
+            this.dgv_alt_aramavelisteleme.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ara_alttaki_cellDoubleClick);
             // 
             // tab_alt_loglar
             // 
@@ -2107,27 +2710,6 @@
             this.tab_alt_loglar.Text = "İşlem kayıtları";
             this.tab_alt_loglar.UseVisualStyleBackColor = true;
             // 
-            // groupBox11
-            // 
-            this.groupBox11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox11.Controls.Add(this.dgv_alt_aramavelisteleme);
-            this.groupBox11.Location = new System.Drawing.Point(6, 6);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(969, 265);
-            this.groupBox11.TabIndex = 34;
-            this.groupBox11.TabStop = false;
-            // 
-            // dgv_alt_aramavelisteleme
-            // 
-            this.dgv_alt_aramavelisteleme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.dgv_alt_aramavelisteleme.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_alt_aramavelisteleme.Location = new System.Drawing.Point(7, 12);
-            this.dgv_alt_aramavelisteleme.Name = "dgv_alt_aramavelisteleme";
-            this.dgv_alt_aramavelisteleme.Size = new System.Drawing.Size(954, 247);
-            this.dgv_alt_aramavelisteleme.TabIndex = 0;
-            // 
             // tb_logkayitlari
             // 
             this.tb_logkayitlari.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2137,6 +2719,16 @@
             this.tb_logkayitlari.Name = "tb_logkayitlari";
             this.tb_logkayitlari.Size = new System.Drawing.Size(1230, 264);
             this.tb_logkayitlari.TabIndex = 0;
+            // 
+            // btn_defter_talepleriniHizliAl
+            // 
+            this.btn_defter_talepleriniHizliAl.Location = new System.Drawing.Point(16, 348);
+            this.btn_defter_talepleriniHizliAl.Name = "btn_defter_talepleriniHizliAl";
+            this.btn_defter_talepleriniHizliAl.Size = new System.Drawing.Size(220, 37);
+            this.btn_defter_talepleriniHizliAl.TabIndex = 4;
+            this.btn_defter_talepleriniHizliAl.Text = "Defter Taleplerini Excelden Al";
+            this.btn_defter_talepleriniHizliAl.UseVisualStyleBackColor = true;
+            this.btn_defter_talepleriniHizliAl.Click += new System.EventHandler(this.btn_defter_talepleriniHizliAl_Click);
             // 
             // Form1
             // 
@@ -2195,6 +2787,8 @@
             this.groupBox14.PerformLayout();
             this.tab_digerislemler.ResumeLayout(false);
             this.tab_digerislemler.PerformLayout();
+            this.groupBox19.ResumeLayout(false);
+            this.groupBox19.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
             this.groupBox10.ResumeLayout(false);
@@ -2204,10 +2798,27 @@
             ((System.ComponentModel.ISupportInitialize)(this.pb_logo)).EndInit();
             this.tabControl2.ResumeLayout(false);
             this.tab_alt_arama.ResumeLayout(false);
-            this.tab_alt_loglar.ResumeLayout(false);
-            this.tab_alt_loglar.PerformLayout();
+            this.tabControl3.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.groupBox27.ResumeLayout(false);
+            this.groupBox27.PerformLayout();
+            this.groupBox26.ResumeLayout(false);
+            this.groupBox20.ResumeLayout(false);
+            this.groupBox20.PerformLayout();
+            this.groupBox21.ResumeLayout(false);
+            this.groupBox21.PerformLayout();
+            this.groupBox22.ResumeLayout(false);
+            this.groupBox22.PerformLayout();
+            this.groupBox23.ResumeLayout(false);
+            this.groupBox23.PerformLayout();
+            this.groupBox25.ResumeLayout(false);
+            this.groupBox25.PerformLayout();
+            this.groupBox24.ResumeLayout(false);
+            this.groupBox24.PerformLayout();
             this.groupBox11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).EndInit();
+            this.tab_alt_loglar.ResumeLayout(false);
+            this.tab_alt_loglar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2382,13 +2993,62 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.TextBox tb_hesapozeti_toplamborc;
         private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.GroupBox groupBox18;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tab_alt_arama;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.DataGridView dgv_alt_aramavelisteleme;
         private System.Windows.Forms.TabPage tab_alt_loglar;
         private System.Windows.Forms.TextBox tb_logkayitlari;
+        private System.Windows.Forms.GroupBox groupBox19;
+        private System.Windows.Forms.CheckBox cb_sil_bilgidisinda_hersey;
+        private System.Windows.Forms.CheckBox cb_sil_odemeler;
+        private System.Windows.Forms.CheckBox cb_sil_cdpdf;
+        private System.Windows.Forms.CheckBox cb_sil_kuluptalebi;
+        private System.Windows.Forms.CheckBox cb_sil_ogrencilistesi;
+        private System.Windows.Forms.CheckBox cb_sil_zumreler;
+        private System.Windows.Forms.CheckBox cb_sil_defterler;
+        private System.Windows.Forms.CheckBox cb_sil_serbestetkinlikler;
+        private System.Windows.Forms.CheckBox cb_sil_gunlukplanlar;
+        private System.Windows.Forms.CheckBox cb_sil_yillikplanlar;
+        private System.Windows.Forms.CheckBox cb_sil_hersey;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Button bt_sil_seciliveriler;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.TextBox tb_sil_sifre;
+        private System.Windows.Forms.GroupBox groupBox20;
+        private System.Windows.Forms.GroupBox groupBox22;
+        private System.Windows.Forms.GroupBox groupBox23;
+        private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.GroupBox groupBox25;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.LinkLabel lnklbl_ara_plan;
+        private System.Windows.Forms.TabControl tabControl3;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.GroupBox groupBox26;
+        private System.Windows.Forms.ComboBox cb_yil_ara;
+        private System.Windows.Forms.GroupBox groupBox27;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.RadioButton rb_ara_durum_basilmamis;
+        private System.Windows.Forms.RadioButton rb_ara_durum_basilmis;
+        private System.Windows.Forms.RadioButton rb_ara_durum_tumu;
+        private System.Windows.Forms.GroupBox groupBox24;
+        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.RadioButton radioButton9;
+        private System.Windows.Forms.RadioButton radioButton10;
+        private System.Windows.Forms.GroupBox groupBox21;
+        private System.Windows.Forms.RadioButton rb_ara_plangunluk;
+        private System.Windows.Forms.RadioButton rb_ara_planyillik;
+        private System.Windows.Forms.RadioButton rb_ara_plantumu;
+        private System.Windows.Forms.Button btn_defter_talepleriniHizliAl;
     }
 }
 

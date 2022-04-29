@@ -21,7 +21,7 @@ namespace Materyall
         public string neyebakalim_g_anaders_urunid_adi = "dersid";
 
 
-        public string neyebakalim_s_ders_tablo = "tlp_y_serbestler_tbl";
+        public string neyebakalim_serbest_ders_tablo = "tlp_y_serbestler_tbl";
         public string neyebakalim_s_ders_urunid_adi = "dersid";
 
 
@@ -39,6 +39,9 @@ namespace Materyall
 
         public string neyebakalim_muhasebe_odeme_tablo = "odemeler_tbl";
 
+        public string neyebakalim_ogrenci_listesi_tablo = "tlp_ogrencilistesi_tbl";
+
+        public string neyebakalim_bilgi_ogretmen_tablo = "tlp_ogretmenbilgileri_tbl";
 
 
 
