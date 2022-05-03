@@ -238,15 +238,9 @@ namespace Materyall
 
             foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
             {
-                //Şimdilik 2 ürün. Daha sonra eklenirse ekürünler buraya eklenecek.
+                //Şimdilik 1 ürün. Daha sonra eklenirse ekürünler buraya eklenecek.
 
-                if (urun.urunadi == "CD") {
-
-                    bool cddurumu = vtislemleri.ek_urun_talepEdilmismi(BirOgt.oid, urun.urunkodu);
-                    cb_talep_CD.Checked = cddurumu;
-                    BirOgt.cd_istiyor = cddurumu;
-                }
-                else if (urun.urunadi == "PDF")
+                if (urun.urunadi == "PDF")
                 {
 
                     bool pdfdurumu = vtislemleri.ek_urun_talepEdilmismi(BirOgt.oid, urun.urunkodu);
@@ -440,10 +434,13 @@ namespace Materyall
                 //  MessageBox.Show(s, "yillar");
                 cb_yili.Items.Add(s);
                 cb_yil_ara.Items.Add(s);
+                cb_yil_ara_defter.Items.Add(s);
             }
 
             //Arama için varsayılanı yazalım.
             cb_yil_ara.Text = varsayilanbossa.yilgorunen;
+            cb_yil_ara_defter.Text = varsayilanbossa.yilgorunen;
+
         }
 
         private void varsayilanDegerler_2_brans()
@@ -721,12 +718,12 @@ namespace Materyall
 
         private void bt_yenikayit_Click(object sender, EventArgs e)
         {
-            yeniKayitYapveyaGuncelle(true);
+            yeniKayitYapveyaGuncelle(true, false);
         }
 
 
 
-        private void yeniKayitYapveyaGuncelle(bool yenikayitmi)
+        private void yeniKayitYapveyaGuncelle(bool yenikayitmi, bool mukerrereizinverilsinmi)
         {
 
 
@@ -842,7 +839,7 @@ namespace Materyall
             if (yenikayitmi)
             {
 
-                string kayitsonucu = vtislemleri.yeniKayit(ogrblg);
+                string kayitsonucu = vtislemleri.yeniKayit(ogrblg, mukerrereizinverilsinmi);
 
                 if (kayitsonucu.All(char.IsNumber))
                 {
@@ -1193,12 +1190,12 @@ namespace Materyall
                 BirOgt.ili = cb_bilgi_ili.Text;
             }
 
-            varayilanTalepleilgiliVeriler();
+            varsayilanTalepleilgiliVeriler();
 
         }
 
 
-        private void varayilanTalepleilgiliVeriler()
+        private void varsayilanTalepleilgiliVeriler()
         {
 
 
@@ -1238,7 +1235,7 @@ namespace Materyall
         {
 
             //Güncelleme işlemi yapılacak.
-            yeniKayitYapveyaGuncelle(false);
+            yeniKayitYapveyaGuncelle(false, false);
 
         }
 
@@ -1289,9 +1286,20 @@ namespace Materyall
 
             string dersid = dgv_talep_anadersler_yillik.Rows[e.RowIndex].Cells[metinler.neyebakalim_y_anaders_urunid_adi].Value.ToString();
 
-            //  MessageBox.Show(dersid);
 
-            anaders_yillik_plan_talep_sil(dersid);
+
+            DialogResult dialogResult = MessageBox.Show("Onaylayın", "Seçtiğiniz kayıt kalıcı olarak silinecektir. Onaylıyor musunuz?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                anaders_yillik_plan_talep_sil(dersid);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+
+
+           
 
         }
 
@@ -1365,12 +1373,7 @@ namespace Materyall
         }
 
         //Change olayı gibi olsa da click olayına tanımla.
-        private void cb_talep_CD_CheckedChanged(object sender, EventArgs e)
-        {
-
-            CD_PDF_islemi_yap(cb_talep_CD.Checked, "CD");
-
-        }
+       
 
         private void cb_talep_pdf_CheckedChanged(object sender, EventArgs e)
         {
@@ -1512,7 +1515,18 @@ namespace Materyall
 
             //  MessageBox.Show(dersid);
 
-            anaders_gunluk_plan_talep_sil(dersid);
+            DialogResult dialogResult = MessageBox.Show("Onaylayın", "Seçtiğiniz kayıt kalıcı olarak silinecektir. Onaylıyor musunuz?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                anaders_gunluk_plan_talep_sil(dersid);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+
+
+           
 
         }
 
@@ -1687,7 +1701,17 @@ namespace Materyall
 
             //  MessageBox.Show(dersid);
 
-            serbest_dersler_talep_sil(dersid);
+            DialogResult dialogResult = MessageBox.Show("Onaylayın", "Seçtiğiniz kayıt kalıcı olarak silinecektir. Onaylıyor musunuz?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                serbest_dersler_talep_sil(dersid);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+
+           
 
         }
 
@@ -1774,7 +1798,17 @@ namespace Materyall
 
             //  MessageBox.Show(dersid);
 
-            defter_talep_sil(dersid);
+            DialogResult dialogResult = MessageBox.Show("Onaylayın", "Seçtiğiniz kayıt kalıcı olarak silinecektir. Onaylıyor musunuz?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                defter_talep_sil(dersid);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+
+           
 
         }
 
@@ -1880,7 +1914,7 @@ namespace Materyall
         private void diger_zumre_ogretmeni_ekle()
         {
 
-            if (BirOgt == null || tb_bilgi_adisoyadi.Text.Trim() == "")
+            if (BirOgt == null || tb_bilgi_okulu.Text.Trim() == "")
             {
                 MessageBox.Show("Bir müşteri oluşturun veya seçin.");
                 return;
@@ -1888,7 +1922,7 @@ namespace Materyall
 
 
 
-            string kayitsonucu = vtislemleri.ekle_digerzumreogretmeni(BirOgt.oid, tb_talep_digerzumreogretmenleri.Text);
+            string kayitsonucu = vtislemleri.ekle_digerzumreogretmeni(BirOgt.oid, yrdsnf.ismiduzelt(tb_talep_digerzumreogretmenleri.Text,"isim"));
 
             if (kayitsonucu.All(char.IsNumber))
             {
@@ -1919,8 +1953,16 @@ namespace Materyall
             string dersid = dgv_talep_digerzumreogretmenleri.Rows[e.RowIndex].Cells["ogretmenadi"].Value.ToString();
 
             //  MessageBox.Show(dersid);
-
-            digerzumreogretmenleri_talep_sil(dersid);
+            DialogResult dialogResult = MessageBox.Show("Onaylayın", "Seçtiğiniz kayıt kalıcı olarak silinecektir. Onaylıyor musunuz?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                digerzumreogretmenleri_talep_sil(dersid);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+            
 
         }
 
@@ -2401,10 +2443,10 @@ namespace Materyall
 
 
             //Öğretmen bilgisi kaydedelim. //Bilgileri forma yazmıştık, bilgileri oradan okutup kaydettiyoruz.
-            yeniKayitYapveyaGuncelle(true);
+            yeniKayitYapveyaGuncelle(true, false);
 
             //Dersleri vs getirelim. (ile, bayiye göre...)
-            varayilanTalepleilgiliVeriler();
+            varsayilanTalepleilgiliVeriler();
 
             //Yeni kayıt soununda oluşan müşteri numarasını döndürüyoruz.
             return int.Parse(tb_bilgi_musterino.Text);
@@ -2869,47 +2911,8 @@ namespace Materyall
 
         }
 
-        private void lnklbl_ara_plan_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-            ara_plan_turune_gore();
-
-        }
 
 
-        private void ara_plan_turune_gore()
-        {
-
-
-            dgv_alt_aramavelisteleme.DataSource = vtislemleri.ara_dgv_icin_plan_turune_gore(cb_yil_ara.Text, rb_ara_plantumu.Checked, rb_ara_planyillik.Checked, rb_ara_plangunluk.Checked,
-                rb_ara_durum_tumu.Checked, rb_ara_durum_basilmis.Checked, rb_ara_durum_basilmamis.Checked);
-
-
-        }
-
-        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-            ara_ekUrunlervb();
-
-        }
-
-
-        private void ara_ekUrunlervb()
-        {
-
-
-            foreach (DataGridViewRow row in dgv_alt_aramavelisteleme.Rows)
-            {
-
-                if (row.Selected)
-                {
-                    MessageBox.Show(row.Cells[0].Value.ToString());
-                }
-
-            }
-
-        }
 
 
 
@@ -3075,12 +3078,16 @@ namespace Materyall
             //Bayi adı otomatik gelecek inşallah.
             // bayikodundanBayiBilgileriniGetir();
 
+            //Burası Defter kayıt işlemleri..
 
             //Öğretmen bilgisi kaydedelim. //Bilgileri forma yazmıştık, bilgileri oradan okutup kaydettiyoruz.
-            yeniKayitYapveyaGuncelle(true);
+            //Defter için aynı sınıf şube'ye birden fazla kayıt girilebilecek.
+            yeniKayitYapveyaGuncelle(true, cb_defter_mukerrerkayit_izin_ver.Checked);
+
+
 
             //Dersleri vs getirelim. (ile, bayiye göre...)
-            varayilanTalepleilgiliVeriler();
+            varsayilanTalepleilgiliVeriler();
 
             //Yeni kayıt soununda oluşan müşteri numarasını döndürüyoruz.
             return int.Parse(tb_bilgi_musterino.Text);
@@ -3089,7 +3096,7 @@ namespace Materyall
 
         private bool deftervtYeKaydet_adim_2(DataGridViewRow dr)
         {
-            
+
 
             int defter_talep_sutun = 54;
 
@@ -3105,7 +3112,7 @@ namespace Materyall
             if (defterkodu.Length > 0)
             {
 
-               
+
                 bool defterbulundumu = false;
 
                 for (int i = 0; i < filtrelenenDefterlers.Count; i++)
@@ -3150,6 +3157,166 @@ namespace Materyall
 
             return true;
         }
+
+
+
+
+
+        private void ara_sonucu_bulunan_kayit_sayisini_yaz()
+        {
+            lbl_ara_bulunankayit_sayisi.Text = dgv_alt_aramavelisteleme.RowCount.ToString();
+        }
+
+
+        private void lnklbl_ara_plan_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            ara_plan_turune_gore();
+
+        }
+
+
+        private void ara_plan_turune_gore()
+        {
+
+
+            dgv_alt_aramavelisteleme.DataSource = vtislemleri.ara_dgv_icin_plan_turune_gore(cb_yil_ara.Text, rb_ara_plantumu.Checked, rb_ara_planyillik.Checked, rb_ara_plangunluk.Checked,
+                rb_ara_durum_tumu.Checked, rb_ara_durum_basilmis.Checked, rb_ara_durum_basilmamis.Checked);
+
+
+            ara_sonucu_bulunan_kayit_sayisini_yaz();
+
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            ara_ekUrunlervb();
+
+            ara_sonucu_bulunan_kayit_sayisini_yaz();
+
+        }
+
+
+        private void ara_ekUrunlervb()
+        {
+
+            //Ek ürünler listesi boş olunca aşağıda kod alma kısmı haliyle çalışmıyor.
+            if (filtrelenenEkUrunlers.Count == 0)
+            {
+                //Sadece kodu lazım. Ücret grubunu 1 olarak gidiriyoruz. Ücret grubuyla işimiz olmayacak. Öğretmen seçildiğinde doğru ücret grubuyla tekrrar çağırılıyor.
+
+                filtrelenenEkUrunlers = vtislemleri.filtre_ekurunler(cb_yil_ara.Text, "1");
+            }
+
+
+            string tur = "PDF";
+
+            if (rb_ara_cd.Checked)
+            {
+                tur = "CD";
+            } else if (rb_ara_sosyalkulup.Checked)
+            {
+                tur = "sosyalkulup";
+            } else if (rb_ara_okumadefteri.Checked)
+            {
+                tur = "okumadefteri";
+            }
+
+
+            int turkodu = 0;
+
+            //CD veya pdf ise o zaman ürün kodunu da alalım. CD = 101, pdf = 102 gibi.
+
+            if (tur == "CD" || tur == "PDF")
+            {
+
+                foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
+                {
+
+                    if (urun.urunadi == tur)
+                    {
+
+                        turkodu = urun.urunkodu;
+                        break;
+                    }
+
+                }
+            }
+
+
+            dgv_alt_aramavelisteleme.DataSource = vtislemleri.ara_dgv_icin_ekurunler_turune_gore(cb_yil_ara.Text, tur, turkodu, 
+                rb_ara_ekurun_durum_tumu.Checked, rb_ara_ekurun_durum_basilmis.Checked, rb_ara_ekurun_durum_basilmamis.Checked);
+
+
+
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            int turkodu = 0;
+
+            //Defter listesi boş olunca aşağıda kod alma kısmı haliyle çalışmıyor.
+            if (filtrelenenDefterlers.Count == 0)
+            {
+                //Sadece kodu lazım. Ücret grubunu 1 olarak gidiriyoruz. Ücret grubuyla işimiz olmayacak. Öğretmen seçildiğinde doğru ücret grubuyla tekrrar çağırılıyor.
+                filtrelenenDefterlers = vtislemleri.filtre_defterler_sadecetalebiolanlar(cb_yil_ara_defter.Text, "1");
+            }
+
+            //Defter isimlerini cb'ye yazalım.
+            //Önceden varsa eklemiyoruz.
+            if (cb_ara_defterturu.Items.Count < 1)
+            {
+
+                foreach (FiltrelenenDefterler urun in filtrelenenDefterlers)
+                {
+
+                    cb_ara_defterturu.Items.Add(urun.defteradi + " (" + urun.defterkodu + ") " + urun.sinif + " - " + urun.ozellik);
+
+                }
+            }
+
+
+            //Seçilen bir defter türü varsa ona bakacağız. Yoksa tümüne bakacağız.
+            if (cb_ara_defterturu.Text.Trim().Length > 1)
+            {
+                        turkodu = filtrelenenDefterlers[cb_ara_defterturu.SelectedIndex].defterkodu;
+              
+            }
+
+
+
+
+
+            dgv_alt_aramavelisteleme.DataSource = vtislemleri.ara_dgv_icin_defterler_turune_gore(cb_yil_ara_defter.Text, turkodu,
+                rb_ara_defter_durum_tumu.Checked, rb_ara_defter_durum_basilmis.Checked, rb_ara_defter_durum_basilmamis.Checked);
+
+            ara_sonucu_bulunan_kayit_sayisini_yaz();
+
+        }
+
+        private void bt_mukerrerkayit_izni_cb_bilgi_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(metinler.bilgi_mukerrer_cb_secimi);
+        }
+
+        private void lnklbl_ara_bilgilerle_listele_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ara_bilgileregore_listele();
+        }
+
+
+        private void ara_bilgileregore_listele()
+        {
+
+
+            dgv_alt_aramavelisteleme.DataSource = vtislemleri.ara_dgv_icin_bilgilere_gore(cb_yil_ara_bilgileregore.Text, tb_yil_ara_bilgileregore_il.Text,
+                tb_yil_ara_bilgileregore_ilce.Text, tb_yil_ara_bilgileregore_okul.Text, tb_yil_ara_musteriadi.Text, tb_yil_ara_bilgileregore_bayiadi.Text);
+
+
+        }
+
 
 
 

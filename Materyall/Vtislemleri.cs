@@ -466,6 +466,60 @@ namespace Materyall
         }
 
 
+        //Sadece talebi olanları arama kısmında gösterelim.
+
+        public List<FiltrelenenDefterler> filtre_defterler_sadecetalebiolanlar(string yil, string ucretgrubu)
+        {
+
+            //Bayi kodundan fiyat bölümünü alacağız.
+
+            List<FiltrelenenDefterler> list = new List<FiltrelenenDefterler>();
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  string sql = "SELECT DISTINCT(il) as veri FROM tlp_ogretmenbilgileri_tbl ORDER BY veri";
+            string sql = "SELECT * FROM sis_defterler_tbl WHERE yil='" + yil + "' AND defterkodu IN " +
+                "(SELECT DISTINCT(defterkodu) as defterkodu FROM " + metinler.neyebakalim_defter_tablo + "  WHERE yil='" + yil + "') " +
+                " ORDER BY defteradi";
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+
+                FiltrelenenDefterler oge = new FiltrelenenDefterler();
+                //list.Add(oku["kulupadi"].ToString());
+                oge.defterkimliktablo = int.Parse(oku["id"].ToString());
+                oge.defterkodu = int.Parse(oku["defterkodu"].ToString());
+                oge.defteradi = oku["defteradi"].ToString();
+                oge.sayfasayisi = oku["sayfasayisi"].ToString();
+                oge.sinif = oku["sinif"].ToString();
+                oge.derssayisi = int.Parse(oku["derssayisi"].ToString());
+                oge.ozellik = oku["ozellik"].ToString();
+                oge.kapak = oku["kapak"].ToString();
+
+                string fiyatgrubu = "grup" + ucretgrubu;
+                oge.fiyat = double.Parse(oku[fiyatgrubu].ToString());
+
+                list.Add(oge);
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return list; //.ToArray();
+
+        }
+
+
 
 
         public List<FiltrelenenEkUrunler> filtre_ekurunler(string yil, string ucretgrubu)
@@ -882,20 +936,25 @@ namespace Materyall
         //sonra buna talep bilgilerini ekleyeceğiz. Güncelle derse aktif öğretmen verilerini değiştireceğiz. Yeni kayıt derse öğretmen bilsini
         // de ekleyeceğiz. (inşallah)
 
-        public string yeniKayit(OgretmenBilgileriSnf ogtblg)
+        public string yeniKayit(OgretmenBilgileriSnf ogtblg, bool mukerrereizinverilsinmi)
         {
             string sonuc = metinler.islembasarili;
 
             long sonid = 0;
 
-           if (bukayitdahaoncedenvarmi(ogtblg.yili, ogtblg.kurumkodu, ogtblg.sinifi, ogtblg.subesi, ogtblg.adisoyadi))
+            //Mükerrer kayda izin vermiyoruz. O zaman mükerrer mi diye kontol edelim.
+            if (!mukerrereizinverilsinmi)
             {
-                sonuc = metinler.mukerrerkayitbilgisiogretmen;
+                if (bukayitdahaoncedenvarmi(ogtblg.yili, ogtblg.kurumkodu, ogtblg.sinifi, ogtblg.subesi, ogtblg.adisoyadi))
+                {
+                    sonuc = metinler.mukerrerkayitbilgisiogretmen;
 
-                yrdsnf.log_yaz(ogtblg.adisoyadi + "- " + sonuc);
+                    yrdsnf.log_yaz(ogtblg.adisoyadi + "- " + sonuc);
 
-                return sonuc;
+                    return sonuc;
+                }
             }
+
 
 
             //Mükerrer değil, devam edelim. (Yeni kayıt)
@@ -3043,7 +3102,7 @@ namespace Materyall
 
                 var dr4 = dt.NewRow();
 
-                dr4[0] = "Ek Ürünler (CD,PDF)";
+                dr4[0] = "Ek Ürünler (PDF vb)";
                 dr4[1] = oku["EK_CD_PDF"].ToString();
 
                 dt.Rows.Add(dr4);
@@ -3315,7 +3374,7 @@ namespace Materyall
 
            
 
-            string basimdurumu = " ";
+            string basimdurumu;
             
             if (durumtumu)
             {
@@ -3338,20 +3397,20 @@ namespace Materyall
                " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " " +
                " UNION " +
                " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + " ) " +
-               "  GROUP BY b.oid";
+               "  GROUP BY b.oid  ORDER BY b.oid";
 
 
             if (planyillik)
             {
                 sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
                                 " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + ") " +
-                                "  GROUP BY b.oid";
+                                "  GROUP BY b.oid  ORDER BY b.oid";
 
             } else if (plangunluk)
             {
                 sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
                                 " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + ") " +
-                                "  GROUP BY b.oid";
+                                "  GROUP BY b.oid  ORDER BY b.oid";
             }
 
            
@@ -3389,6 +3448,235 @@ namespace Materyall
             return dt;
 
         }
+
+
+        //Ek ürünleri arama ve listeleme
+
+        public DataTable ara_dgv_icin_ekurunler_turune_gore(String yili, string tur, int tur_urunkodu, bool durumtumu, bool basilmis, bool basilmamis)
+        {
+
+
+            string basimdurumu;
+
+            if (durumtumu)
+            {
+                basimdurumu = " ";
+
+            }
+            else if (basilmis)
+            {
+                basimdurumu = " WHERE basimtarihi IS NOT NULL ";
+
+            }
+            else
+            {
+                //Basılmamışlar isteniyorsa.
+                basimdurumu = " WHERE basimtarihi IS NULL ";
+            }
+
+
+
+
+            //Türe göre hangi tabloya bakılacağı belirlenecek ve sonra da ona göre ürün koduyla arama yapılacak. Mesela CD 101, PDF 102 gibi.
+            //Şimdilik varsayılan olarak sosyal kulüp tablosunu esas alıyoruz.
+
+            string tabloadi = metinler.neyebakalim_sosyalkulup_tablo;
+           
+            if (tur == "CD" || tur == "PDF")
+            {
+                tabloadi = metinler.neyebakalim_ekurunler_cd_pdf_tablo;
+
+                //CD veya PDF olunca WHERE kısmına ürün kodunu da eklemek gerekiyor.
+
+                if (basimdurumu == " ")
+                {
+                    basimdurumu = basimdurumu + " WHERE urunkodu=" + tur_urunkodu;
+                } else
+                {
+                    basimdurumu = basimdurumu + " AND urunkodu=" + tur_urunkodu;
+                }
+
+               
+            }
+
+
+
+            //Varsaılan olarak ikisi de seçili.
+            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                                " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + tabloadi + " " + basimdurumu + ") " +
+                                "  GROUP BY b.oid  ORDER BY b.oid";
+
+
+           
+
+            string sql_son = sql1;
+
+
+
+
+            baglantiKur();
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql_son, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
+
+
+
+
+
+        public DataTable ara_dgv_icin_defterler_turune_gore(String yili, int tur_urunkodu, bool durumtumu, bool basilmis, bool basilmamis)
+        {
+
+
+            string basimdurumu;
+
+            if (durumtumu)
+            {
+                basimdurumu = " ";
+
+            }
+            else if (basilmis)
+            {
+                basimdurumu = " WHERE basimtarihi IS NOT NULL ";
+
+            }
+            else
+            {
+                //Basılmamışlar isteniyorsa.
+                basimdurumu = " WHERE basimtarihi IS NULL ";
+            }
+
+
+
+            //Ürün yani defter seçilmişse ve Where kısmı boşsa ayarlama yapıyoruz.
+            if (tur_urunkodu > 0)
+            {
+                if (basimdurumu == " ")
+                {
+                    basimdurumu = basimdurumu + " WHERE defterkodu=" + tur_urunkodu;
+                }
+                else
+                {
+                    basimdurumu = basimdurumu + " AND defterkodu=" + tur_urunkodu;
+                }
+            }
+
+            //Türe göre hangi tabloya bakılacağı belirlenecek ve sonra da ona göre ürün koduyla arama yapılacak. Mesela CD 101, PDF 102 gibi.
+            //Şimdilik varsayılan olarak ek ürünler tablosu esas alıyoruz.
+
+            string tabloadi = metinler.neyebakalim_defter_tablo;
+
+
+
+
+
+            //Varsaılan olarak ikisi de seçili.
+            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube, d.defterkodu FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                " LEFT JOIN " + tabloadi + " d ON d.oid=b.oid" +
+                " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + tabloadi + " " + basimdurumu + ") ORDER BY b.oid";
+                          
+            //Group by demiyoruz. Kişiye kayıtlı kaç defter varsa görünsün. "  GROUP BY b.oid";
+
+
+
+
+            string sql_son = sql1;
+
+
+
+
+            baglantiKur();
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql_son, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
+
+
+
+
+
+
+        //BİLGİLERE GÖRE LİSTELEME EKRANI
+
+
+
+        public DataTable ara_dgv_icin_bilgilere_gore(String yili, string iladi, string ilceadi, string okuladi, string musteriadi, string bayiadi)
+        {
+
+
+           
+            string wheree = " LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi WHERE b.yili='" + yili + "' AND b.il LIKE '" + iladi + "%' AND b.ilce LIKE '" + ilceadi + "%' AND okuladi LIKE '" + okuladi + "%' AND" +
+                " b.adisoyadi LIKE '%" + musteriadi + "%' AND b.bayi IN (SELECT bayikodu FROM sis_bayiler_tbl WHERE bayiadi LIKE '%" + bayiadi + "%') ";
+            
+
+
+
+           
+
+            //Türe göre hangi tabloya bakılacağı belirlenecek ve sonra da ona göre ürün koduyla arama yapılacak. Mesela CD 101, PDF 102 gibi.
+            //Şimdilik varsayılan olarak ek ürünler tablosu esas alıyoruz.
+
+            
+
+
+
+
+            //Varsaılan olarak ikisi de seçili.
+            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube, y.bayiadi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                " " + wheree + " ORDER BY b.oid";
+
+            //Group by demiyoruz. Kişiye kayıtlı kaç defter varsa görünsün. "  GROUP BY b.oid";
+
+
+
+
+            string sql_son = sql1;
+
+
+
+
+            baglantiKur();
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql_son, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
+
 
 
 

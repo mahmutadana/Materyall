@@ -64,5 +64,9 @@ namespace Materyall
 
         public string bilgi_metni_ogrenci_listesi = "Her kaydetme işleminde öğretmene (müşteri no) kayıtlı tüm öğrenci listesi silinir ve buradaki liste kaydedilir. Değişiklikleri buradaki liste üzerinde yapıp kaydedebilirsiniz. Listeyi silip kaydederseniz tüm liste silinmiş olur.";
 
+        public string bilgi_mukerrer_cb_secimi = "Sadece Defter için Hızlı Talep olarak girişlerde mükerrer kayıtlara izin verilir. Aynı okul, sınıf ve şubeye birden fazla bilgi kaydı açabilirsiniz. Aynı koda sahip defter talebi aynı öğretmene sadece 1 kez yapılabilir. Aynı koda sahip Sınıf Defteri talebini birden fazla girmek için farklı mükerrer kayıtlar açmanız gerekir.";
+
+
+
     }
 }
