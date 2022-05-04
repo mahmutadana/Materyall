@@ -435,11 +435,13 @@ namespace Materyall
                 cb_yili.Items.Add(s);
                 cb_yil_ara.Items.Add(s);
                 cb_yil_ara_defter.Items.Add(s);
+                cb_yil_ara_bilgileregore.Items.Add(s);
             }
 
             //Arama için varsayılanı yazalım.
             cb_yil_ara.Text = varsayilanbossa.yilgorunen;
             cb_yil_ara_defter.Text = varsayilanbossa.yilgorunen;
+            cb_yil_ara_bilgileregore.Text = varsayilanbossa.yilgorunen;
 
         }
 
@@ -834,12 +836,19 @@ namespace Materyall
 
             ogrblg.bayikodu = tb_bilgi_bayikodu.Text;
 
-
+            
 
             if (yenikayitmi)
             {
 
-                string kayitsonucu = vtislemleri.yeniKayit(ogrblg, mukerrereizinverilsinmi);
+                bool mukerrerizinickontrol = mukerrereizinverilsinmi;
+                //Eğer şube kısmı sadece üç nokta ise mükerrere izin vereceğiz.
+                if (!ogrblg.subesi.Contains(metinler.ucnokta) && !ogrblg.subesi.Contains(metinler.ucnokta_bitisik))
+                {
+                    mukerrerizinickontrol = false;
+                }
+
+                string kayitsonucu = vtislemleri.yeniKayit(ogrblg, mukerrerizinickontrol);
 
                 if (kayitsonucu.All(char.IsNumber))
                 {
@@ -2967,7 +2976,7 @@ namespace Materyall
                     defterVerileriniVtYeKaydet();
 
                     lbl_bekleyin.Text = "Tamamlandı. Adet: " + datagridSunucuTalepleri.RowCount;
-
+                    pb_defterhizlikayit.Value = 0;
 
 
                 }
@@ -2989,9 +2998,13 @@ namespace Materyall
 
             //  MessageBox.Show(datagridSunucuTalepleri.Rows.Count.ToString(), "Satır");
 
+            pb_defterhizlikayit.Maximum = datagridSunucuTalepleri.RowCount;
+
 
             for (int i = 0; i < datagridSunucuTalepleri.Rows.Count; i++)
             {
+                pb_defterhizlikayit.Value = i; // +1 gerekir ama eklemiyoruz.
+
                 DataGridViewRow dr = datagridSunucuTalepleri.Rows[i];
 
                 if (dr.Cells[excelbilgisutunlari.adisoyadi_stn].Value.ToString() != "")
@@ -3068,15 +3081,16 @@ namespace Materyall
             tb_bilgi_eposta.Text = dr.Cells[excelbilgisutunlari.eposta_stn - 1].Value.ToString();
 
             //Excelden adres bilgis gelmiyor.
-            //  tb_bilgi_adres.Text = dr.Cells[excelbilgisutunlari.aciklama_stn - 1].Value.ToString();
+            //Adres bölümünde NOTUMUZ'u göstereceğiz.
+            tb_bilgi_adres.Text = dr.Cells[excelbilgisutunlari.notumuz_stn - 1].Value.ToString();
 
             tb_bilgi_aciklama.Text = dr.Cells[excelbilgisutunlari.aciklama_stn - 1].Value.ToString();
-
 
 
             tb_bilgi_bayikodu.Text = dr.Cells[excelbilgisutunlari.bayikodu_stn - 1].Value.ToString();
             //Bayi adı otomatik gelecek inşallah.
             // bayikodundanBayiBilgileriniGetir();
+
 
             //Burası Defter kayıt işlemleri..
 
@@ -3100,12 +3114,59 @@ namespace Materyall
 
             int defter_talep_sutun = 54;
 
+            //Excelde burada nöbet yerlerinin adı yazıyor. Biz o yerlere uygun şablon adını elle kendimiz yazıyoruz. Şablon adını esas alacağız.
+            int defter_nobetyerleri_sutun = 57;
 
 
-            //EK ÜRÜN İŞLEMLERİ. CD-PDF
+            //Nöbet yeri şablonu varsa onu da ekliyoruz.
+            //Nöbet yeri şablon adını listeden bulup ekleyeceğiz inşallah.
+
+            string nobetsablonununadi = dr.Cells[defter_nobetyerleri_sutun - 1].Value.ToString();
+
+            if (nobetsablonununadi.Trim().Length > 0)
+            {
+
+                bool sablonbulundumu = false;
+
+                for (int i = 0; i < filtrelenenNobetyerisablonlars.Count; i++)
+                {
+
+                    yrdsnf.log_yaz("defter kodu " + filtrelenenDefterlers[i].defterkodu);
+
+                    if (filtrelenenNobetyerisablonlars[i].nobetyerisablonadi == nobetsablonununadi)
+                    {
+                        sablonbulundumu = true;
+
+                        string sablonkayitsonucu = vtislemleri.ekle_nobetyerisablonu(BirOgt.oid, filtrelenenNobetyerisablonlars[i].nobetyerisablonadi);
+
+                        if (sablonkayitsonucu.All(char.IsNumber))
+                        {
 
 
-            //Kulüp kaydı
+                        }
+                        else
+                        {
+                            MessageBox.Show("Nöbet yeri şablon kaydı yapılamadı. Yapılmadan devam edilecek. Şablon adı: " + nobetsablonununadi + " Hata: " + sablonkayitsonucu);
+                           
+                        }
+
+                        break;
+                    }
+
+                }
+
+                if (!sablonbulundumu)
+                {
+                    MessageBox.Show("Nöbet yeri şablon kaydı yapılamadı. Şablon bulunamadı. Kayıt yapılmadan devam edilecek. Şablon adı: " + nobetsablonununadi);
+
+                }
+
+
+            }
+
+
+
+            //Defter kaydı
             string defterkodu = dr.Cells[defter_talep_sutun - 1].Value.ToString();
 
             //Kulüp adı girilmişse işlem yapacağız.
@@ -3315,6 +3376,28 @@ namespace Materyall
                 tb_yil_ara_bilgileregore_ilce.Text, tb_yil_ara_bilgileregore_okul.Text, tb_yil_ara_musteriadi.Text, tb_yil_ara_bilgileregore_bayiadi.Text);
 
 
+        }
+
+        private void bt_defterbas_rb_secenekleri_bilgi_Click(object sender, EventArgs e)
+        {
+
+            MessageBox.Show(metinler.bilgi_defterbas_rb_secenekleri);
+
+        }
+
+        private void bt_bilgi_defterbaskisecenek_1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(metinler.bilgi_defterbas_rb_baskisecenekleri_1);
+        }
+
+        private void bt_bilgi_defterbaskisecenek_2_teklitoplu_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(metinler.bilgi_defterbas_rb_baskisecenekleri_2_teklitoplu1);
+        }
+
+        private void bt_bilgi_defterbas_sonislem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(metinler.bilgi_defterbas_rb_baskisecenekleri_sonislem);
         }
 
 

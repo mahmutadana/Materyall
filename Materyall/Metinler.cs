@@ -66,6 +66,23 @@ namespace Materyall
 
         public string bilgi_mukerrer_cb_secimi = "Sadece Defter için Hızlı Talep olarak girişlerde mükerrer kayıtlara izin verilir. Aynı okul, sınıf ve şubeye birden fazla bilgi kaydı açabilirsiniz. Aynı koda sahip defter talebi aynı öğretmene sadece 1 kez yapılabilir. Aynı koda sahip Sınıf Defteri talebini birden fazla girmek için farklı mükerrer kayıtlar açmanız gerekir.";
 
+        public string bilgi_defterbas_rb_secenekleri = "Eğer ekranda bilgilerini gördüğünüz öğretmen için işlem yapacaksanız üstteki seçeneği seçin. " +
+            "Eğer ekranın alt bölümündeki arama listesindeki seçili kayıtlar için sırayla işlem yapmak isterseniz alttaki seçeneği işaretleyin. Listeden aralık seçilebilir veya ctrl ile farklı satırlar seçilebilir.";
+
+        public string bilgi_defterbas_rb_baskisecenekleri_1 = "Basma işlemi başlatıldığında ne basmak istediğinizi seçin. Kapak ve Defter art arda baskı seçildiğinde önce kapak ve hemen arkasından defter baskısı hazırlanır.";
+
+        public string bilgi_defterbas_rb_baskisecenekleri_2_teklitoplu1 = "Bu bölüm listeden baskı işlemi yapıyorsanız geçerlidir. Her kayıt için ayrı ayrı PDF dosyası oluşturabilirsiniz." +
+            " Tek dosyada birleştir seçeneği seçildiğinde listedeki tüm kayıtların yapılan baskıları tek bir PDF dosyasında birleştirilir. Mesela 45 öğretmen için kapak basımı tek dosyada istenirse 45 sayfalık tek bir PDF oluşur. Tek tek basımda her kayıt için 1 tane olmak üzere 45 tane PDF oluşur. ";
+
+
+        public string bilgi_defterbas_rb_baskisecenekleri_sonislem = "Hazırlanan dosyalar PDF olarak tutulur. Doğrudan yazdırmak isterseniz ilgili seçeneği seçebilirsiniz.";
+
+
+
+
+        //Şube kısmında üç nokta varsa mükerrer için izin vereceğiz.
+        public string ucnokta = "...";
+        public string ucnokta_bitisik = "…";
 
 
     }

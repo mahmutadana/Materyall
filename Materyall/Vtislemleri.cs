@@ -945,7 +945,7 @@ namespace Materyall
             //Mükerrer kayda izin vermiyoruz. O zaman mükerrer mi diye kontol edelim.
             if (!mukerrereizinverilsinmi)
             {
-                if (bukayitdahaoncedenvarmi(ogtblg.yili, ogtblg.kurumkodu, ogtblg.sinifi, ogtblg.subesi, ogtblg.adisoyadi))
+                if (bukayitdahaoncedenvarmi(ogtblg.yili, ogtblg.kurumkodu, ogtblg.ili, ogtblg.ilcesi, ogtblg.okuladi, ogtblg.sinifi, ogtblg.subesi, ogtblg.adisoyadi))
                 {
                     sonuc = metinler.mukerrerkayitbilgisiogretmen;
 
@@ -1090,14 +1090,14 @@ namespace Materyall
 
 
 
-        private bool bukayitdahaoncedenvarmi(string yili, string kurumkodu, string sinif, string sube, string adisoyadi)
+        private bool bukayitdahaoncedenvarmi(string yili, string kurumkodu, string il, string ilce, string okuladi, string sinif, string sube, string adisoyadi)
         {
 
             string adet = "0";
 
             baglantiKur();
 
-            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE yili='" + yili + "' AND kurumkodu='" + kurumkodu + "' AND sinif='" + sinif + "' AND sube='" + sube + "' AND adisoyadi='" + adisoyadi + "'";
+            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE yili='" + yili + "' AND kurumkodu='" + kurumkodu + "' AND il='" + il + "' AND ilce='" + ilce + "' AND okuladi='" + okuladi + "' AND sinif='" + sinif + "' AND sube='" + sube + "' AND adisoyadi='" + adisoyadi + "'";
 
 
 
@@ -3178,6 +3178,9 @@ namespace Materyall
                 verisnf.mudurunvani_stn = int.Parse(oku["mudurunvani"].ToString());
                 verisnf.eposta_stn = int.Parse(oku["eposta"].ToString());
                 verisnf.telefon_stn = int.Parse(oku["telefon"].ToString());
+
+                //Notumuzu defter talebinde kullanıyoruz.
+                verisnf.notumuz_stn = int.Parse(oku["notumuz"].ToString());
 
 
             }

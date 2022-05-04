@@ -218,6 +218,7 @@
             this.rb_ara_okumadefteri = new System.Windows.Forms.RadioButton();
             this.cb_yil_ara_defter = new System.Windows.Forms.ComboBox();
             this.cb_ara_defterturu = new System.Windows.Forms.ComboBox();
+            this.cb_yil_ara_bilgileregore = new System.Windows.Forms.ComboBox();
             this.lbl_bilgi = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tab_alt_arama = new System.Windows.Forms.TabPage();
@@ -253,24 +254,45 @@
             this.rb_ara_defter_durum_basilmamis = new System.Windows.Forms.RadioButton();
             this.rb_ara_defter_durum_basilmis = new System.Windows.Forms.RadioButton();
             this.rb_ara_defter_durum_tumu = new System.Windows.Forms.RadioButton();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lnklbl_ara_bilgilerle_listele = new System.Windows.Forms.LinkLabel();
+            this.groupBox33 = new System.Windows.Forms.GroupBox();
+            this.tb_yil_ara_bilgileregore_bayiadi = new System.Windows.Forms.TextBox();
+            this.groupBox32 = new System.Windows.Forms.GroupBox();
+            this.tb_yil_ara_musteriadi = new System.Windows.Forms.TextBox();
+            this.groupBox31 = new System.Windows.Forms.GroupBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.tb_yil_ara_bilgileregore_okul = new System.Windows.Forms.TextBox();
+            this.tb_yil_ara_bilgileregore_ilce = new System.Windows.Forms.TextBox();
+            this.tb_yil_ara_bilgileregore_il = new System.Windows.Forms.TextBox();
+            this.groupBox27 = new System.Windows.Forms.GroupBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.lbl_ara_bulunankayit_sayisi = new System.Windows.Forms.Label();
             this.dgv_alt_aramavelisteleme = new System.Windows.Forms.DataGridView();
             this.label48 = new System.Windows.Forms.Label();
             this.tab_alt_loglar = new System.Windows.Forms.TabPage();
             this.tb_logkayitlari = new System.Windows.Forms.TextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.groupBox27 = new System.Windows.Forms.GroupBox();
-            this.cb_yil_ara_bilgileregore = new System.Windows.Forms.ComboBox();
-            this.groupBox31 = new System.Windows.Forms.GroupBox();
-            this.groupBox32 = new System.Windows.Forms.GroupBox();
-            this.tb_yil_ara_musteriadi = new System.Windows.Forms.TextBox();
-            this.groupBox33 = new System.Windows.Forms.GroupBox();
-            this.lnklbl_ara_bilgilerle_listele = new System.Windows.Forms.LinkLabel();
-            this.tb_yil_ara_bilgileregore_il = new System.Windows.Forms.TextBox();
-            this.tb_yil_ara_bilgileregore_ilce = new System.Windows.Forms.TextBox();
-            this.tb_yil_ara_bilgileregore_bayiadi = new System.Windows.Forms.TextBox();
-            this.tb_yil_ara_bilgileregore_okul = new System.Windows.Forms.TextBox();
+            this.pb_defterhizlikayit = new System.Windows.Forms.ProgressBar();
+            this.groupBox34 = new System.Windows.Forms.GroupBox();
+            this.rb_defter_bas_ekrandakikayiticinislemyap = new System.Windows.Forms.RadioButton();
+            this.rb_defter_bas_listedesecilikayitlaricinislemyap = new System.Windows.Forms.RadioButton();
+            this.bt_defterbas_rb_secenekleri_bilgi = new System.Windows.Forms.Button();
+            this.groupBox35 = new System.Windows.Forms.GroupBox();
+            this.rb_defterbas_secenek_kapak = new System.Windows.Forms.RadioButton();
+            this.rb_defterbas_secenek_defter = new System.Windows.Forms.RadioButton();
+            this.rb_defterbas_secenek_kapakvedefter = new System.Windows.Forms.RadioButton();
+            this.groupBox36 = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.bt_bilgi_defterbaskisecenek_2_teklitoplu = new System.Windows.Forms.Button();
+            this.bt_bilgi_defterbaskisecenek_1 = new System.Windows.Forms.Button();
+            this.groupBox37 = new System.Windows.Forms.GroupBox();
+            this.bt_bilgi_defterbas_sonislem = new System.Windows.Forms.Button();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -290,6 +312,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_talep_anadersler_yillik)).BeginInit();
             this.tab_hizlitalep.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridSunucuTalepleri)).BeginInit();
+            this.tab_defterbasim.SuspendLayout();
             this.tab_muhasebe.SuspendLayout();
             this.groupBox17.SuspendLayout();
             this.groupBox16.SuspendLayout();
@@ -319,14 +342,18 @@
             this.groupBox30.SuspendLayout();
             this.groupBox18.SuspendLayout();
             this.groupBox29.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox33.SuspendLayout();
+            this.groupBox32.SuspendLayout();
+            this.groupBox31.SuspendLayout();
+            this.groupBox27.SuspendLayout();
             this.groupBox11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).BeginInit();
             this.tab_alt_loglar.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.groupBox27.SuspendLayout();
-            this.groupBox31.SuspendLayout();
-            this.groupBox32.SuspendLayout();
-            this.groupBox33.SuspendLayout();
+            this.groupBox34.SuspendLayout();
+            this.groupBox35.SuspendLayout();
+            this.groupBox36.SuspendLayout();
+            this.groupBox37.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -921,6 +948,7 @@
             // 
             // tab_hizlitalep
             // 
+            this.tab_hizlitalep.Controls.Add(this.pb_defterhizlikayit);
             this.tab_hizlitalep.Controls.Add(this.bt_mukerrerkayit_izni_cb_bilgi);
             this.tab_hizlitalep.Controls.Add(this.cb_defter_mukerrerkayit_izin_ver);
             this.tab_hizlitalep.Controls.Add(this.btn_defter_talepleriniHizliAl);
@@ -950,11 +978,13 @@
             // cb_defter_mukerrerkayit_izin_ver
             // 
             this.cb_defter_mukerrerkayit_izin_ver.AutoSize = true;
+            this.cb_defter_mukerrerkayit_izin_ver.Checked = true;
+            this.cb_defter_mukerrerkayit_izin_ver.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_defter_mukerrerkayit_izin_ver.Location = new System.Drawing.Point(288, 359);
             this.cb_defter_mukerrerkayit_izin_ver.Name = "cb_defter_mukerrerkayit_izin_ver";
-            this.cb_defter_mukerrerkayit_izin_ver.Size = new System.Drawing.Size(194, 17);
+            this.cb_defter_mukerrerkayit_izin_ver.Size = new System.Drawing.Size(301, 17);
             this.cb_defter_mukerrerkayit_izin_ver.TabIndex = 5;
-            this.cb_defter_mukerrerkayit_izin_ver.Text = "Mükerrer Müşteri Kayıtlarına İzin Ver";
+            this.cb_defter_mukerrerkayit_izin_ver.Text = "Mükerrer Müşteri Kayıtlarına İzin Ver ( Sadece ... şubeli ise)";
             this.toolTip1.SetToolTip(this.cb_defter_mukerrerkayit_izin_ver, "Aynı okul, sınıf ve şubeye mükerrer kayıt izni verir.");
             this.cb_defter_mukerrerkayit_izin_ver.UseVisualStyleBackColor = true;
             // 
@@ -1020,6 +1050,11 @@
             // 
             // tab_defterbasim
             // 
+            this.tab_defterbasim.Controls.Add(this.button1);
+            this.tab_defterbasim.Controls.Add(this.groupBox37);
+            this.tab_defterbasim.Controls.Add(this.groupBox35);
+            this.tab_defterbasim.Controls.Add(this.groupBox36);
+            this.tab_defterbasim.Controls.Add(this.groupBox34);
             this.tab_defterbasim.Location = new System.Drawing.Point(4, 22);
             this.tab_defterbasim.Name = "tab_defterbasim";
             this.tab_defterbasim.Padding = new System.Windows.Forms.Padding(3);
@@ -2382,6 +2417,17 @@
             this.toolTip1.SetToolTip(this.cb_ara_defterturu, "Yeni kayıt veya Güncelleme yaparken boş bırakılırsa varsayılan değeri alır. (Bayi" +
         " de aynı şekilde varsayılan değeri alır.)");
             // 
+            // cb_yil_ara_bilgileregore
+            // 
+            this.cb_yil_ara_bilgileregore.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.cb_yil_ara_bilgileregore.FormattingEnabled = true;
+            this.cb_yil_ara_bilgileregore.Location = new System.Drawing.Point(6, 19);
+            this.cb_yil_ara_bilgileregore.Name = "cb_yil_ara_bilgileregore";
+            this.cb_yil_ara_bilgileregore.Size = new System.Drawing.Size(121, 32);
+            this.cb_yil_ara_bilgileregore.TabIndex = 100;
+            this.toolTip1.SetToolTip(this.cb_yil_ara_bilgileregore, "Yeni kayıt veya Güncelleme yaparken boş bırakılırsa varsayılan değeri alır. (Bayi" +
+        " de aynı şekilde varsayılan değeri alır.)");
+            // 
             // lbl_bilgi
             // 
             this.lbl_bilgi.AutoSize = true;
@@ -2772,6 +2818,145 @@
             this.rb_ara_defter_durum_tumu.Text = "Tümü";
             this.rb_ara_defter_durum_tumu.UseVisualStyleBackColor = true;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.lnklbl_ara_bilgilerle_listele);
+            this.tabPage3.Controls.Add(this.groupBox33);
+            this.tabPage3.Controls.Add(this.groupBox32);
+            this.tabPage3.Controls.Add(this.groupBox31);
+            this.tabPage3.Controls.Add(this.groupBox27);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(456, 239);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Bilgilerle Arama";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // lnklbl_ara_bilgilerle_listele
+            // 
+            this.lnklbl_ara_bilgilerle_listele.AutoSize = true;
+            this.lnklbl_ara_bilgilerle_listele.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lnklbl_ara_bilgilerle_listele.Location = new System.Drawing.Point(43, 211);
+            this.lnklbl_ara_bilgilerle_listele.Name = "lnklbl_ara_bilgilerle_listele";
+            this.lnklbl_ara_bilgilerle_listele.Size = new System.Drawing.Size(74, 20);
+            this.lnklbl_ara_bilgilerle_listele.TabIndex = 46;
+            this.lnklbl_ara_bilgilerle_listele.TabStop = true;
+            this.lnklbl_ara_bilgilerle_listele.Text = "LİSTELE";
+            this.lnklbl_ara_bilgilerle_listele.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklbl_ara_bilgilerle_listele_LinkClicked);
+            // 
+            // groupBox33
+            // 
+            this.groupBox33.Controls.Add(this.tb_yil_ara_bilgileregore_bayiadi);
+            this.groupBox33.Location = new System.Drawing.Point(10, 79);
+            this.groupBox33.Name = "groupBox33";
+            this.groupBox33.Size = new System.Drawing.Size(140, 64);
+            this.groupBox33.TabIndex = 44;
+            this.groupBox33.TabStop = false;
+            this.groupBox33.Text = "Bayi Adı";
+            // 
+            // tb_yil_ara_bilgileregore_bayiadi
+            // 
+            this.tb_yil_ara_bilgileregore_bayiadi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_yil_ara_bilgileregore_bayiadi.Location = new System.Drawing.Point(6, 19);
+            this.tb_yil_ara_bilgileregore_bayiadi.Name = "tb_yil_ara_bilgileregore_bayiadi";
+            this.tb_yil_ara_bilgileregore_bayiadi.Size = new System.Drawing.Size(121, 29);
+            this.tb_yil_ara_bilgileregore_bayiadi.TabIndex = 1;
+            // 
+            // groupBox32
+            // 
+            this.groupBox32.Controls.Add(this.tb_yil_ara_musteriadi);
+            this.groupBox32.Location = new System.Drawing.Point(163, 9);
+            this.groupBox32.Name = "groupBox32";
+            this.groupBox32.Size = new System.Drawing.Size(274, 64);
+            this.groupBox32.TabIndex = 43;
+            this.groupBox32.TabStop = false;
+            this.groupBox32.Text = "Müşteri Adı";
+            // 
+            // tb_yil_ara_musteriadi
+            // 
+            this.tb_yil_ara_musteriadi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_yil_ara_musteriadi.Location = new System.Drawing.Point(6, 19);
+            this.tb_yil_ara_musteriadi.Name = "tb_yil_ara_musteriadi";
+            this.tb_yil_ara_musteriadi.Size = new System.Drawing.Size(254, 29);
+            this.tb_yil_ara_musteriadi.TabIndex = 0;
+            // 
+            // groupBox31
+            // 
+            this.groupBox31.Controls.Add(this.label51);
+            this.groupBox31.Controls.Add(this.label50);
+            this.groupBox31.Controls.Add(this.label49);
+            this.groupBox31.Controls.Add(this.tb_yil_ara_bilgileregore_okul);
+            this.groupBox31.Controls.Add(this.tb_yil_ara_bilgileregore_ilce);
+            this.groupBox31.Controls.Add(this.tb_yil_ara_bilgileregore_il);
+            this.groupBox31.Location = new System.Drawing.Point(163, 79);
+            this.groupBox31.Name = "groupBox31";
+            this.groupBox31.Size = new System.Drawing.Size(274, 140);
+            this.groupBox31.TabIndex = 42;
+            this.groupBox31.TabStop = false;
+            this.groupBox31.Text = "İl-İlçe-Okul";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(12, 108);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(35, 13);
+            this.label51.TabIndex = 6;
+            this.label51.Text = "Okulu";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(12, 67);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(31, 13);
+            this.label50.TabIndex = 5;
+            this.label50.Text = "İlçesi";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(12, 30);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(14, 13);
+            this.label49.TabIndex = 4;
+            this.label49.Text = "İli";
+            // 
+            // tb_yil_ara_bilgileregore_okul
+            // 
+            this.tb_yil_ara_bilgileregore_okul.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_yil_ara_bilgileregore_okul.Location = new System.Drawing.Point(59, 97);
+            this.tb_yil_ara_bilgileregore_okul.Name = "tb_yil_ara_bilgileregore_okul";
+            this.tb_yil_ara_bilgileregore_okul.Size = new System.Drawing.Size(201, 29);
+            this.tb_yil_ara_bilgileregore_okul.TabIndex = 3;
+            // 
+            // tb_yil_ara_bilgileregore_ilce
+            // 
+            this.tb_yil_ara_bilgileregore_ilce.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_yil_ara_bilgileregore_ilce.Location = new System.Drawing.Point(59, 56);
+            this.tb_yil_ara_bilgileregore_ilce.Name = "tb_yil_ara_bilgileregore_ilce";
+            this.tb_yil_ara_bilgileregore_ilce.Size = new System.Drawing.Size(201, 29);
+            this.tb_yil_ara_bilgileregore_ilce.TabIndex = 2;
+            // 
+            // tb_yil_ara_bilgileregore_il
+            // 
+            this.tb_yil_ara_bilgileregore_il.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_yil_ara_bilgileregore_il.Location = new System.Drawing.Point(59, 19);
+            this.tb_yil_ara_bilgileregore_il.Name = "tb_yil_ara_bilgileregore_il";
+            this.tb_yil_ara_bilgileregore_il.Size = new System.Drawing.Size(201, 29);
+            this.tb_yil_ara_bilgileregore_il.TabIndex = 1;
+            // 
+            // groupBox27
+            // 
+            this.groupBox27.Controls.Add(this.cb_yil_ara_bilgileregore);
+            this.groupBox27.Location = new System.Drawing.Point(10, 9);
+            this.groupBox27.Name = "groupBox27";
+            this.groupBox27.Size = new System.Drawing.Size(140, 64);
+            this.groupBox27.TabIndex = 39;
+            this.groupBox27.TabStop = false;
+            this.groupBox27.Text = "Yıl Seçimi";
+            // 
             // groupBox11
             // 
             this.groupBox11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2839,125 +3024,212 @@
             this.tb_logkayitlari.Size = new System.Drawing.Size(1230, 264);
             this.tb_logkayitlari.TabIndex = 0;
             // 
-            // tabPage3
+            // pb_defterhizlikayit
             // 
-            this.tabPage3.Controls.Add(this.lnklbl_ara_bilgilerle_listele);
-            this.tabPage3.Controls.Add(this.groupBox33);
-            this.tabPage3.Controls.Add(this.groupBox32);
-            this.tabPage3.Controls.Add(this.groupBox31);
-            this.tabPage3.Controls.Add(this.groupBox27);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(456, 239);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Bilgilerle Arama";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.pb_defterhizlikayit.Location = new System.Drawing.Point(737, 348);
+            this.pb_defterhizlikayit.Name = "pb_defterhizlikayit";
+            this.pb_defterhizlikayit.Size = new System.Drawing.Size(221, 10);
+            this.pb_defterhizlikayit.TabIndex = 7;
             // 
-            // groupBox27
+            // groupBox34
             // 
-            this.groupBox27.Controls.Add(this.cb_yil_ara_bilgileregore);
-            this.groupBox27.Location = new System.Drawing.Point(10, 9);
-            this.groupBox27.Name = "groupBox27";
-            this.groupBox27.Size = new System.Drawing.Size(140, 64);
-            this.groupBox27.TabIndex = 39;
-            this.groupBox27.TabStop = false;
-            this.groupBox27.Text = "Yıl Seçimi";
+            this.groupBox34.Controls.Add(this.bt_defterbas_rb_secenekleri_bilgi);
+            this.groupBox34.Controls.Add(this.rb_defter_bas_listedesecilikayitlaricinislemyap);
+            this.groupBox34.Controls.Add(this.rb_defter_bas_ekrandakikayiticinislemyap);
+            this.groupBox34.Location = new System.Drawing.Point(22, 24);
+            this.groupBox34.Name = "groupBox34";
+            this.groupBox34.Size = new System.Drawing.Size(312, 72);
+            this.groupBox34.TabIndex = 0;
+            this.groupBox34.TabStop = false;
+            this.groupBox34.Text = "Tek Tek veya Listeden Basım Seçenekleri";
             // 
-            // cb_yil_ara_bilgileregore
+            // rb_defter_bas_ekrandakikayiticinislemyap
             // 
-            this.cb_yil_ara_bilgileregore.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.cb_yil_ara_bilgileregore.FormattingEnabled = true;
-            this.cb_yil_ara_bilgileregore.Location = new System.Drawing.Point(6, 19);
-            this.cb_yil_ara_bilgileregore.Name = "cb_yil_ara_bilgileregore";
-            this.cb_yil_ara_bilgileregore.Size = new System.Drawing.Size(121, 32);
-            this.cb_yil_ara_bilgileregore.TabIndex = 100;
-            this.toolTip1.SetToolTip(this.cb_yil_ara_bilgileregore, "Yeni kayıt veya Güncelleme yaparken boş bırakılırsa varsayılan değeri alır. (Bayi" +
-        " de aynı şekilde varsayılan değeri alır.)");
+            this.rb_defter_bas_ekrandakikayiticinislemyap.AutoSize = true;
+            this.rb_defter_bas_ekrandakikayiticinislemyap.Checked = true;
+            this.rb_defter_bas_ekrandakikayiticinislemyap.Location = new System.Drawing.Point(8, 21);
+            this.rb_defter_bas_ekrandakikayiticinislemyap.Name = "rb_defter_bas_ekrandakikayiticinislemyap";
+            this.rb_defter_bas_ekrandakikayiticinislemyap.Size = new System.Drawing.Size(168, 17);
+            this.rb_defter_bas_ekrandakikayiticinislemyap.TabIndex = 0;
+            this.rb_defter_bas_ekrandakikayiticinislemyap.TabStop = true;
+            this.rb_defter_bas_ekrandakikayiticinislemyap.Text = "Ekrandaki Kayıt İçin İşlem Yap";
+            this.rb_defter_bas_ekrandakikayiticinislemyap.UseVisualStyleBackColor = true;
             // 
-            // groupBox31
+            // rb_defter_bas_listedesecilikayitlaricinislemyap
             // 
-            this.groupBox31.Controls.Add(this.tb_yil_ara_bilgileregore_okul);
-            this.groupBox31.Controls.Add(this.tb_yil_ara_bilgileregore_ilce);
-            this.groupBox31.Controls.Add(this.tb_yil_ara_bilgileregore_il);
-            this.groupBox31.Location = new System.Drawing.Point(163, 79);
-            this.groupBox31.Name = "groupBox31";
-            this.groupBox31.Size = new System.Drawing.Size(274, 140);
-            this.groupBox31.TabIndex = 42;
-            this.groupBox31.TabStop = false;
-            this.groupBox31.Text = "İl-İlçe-Okul";
+            this.rb_defter_bas_listedesecilikayitlaricinislemyap.AutoSize = true;
+            this.rb_defter_bas_listedesecilikayitlaricinislemyap.Location = new System.Drawing.Point(8, 44);
+            this.rb_defter_bas_listedesecilikayitlaricinislemyap.Name = "rb_defter_bas_listedesecilikayitlaricinislemyap";
+            this.rb_defter_bas_listedesecilikayitlaricinislemyap.Size = new System.Drawing.Size(264, 17);
+            this.rb_defter_bas_listedesecilikayitlaricinislemyap.TabIndex = 1;
+            this.rb_defter_bas_listedesecilikayitlaricinislemyap.Text = "Arama Listesinde Seçili Olan Kayıtlar İçin İşlem Yap";
+            this.rb_defter_bas_listedesecilikayitlaricinislemyap.UseVisualStyleBackColor = true;
             // 
-            // groupBox32
+            // bt_defterbas_rb_secenekleri_bilgi
             // 
-            this.groupBox32.Controls.Add(this.tb_yil_ara_musteriadi);
-            this.groupBox32.Location = new System.Drawing.Point(163, 9);
-            this.groupBox32.Name = "groupBox32";
-            this.groupBox32.Size = new System.Drawing.Size(274, 64);
-            this.groupBox32.TabIndex = 43;
-            this.groupBox32.TabStop = false;
-            this.groupBox32.Text = "Müşteri Adı";
+            this.bt_defterbas_rb_secenekleri_bilgi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.bt_defterbas_rb_secenekleri_bilgi.Location = new System.Drawing.Point(266, 19);
+            this.bt_defterbas_rb_secenekleri_bilgi.Name = "bt_defterbas_rb_secenekleri_bilgi";
+            this.bt_defterbas_rb_secenekleri_bilgi.Size = new System.Drawing.Size(29, 24);
+            this.bt_defterbas_rb_secenekleri_bilgi.TabIndex = 2;
+            this.bt_defterbas_rb_secenekleri_bilgi.Text = "!";
+            this.bt_defterbas_rb_secenekleri_bilgi.UseVisualStyleBackColor = true;
+            this.bt_defterbas_rb_secenekleri_bilgi.Click += new System.EventHandler(this.bt_defterbas_rb_secenekleri_bilgi_Click);
             // 
-            // tb_yil_ara_musteriadi
+            // groupBox35
             // 
-            this.tb_yil_ara_musteriadi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_yil_ara_musteriadi.Location = new System.Drawing.Point(6, 19);
-            this.tb_yil_ara_musteriadi.Name = "tb_yil_ara_musteriadi";
-            this.tb_yil_ara_musteriadi.Size = new System.Drawing.Size(254, 29);
-            this.tb_yil_ara_musteriadi.TabIndex = 0;
+            this.groupBox35.Controls.Add(this.bt_bilgi_defterbaskisecenek_1);
+            this.groupBox35.Controls.Add(this.rb_defterbas_secenek_kapakvedefter);
+            this.groupBox35.Controls.Add(this.rb_defterbas_secenek_defter);
+            this.groupBox35.Controls.Add(this.rb_defterbas_secenek_kapak);
+            this.groupBox35.Location = new System.Drawing.Point(22, 102);
+            this.groupBox35.Name = "groupBox35";
+            this.groupBox35.Size = new System.Drawing.Size(312, 106);
+            this.groupBox35.TabIndex = 1;
+            this.groupBox35.TabStop = false;
+            this.groupBox35.Text = "Baskı Seçenekleri";
             // 
-            // groupBox33
+            // rb_defterbas_secenek_kapak
             // 
-            this.groupBox33.Controls.Add(this.tb_yil_ara_bilgileregore_bayiadi);
-            this.groupBox33.Location = new System.Drawing.Point(10, 79);
-            this.groupBox33.Name = "groupBox33";
-            this.groupBox33.Size = new System.Drawing.Size(140, 64);
-            this.groupBox33.TabIndex = 44;
-            this.groupBox33.TabStop = false;
-            this.groupBox33.Text = "Bayi Seçimi";
+            this.rb_defterbas_secenek_kapak.AutoSize = true;
+            this.rb_defterbas_secenek_kapak.Checked = true;
+            this.rb_defterbas_secenek_kapak.Location = new System.Drawing.Point(6, 33);
+            this.rb_defterbas_secenek_kapak.Name = "rb_defterbas_secenek_kapak";
+            this.rb_defterbas_secenek_kapak.Size = new System.Drawing.Size(100, 17);
+            this.rb_defterbas_secenek_kapak.TabIndex = 0;
+            this.rb_defterbas_secenek_kapak.TabStop = true;
+            this.rb_defterbas_secenek_kapak.Text = "Sadece KAPAK";
+            this.rb_defterbas_secenek_kapak.UseVisualStyleBackColor = true;
             // 
-            // lnklbl_ara_bilgilerle_listele
+            // rb_defterbas_secenek_defter
             // 
-            this.lnklbl_ara_bilgilerle_listele.AutoSize = true;
-            this.lnklbl_ara_bilgilerle_listele.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lnklbl_ara_bilgilerle_listele.Location = new System.Drawing.Point(43, 211);
-            this.lnklbl_ara_bilgilerle_listele.Name = "lnklbl_ara_bilgilerle_listele";
-            this.lnklbl_ara_bilgilerle_listele.Size = new System.Drawing.Size(74, 20);
-            this.lnklbl_ara_bilgilerle_listele.TabIndex = 46;
-            this.lnklbl_ara_bilgilerle_listele.TabStop = true;
-            this.lnklbl_ara_bilgilerle_listele.Text = "LİSTELE";
-            this.lnklbl_ara_bilgilerle_listele.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklbl_ara_bilgilerle_listele_LinkClicked);
+            this.rb_defterbas_secenek_defter.AutoSize = true;
+            this.rb_defterbas_secenek_defter.Location = new System.Drawing.Point(6, 56);
+            this.rb_defterbas_secenek_defter.Name = "rb_defterbas_secenek_defter";
+            this.rb_defterbas_secenek_defter.Size = new System.Drawing.Size(108, 17);
+            this.rb_defterbas_secenek_defter.TabIndex = 1;
+            this.rb_defterbas_secenek_defter.Text = "Sadece DEFTER";
+            this.rb_defterbas_secenek_defter.UseVisualStyleBackColor = true;
             // 
-            // tb_yil_ara_bilgileregore_il
+            // rb_defterbas_secenek_kapakvedefter
             // 
-            this.tb_yil_ara_bilgileregore_il.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_yil_ara_bilgileregore_il.Location = new System.Drawing.Point(6, 19);
-            this.tb_yil_ara_bilgileregore_il.Name = "tb_yil_ara_bilgileregore_il";
-            this.tb_yil_ara_bilgileregore_il.Size = new System.Drawing.Size(254, 29);
-            this.tb_yil_ara_bilgileregore_il.TabIndex = 1;
+            this.rb_defterbas_secenek_kapakvedefter.AutoSize = true;
+            this.rb_defterbas_secenek_kapakvedefter.Location = new System.Drawing.Point(6, 79);
+            this.rb_defterbas_secenek_kapakvedefter.Name = "rb_defterbas_secenek_kapakvedefter";
+            this.rb_defterbas_secenek_kapakvedefter.Size = new System.Drawing.Size(160, 17);
+            this.rb_defterbas_secenek_kapakvedefter.TabIndex = 2;
+            this.rb_defterbas_secenek_kapakvedefter.Text = "KAPAK ve DEFTER art arda";
+            this.rb_defterbas_secenek_kapakvedefter.UseVisualStyleBackColor = true;
             // 
-            // tb_yil_ara_bilgileregore_ilce
+            // groupBox36
             // 
-            this.tb_yil_ara_bilgileregore_ilce.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_yil_ara_bilgileregore_ilce.Location = new System.Drawing.Point(6, 56);
-            this.tb_yil_ara_bilgileregore_ilce.Name = "tb_yil_ara_bilgileregore_ilce";
-            this.tb_yil_ara_bilgileregore_ilce.Size = new System.Drawing.Size(254, 29);
-            this.tb_yil_ara_bilgileregore_ilce.TabIndex = 2;
+            this.groupBox36.Controls.Add(this.bt_bilgi_defterbaskisecenek_2_teklitoplu);
+            this.groupBox36.Controls.Add(this.radioButton2);
+            this.groupBox36.Controls.Add(this.radioButton1);
+            this.groupBox36.Location = new System.Drawing.Point(22, 214);
+            this.groupBox36.Name = "groupBox36";
+            this.groupBox36.Size = new System.Drawing.Size(312, 85);
+            this.groupBox36.TabIndex = 3;
+            this.groupBox36.TabStop = false;
+            this.groupBox36.Text = "Tek - Toplu Baskı";
             // 
-            // tb_yil_ara_bilgileregore_bayiadi
+            // radioButton1
             // 
-            this.tb_yil_ara_bilgileregore_bayiadi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_yil_ara_bilgileregore_bayiadi.Location = new System.Drawing.Point(6, 19);
-            this.tb_yil_ara_bilgileregore_bayiadi.Name = "tb_yil_ara_bilgileregore_bayiadi";
-            this.tb_yil_ara_bilgileregore_bayiadi.Size = new System.Drawing.Size(121, 29);
-            this.tb_yil_ara_bilgileregore_bayiadi.TabIndex = 1;
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 28);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(117, 17);
+            this.radioButton1.TabIndex = 1;
+            this.radioButton1.Text = "Her kayıt ayrı dosya";
+            this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // tb_yil_ara_bilgileregore_okul
+            // radioButton2
             // 
-            this.tb_yil_ara_bilgileregore_okul.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_yil_ara_bilgileregore_okul.Location = new System.Drawing.Point(6, 97);
-            this.tb_yil_ara_bilgileregore_okul.Name = "tb_yil_ara_bilgileregore_okul";
-            this.tb_yil_ara_bilgileregore_okul.Size = new System.Drawing.Size(254, 29);
-            this.tb_yil_ara_bilgileregore_okul.TabIndex = 3;
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Checked = true;
+            this.radioButton2.Location = new System.Drawing.Point(6, 51);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(181, 17);
+            this.radioButton2.TabIndex = 2;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Listede seçililerin hepsi tek dosya";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // bt_bilgi_defterbaskisecenek_2_teklitoplu
+            // 
+            this.bt_bilgi_defterbaskisecenek_2_teklitoplu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.bt_bilgi_defterbaskisecenek_2_teklitoplu.Location = new System.Drawing.Point(266, 38);
+            this.bt_bilgi_defterbaskisecenek_2_teklitoplu.Name = "bt_bilgi_defterbaskisecenek_2_teklitoplu";
+            this.bt_bilgi_defterbaskisecenek_2_teklitoplu.Size = new System.Drawing.Size(29, 24);
+            this.bt_bilgi_defterbaskisecenek_2_teklitoplu.TabIndex = 3;
+            this.bt_bilgi_defterbaskisecenek_2_teklitoplu.Text = "!";
+            this.bt_bilgi_defterbaskisecenek_2_teklitoplu.UseVisualStyleBackColor = true;
+            this.bt_bilgi_defterbaskisecenek_2_teklitoplu.Click += new System.EventHandler(this.bt_bilgi_defterbaskisecenek_2_teklitoplu_Click);
+            // 
+            // bt_bilgi_defterbaskisecenek_1
+            // 
+            this.bt_bilgi_defterbaskisecenek_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.bt_bilgi_defterbaskisecenek_1.Location = new System.Drawing.Point(266, 54);
+            this.bt_bilgi_defterbaskisecenek_1.Name = "bt_bilgi_defterbaskisecenek_1";
+            this.bt_bilgi_defterbaskisecenek_1.Size = new System.Drawing.Size(29, 24);
+            this.bt_bilgi_defterbaskisecenek_1.TabIndex = 4;
+            this.bt_bilgi_defterbaskisecenek_1.Text = "!";
+            this.bt_bilgi_defterbaskisecenek_1.UseVisualStyleBackColor = true;
+            this.bt_bilgi_defterbaskisecenek_1.Click += new System.EventHandler(this.bt_bilgi_defterbaskisecenek_1_Click);
+            // 
+            // groupBox37
+            // 
+            this.groupBox37.Controls.Add(this.bt_bilgi_defterbas_sonislem);
+            this.groupBox37.Controls.Add(this.radioButton3);
+            this.groupBox37.Controls.Add(this.radioButton4);
+            this.groupBox37.Location = new System.Drawing.Point(22, 305);
+            this.groupBox37.Name = "groupBox37";
+            this.groupBox37.Size = new System.Drawing.Size(312, 85);
+            this.groupBox37.TabIndex = 4;
+            this.groupBox37.TabStop = false;
+            this.groupBox37.Text = "Son İşlem";
+            // 
+            // bt_bilgi_defterbas_sonislem
+            // 
+            this.bt_bilgi_defterbas_sonislem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.bt_bilgi_defterbas_sonislem.Location = new System.Drawing.Point(266, 38);
+            this.bt_bilgi_defterbas_sonislem.Name = "bt_bilgi_defterbas_sonislem";
+            this.bt_bilgi_defterbas_sonislem.Size = new System.Drawing.Size(29, 24);
+            this.bt_bilgi_defterbas_sonislem.TabIndex = 3;
+            this.bt_bilgi_defterbas_sonislem.Text = "!";
+            this.bt_bilgi_defterbas_sonislem.UseVisualStyleBackColor = true;
+            this.bt_bilgi_defterbas_sonislem.Click += new System.EventHandler(this.bt_bilgi_defterbas_sonislem_Click);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Checked = true;
+            this.radioButton3.Location = new System.Drawing.Point(6, 51);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(102, 17);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Yazıcıya Gönder";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(6, 28);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(93, 17);
+            this.radioButton4.TabIndex = 1;
+            this.radioButton4.Text = "PDF olarak tut";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(22, 410);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(312, 78);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "BASKIYA BAŞLA";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -3005,6 +3277,7 @@
             this.tab_hizlitalep.ResumeLayout(false);
             this.tab_hizlitalep.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridSunucuTalepleri)).EndInit();
+            this.tab_defterbasim.ResumeLayout(false);
             this.tab_muhasebe.ResumeLayout(false);
             this.groupBox17.ResumeLayout(false);
             this.groupBox17.PerformLayout();
@@ -3049,20 +3322,28 @@
             this.groupBox18.PerformLayout();
             this.groupBox29.ResumeLayout(false);
             this.groupBox29.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.groupBox33.ResumeLayout(false);
+            this.groupBox33.PerformLayout();
+            this.groupBox32.ResumeLayout(false);
+            this.groupBox32.PerformLayout();
+            this.groupBox31.ResumeLayout(false);
+            this.groupBox31.PerformLayout();
+            this.groupBox27.ResumeLayout(false);
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).EndInit();
             this.tab_alt_loglar.ResumeLayout(false);
             this.tab_alt_loglar.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.groupBox27.ResumeLayout(false);
-            this.groupBox31.ResumeLayout(false);
-            this.groupBox31.PerformLayout();
-            this.groupBox32.ResumeLayout(false);
-            this.groupBox32.PerformLayout();
-            this.groupBox33.ResumeLayout(false);
-            this.groupBox33.PerformLayout();
+            this.groupBox34.ResumeLayout(false);
+            this.groupBox34.PerformLayout();
+            this.groupBox35.ResumeLayout(false);
+            this.groupBox35.PerformLayout();
+            this.groupBox36.ResumeLayout(false);
+            this.groupBox36.PerformLayout();
+            this.groupBox37.ResumeLayout(false);
+            this.groupBox37.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3311,6 +3592,28 @@
         private System.Windows.Forms.TextBox tb_yil_ara_bilgileregore_okul;
         private System.Windows.Forms.TextBox tb_yil_ara_bilgileregore_ilce;
         private System.Windows.Forms.TextBox tb_yil_ara_bilgileregore_il;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.ProgressBar pb_defterhizlikayit;
+        private System.Windows.Forms.GroupBox groupBox34;
+        private System.Windows.Forms.RadioButton rb_defter_bas_listedesecilikayitlaricinislemyap;
+        private System.Windows.Forms.RadioButton rb_defter_bas_ekrandakikayiticinislemyap;
+        private System.Windows.Forms.Button bt_defterbas_rb_secenekleri_bilgi;
+        private System.Windows.Forms.GroupBox groupBox35;
+        private System.Windows.Forms.RadioButton rb_defterbas_secenek_kapakvedefter;
+        private System.Windows.Forms.RadioButton rb_defterbas_secenek_defter;
+        private System.Windows.Forms.RadioButton rb_defterbas_secenek_kapak;
+        private System.Windows.Forms.GroupBox groupBox36;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Button bt_bilgi_defterbaskisecenek_1;
+        private System.Windows.Forms.Button bt_bilgi_defterbaskisecenek_2_teklitoplu;
+        private System.Windows.Forms.GroupBox groupBox37;
+        private System.Windows.Forms.Button bt_bilgi_defterbas_sonislem;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.Button button1;
     }
 }
 
