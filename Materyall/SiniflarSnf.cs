@@ -27,6 +27,11 @@ namespace Materyall
         public string bayigorunen { get; set; }
 
 
+        public string defter_kayit_yolu_pdf { get; set; }
+
+        public string plan_kayit_yolu_pdf { get; set; }
+
+
     }
 
 

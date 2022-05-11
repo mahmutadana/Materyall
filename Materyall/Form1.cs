@@ -38,6 +38,8 @@ namespace Materyall
         List<FiltrelenenSosyalKulupler> filtrelenenSosyalKuluplers = new List<FiltrelenenSosyalKulupler>();
         List<FiltrelenenDefterler> filtrelenenDefterlers = new List<FiltrelenenDefterler>();
 
+        List<FiltrelenenDefterler> filtrelenenDefterlers_sadeceolanlar = new List<FiltrelenenDefterler>();
+
         List<FiltrelenenEkUrunler> filtrelenenEkUrunlers = new List<FiltrelenenEkUrunler>();
 
         List<FiltrelenenNobetYeriSablonlari> filtrelenenNobetyerisablonlars = new List<FiltrelenenNobetYeriSablonlari>();
@@ -323,6 +325,9 @@ namespace Materyall
             //Defter taleplerini göster.
             dgv_talep_defterler.DataSource = vtislemleri.dgv_icin_defterleri_getir(BirOgt.oid, BirOgt.yili);
 
+            //Defter taleplerini göster.
+            dgv_talep_defterler_baski.DataSource = dgv_talep_defterler.DataSource;
+
             //Diğer zümre öğretmenlerinin isimlerini göster.
             dgv_talep_digerzumreogretmenleri.DataSource = vtislemleri.dgv_icin_digerzumreogretmenlerini_getir(BirOgt.oid);
 
@@ -413,6 +418,15 @@ namespace Materyall
 
             varsayilanbossa = vtislemleri.varsayilanlar_bossa();
 
+            defter_ve_plan_kayit_konumlarini_yaz();
+
+        }
+
+
+        private void defter_ve_plan_kayit_konumlarini_yaz()
+        {
+
+            tb_varsayilan_kayit_konumu_pdf.Text = varsayilanbossa.defter_kayit_yolu_pdf;
 
         }
 
@@ -942,6 +956,10 @@ namespace Materyall
             dgv_talep_serbestdersler_yillik.DataSource = null;
             dgv_talep_nobetyerleri.DataSource = null;
             dgv_talep_defterler.DataSource = null;
+
+            //Baskı ekranı için.
+            dgv_talep_defterler_baski.DataSource = null;
+
             dgv_talep_digerzumreogretmenleri.DataSource = null;
 
 
@@ -3319,10 +3337,11 @@ namespace Materyall
             int turkodu = 0;
 
             //Defter listesi boş olunca aşağıda kod alma kısmı haliyle çalışmıyor.
-            if (filtrelenenDefterlers.Count == 0)
+            if (filtrelenenDefterlers_sadeceolanlar.Count == 0)
             {
-                //Sadece kodu lazım. Ücret grubunu 1 olarak gidiriyoruz. Ücret grubuyla işimiz olmayacak. Öğretmen seçildiğinde doğru ücret grubuyla tekrrar çağırılıyor.
-                filtrelenenDefterlers = vtislemleri.filtre_defterler_sadecetalebiolanlar(cb_yil_ara_defter.Text, "1");
+                //Sadece kodu lazım. Ücret grubunu 1 olarak gidiriyoruz. Ücret grubuyla işimiz olmayacak.
+                //Öğretmen seçildiğinde doğru ücret grubuyla tekrar çağırılıyor.
+                filtrelenenDefterlers_sadeceolanlar = vtislemleri.filtre_defterler_sadecetalebiolanlar(cb_yil_ara_defter.Text, "1");
             }
 
             //Defter isimlerini cb'ye yazalım.
@@ -3330,19 +3349,24 @@ namespace Materyall
             if (cb_ara_defterturu.Items.Count < 1)
             {
 
-                foreach (FiltrelenenDefterler urun in filtrelenenDefterlers)
+                foreach (FiltrelenenDefterler urun in filtrelenenDefterlers_sadeceolanlar)
                 {
 
                     cb_ara_defterturu.Items.Add(urun.defteradi + " (" + urun.defterkodu + ") " + urun.sinif + " - " + urun.ozellik);
 
+
+                    //Baskı aşamasında sadece bu defter için basım yapın demek için cb dolduruyoruz.
+                    cb_baski_basilacak_defterturu.Items.Add(urun.defteradi + " (" + urun.defterkodu + ") " + urun.sinif + " - " + urun.ozellik);
+
                 }
+
             }
 
 
             //Seçilen bir defter türü varsa ona bakacağız. Yoksa tümüne bakacağız.
             if (cb_ara_defterturu.Text.Trim().Length > 1)
             {
-                        turkodu = filtrelenenDefterlers[cb_ara_defterturu.SelectedIndex].defterkodu;
+                        turkodu = filtrelenenDefterlers_sadeceolanlar[cb_ara_defterturu.SelectedIndex].defterkodu;
               
             }
 
@@ -3376,6 +3400,8 @@ namespace Materyall
                 tb_yil_ara_bilgileregore_ilce.Text, tb_yil_ara_bilgileregore_okul.Text, tb_yil_ara_musteriadi.Text, tb_yil_ara_bilgileregore_bayiadi.Text);
 
 
+            ara_sonucu_bulunan_kayit_sayisini_yaz();
+
         }
 
         private void bt_defterbas_rb_secenekleri_bilgi_Click(object sender, EventArgs e)
@@ -3400,14 +3426,110 @@ namespace Materyall
             MessageBox.Show(metinler.bilgi_defterbas_rb_baskisecenekleri_sonislem);
         }
 
+        private void bt_varsayilan_kayit_konumu_pdf_degistir_Click(object sender, EventArgs e)
+        {
+
+            yeni_defter_kayit_yolu_pdf_sec();
+
+        }
+
+
+        private void yeni_defter_kayit_yolu_pdf_sec()
+        {
+
+
+            OpenFileDialog folderBrowser = new OpenFileDialog();
+            // Set validate names and check file exists to false otherwise windows will
+            // not let you select "Folder Selection."
+            folderBrowser.ValidateNames = false;
+            folderBrowser.CheckFileExists = false;
+            folderBrowser.CheckPathExists = true;
+            // Always default to Folder Selection.
+            folderBrowser.FileName = "Kayıt klasörü seçin.";
+            if (folderBrowser.ShowDialog() == DialogResult.OK)
+            {
+                string folderPath = Path.GetDirectoryName(folderBrowser.FileName);
+
+                tb_varsayilan_kayit_konumu_pdf.Text = folderPath;
+
+                vtislemleri.varsayilan_kayit_yeri_kaydet("defter_kayit_yolu_pdf", folderPath);
+
+                // ...
+            } else
+            {
+
+                MessageBox.Show("Yeni klasör seçimi yapılmadı.");
+
+            }
+
+
+
+        }
+
+        private void bt_defterbas_baskiyabasla_Click(object sender, EventArgs e)
+        {
+
+            defter_baskisina_basla();
+
+        }
+
+
+        private void defter_baskisina_basla()
+        {
+
+            //Liste mi basacağız, sadece ekrandakini mi_
+            defter_bas_1_basilacaklar();
+
+
+
+        }
+
+        private void defter_bas_1_basilacaklar()
+        {
+
+            if (rb_defter_bas_ekrandakikayiticinislemyap.Checked)
+            {
+
+                //Listeden birini seçip göster demiyoruz. Zaten ekrandakini bas demişiz.
+                defter_bas_2_islemdekiKayit();
+
+
+            } else
+            {
+
+                //Döngü ile listedeki kayıtları ekrana getireceğiz ve işleme alarak işlemdeki kayda ait defter basım işlemini başlatacağız.
+                for (int i = 0; i< dgv_alt_aramavelisteleme.Rows.Count; i++)
+                {
+
+                    Burada satır satır alıp göster dieceğiz ve gösterildikten sonra işlemdeki kaydın defterini bas diyeceğiz.
+
+
+                }
+
+
+            }
+
+
+        }
+
+
+
+        private void defter_bas_2_islemdekiKayit()
+        {
+            //O anda ekrandaki kayda ilişkin işlem yapar ama buradaki mantık şu şekildedir. Listeden seçim bile olsa önceki komutta listedeki kayıt ekrana 
+            //getirilmiştir. Yani burası liste veya ekrandaki kayıt mantığının dışında.
+
+
+
+        }
+
+        private void defter_bas_3_gelenKaydiBas(string basilacakdefterkodu)
+        {
 
 
 
 
-
-
-
-
+        }
 
 
 

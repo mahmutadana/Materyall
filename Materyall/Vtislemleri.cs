@@ -82,6 +82,11 @@ namespace Materyall
                 veriler.bayikodu = oku["bayikodu"].ToString();
                 veriler.bayigorunen = oku["bayiadi"].ToString();
 
+
+                veriler.defter_kayit_yolu_pdf = oku["defter_kayit_yolu_pdf"].ToString();
+
+                veriler.plan_kayit_yolu_pdf = oku["plan_kayit_yolu_pdf"].ToString();
+
             }
 
 
@@ -3586,8 +3591,9 @@ namespace Materyall
 
 
             //Varsaılan olarak ikisi de seçili.
-            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube, d.defterkodu FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube, d.defterkodu, f.defteradi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
                 " LEFT JOIN " + tabloadi + " d ON d.oid=b.oid" +
+                " LEFT JOIN sis_defterler_tbl f ON f.defterkodu=d.defterkodu " +
                 " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + tabloadi + " " + basimdurumu + ") ORDER BY b.oid";
                           
             //Group by demiyoruz. Kişiye kayıtlı kaç defter varsa görünsün. "  GROUP BY b.oid";
@@ -3677,6 +3683,69 @@ namespace Materyall
 
 
             return dt;
+
+        }
+
+
+
+
+
+
+        //varsayılan kayıt yeri bilgilerini güncelliyoruz.
+        //
+
+        public string varsayilan_kayit_yeri_kaydet(string sutunadi_defter_plan, string yeniyol)
+        {
+
+            //Sütun adı vt tabloda tutulduğu şekliyle gelecek.
+            //Defter için defter_kayit_yolu_pdf, plan için plan_kayit_yolu_pdf olmak zorunda.
+
+
+            string sonuc = metinler.islembasarili;
+
+
+
+            string sql = "UPDATE sis_varsayilanlar_tbl SET " +
+                    sutunadi_defter_plan + "='" +yeniyol + "'";
+
+           
+
+
+
+            baglantiKur();
+
+
+            try
+            {
+
+                
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return sonuc;
 
         }
 
