@@ -320,7 +320,6 @@
             this.label48 = new System.Windows.Forms.Label();
             this.tab_alt_loglar = new System.Windows.Forms.TabPage();
             this.tb_logkayitlari = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -1090,7 +1089,6 @@
             // 
             // tab_defterbasim
             // 
-            this.tab_defterbasim.Controls.Add(this.button1);
             this.tab_defterbasim.Controls.Add(this.groupBox39);
             this.tab_defterbasim.Controls.Add(this.groupBox38);
             this.tab_defterbasim.Controls.Add(this.bt_defterbas_baskiyabasla);
@@ -1284,22 +1282,22 @@
             // rb_defterbas_tektoplu_toplu
             // 
             this.rb_defterbas_tektoplu_toplu.AutoSize = true;
-            this.rb_defterbas_tektoplu_toplu.Checked = true;
             this.rb_defterbas_tektoplu_toplu.Location = new System.Drawing.Point(6, 51);
             this.rb_defterbas_tektoplu_toplu.Name = "rb_defterbas_tektoplu_toplu";
             this.rb_defterbas_tektoplu_toplu.Size = new System.Drawing.Size(181, 17);
             this.rb_defterbas_tektoplu_toplu.TabIndex = 2;
-            this.rb_defterbas_tektoplu_toplu.TabStop = true;
             this.rb_defterbas_tektoplu_toplu.Text = "Listede seçililerin hepsi tek dosya";
             this.rb_defterbas_tektoplu_toplu.UseVisualStyleBackColor = true;
             // 
             // rb_defterbas_tektoplu_tek
             // 
             this.rb_defterbas_tektoplu_tek.AutoSize = true;
+            this.rb_defterbas_tektoplu_tek.Checked = true;
             this.rb_defterbas_tektoplu_tek.Location = new System.Drawing.Point(6, 28);
             this.rb_defterbas_tektoplu_tek.Name = "rb_defterbas_tektoplu_tek";
             this.rb_defterbas_tektoplu_tek.Size = new System.Drawing.Size(117, 17);
             this.rb_defterbas_tektoplu_tek.TabIndex = 1;
+            this.rb_defterbas_tektoplu_tek.TabStop = true;
             this.rb_defterbas_tektoplu_tek.Text = "Her kayıt ayrı dosya";
             this.rb_defterbas_tektoplu_tek.UseVisualStyleBackColor = true;
             // 
@@ -3546,16 +3544,6 @@
             this.tb_logkayitlari.Size = new System.Drawing.Size(1230, 264);
             this.tb_logkayitlari.TabIndex = 0;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(422, 271);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(70, 58);
-            this.button1.TabIndex = 42;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3973,7 +3961,6 @@
         private System.Windows.Forms.TextBox tb_varsayilan_defteryolu;
         private System.Windows.Forms.Button bt_varsayilan_degistir_defteryolu;
         private System.Windows.Forms.Label label60;
-        private System.Windows.Forms.Button button1;
     }
 }
 

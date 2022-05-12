@@ -3524,17 +3524,19 @@ namespace Materyall
         }
 
 
+       //Her öğretmenin belgeleri kapak, plan vs ayrı ayrı pdf oluyor. Bunları buraya birleştiriyoruz. En sonunda tek pdf haline getireceğiz.
+       //Her öğretmen için ayrı dosya seçeneği seçili ise öğretmene ait belgeler diğer öğretmene geçmeden önce birleştirilip öğretmen oidpdf olarak kaydedilecek.
+       //Eğer listedekilerin hepsini tek pdf yap derse tek pdf yapma içini diğer öğretmene geçse de yapmayacağız. 5 öğretmenlik belge varsa mesela onları birleştireceğiz.
+       //Son öğretmenin oid'si ve toplupdf yazarak kaydedeceğiz.
+
         List<string> yeniBelgelerPdfBirlestirmeicin = new List<string>();
         int yenidosyasayaci;
 
+       
 
         private void bt_defterbas_baskiyabasla_Click(object sender, EventArgs e)
         {
-            //Baskıya başla dediğimizde bu listeyi temizleyip sıfırlan belgeleri ekleyeceğiz.
-            yeniBelgelerPdfBirlestirmeicin.Clear();
-            //Her dosyanın başınamüşteri numarasını ekleyeceğiz, onun yanına da bu değeri ekleyeceğiz. 176_1_defterkapakdosya.pdf gibi olacak.
-            yenidosyasayaci = 1;
-
+           
 
 
             defter_baskisina_basla();
@@ -3555,8 +3557,16 @@ namespace Materyall
         private void defter_bas_1_basilacaklar()
         {
 
+            //Baskıya başla dediğimizde bu listeyi temizleyip sıfırlan belgeleri ekleyeceğiz.
+            yeniBelgelerPdfBirlestirmeicin.Clear();
+            //Her dosyanın başınamüşteri numarasını ekleyeceğiz, onun yanına da bu değeri ekleyeceğiz. 176_1_defterkapakdosya.pdf gibi olacak.
+            yenidosyasayaci = 1;
+
+
             if (rb_defter_bas_ekrandakikayiticinislemyap.Checked)
             {
+
+               
 
                 //Listeden birini seçip göster demiyoruz. Zaten ekrandakini bas demişiz.
                 defter_bas_2_islemdekiKayit();
@@ -3569,8 +3579,33 @@ namespace Materyall
                 for (int i = 0; i< dgv_alt_aramavelisteleme.Rows.Count; i++)
                 {
 
-                 //   Burada satır satır alıp göster dieceğiz ve gösterildikten sonra işlemdeki kaydın defterini bas diyeceğiz.
+                    if (rb_defterbas_tektoplu_tek.Checked)
+                    {
+                        //Tek tek bas demişse her öğretmen çin temiz bir liste hazırlıyoruz.
+                        yeniBelgelerPdfBirlestirmeicin.Clear();
+                        yenidosyasayaci = 1;
+                    }
 
+
+                    //   Burada satır satır alıp göster diyeceğiz ve gösterildikten sonra işlemdeki kaydın defterini bas diyeceğiz.
+
+
+
+                    if (rb_defterbas_tektoplu_tek.Checked)
+                    {
+                        //Tek tek bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
+                        
+                        pdfbirlestir_1(true,false);
+
+                    }
+
+                }
+
+                if (rb_defterbas_tektoplu_toplu.Checked)
+                {
+                    //Tek tek bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
+
+                    pdfbirlestir_1(false, false);
 
                 }
 
@@ -3888,49 +3923,105 @@ namespace Materyall
         }
 
 
-        private void pdfbirlestir_1()
-        {
 
+
+        private void pdfbirlestir_1(bool tektek1_toplu0, bool planmi1_deftermi0)
+        {
+            /*
             string document1 = @"C:\materyall\pdfler\belge1.pdf";
             string document2 = @"C:\materyall\pdfler\belge2.pdf";
             string document3 = @"C:\materyall\pdfler\belge3.pdf";
             string document4 = @"C:\materyall\pdfler\2YILLIK.pdf";
+            */
 
-            string taget = @"C:\materyall\pdfler\hedef.pdf";
+            string hedef_pdf_dosyamiz_birlesik = varsayilanbossa.plan_kayit_yolu_pdf;  //@"C:\materyall\wordler\1001pdf.pdf";                                                      //   Mailmerge(sourceFile, filePath, nr, dt.Columns);
+
+            if (!planmi1_deftermi0)
+            {
+                //Eğer defter basılıyorsa o klasörü seçelim.
+                hedef_pdf_dosyamiz_birlesik = varsayilanbossa.defter_kayit_yolu_pdf;
+            }
+
+            //Tek tek değil de toplu ise o zaman toplupdf ifadesini ekleyeceğiz.
+            if (!tektek1_toplu0)
+            {
+                hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + "toplu" + BirOgt.oid + ".pdf";
+
+            }
+            else
+            {
+                hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + BirOgt.oid + ".pdf";
+            }
 
 
-            pdfbirlestir_2(taget, document1, document2, document3, document4);
+
+            //PDF'leri dizi haline getirip birleştirmeye gönderelim.
+
+            string[] pdfler = new string[yeniBelgelerPdfBirlestirmeicin.Count];
+
+            for (int i=0; i < yeniBelgelerPdfBirlestirmeicin.Count;i++)
+            {
+                pdfler[i] = yeniBelgelerPdfBirlestirmeicin[i];
+            }
 
 
-            MessageBox.Show("bitti pdf");
+
+
+            pdfbirlestir_2(hedef_pdf_dosyamiz_birlesik, pdfler);
+
+
+         //   MessageBox.Show("bitti pdf");
 
         }
 
 
-
-        public static void pdfbirlestir_2(string targetPath, params string[] pdfs)
+        //Bu olay normalde static idi. Sildik. Diğer statik olmayan işlemlere erişime izin vermiyor.
+        public void pdfbirlestir_2(string hedef_pdf_dosyamiz_birlesik, params string[] pdfs)
         {
-            using (var targetDoc = new PdfDocument())
+            using (var hedefDoc = new PdfDocument())
             {
                 foreach (var pdf in pdfs)
                 {
                     using (var pdfDoc = PdfReader.Open(pdf, PdfDocumentOpenMode.Import))
                     {
                         for (var i = 0; i < pdfDoc.PageCount; i++)
-                            targetDoc.AddPage(pdfDoc.Pages[i]);
+                            hedefDoc.AddPage(pdfDoc.Pages[i]);
                     }
                 }
-                targetDoc.Save(targetPath);
+
+                hedefDoc.Save(hedef_pdf_dosyamiz_birlesik);
             }
+
+
+            //İşlem sonunda pdf parçacıklarını silelim.
+
+            pdfParcaciklariniSil(pdfs);
+
+
+            //Eğer doğrudan yazıcıya gönderme seçeneği seçilmişse yazıcıya gönderelim.
+
+            if (rb_defterbas_sonislem_yaziciyagonder.Checked)
+            {
+                pdfyiYazdir(hedef_pdf_dosyamiz_birlesik);
+            }
+
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void pdfParcaciklariniSil(string[] pdfler)
         {
-           
-            pdfDikeyYap("");
+
+
+
+
         }
 
+        private void pdfyiYazdir(string yazdirilacakpdf)
+        {
 
+
+
+
+        }
 
 
 
