@@ -92,9 +92,10 @@
             this.btn_taleplerial_sunucudan = new System.Windows.Forms.Button();
             this.tab_planbasim = new System.Windows.Forms.TabPage();
             this.tab_defterbasim = new System.Windows.Forms.TabPage();
-            this.bt_varsayilan_kayit_konumu_pdf_degistir = new System.Windows.Forms.Button();
-            this.tb_varsayilan_kayit_konumu_pdf = new System.Windows.Forms.TextBox();
-            this.label52 = new System.Windows.Forms.Label();
+            this.groupBox39 = new System.Windows.Forms.GroupBox();
+            this.dgv_talep_defterler_baski = new System.Windows.Forms.DataGridView();
+            this.groupBox38 = new System.Windows.Forms.GroupBox();
+            this.cb_baski_basilacak_defterturu = new System.Windows.Forms.ComboBox();
             this.bt_defterbas_baskiyabasla = new System.Windows.Forms.Button();
             this.groupBox37 = new System.Windows.Forms.GroupBox();
             this.bt_bilgi_defterbas_sonislem = new System.Windows.Forms.Button();
@@ -137,6 +138,29 @@
             this.tb_muhasebe_toplam_borc = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
             this.tab_digerislemler = new System.Windows.Forms.TabPage();
+            this.groupBox41 = new System.Windows.Forms.GroupBox();
+            this.tb_varsayilan_defterkapakyolu = new System.Windows.Forms.TextBox();
+            this.bt_varsayilan_degistir_defterkapakyolu = new System.Windows.Forms.Button();
+            this.bt_varsayilan_kayit_konumu_pdf_degistir = new System.Windows.Forms.Button();
+            this.label58 = new System.Windows.Forms.Label();
+            this.tb_varsayilan_defteryolu = new System.Windows.Forms.TextBox();
+            this.tb_varsayilan_kayit_konumu_pdf = new System.Windows.Forms.TextBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.bt_varsayilan_degistir_defteryolu = new System.Windows.Forms.Button();
+            this.label60 = new System.Windows.Forms.Label();
+            this.groupBox40 = new System.Windows.Forms.GroupBox();
+            this.tb_varsayilan_kayit_planyolu_pdf = new System.Windows.Forms.TextBox();
+            this.bt_varsayilan_degistir_basimsonu_planpdfyolu = new System.Windows.Forms.Button();
+            this.label56 = new System.Windows.Forms.Label();
+            this.tb_varsayilan_plankapakyolu = new System.Windows.Forms.TextBox();
+            this.bt_varsayilan_degistir_plankapakyolu = new System.Windows.Forms.Button();
+            this.label55 = new System.Windows.Forms.Label();
+            this.tb_varsayilan_gunlukplanyolu = new System.Windows.Forms.TextBox();
+            this.bt_varsayilan_degistir_gunlukplanyolu = new System.Windows.Forms.Button();
+            this.label54 = new System.Windows.Forms.Label();
+            this.tb_varsayilan_yillikplanyolu = new System.Windows.Forms.TextBox();
+            this.bt_varsayilan_degistir_yillikplanyolu = new System.Windows.Forms.Button();
+            this.label53 = new System.Windows.Forms.Label();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
             this.label47 = new System.Windows.Forms.Label();
             this.tb_sil_sifre = new System.Windows.Forms.TextBox();
@@ -296,10 +320,7 @@
             this.label48 = new System.Windows.Forms.Label();
             this.tab_alt_loglar = new System.Windows.Forms.TabPage();
             this.tb_logkayitlari = new System.Windows.Forms.TextBox();
-            this.groupBox38 = new System.Windows.Forms.GroupBox();
-            this.cb_baski_basilacak_defterturu = new System.Windows.Forms.ComboBox();
-            this.groupBox39 = new System.Windows.Forms.GroupBox();
-            this.dgv_talep_defterler_baski = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -320,6 +341,9 @@
             this.tab_hizlitalep.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridSunucuTalepleri)).BeginInit();
             this.tab_defterbasim.SuspendLayout();
+            this.groupBox39.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_talep_defterler_baski)).BeginInit();
+            this.groupBox38.SuspendLayout();
             this.groupBox37.SuspendLayout();
             this.groupBox35.SuspendLayout();
             this.groupBox36.SuspendLayout();
@@ -332,6 +356,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_muhasebe_borclanmalar)).BeginInit();
             this.groupBox14.SuspendLayout();
             this.tab_digerislemler.SuspendLayout();
+            this.groupBox41.SuspendLayout();
+            this.groupBox40.SuspendLayout();
             this.groupBox19.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -361,9 +387,6 @@
             this.groupBox11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).BeginInit();
             this.tab_alt_loglar.SuspendLayout();
-            this.groupBox38.SuspendLayout();
-            this.groupBox39.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_talep_defterler_baski)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -1067,11 +1090,9 @@
             // 
             // tab_defterbasim
             // 
+            this.tab_defterbasim.Controls.Add(this.button1);
             this.tab_defterbasim.Controls.Add(this.groupBox39);
             this.tab_defterbasim.Controls.Add(this.groupBox38);
-            this.tab_defterbasim.Controls.Add(this.bt_varsayilan_kayit_konumu_pdf_degistir);
-            this.tab_defterbasim.Controls.Add(this.tb_varsayilan_kayit_konumu_pdf);
-            this.tab_defterbasim.Controls.Add(this.label52);
             this.tab_defterbasim.Controls.Add(this.bt_defterbas_baskiyabasla);
             this.tab_defterbasim.Controls.Add(this.groupBox37);
             this.tab_defterbasim.Controls.Add(this.groupBox35);
@@ -1085,36 +1106,50 @@
             this.tab_defterbasim.Text = "Defter Basım İşlemleri";
             this.tab_defterbasim.UseVisualStyleBackColor = true;
             // 
-            // bt_varsayilan_kayit_konumu_pdf_degistir
+            // groupBox39
             // 
-            this.bt_varsayilan_kayit_konumu_pdf_degistir.Location = new System.Drawing.Point(300, 487);
-            this.bt_varsayilan_kayit_konumu_pdf_degistir.Name = "bt_varsayilan_kayit_konumu_pdf_degistir";
-            this.bt_varsayilan_kayit_konumu_pdf_degistir.Size = new System.Drawing.Size(34, 39);
-            this.bt_varsayilan_kayit_konumu_pdf_degistir.TabIndex = 8;
-            this.bt_varsayilan_kayit_konumu_pdf_degistir.Text = "Seç";
-            this.bt_varsayilan_kayit_konumu_pdf_degistir.UseVisualStyleBackColor = true;
-            this.bt_varsayilan_kayit_konumu_pdf_degistir.Click += new System.EventHandler(this.bt_varsayilan_kayit_konumu_pdf_degistir_Click);
+            this.groupBox39.Controls.Add(this.dgv_talep_defterler_baski);
+            this.groupBox39.Location = new System.Drawing.Point(363, 102);
+            this.groupBox39.Name = "groupBox39";
+            this.groupBox39.Size = new System.Drawing.Size(603, 107);
+            this.groupBox39.TabIndex = 41;
+            this.groupBox39.TabStop = false;
+            this.groupBox39.Text = "Defter Talepleri";
             // 
-            // tb_varsayilan_kayit_konumu_pdf
+            // dgv_talep_defterler_baski
             // 
-            this.tb_varsayilan_kayit_konumu_pdf.Location = new System.Drawing.Point(80, 476);
-            this.tb_varsayilan_kayit_konumu_pdf.Multiline = true;
-            this.tb_varsayilan_kayit_konumu_pdf.Name = "tb_varsayilan_kayit_konumu_pdf";
-            this.tb_varsayilan_kayit_konumu_pdf.Size = new System.Drawing.Size(214, 50);
-            this.tb_varsayilan_kayit_konumu_pdf.TabIndex = 7;
+            this.dgv_talep_defterler_baski.AllowUserToAddRows = false;
+            this.dgv_talep_defterler_baski.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgv_talep_defterler_baski.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_talep_defterler_baski.Location = new System.Drawing.Point(6, 19);
+            this.dgv_talep_defterler_baski.Name = "dgv_talep_defterler_baski";
+            this.dgv_talep_defterler_baski.Size = new System.Drawing.Size(591, 83);
+            this.dgv_talep_defterler_baski.TabIndex = 29;
             // 
-            // label52
+            // groupBox38
             // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(19, 490);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(55, 26);
-            this.label52.TabIndex = 6;
-            this.label52.Text = "Varsayılan\r\nKonum:";
+            this.groupBox38.Controls.Add(this.cb_baski_basilacak_defterturu);
+            this.groupBox38.Location = new System.Drawing.Point(363, 24);
+            this.groupBox38.Name = "groupBox38";
+            this.groupBox38.Size = new System.Drawing.Size(603, 72);
+            this.groupBox38.TabIndex = 40;
+            this.groupBox38.TabStop = false;
+            this.groupBox38.Text = "Basılacak Defter Seçimi (Tümü için boş bırakın)";
+            // 
+            // cb_baski_basilacak_defterturu
+            // 
+            this.cb_baski_basilacak_defterturu.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.cb_baski_basilacak_defterturu.FormattingEnabled = true;
+            this.cb_baski_basilacak_defterturu.Location = new System.Drawing.Point(6, 19);
+            this.cb_baski_basilacak_defterturu.Name = "cb_baski_basilacak_defterturu";
+            this.cb_baski_basilacak_defterturu.Size = new System.Drawing.Size(591, 32);
+            this.cb_baski_basilacak_defterturu.TabIndex = 100;
+            this.toolTip1.SetToolTip(this.cb_baski_basilacak_defterturu, "Yeni kayıt veya Güncelleme yaparken boş bırakılırsa varsayılan değeri alır. (Bayi" +
+        " de aynı şekilde varsayılan değeri alır.)");
             // 
             // bt_defterbas_baskiyabasla
             // 
-            this.bt_defterbas_baskiyabasla.Location = new System.Drawing.Point(363, 460);
+            this.bt_defterbas_baskiyabasla.Location = new System.Drawing.Point(22, 423);
             this.bt_defterbas_baskiyabasla.Name = "bt_defterbas_baskiyabasla";
             this.bt_defterbas_baskiyabasla.Size = new System.Drawing.Size(312, 78);
             this.bt_defterbas_baskiyabasla.TabIndex = 5;
@@ -1546,6 +1581,8 @@
             // 
             // tab_digerislemler
             // 
+            this.tab_digerislemler.Controls.Add(this.groupBox41);
+            this.tab_digerislemler.Controls.Add(this.groupBox40);
             this.tab_digerislemler.Controls.Add(this.groupBox19);
             this.tab_digerislemler.Controls.Add(this.groupBox13);
             this.tab_digerislemler.Controls.Add(this.label22);
@@ -1557,6 +1594,241 @@
             this.tab_digerislemler.TabIndex = 4;
             this.tab_digerislemler.Text = "Diğer İşlemler";
             this.tab_digerislemler.UseVisualStyleBackColor = true;
+            // 
+            // groupBox41
+            // 
+            this.groupBox41.Controls.Add(this.tb_varsayilan_defterkapakyolu);
+            this.groupBox41.Controls.Add(this.bt_varsayilan_degistir_defterkapakyolu);
+            this.groupBox41.Controls.Add(this.bt_varsayilan_kayit_konumu_pdf_degistir);
+            this.groupBox41.Controls.Add(this.label58);
+            this.groupBox41.Controls.Add(this.tb_varsayilan_defteryolu);
+            this.groupBox41.Controls.Add(this.tb_varsayilan_kayit_konumu_pdf);
+            this.groupBox41.Controls.Add(this.label52);
+            this.groupBox41.Controls.Add(this.bt_varsayilan_degistir_defteryolu);
+            this.groupBox41.Controls.Add(this.label60);
+            this.groupBox41.Location = new System.Drawing.Point(623, 282);
+            this.groupBox41.Name = "groupBox41";
+            this.groupBox41.Size = new System.Drawing.Size(339, 202);
+            this.groupBox41.TabIndex = 14;
+            this.groupBox41.TabStop = false;
+            this.groupBox41.Text = "Defterlerin Konumları";
+            // 
+            // tb_varsayilan_defterkapakyolu
+            // 
+            this.tb_varsayilan_defterkapakyolu.Enabled = false;
+            this.tb_varsayilan_defterkapakyolu.Location = new System.Drawing.Point(69, 75);
+            this.tb_varsayilan_defterkapakyolu.Multiline = true;
+            this.tb_varsayilan_defterkapakyolu.Name = "tb_varsayilan_defterkapakyolu";
+            this.tb_varsayilan_defterkapakyolu.Size = new System.Drawing.Size(214, 50);
+            this.tb_varsayilan_defterkapakyolu.TabIndex = 17;
+            // 
+            // bt_varsayilan_degistir_defterkapakyolu
+            // 
+            this.bt_varsayilan_degistir_defterkapakyolu.Location = new System.Drawing.Point(289, 86);
+            this.bt_varsayilan_degistir_defterkapakyolu.Name = "bt_varsayilan_degistir_defterkapakyolu";
+            this.bt_varsayilan_degistir_defterkapakyolu.Size = new System.Drawing.Size(34, 39);
+            this.bt_varsayilan_degistir_defterkapakyolu.TabIndex = 18;
+            this.bt_varsayilan_degistir_defterkapakyolu.Text = "Seç";
+            this.bt_varsayilan_degistir_defterkapakyolu.UseVisualStyleBackColor = true;
+            this.bt_varsayilan_degistir_defterkapakyolu.Click += new System.EventHandler(this.bt_varsayilan_degistir_defterkapakyolu_Click);
+            // 
+            // bt_varsayilan_kayit_konumu_pdf_degistir
+            // 
+            this.bt_varsayilan_kayit_konumu_pdf_degistir.Location = new System.Drawing.Point(289, 142);
+            this.bt_varsayilan_kayit_konumu_pdf_degistir.Name = "bt_varsayilan_kayit_konumu_pdf_degistir";
+            this.bt_varsayilan_kayit_konumu_pdf_degistir.Size = new System.Drawing.Size(34, 39);
+            this.bt_varsayilan_kayit_konumu_pdf_degistir.TabIndex = 8;
+            this.bt_varsayilan_kayit_konumu_pdf_degistir.Text = "Seç";
+            this.bt_varsayilan_kayit_konumu_pdf_degistir.UseVisualStyleBackColor = true;
+            this.bt_varsayilan_kayit_konumu_pdf_degistir.Click += new System.EventHandler(this.bt_varsayilan_kayit_konumu_pdf_degistir_Click);
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(8, 89);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(51, 26);
+            this.label58.TabIndex = 16;
+            this.label58.Text = "Defter\r\nKapakları";
+            // 
+            // tb_varsayilan_defteryolu
+            // 
+            this.tb_varsayilan_defteryolu.Enabled = false;
+            this.tb_varsayilan_defteryolu.Location = new System.Drawing.Point(69, 19);
+            this.tb_varsayilan_defteryolu.Multiline = true;
+            this.tb_varsayilan_defteryolu.Name = "tb_varsayilan_defteryolu";
+            this.tb_varsayilan_defteryolu.Size = new System.Drawing.Size(214, 50);
+            this.tb_varsayilan_defteryolu.TabIndex = 11;
+            // 
+            // tb_varsayilan_kayit_konumu_pdf
+            // 
+            this.tb_varsayilan_kayit_konumu_pdf.Enabled = false;
+            this.tb_varsayilan_kayit_konumu_pdf.Location = new System.Drawing.Point(69, 131);
+            this.tb_varsayilan_kayit_konumu_pdf.Multiline = true;
+            this.tb_varsayilan_kayit_konumu_pdf.Name = "tb_varsayilan_kayit_konumu_pdf";
+            this.tb_varsayilan_kayit_konumu_pdf.Size = new System.Drawing.Size(214, 50);
+            this.tb_varsayilan_kayit_konumu_pdf.TabIndex = 7;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(8, 142);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(63, 39);
+            this.label52.TabIndex = 6;
+            this.label52.Text = "Defter\r\nBasım Sonu\r\nPDF Yolu";
+            // 
+            // bt_varsayilan_degistir_defteryolu
+            // 
+            this.bt_varsayilan_degistir_defteryolu.Location = new System.Drawing.Point(289, 30);
+            this.bt_varsayilan_degistir_defteryolu.Name = "bt_varsayilan_degistir_defteryolu";
+            this.bt_varsayilan_degistir_defteryolu.Size = new System.Drawing.Size(34, 39);
+            this.bt_varsayilan_degistir_defteryolu.TabIndex = 12;
+            this.bt_varsayilan_degistir_defteryolu.Text = "Seç";
+            this.bt_varsayilan_degistir_defteryolu.UseVisualStyleBackColor = true;
+            this.bt_varsayilan_degistir_defteryolu.Click += new System.EventHandler(this.bt_varsayilan_degistir_defteryolu_Click);
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(8, 33);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(47, 13);
+            this.label60.TabIndex = 10;
+            this.label60.Text = "Defterler";
+            // 
+            // groupBox40
+            // 
+            this.groupBox40.Controls.Add(this.tb_varsayilan_kayit_planyolu_pdf);
+            this.groupBox40.Controls.Add(this.bt_varsayilan_degistir_basimsonu_planpdfyolu);
+            this.groupBox40.Controls.Add(this.label56);
+            this.groupBox40.Controls.Add(this.tb_varsayilan_plankapakyolu);
+            this.groupBox40.Controls.Add(this.bt_varsayilan_degistir_plankapakyolu);
+            this.groupBox40.Controls.Add(this.label55);
+            this.groupBox40.Controls.Add(this.tb_varsayilan_gunlukplanyolu);
+            this.groupBox40.Controls.Add(this.bt_varsayilan_degistir_gunlukplanyolu);
+            this.groupBox40.Controls.Add(this.label54);
+            this.groupBox40.Controls.Add(this.tb_varsayilan_yillikplanyolu);
+            this.groupBox40.Controls.Add(this.bt_varsayilan_degistir_yillikplanyolu);
+            this.groupBox40.Controls.Add(this.label53);
+            this.groupBox40.Location = new System.Drawing.Point(623, 19);
+            this.groupBox40.Name = "groupBox40";
+            this.groupBox40.Size = new System.Drawing.Size(339, 247);
+            this.groupBox40.TabIndex = 13;
+            this.groupBox40.TabStop = false;
+            this.groupBox40.Text = "Planların Konumları";
+            // 
+            // tb_varsayilan_kayit_planyolu_pdf
+            // 
+            this.tb_varsayilan_kayit_planyolu_pdf.Enabled = false;
+            this.tb_varsayilan_kayit_planyolu_pdf.Location = new System.Drawing.Point(69, 187);
+            this.tb_varsayilan_kayit_planyolu_pdf.Multiline = true;
+            this.tb_varsayilan_kayit_planyolu_pdf.Name = "tb_varsayilan_kayit_planyolu_pdf";
+            this.tb_varsayilan_kayit_planyolu_pdf.Size = new System.Drawing.Size(214, 50);
+            this.tb_varsayilan_kayit_planyolu_pdf.TabIndex = 20;
+            // 
+            // bt_varsayilan_degistir_basimsonu_planpdfyolu
+            // 
+            this.bt_varsayilan_degistir_basimsonu_planpdfyolu.Location = new System.Drawing.Point(289, 198);
+            this.bt_varsayilan_degistir_basimsonu_planpdfyolu.Name = "bt_varsayilan_degistir_basimsonu_planpdfyolu";
+            this.bt_varsayilan_degistir_basimsonu_planpdfyolu.Size = new System.Drawing.Size(34, 39);
+            this.bt_varsayilan_degistir_basimsonu_planpdfyolu.TabIndex = 21;
+            this.bt_varsayilan_degistir_basimsonu_planpdfyolu.Text = "Seç";
+            this.bt_varsayilan_degistir_basimsonu_planpdfyolu.UseVisualStyleBackColor = true;
+            this.bt_varsayilan_degistir_basimsonu_planpdfyolu.Click += new System.EventHandler(this.bt_varsayilan_degistir_basimsonu_planpdfyolu_Click);
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(6, 198);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(63, 39);
+            this.label56.TabIndex = 19;
+            this.label56.Text = "Plan\r\nBasım Sonu\r\nPDF Yolu";
+            // 
+            // tb_varsayilan_plankapakyolu
+            // 
+            this.tb_varsayilan_plankapakyolu.Enabled = false;
+            this.tb_varsayilan_plankapakyolu.Location = new System.Drawing.Point(69, 131);
+            this.tb_varsayilan_plankapakyolu.Multiline = true;
+            this.tb_varsayilan_plankapakyolu.Name = "tb_varsayilan_plankapakyolu";
+            this.tb_varsayilan_plankapakyolu.Size = new System.Drawing.Size(214, 50);
+            this.tb_varsayilan_plankapakyolu.TabIndex = 17;
+            // 
+            // bt_varsayilan_degistir_plankapakyolu
+            // 
+            this.bt_varsayilan_degistir_plankapakyolu.Location = new System.Drawing.Point(289, 142);
+            this.bt_varsayilan_degistir_plankapakyolu.Name = "bt_varsayilan_degistir_plankapakyolu";
+            this.bt_varsayilan_degistir_plankapakyolu.Size = new System.Drawing.Size(34, 39);
+            this.bt_varsayilan_degistir_plankapakyolu.TabIndex = 18;
+            this.bt_varsayilan_degistir_plankapakyolu.Text = "Seç";
+            this.bt_varsayilan_degistir_plankapakyolu.UseVisualStyleBackColor = true;
+            this.bt_varsayilan_degistir_plankapakyolu.Click += new System.EventHandler(this.bt_varsayilan_degistir_plankapakyolu_Click);
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(8, 145);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(51, 26);
+            this.label55.TabIndex = 16;
+            this.label55.Text = "Plan\r\nKapakları";
+            // 
+            // tb_varsayilan_gunlukplanyolu
+            // 
+            this.tb_varsayilan_gunlukplanyolu.Enabled = false;
+            this.tb_varsayilan_gunlukplanyolu.Location = new System.Drawing.Point(69, 75);
+            this.tb_varsayilan_gunlukplanyolu.Multiline = true;
+            this.tb_varsayilan_gunlukplanyolu.Name = "tb_varsayilan_gunlukplanyolu";
+            this.tb_varsayilan_gunlukplanyolu.Size = new System.Drawing.Size(214, 50);
+            this.tb_varsayilan_gunlukplanyolu.TabIndex = 14;
+            // 
+            // bt_varsayilan_degistir_gunlukplanyolu
+            // 
+            this.bt_varsayilan_degistir_gunlukplanyolu.Location = new System.Drawing.Point(289, 86);
+            this.bt_varsayilan_degistir_gunlukplanyolu.Name = "bt_varsayilan_degistir_gunlukplanyolu";
+            this.bt_varsayilan_degistir_gunlukplanyolu.Size = new System.Drawing.Size(34, 39);
+            this.bt_varsayilan_degistir_gunlukplanyolu.TabIndex = 15;
+            this.bt_varsayilan_degistir_gunlukplanyolu.Text = "Seç";
+            this.bt_varsayilan_degistir_gunlukplanyolu.UseVisualStyleBackColor = true;
+            this.bt_varsayilan_degistir_gunlukplanyolu.Click += new System.EventHandler(this.bt_varsayilan_degistir_gunlukplanyolu_Click);
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(8, 89);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(41, 26);
+            this.label54.TabIndex = 13;
+            this.label54.Text = "Günlük\r\nPlanlar";
+            // 
+            // tb_varsayilan_yillikplanyolu
+            // 
+            this.tb_varsayilan_yillikplanyolu.Enabled = false;
+            this.tb_varsayilan_yillikplanyolu.Location = new System.Drawing.Point(69, 19);
+            this.tb_varsayilan_yillikplanyolu.Multiline = true;
+            this.tb_varsayilan_yillikplanyolu.Name = "tb_varsayilan_yillikplanyolu";
+            this.tb_varsayilan_yillikplanyolu.Size = new System.Drawing.Size(214, 50);
+            this.tb_varsayilan_yillikplanyolu.TabIndex = 11;
+            // 
+            // bt_varsayilan_degistir_yillikplanyolu
+            // 
+            this.bt_varsayilan_degistir_yillikplanyolu.Location = new System.Drawing.Point(289, 30);
+            this.bt_varsayilan_degistir_yillikplanyolu.Name = "bt_varsayilan_degistir_yillikplanyolu";
+            this.bt_varsayilan_degistir_yillikplanyolu.Size = new System.Drawing.Size(34, 39);
+            this.bt_varsayilan_degistir_yillikplanyolu.TabIndex = 12;
+            this.bt_varsayilan_degistir_yillikplanyolu.Text = "Seç";
+            this.bt_varsayilan_degistir_yillikplanyolu.UseVisualStyleBackColor = true;
+            this.bt_varsayilan_degistir_yillikplanyolu.Click += new System.EventHandler(this.bt_varsayilan_degistir_yillikplanyolu_Click);
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(8, 33);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(39, 26);
+            this.label53.TabIndex = 10;
+            this.label53.Text = "Yıllık\r\nPlanlar";
             // 
             // groupBox19
             // 
@@ -3274,46 +3546,15 @@
             this.tb_logkayitlari.Size = new System.Drawing.Size(1230, 264);
             this.tb_logkayitlari.TabIndex = 0;
             // 
-            // groupBox38
+            // button1
             // 
-            this.groupBox38.Controls.Add(this.cb_baski_basilacak_defterturu);
-            this.groupBox38.Location = new System.Drawing.Point(363, 24);
-            this.groupBox38.Name = "groupBox38";
-            this.groupBox38.Size = new System.Drawing.Size(603, 72);
-            this.groupBox38.TabIndex = 40;
-            this.groupBox38.TabStop = false;
-            this.groupBox38.Text = "Basılacak Defter Seçimi (Tümü için boş bırakın)";
-            // 
-            // cb_baski_basilacak_defterturu
-            // 
-            this.cb_baski_basilacak_defterturu.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.cb_baski_basilacak_defterturu.FormattingEnabled = true;
-            this.cb_baski_basilacak_defterturu.Location = new System.Drawing.Point(6, 19);
-            this.cb_baski_basilacak_defterturu.Name = "cb_baski_basilacak_defterturu";
-            this.cb_baski_basilacak_defterturu.Size = new System.Drawing.Size(591, 32);
-            this.cb_baski_basilacak_defterturu.TabIndex = 100;
-            this.toolTip1.SetToolTip(this.cb_baski_basilacak_defterturu, "Yeni kayıt veya Güncelleme yaparken boş bırakılırsa varsayılan değeri alır. (Bayi" +
-        " de aynı şekilde varsayılan değeri alır.)");
-            // 
-            // groupBox39
-            // 
-            this.groupBox39.Controls.Add(this.dgv_talep_defterler_baski);
-            this.groupBox39.Location = new System.Drawing.Point(363, 102);
-            this.groupBox39.Name = "groupBox39";
-            this.groupBox39.Size = new System.Drawing.Size(603, 107);
-            this.groupBox39.TabIndex = 41;
-            this.groupBox39.TabStop = false;
-            this.groupBox39.Text = "Defter Talepleri";
-            // 
-            // dgv_talep_defterler_baski
-            // 
-            this.dgv_talep_defterler_baski.AllowUserToAddRows = false;
-            this.dgv_talep_defterler_baski.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgv_talep_defterler_baski.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_talep_defterler_baski.Location = new System.Drawing.Point(6, 19);
-            this.dgv_talep_defterler_baski.Name = "dgv_talep_defterler_baski";
-            this.dgv_talep_defterler_baski.Size = new System.Drawing.Size(591, 83);
-            this.dgv_talep_defterler_baski.TabIndex = 29;
+            this.button1.Location = new System.Drawing.Point(422, 271);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(70, 58);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Form1
             // 
@@ -3362,7 +3603,9 @@
             this.tab_hizlitalep.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridSunucuTalepleri)).EndInit();
             this.tab_defterbasim.ResumeLayout(false);
-            this.tab_defterbasim.PerformLayout();
+            this.groupBox39.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_talep_defterler_baski)).EndInit();
+            this.groupBox38.ResumeLayout(false);
             this.groupBox37.ResumeLayout(false);
             this.groupBox37.PerformLayout();
             this.groupBox35.ResumeLayout(false);
@@ -3382,6 +3625,10 @@
             this.groupBox14.PerformLayout();
             this.tab_digerislemler.ResumeLayout(false);
             this.tab_digerislemler.PerformLayout();
+            this.groupBox41.ResumeLayout(false);
+            this.groupBox41.PerformLayout();
+            this.groupBox40.ResumeLayout(false);
+            this.groupBox40.PerformLayout();
             this.groupBox19.ResumeLayout(false);
             this.groupBox19.PerformLayout();
             this.groupBox13.ResumeLayout(false);
@@ -3429,9 +3676,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).EndInit();
             this.tab_alt_loglar.ResumeLayout(false);
             this.tab_alt_loglar.PerformLayout();
-            this.groupBox38.ResumeLayout(false);
-            this.groupBox39.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_talep_defterler_baski)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3709,6 +3953,27 @@
         private System.Windows.Forms.ComboBox cb_baski_basilacak_defterturu;
         private System.Windows.Forms.GroupBox groupBox39;
         private System.Windows.Forms.DataGridView dgv_talep_defterler_baski;
+        private System.Windows.Forms.GroupBox groupBox40;
+        private System.Windows.Forms.TextBox tb_varsayilan_plankapakyolu;
+        private System.Windows.Forms.Button bt_varsayilan_degistir_plankapakyolu;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.TextBox tb_varsayilan_gunlukplanyolu;
+        private System.Windows.Forms.Button bt_varsayilan_degistir_gunlukplanyolu;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.TextBox tb_varsayilan_yillikplanyolu;
+        private System.Windows.Forms.Button bt_varsayilan_degistir_yillikplanyolu;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.TextBox tb_varsayilan_kayit_planyolu_pdf;
+        private System.Windows.Forms.Button bt_varsayilan_degistir_basimsonu_planpdfyolu;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.GroupBox groupBox41;
+        private System.Windows.Forms.TextBox tb_varsayilan_defterkapakyolu;
+        private System.Windows.Forms.Button bt_varsayilan_degistir_defterkapakyolu;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.TextBox tb_varsayilan_defteryolu;
+        private System.Windows.Forms.Button bt_varsayilan_degistir_defteryolu;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -10,6 +10,14 @@ namespace Materyall
     {
 
 
+        //  public string siparisci_tam_yolu = @"C:\Materyall\SistemDosyaları\siparisci2022\siparisci_2022.xlsx";
+        public string siparisci_tam_yolu = @"C:\Materyall\siparisci.xlsx";
+
+        //Yatay pdf'leri dikeye çevirirken aynı ismi kullanamıyoruz. Bu yüzden dikey pdf yaparken dikey pdf'nin adından aşağıdaki metni replace ile sileceğiz.
+        public string pdf_yatay_bilgisi = "xpdfyatayx";
+
+
+
         //Tablo adları ve ürünid isimleri. neyebakalim bölümü için.
         public string neyebakalim_y_anaders_tablo = "tlp_y_anadersler_tbl";
         public string neyebakalim_y_anaders_urunid_adi = "dersid";

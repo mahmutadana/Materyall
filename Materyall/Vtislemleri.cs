@@ -83,10 +83,17 @@ namespace Materyall
                 veriler.bayigorunen = oku["bayiadi"].ToString();
 
 
-                veriler.defter_kayit_yolu_pdf = oku["defter_kayit_yolu_pdf"].ToString();
-
+                veriler.yillikplanyolu = oku["yillikplanyolu"].ToString();
+                veriler.gunlukplanyolu= oku["gunlukplanyolu"].ToString();
+                veriler.plankapakyolu = oku["plankapakyolu"].ToString();
                 veriler.plan_kayit_yolu_pdf = oku["plan_kayit_yolu_pdf"].ToString();
 
+
+                veriler.defteryolu = oku["defteryolu"].ToString();
+                veriler.defterkapakyolu = oku["defterkapakyolu"].ToString();
+                veriler.defter_kayit_yolu_pdf = oku["defter_kayit_yolu_pdf"].ToString();
+
+               
             }
 
 

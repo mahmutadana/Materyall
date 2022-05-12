@@ -93,7 +93,42 @@ namespace Materyall
 
 
 
-       
+
+        public void adresMektupicinExceliHazirlasiparisci(Dictionary<string, string> adresMesktupBaslikDegerleri)
+        {
+
+            Metinler metinler = new Metinler();
+
+            //Gelen başlıkları 1. satıra, değerleri 2. satıra yazarak bir excel belgesi oluşturuyoruz. (Eski siparişçi) Adı siparisci2022.xls olabilir.
+
+            //Exceli açalım.
+            Microsoft.Office.Interop.Excel.Application uyg = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook ktp;
+            Microsoft.Office.Interop.Excel.Worksheet syf;
+
+
+            ktp = uyg.Workbooks.Open(metinler.siparisci_tam_yolu);
+            syf = ktp.Worksheets["Sayfa1"];
+
+
+            syf.Cells.ClearContents();
+            int sutunsayac = 1;
+
+            foreach (string s in adresMesktupBaslikDegerleri.Keys)
+            {
+                syf.Cells[1, sutunsayac] = s;
+                syf.Cells[2,sutunsayac] = adresMesktupBaslikDegerleri[s];
+
+                sutunsayac++;
+            }
+
+
+            ktp.Close(true);
+            uyg.Quit();
+
+        }
+
+
 
 
 

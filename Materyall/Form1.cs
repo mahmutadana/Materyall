@@ -11,6 +11,12 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Data.OleDb;
 
+using Microsoft.Office.Interop.Word;
+using Microsoft.Office.Core;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
+using Application = Microsoft.Office.Interop.Word.Application;
+
 namespace Materyall
 {
     public partial class Form1 : Form
@@ -54,6 +60,7 @@ namespace Materyall
         Vtislemleri vtislemleri = new Vtislemleri();
         Metinler metinler = new Metinler();
         YardimciSnf yrdsnf = new YardimciSnf();
+        ExcelSnf excelSnf = new ExcelSnf();
 
         public Form1()
         {
@@ -426,6 +433,14 @@ namespace Materyall
         private void defter_ve_plan_kayit_konumlarini_yaz()
         {
 
+            tb_varsayilan_yillikplanyolu.Text = varsayilanbossa.yillikplanyolu;
+            tb_varsayilan_gunlukplanyolu.Text = varsayilanbossa.gunlukplanyolu;
+            tb_varsayilan_plankapakyolu.Text = varsayilanbossa.plankapakyolu;
+            tb_varsayilan_kayit_planyolu_pdf.Text = varsayilanbossa.plan_kayit_yolu_pdf;
+
+
+            tb_varsayilan_defteryolu.Text = varsayilanbossa.defteryolu;
+            tb_varsayilan_defterkapakyolu.Text = varsayilanbossa.defterkapakyolu;
             tb_varsayilan_kayit_konumu_pdf.Text = varsayilanbossa.defter_kayit_yolu_pdf;
 
         }
@@ -2183,7 +2198,7 @@ namespace Materyall
             //Kaydedildi yazısı sürekli ekranda kalmayacak.
             lbl_ogrencilistesikaydedildi.Text = "Kaydedildi";
 
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
 
             lbl_ogrencilistesikaydedildi.Text = "";
 
@@ -2314,7 +2329,7 @@ namespace Materyall
 
 
 
-        public static DataTable excelSecildiTalepleriGetir(string strFileName, string tabloAdi)
+        public static System.Data.DataTable excelSecildiTalepleriGetir(string strFileName, string tabloAdi)
         {
            // string Table = "talep";
 
@@ -3429,12 +3444,50 @@ namespace Materyall
         private void bt_varsayilan_kayit_konumu_pdf_degistir_Click(object sender, EventArgs e)
         {
 
-            yeni_defter_kayit_yolu_pdf_sec();
+            string sutunbasligi = "defter_kayit_yolu_pdf";
+            yeni_defter_kayit_yolu_pdf_sec(sutunbasligi);
 
         }
 
 
-        private void yeni_defter_kayit_yolu_pdf_sec()
+        private void bt_varsayilan_degistir_yillikplanyolu_Click(object sender, EventArgs e)
+        {
+            string sutunbasligi = "yillikplanyolu";
+            yeni_defter_kayit_yolu_pdf_sec(sutunbasligi);
+        }
+
+        private void bt_varsayilan_degistir_gunlukplanyolu_Click(object sender, EventArgs e)
+        {
+            string sutunbasligi = "gunlukplanyolu";
+            yeni_defter_kayit_yolu_pdf_sec(sutunbasligi);
+        }
+
+        private void bt_varsayilan_degistir_plankapakyolu_Click(object sender, EventArgs e)
+        {
+            string sutunbasligi = "plankapakyolu";
+            yeni_defter_kayit_yolu_pdf_sec(sutunbasligi);
+        }
+
+        private void bt_varsayilan_degistir_basimsonu_planpdfyolu_Click(object sender, EventArgs e)
+        {
+            string sutunbasligi = "plan_kayit_yolu_pdf";
+            yeni_defter_kayit_yolu_pdf_sec(sutunbasligi);
+        }
+
+        private void bt_varsayilan_degistir_defteryolu_Click(object sender, EventArgs e)
+        {
+            string sutunbasligi = "defteryolu";
+            yeni_defter_kayit_yolu_pdf_sec(sutunbasligi);
+        }
+
+        private void bt_varsayilan_degistir_defterkapakyolu_Click(object sender, EventArgs e)
+        {
+            string sutunbasligi = "defterkapakyolu";
+            yeni_defter_kayit_yolu_pdf_sec(sutunbasligi);
+        }
+
+
+        private void yeni_defter_kayit_yolu_pdf_sec(string sutunbasligi)
         {
 
 
@@ -3445,14 +3498,19 @@ namespace Materyall
             folderBrowser.CheckFileExists = false;
             folderBrowser.CheckPathExists = true;
             // Always default to Folder Selection.
-            folderBrowser.FileName = "Kayıt klasörü seçin.";
+            folderBrowser.FileName = "Klasörü seçin.";
             if (folderBrowser.ShowDialog() == DialogResult.OK)
             {
                 string folderPath = Path.GetDirectoryName(folderBrowser.FileName);
 
-                tb_varsayilan_kayit_konumu_pdf.Text = folderPath;
+             //   tb_varsayilan_kayit_konumu_pdf.Text = folderPath;
 
-                vtislemleri.varsayilan_kayit_yeri_kaydet("defter_kayit_yolu_pdf", folderPath);
+
+                folderPath = folderPath.Replace("\\", "\\\\");
+
+                vtislemleri.varsayilan_kayit_yeri_kaydet(sutunbasligi, folderPath);
+
+                bossa_varsayilanlarYilBayivs();
 
                 // ...
             } else
@@ -3463,11 +3521,21 @@ namespace Materyall
             }
 
 
-
         }
+
+
+        List<string> yeniBelgelerPdfBirlestirmeicin = new List<string>();
+        int yenidosyasayaci;
+
 
         private void bt_defterbas_baskiyabasla_Click(object sender, EventArgs e)
         {
+            //Baskıya başla dediğimizde bu listeyi temizleyip sıfırlan belgeleri ekleyeceğiz.
+            yeniBelgelerPdfBirlestirmeicin.Clear();
+            //Her dosyanın başınamüşteri numarasını ekleyeceğiz, onun yanına da bu değeri ekleyeceğiz. 176_1_defterkapakdosya.pdf gibi olacak.
+            yenidosyasayaci = 1;
+
+
 
             defter_baskisina_basla();
 
@@ -3501,7 +3569,7 @@ namespace Materyall
                 for (int i = 0; i< dgv_alt_aramavelisteleme.Rows.Count; i++)
                 {
 
-                    Burada satır satır alıp göster dieceğiz ve gösterildikten sonra işlemdeki kaydın defterini bas diyeceğiz.
+                 //   Burada satır satır alıp göster dieceğiz ve gösterildikten sonra işlemdeki kaydın defterini bas diyeceğiz.
 
 
                 }
@@ -3516,20 +3584,362 @@ namespace Materyall
 
         private void defter_bas_2_islemdekiKayit()
         {
-            //O anda ekrandaki kayda ilişkin işlem yapar ama buradaki mantık şu şekildedir. Listeden seçim bile olsa önceki komutta listedeki kayıt ekrana 
+            //O anda ekrandaki kayda ilişkin işlem yapar ama buradaki mantık şu şekildedir. İstenilen kayıt ekrana 
             //getirilmiştir. Yani burası liste veya ekrandaki kayıt mantığının dışında.
+
+            FiltrelenenDefterler istenendefter = null;
+
+            if (cb_baski_basilacak_defterturu.SelectedIndex >= 0)
+            {
+                istenendefter = filtrelenenDefterlers_sadeceolanlar[cb_baski_basilacak_defterturu.SelectedIndex];
+            }
+            
+
+
+
+            for (int i=0;i< dgv_talep_defterler_baski.RowCount; i++)
+            {
+               DataGridViewRow dr = dgv_talep_defterler_baski.Rows[i];
+
+                string basilacakolandefterkodu = dr.Cells["defterkodu"].Value.ToString();
+
+                if (istenendefter == null || (istenendefter.defterkodu.ToString() == basilacakolandefterkodu))
+                {
+                    //Eğer herhangi bir defter seçilmemişse tüm defterler basılacak demektir. Defter seçilmişse aynı defter mi diye bakıyoruz.
+                    defter_bas_3_gelenKaydiBas(basilacakolandefterkodu);
+
+                }
+
+
+            }
+
 
 
 
         }
 
-        private void defter_bas_3_gelenKaydiBas(string basilacakdefterkodu)
+
+
+        private void defter_bas_3_gelenKaydiBas(string basilacakolandefterkodu)
+        {
+
+            //Defter kodu geldi. Asıl defter basma işlemi burada başlayacak.
+
+
+            //Önce defter kapağı basacağız.
+            defter_bas_3_ek_defterkapagibas(basilacakolandefterkodu);
+
+
+            //Kapağa isim verip kaydediyoruz. Ne isim verdiğimizi bileceğiz. müşterino_defterno veya müşterino_defterkapakno gibi.
+            //Sonra bunları sıra ile birleştireceğiz.
+
+
+
+
+        }
+
+        private void defter_bas_3_ek_defterkapagibas(string basilacakolandefterkodu)
+        {
+
+            //Defter kodu geldi.
+            //Önce defter kapağı basacağız.
+
+            //Belgeyi açması için filigran ekle komutunu kullanıyoruz. İlk değişken olarak basılacak olan defter kapağını alıyoruz
+            //ve filigran olarak bir boşluk gönderiyoruz.
+
+
+            Dictionary<string, string> adresMesktupBaslikDegerleri = new Dictionary<string, string>();
+            //Kapakta/defterde/planda olması gereken değerleri burada oluşturuyoruz.
+
+            adresMesktupBaslikDegerleri["ili"] = BirOgt.ili;
+            adresMesktupBaslikDegerleri["ilcesi"] = BirOgt.ilcesi;
+            adresMesktupBaslikDegerleri["okuladi"] = BirOgt.okuladi;
+            adresMesktupBaslikDegerleri["sinifi"] = BirOgt.sinifi;
+            adresMesktupBaslikDegerleri["subesi"] = BirOgt.subesi;
+            adresMesktupBaslikDegerleri["adisoyadi"] = BirOgt.adisoyadi;
+            adresMesktupBaslikDegerleri["bransi"] = BirOgt.bransi;
+            adresMesktupBaslikDegerleri["muduradi"] = BirOgt.muduradi;
+            adresMesktupBaslikDegerleri["mudurunvani"] = BirOgt.mudurunvani;
+
+           
+
+           excelSnf.adresMektupicinExceliHazirlasiparisci(adresMesktupBaslikDegerleri);
+
+
+            basim_1_filigranEkle(varsayilanbossa.defterkapakyolu + @"\" + "kapak_" + basilacakolandefterkodu + ".docx", " ", false, false);
+
+
+        }
+
+
+
+       
+
+
+
+
+
+
+
+        //WORD PDF VB İŞLEMLER.
+
+
+
+
+
+        private void basim_1_filigranEkle(string filePath, string filigranmetni, bool planmi1_deftermi0, bool pdfyataydir_donecekmi)
+        {
+            //Plan basılıyorsa true, defter basılıyorsa false. PDF klasörünü ayırmak için kullanacağız.
+
+            object oMissing = System.Type.Missing;
+
+            Document wordDoc = null;
+            Application wordApp = new Application(); //null;
+
+
+
+            wordDoc = wordApp.Documents.Open(filePath);
+            Microsoft.Office.Interop.Word.Shape txWatermark = null;
+            foreach (Microsoft.Office.Interop.Word.Section section in wordDoc.Sections)
+            {
+                txWatermark = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Shapes.AddTextEffect(
+                    MsoPresetTextEffect.msoTextEffect1,
+                                        filigranmetni, "Arial", (float)40,
+                                         MsoTriState.msoTrue,
+                                         MsoTriState.msoFalse,
+                                         0, 0, ref oMissing);
+
+                //      txWatermark.Select(ref oMissing);
+                txWatermark.Fill.Visible = MsoTriState.msoTrue;
+                txWatermark.Line.Visible = MsoTriState.msoFalse;
+                txWatermark.Fill.Solid();
+                txWatermark.Fill.ForeColor.RGB = (Int32)Microsoft.Office.Interop.Word.WdColor.wdColorGray30; //wdColorRed;
+                txWatermark.RelativeHorizontalPosition =
+                                       Microsoft.Office.Interop.Word.WdRelativeHorizontalPosition.wdRelativeHorizontalPositionMargin;
+                txWatermark.RelativeVerticalPosition =
+                                           Microsoft.Office.Interop.Word.WdRelativeVerticalPosition.wdRelativeVerticalPositionMargin;
+                txWatermark.Left = (float)Microsoft.Office.Interop.Word.WdShapePosition.wdShapeCenter;
+                txWatermark.Top = (float)Microsoft.Office.Interop.Word.WdShapePosition.wdShapeCenter;
+                txWatermark.Height = wordApp.InchesToPoints(2.4f);
+                txWatermark.Width = wordApp.InchesToPoints(6f);
+                txWatermark.Rotation = -60;
+
+                //SADECE 1 BÖLÜME EKLESEK YETERLİ. YOKSA KAÇ BÖLÜM VARSA AYNISINI O KADAR EKLİYOR.
+                break;
+            }
+
+            // doc.Save(); // As2(filePath, new Guid());
+
+            // wordApp.Quit();
+
+
+            //Sonraki adım için Kapatmadan açık word belgesiyle devam ediyoruz.
+            basim_2_adresMektupAyarlavePDFOlarakKaydet(wordApp, wordDoc, planmi1_deftermi0, pdfyataydir_donecekmi);
+
+
+        }
+
+
+
+        private void basim_2_adresMektupAyarlavePDFOlarakKaydet(Application word_Uygulamasi, Document word_Belgesi, bool planmi1_deftermi0, bool pdfyataydir_donecekmi)
         {
 
 
 
+            // string sourceFile = ""; // "c:\my_template.docx"; //this is where you store your template
+            // string word_dosyamiz = @"C:\materyall\wordler\1001.docm";  //"c:\final.docx"; //this is where your result file locate
+
+
+            string hedef_pdf_dosyamiz = varsayilanbossa.plan_kayit_yolu_pdf;  //@"C:\materyall\wordler\1001pdf.pdf";                                                      //   Mailmerge(sourceFile, filePath, nr, dt.Columns);
+
+            if (!planmi1_deftermi0)
+            {
+                //Eğer defter basılıyorsa o klasörü seçelim.
+                hedef_pdf_dosyamiz = varsayilanbossa.defter_kayit_yolu_pdf;
+            }
+
+            //Klasör yoluna pdf dosya adı olacak bilgileri ekleyelim.
+            if (pdfyataydir_donecekmi)
+            {
+                hedef_pdf_dosyamiz = hedef_pdf_dosyamiz + @"\" + metinler.pdf_yatay_bilgisi + BirOgt.oid + "_" + yenidosyasayaci + "_" + word_Belgesi.Name + ".pdf";
+
+            } else
+            {
+                hedef_pdf_dosyamiz = hedef_pdf_dosyamiz + @"\" + BirOgt.oid + "_" + yenidosyasayaci + "_" + word_Belgesi.Name + ".pdf";
+            }
+            
+
+
+            adresmektupBirlestir2(word_Uygulamasi, word_Belgesi, hedef_pdf_dosyamiz, pdfyataydir_donecekmi);
 
         }
+
+        private void adresmektupBirlestir2(Application word_Uygulamasi, Document word_Belgesi, string hedefpdfdosyamiz, bool pdfyataydir_donecekmi)
+        {
+
+            string excelAdresMektupbilgileri = metinler.siparisci_tam_yolu;
+
+            //  Microsoft.Office.Interop.Word.Application wordApplication = new Microsoft.Office.Interop.Word.Application();
+
+            // var document = new Document();
+            // document = wordApplication.Documents.Add(Template: word_dosyamiz);
+
+
+            word_Belgesi.MailMerge.OpenDataSource(Name: excelAdresMektupbilgileri, ConfirmConversions: false, ReadOnly: true, LinkToSource: true,
+                AddToRecentFiles: false, PasswordDocument: "", PasswordTemplate: "", WritePasswordDocument: "", WritePasswordTemplate: "", Revert: false,
+                Format: WdOpenFormat.wdOpenFormatAuto, Connection: "Provider=Microsoft.Jet.OLEDB.4.0;Password='';User ID=Admin;Data Source=" + excelAdresMektupbilgileri + ";Mode=Read;Extended Properties=HDR=YES;IMEX=1;'';Jet OLEDB:System database='';Jet OLEDB:Registry Path='';Jet OLEDB:Database P",
+                SQLStatement: "SELECT * FROM `Sayfa1$`", SQLStatement1: "", SubType: WdMergeSubType.wdMergeSubTypeAccess);
+
+            //"SELECT * FROM `Sayfa1$`" Tek tırnak farklı.
+
+            //   document.MailMerge.ViewMailMergeFieldCodes = WdConstants.wdToggle;
+            word_Belgesi.ActiveWindow.View.MailMergeDataView = true;
+           
+
+            //Şimdi de pdf olarak kaydedelim.
+
+            acikWorduPdfKaydet(hedefpdfdosyamiz, word_Belgesi, pdfyataydir_donecekmi);
+
+          //çAĞRILAN NESNE İSTEMCİDEN AYRILMIŞ. Farklı kaydedince zaten kapanmış gibi oluyor galiba.  document.Close(false);
+            word_Uygulamasi.Quit();
+
+
+
+
+
+        }
+
+
+
+        private void acikWorduPdfKaydet(string hedefdosya, Document word_Belgesi, bool pdfyataydir_donecekmi)
+        {
+
+            object oMissing = System.Type.Missing;
+
+            object outputFileName = hedefdosya;
+            object fileFormat = WdSaveFormat.wdFormatPDF;
+
+            // Save document into PDF Format
+            word_Belgesi.SaveAs(ref outputFileName,
+                ref fileFormat, ref oMissing, ref oMissing,
+                ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+            // Close the Word document, but leave the Word application open.
+            // doc has to be cast to type _Document so that it will find the
+            // correct Close method.                
+            object saveChanges = WdSaveOptions.wdDoNotSaveChanges;
+            ((_Document)word_Belgesi).Close(ref saveChanges, ref oMissing, ref oMissing);
+            word_Belgesi = null;
+
+            //Word belgemizi kaydetmeden kapattık ve yok ettik. Döndüreceksek döndürelim sonra Belgeler listemize ekleyelim.
+
+            if (pdfyataydir_donecekmi)
+            {
+                pdfDikeyYap(hedefdosya);
+            }
+
+
+            yeniBelgelerPdfBirlestirmeicin.Add(hedefdosya.Replace(metinler.pdf_yatay_bilgisi,""));
+            yenidosyasayaci++;
+
+        }
+
+
+
+
+
+        //PDF ÜZERİNDEKİ İŞLEMLER.
+        private void pdfDikeyYap(string yataypdf)
+        {
+
+            string yadaybelge = yataypdf; //@"C:\materyall\pdfler\2YILLIK.pdf";
+            string dikeybelge = yataypdf.Replace(metinler.pdf_yatay_bilgisi, ""); // @"C:\materyall\pdfler\2YILLIKD.pdf";
+
+
+            iTextSharp.text.pdf.PdfReader reader = new iTextSharp.text.pdf.PdfReader(yadaybelge);
+
+
+            int pagesCount = reader.NumberOfPages;
+
+            for (int i = 0; i < pagesCount; i++)
+            {
+
+                iTextSharp.text.pdf.PdfDictionary page = reader.GetPageN(i + 1);
+                iTextSharp.text.pdf.PdfNumber rotate = page.GetAsNumber(iTextSharp.text.pdf.PdfName.ROTATE);
+                page.Put(iTextSharp.text.pdf.PdfName.ROTATE, new iTextSharp.text.pdf.PdfNumber(270));
+
+            }
+
+
+
+            FileStream fs = new FileStream(dikeybelge, FileMode.Create,
+            FileAccess.Write, FileShare.None);
+
+            iTextSharp.text.pdf.PdfStamper stamper = new iTextSharp.text.pdf.PdfStamper(reader, fs);
+
+            stamper.Close();
+            reader.Close();
+
+
+          //  MessageBox.Show("dikildi");
+
+        }
+
+
+        private void pdfbirlestir_1()
+        {
+
+            string document1 = @"C:\materyall\pdfler\belge1.pdf";
+            string document2 = @"C:\materyall\pdfler\belge2.pdf";
+            string document3 = @"C:\materyall\pdfler\belge3.pdf";
+            string document4 = @"C:\materyall\pdfler\2YILLIK.pdf";
+
+            string taget = @"C:\materyall\pdfler\hedef.pdf";
+
+
+            pdfbirlestir_2(taget, document1, document2, document3, document4);
+
+
+            MessageBox.Show("bitti pdf");
+
+        }
+
+
+
+        public static void pdfbirlestir_2(string targetPath, params string[] pdfs)
+        {
+            using (var targetDoc = new PdfDocument())
+            {
+                foreach (var pdf in pdfs)
+                {
+                    using (var pdfDoc = PdfReader.Open(pdf, PdfDocumentOpenMode.Import))
+                    {
+                        for (var i = 0; i < pdfDoc.PageCount; i++)
+                            targetDoc.AddPage(pdfDoc.Pages[i]);
+                    }
+                }
+                targetDoc.Save(targetPath);
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+           
+            pdfDikeyYap("");
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
