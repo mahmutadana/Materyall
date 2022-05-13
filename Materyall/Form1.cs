@@ -11,14 +11,18 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Data.OleDb;
 
+using Microsoft.Office.Interop;
 using Microsoft.Office.Interop.Word;
 using Microsoft.Office.Core;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using Application = Microsoft.Office.Interop.Word.Application;
+using System.Diagnostics;
 
 namespace Materyall
 {
+
+
     public partial class Form1 : Form
     {
 
@@ -311,6 +315,7 @@ namespace Materyall
                 if (s.nobetyerisablonadi == talepedilen_nobetyeri_sablonu_adi)
                 {
                     cb_talep_nobetyerisablon.SelectedIndex = nbtsblsayac;
+                    break;
                 }
 
                 nbtsblsayac++;
@@ -3565,18 +3570,19 @@ namespace Materyall
 
             if (rb_defter_bas_ekrandakikayiticinislemyap.Checked)
             {
-
-               
-
                 //Listeden birini seçip göster demiyoruz. Zaten ekrandakini bas demişiz.
+               
+                               
                 defter_bas_2_islemdekiKayit();
 
+                //Ekrandaki kaydı bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
+                pdfbirlestir_1(true, false);
 
             } else
             {
 
                 //Döngü ile listedeki kayıtları ekrana getireceğiz ve işleme alarak işlemdeki kayda ait defter basım işlemini başlatacağız.
-                for (int i = 0; i< dgv_alt_aramavelisteleme.Rows.Count; i++)
+                for (int i = 0; i < dgv_alt_aramavelisteleme.Rows.Count; i++)
                 {
 
                     if (rb_defterbas_tektoplu_tek.Checked)
@@ -3588,6 +3594,20 @@ namespace Materyall
 
 
                     //   Burada satır satır alıp göster diyeceğiz ve gösterildikten sonra işlemdeki kaydın defterini bas diyeceğiz.
+
+                    DataGridViewRow dr = dgv_alt_aramavelisteleme.Rows[i];
+
+                    if (dr.Selected)
+                    {
+
+                        tb_bilgi_musterino.Text = dr.Cells[0].Value.ToString();
+
+                        gosterDugmesineBasildi();
+
+                        //Listedeki seçili öğretmen gösterildi ve işleme alındı.
+                        defter_bas_2_islemdekiKayit();
+
+                    }
 
 
 
@@ -3626,7 +3646,12 @@ namespace Materyall
 
             if (cb_baski_basilacak_defterturu.SelectedIndex >= 0)
             {
+            
+               
                 istenendefter = filtrelenenDefterlers_sadeceolanlar[cb_baski_basilacak_defterturu.SelectedIndex];
+            
+            
+            
             }
             
 
@@ -3645,11 +3670,7 @@ namespace Materyall
 
                 }
 
-
             }
-
-
-
 
         }
 
@@ -3660,9 +3681,30 @@ namespace Materyall
 
             //Defter kodu geldi. Asıl defter basma işlemi burada başlayacak.
 
+            //Tüm defterler için ortak olabilecek değerlerle siparişçi excelini oluşturuyoruz.
+            defter_icinAdresMektupSipariscisiHazirla();
 
-            //Önce defter kapağı basacağız.
-            defter_bas_3_ek_defterkapagibas(basilacakolandefterkodu);
+
+
+
+            if (rb_defterbas_secenek_kapakvedefter.Checked)
+            {
+                //Kapak ve defter basımı.
+                //Önce defter kapağı basacağız.
+                defter_bas_3_ek_defterkapagibas(basilacakolandefterkodu);
+                defter_bas_3_ek_2_defter_bas(basilacakolandefterkodu);
+
+            } else if (rb_defterbas_secenek_kapak.Checked)
+            {
+                //Sadece kapağı bas.
+                defter_bas_3_ek_defterkapagibas(basilacakolandefterkodu);
+
+            } else if (rb_defterbas_secenek_defter.Checked)
+            {
+                defter_bas_3_ek_2_defter_bas(basilacakolandefterkodu);
+            }
+
+            
 
 
             //Kapağa isim verip kaydediyoruz. Ne isim verdiğimizi bileceğiz. müşterino_defterno veya müşterino_defterkapakno gibi.
@@ -3672,6 +3714,74 @@ namespace Materyall
 
 
         }
+
+
+        private void defter_icinAdresMektupSipariscisiHazirla()
+        {
+
+
+            Dictionary<string, string> adresMesktupBaslikDegerleri = new Dictionary<string, string>();
+            //Kapakta/defterde/planda olması gereken değerleri burada oluşturuyoruz.
+
+            adresMesktupBaslikDegerleri["İLİ"] = BirOgt.ili;
+            adresMesktupBaslikDegerleri["ili"] = BirOgt.ili;
+            adresMesktupBaslikDegerleri["İLÇESİ"] = BirOgt.ilcesi;
+            adresMesktupBaslikDegerleri["OKULU"] = BirOgt.okuladi;
+            adresMesktupBaslikDegerleri["ilcesi"] = BirOgt.ilcesi;
+            adresMesktupBaslikDegerleri["sinifi"] = BirOgt.sinifi;
+            adresMesktupBaslikDegerleri["subesi"] = BirOgt.subesi;
+            adresMesktupBaslikDegerleri["adisoyadi"] = BirOgt.adisoyadi;
+            adresMesktupBaslikDegerleri["bransi"] = BirOgt.bransi;
+            adresMesktupBaslikDegerleri["OKUL_MÜDÜR"] = BirOgt.muduradi;
+            adresMesktupBaslikDegerleri["GÖREVİ1"] = BirOgt.mudurunvani;
+
+
+            //Öğrenci listesi varsa onu da alalım ve ekleyelim.
+
+            int ogrencisayac = 1;
+
+            foreach (OgrenciListesiSnf veri in talepOgrencilistesis)
+            {
+                adresMesktupBaslikDegerleri["ogrencino_" + ogrencisayac] = veri.numara.ToString();
+                adresMesktupBaslikDegerleri["ogrenciadi_" + ogrencisayac] = veri.adisoyadi;
+                ogrencisayac++;
+            }
+
+
+
+            //Nöbet yerleriyle ilgili bilgileri alıyoruz.
+            //Nöbet yerlerini dgv_talep_nobetyerleri üzerinden çekeceğiz. Görüntüleyince nöbet yeri varsa oraya düşüyor.
+
+            if (dgv_talep_nobetyerleri.Rows.Count > 0)
+            {
+
+                for (int i = 0; i < 1; i++)
+                {
+                    //Toplam 12 tane nöbet yeri var. Boş olanlar olsa da onları yazacağız.
+                    for (int ny = 1; ny < 13; ny++)
+                    {
+                        adresMesktupBaslikDegerleri["NOBETYERI" + ny] = dgv_talep_nobetyerleri.Rows[0].Cells[ny + 1].Value.ToString();
+                    }
+
+                }
+
+            }
+            else
+            {
+                //Eğer nöbet yeri belirtilmemişse başlıkları yazıp boş bırakıyoruz.
+                for (int ny = 1; ny < 13; ny++)
+                {
+                    adresMesktupBaslikDegerleri["NOBETYERI" + ny] = "";
+                }
+
+            }
+
+
+
+            excelSnf.adresMektupicinExceliHazirlasiparisci(adresMesktupBaslikDegerleri);
+
+        }
+
 
         private void defter_bas_3_ek_defterkapagibas(string basilacakolandefterkodu)
         {
@@ -3683,24 +3793,6 @@ namespace Materyall
             //ve filigran olarak bir boşluk gönderiyoruz.
 
 
-            Dictionary<string, string> adresMesktupBaslikDegerleri = new Dictionary<string, string>();
-            //Kapakta/defterde/planda olması gereken değerleri burada oluşturuyoruz.
-
-            adresMesktupBaslikDegerleri["ili"] = BirOgt.ili;
-            adresMesktupBaslikDegerleri["ilcesi"] = BirOgt.ilcesi;
-            adresMesktupBaslikDegerleri["okuladi"] = BirOgt.okuladi;
-            adresMesktupBaslikDegerleri["sinifi"] = BirOgt.sinifi;
-            adresMesktupBaslikDegerleri["subesi"] = BirOgt.subesi;
-            adresMesktupBaslikDegerleri["adisoyadi"] = BirOgt.adisoyadi;
-            adresMesktupBaslikDegerleri["bransi"] = BirOgt.bransi;
-            adresMesktupBaslikDegerleri["muduradi"] = BirOgt.muduradi;
-            adresMesktupBaslikDegerleri["mudurunvani"] = BirOgt.mudurunvani;
-
-           
-
-           excelSnf.adresMektupicinExceliHazirlasiparisci(adresMesktupBaslikDegerleri);
-
-
             basim_1_filigranEkle(varsayilanbossa.defterkapakyolu + @"\" + "kapak_" + basilacakolandefterkodu + ".docx", " ", false, false);
 
 
@@ -3708,7 +3800,26 @@ namespace Materyall
 
 
 
-       
+        private void defter_bas_3_ek_2_defter_bas(string basilacakolandefterkodu)
+        {
+
+            //Defter kodu geldi.
+           //Burada defteri basıyoruz.
+
+            //Belgeyi açması için filigran ekle komutunu kullanıyoruz. İlk değişken olarak basılacak olan defter kapağını alıyoruz
+            //ve filigran olarak bir boşluk gönderiyoruz.
+
+            basim_1_filigranEkle(varsayilanbossa.defteryolu + @"\" + basilacakolandefterkodu + ".docx", " ", false, false);
+
+        }
+
+
+
+
+
+
+
+
 
 
 
@@ -3724,6 +3835,7 @@ namespace Materyall
 
         private void basim_1_filigranEkle(string filePath, string filigranmetni, bool planmi1_deftermi0, bool pdfyataydir_donecekmi)
         {
+            //ORTAK İŞLEMLER...
             //Plan basılıyorsa true, defter basılıyorsa false. PDF klasörünü ayırmak için kullanacağız.
 
             object oMissing = System.Type.Missing;
@@ -3734,38 +3846,48 @@ namespace Materyall
 
 
             wordDoc = wordApp.Documents.Open(filePath);
-            Microsoft.Office.Interop.Word.Shape txWatermark = null;
-            foreach (Microsoft.Office.Interop.Word.Section section in wordDoc.Sections)
+
+            if (filigranmetni.Trim().Length > 0)
             {
-                txWatermark = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Shapes.AddTextEffect(
-                    MsoPresetTextEffect.msoTextEffect1,
-                                        filigranmetni, "Arial", (float)40,
-                                         MsoTriState.msoTrue,
-                                         MsoTriState.msoFalse,
-                                         0, 0, ref oMissing);
 
-                //      txWatermark.Select(ref oMissing);
-                txWatermark.Fill.Visible = MsoTriState.msoTrue;
-                txWatermark.Line.Visible = MsoTriState.msoFalse;
-                txWatermark.Fill.Solid();
-                txWatermark.Fill.ForeColor.RGB = (Int32)Microsoft.Office.Interop.Word.WdColor.wdColorGray30; //wdColorRed;
-                txWatermark.RelativeHorizontalPosition =
-                                       Microsoft.Office.Interop.Word.WdRelativeHorizontalPosition.wdRelativeHorizontalPositionMargin;
-                txWatermark.RelativeVerticalPosition =
-                                           Microsoft.Office.Interop.Word.WdRelativeVerticalPosition.wdRelativeVerticalPositionMargin;
-                txWatermark.Left = (float)Microsoft.Office.Interop.Word.WdShapePosition.wdShapeCenter;
-                txWatermark.Top = (float)Microsoft.Office.Interop.Word.WdShapePosition.wdShapeCenter;
-                txWatermark.Height = wordApp.InchesToPoints(2.4f);
-                txWatermark.Width = wordApp.InchesToPoints(6f);
-                txWatermark.Rotation = -60;
+            
 
-                //SADECE 1 BÖLÜME EKLESEK YETERLİ. YOKSA KAÇ BÖLÜM VARSA AYNISINI O KADAR EKLİYOR.
-                break;
+
+                Microsoft.Office.Interop.Word.Shape txWatermark = null;
+                foreach (Microsoft.Office.Interop.Word.Section section in wordDoc.Sections)
+                {
+                    txWatermark = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Shapes.AddTextEffect(
+                        MsoPresetTextEffect.msoTextEffect1,
+                                            filigranmetni, "Arial", (float)40,
+                                             MsoTriState.msoTrue,
+                                             MsoTriState.msoFalse,
+                                             0, 0, ref oMissing);
+
+                    //      txWatermark.Select(ref oMissing);
+                    txWatermark.Fill.Visible = MsoTriState.msoTrue;
+                    txWatermark.Line.Visible = MsoTriState.msoFalse;
+                    txWatermark.Fill.Solid();
+                    txWatermark.Fill.ForeColor.RGB = (Int32)Microsoft.Office.Interop.Word.WdColor.wdColorGray30; //wdColorRed;
+                    txWatermark.RelativeHorizontalPosition =
+                                           Microsoft.Office.Interop.Word.WdRelativeHorizontalPosition.wdRelativeHorizontalPositionMargin;
+                    txWatermark.RelativeVerticalPosition =
+                                               Microsoft.Office.Interop.Word.WdRelativeVerticalPosition.wdRelativeVerticalPositionMargin;
+                    txWatermark.Left = (float)Microsoft.Office.Interop.Word.WdShapePosition.wdShapeCenter;
+                    txWatermark.Top = (float)Microsoft.Office.Interop.Word.WdShapePosition.wdShapeCenter;
+                    txWatermark.Height = wordApp.InchesToPoints(2.4f);
+                    txWatermark.Width = wordApp.InchesToPoints(6f);
+                    txWatermark.Rotation = -60;
+
+                    //SADECE 1 BÖLÜME EKLESEK YETERLİ. YOKSA KAÇ BÖLÜM VARSA AYNISINI O KADAR EKLİYOR.
+                    break;
+                }
+
             }
-
             // doc.Save(); // As2(filePath, new Guid());
 
             // wordApp.Quit();
+
+
 
 
             //Sonraki adım için Kapatmadan açık word belgesiyle devam ediyoruz.
@@ -3833,7 +3955,7 @@ namespace Materyall
 
             //Şimdi de pdf olarak kaydedelim.
 
-            acikWorduPdfKaydet(hedefpdfdosyamiz, word_Belgesi, pdfyataydir_donecekmi);
+            acikWorduPdfKaydet(hedefpdfdosyamiz,word_Uygulamasi, word_Belgesi, pdfyataydir_donecekmi);
 
           //çAĞRILAN NESNE İSTEMCİDEN AYRILMIŞ. Farklı kaydedince zaten kapanmış gibi oluyor galiba.  document.Close(false);
             word_Uygulamasi.Quit();
@@ -3844,12 +3966,35 @@ namespace Materyall
 
         }
 
-
-
-        private void acikWorduPdfKaydet(string hedefdosya, Document word_Belgesi, bool pdfyataydir_donecekmi)
+      
+        private void acikWorduPdfKaydet(string hedefdosya, Application word_Uygulamasi, Document word_Belgesi, bool pdfyataydir_donecekmi)
         {
 
+
+            /*
+             ActiveDocument.ExportAsFixedFormat OutputFileName:= _
+        "C:\Materyall\SistemDosyaları\Defterler\Defterdosyaları\2710PDF2.pdf", _
+        ExportFormat:=wdExportFormatPDF, OpenAfterExport:=False, OptimizeFor:= _
+        wdExportOptimizeForPrint, Range:=wdExportAllDocument, From:=1, To:=1, _
+        Item:=wdExportDocumentContent, IncludeDocProps:=True, KeepIRM:=True, _
+        CreateBookmarks:=wdExportCreateNoBookmarks, DocStructureTags:=True, _
+        BitmapMissingFonts:=True, UseISO19005_1:=False
+
+            */
+
+         
+
+          
+
+
+           
+
+            word_Belgesi.SaveAs2(hedefdosya, WdSaveFormat.wdFormatPDF,  WdExportOptimizeFor.wdExportOptimizeForPrint);
+
             object oMissing = System.Type.Missing;
+
+            /*
+           
 
             object outputFileName = hedefdosya;
             object fileFormat = WdSaveFormat.wdFormatPDF;
@@ -3860,6 +4005,8 @@ namespace Materyall
                 ref oMissing, ref oMissing, ref oMissing, ref oMissing,
                 ref oMissing, ref oMissing, ref oMissing, ref oMissing,
                 ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+            */
 
             // Close the Word document, but leave the Word application open.
             // doc has to be cast to type _Document so that it will find the
@@ -4010,15 +4157,28 @@ namespace Materyall
         private void pdfParcaciklariniSil(string[] pdfler)
         {
 
-
-
+            foreach (var pdf in pdfler)
+            {
+                if (File.Exists(pdf))
+                {
+                    File.Delete(pdf);
+                }
+            }
 
         }
+
 
         private void pdfyiYazdir(string yazdirilacakpdf)
         {
 
-
+            Process p = new Process();
+            p.StartInfo = new ProcessStartInfo()
+            {
+                CreateNoWindow = true,
+                Verb = "print",
+                FileName = yazdirilacakpdf //put the correct path here
+            };
+            p.Start();
 
 
         }
