@@ -3694,17 +3694,17 @@ namespace Materyall
             {
                 //Kapak ve defter basımı.
                 //Önce defter kapağı basacağız.
-                defter_bas_3_ek_defterkapagibas(basilacakolandefterkodu);
-                defter_bas_3_ek_2_defter_bas(basilacakolandefterkodu);
+                defter_bas_3_ek_defterkapagibas(basilacakolandefterkodu,"kapak");
+                defter_bas_3_ek_2_defter_bas(basilacakolandefterkodu,"defter");
 
             } else if (rb_defterbas_secenek_kapak.Checked)
             {
                 //Sadece kapağı bas.
-                defter_bas_3_ek_defterkapagibas(basilacakolandefterkodu);
+                defter_bas_3_ek_defterkapagibas(basilacakolandefterkodu,"kapak");
 
             } else if (rb_defterbas_secenek_defter.Checked)
             {
-                defter_bas_3_ek_2_defter_bas(basilacakolandefterkodu);
+                defter_bas_3_ek_2_defter_bas(basilacakolandefterkodu, "defter");
             }
 
             
@@ -3786,7 +3786,7 @@ namespace Materyall
         }
 
 
-        private void defter_bas_3_ek_defterkapagibas(string basilacakolandefterkodu)
+        private void defter_bas_3_ek_defterkapagibas(string basilacakolandefterkodu, string basilanTur)
         {
 
             //Defter kodu geldi.
@@ -3795,15 +3795,16 @@ namespace Materyall
             //Belgeyi açması için filigran ekle komutunu kullanıyoruz. İlk değişken olarak basılacak olan defter kapağını alıyoruz
             //ve filigran olarak bir boşluk gönderiyoruz.
 
+            //Kapak için defterkodunu "" olarak giriyoruz. Çünkü kapak için basım tarihi eklemeyeceğiz.
 
-            basim_1_filigranEkle(varsayilanbossa.defterkapakyolu + @"\" + "kapak_" + basilacakolandefterkodu + ".docx", " ", false, false);
+            basim_1_filigranEkle(varsayilanbossa.defterkapakyolu + @"\" + "kapak_" + basilacakolandefterkodu + ".docx", " ", false, false, "", basilanTur);
 
 
         }
 
 
 
-        private void defter_bas_3_ek_2_defter_bas(string basilacakolandefterkodu)
+        private void defter_bas_3_ek_2_defter_bas(string basilacakolandefterkodu, string basilanTur)
         {
 
             //Defter kodu geldi.
@@ -3812,7 +3813,7 @@ namespace Materyall
             //Belgeyi açması için filigran ekle komutunu kullanıyoruz. İlk değişken olarak basılacak olan defter kapağını alıyoruz
             //ve filigran olarak bir boşluk gönderiyoruz.
 
-            basim_1_filigranEkle(varsayilanbossa.defteryolu + @"\" + basilacakolandefterkodu + ".docx", " ", false, false);
+            basim_1_filigranEkle(varsayilanbossa.defteryolu + @"\" + basilacakolandefterkodu + ".docx", " ", false, false, basilacakolandefterkodu, basilanTur);
 
         }
 
@@ -3836,7 +3837,7 @@ namespace Materyall
 
 
 
-        private void basim_1_filigranEkle(string filePath, string filigranmetni, bool planmi1_deftermi0, bool pdfyataydir_donecekmi)
+        private void basim_1_filigranEkle(string filePath, string filigranmetni, bool planmi1_deftermi0, bool pdfyataydir_donecekmi, string basilanUrunKoduTarih_icin, string basilanTur)
         {
             //ORTAK İŞLEMLER...
             //Plan basılıyorsa true, defter basılıyorsa false. PDF klasörünü ayırmak için kullanacağız.
@@ -3894,14 +3895,14 @@ namespace Materyall
 
 
             //Sonraki adım için Kapatmadan açık word belgesiyle devam ediyoruz.
-            basim_2_adresMektupAyarlavePDFOlarakKaydet(wordApp, wordDoc, planmi1_deftermi0, pdfyataydir_donecekmi);
+            basim_2_adresMektupAyarlavePDFOlarakKaydet(wordApp, wordDoc, planmi1_deftermi0, pdfyataydir_donecekmi, basilanUrunKoduTarih_icin, basilanTur);
 
 
         }
 
 
 
-        private void basim_2_adresMektupAyarlavePDFOlarakKaydet(Application word_Uygulamasi, Document word_Belgesi, bool planmi1_deftermi0, bool pdfyataydir_donecekmi)
+        private void basim_2_adresMektupAyarlavePDFOlarakKaydet(Application word_Uygulamasi, Document word_Belgesi, bool planmi1_deftermi0, bool pdfyataydir_donecekmi, string basilanUrunKoduTarih_icin, string basilanTur)
         {
 
 
@@ -3930,11 +3931,11 @@ namespace Materyall
             
 
 
-            adresmektupBirlestir2(word_Uygulamasi, word_Belgesi, hedef_pdf_dosyamiz, pdfyataydir_donecekmi);
+            adresmektupBirlestir2(word_Uygulamasi, word_Belgesi, hedef_pdf_dosyamiz, pdfyataydir_donecekmi, basilanUrunKoduTarih_icin, basilanTur);
 
         }
 
-        private void adresmektupBirlestir2(Application word_Uygulamasi, Document word_Belgesi, string hedefpdfdosyamiz, bool pdfyataydir_donecekmi)
+        private void adresmektupBirlestir2(Application word_Uygulamasi, Document word_Belgesi, string hedefpdfdosyamiz, bool pdfyataydir_donecekmi, string basilanUrunKoduTarih_icin, string basilanTur)
         {
 
             string excelAdresMektupbilgileri = metinler.siparisci_tam_yolu;
@@ -3958,7 +3959,7 @@ namespace Materyall
 
             //Şimdi de pdf olarak kaydedelim.
 
-            acikWorduPdfKaydet(hedefpdfdosyamiz,word_Uygulamasi, word_Belgesi, pdfyataydir_donecekmi);
+            acikWorduPdfKaydet(hedefpdfdosyamiz,word_Uygulamasi, word_Belgesi, pdfyataydir_donecekmi, basilanUrunKoduTarih_icin, basilanTur);
 
           //çAĞRILAN NESNE İSTEMCİDEN AYRILMIŞ. Farklı kaydedince zaten kapanmış gibi oluyor galiba.  document.Close(false);
             word_Uygulamasi.Quit();
@@ -3970,7 +3971,7 @@ namespace Materyall
         }
 
       
-        private void acikWorduPdfKaydet(string hedefdosya, Application word_Uygulamasi, Document word_Belgesi, bool pdfyataydir_donecekmi)
+        private void acikWorduPdfKaydet(string hedefdosya, Application word_Uygulamasi, Document word_Belgesi, bool pdfyataydir_donecekmi, string basilanUrunKoduTarih_icin, string basilanTur)
         {
 
 
@@ -3987,14 +3988,10 @@ namespace Materyall
 
          
 
-          
-
-
-           
-
             word_Belgesi.SaveAs2(hedefdosya, WdSaveFormat.wdFormatPDF,  WdExportOptimizeFor.wdExportOptimizeForPrint);
 
             object oMissing = System.Type.Missing;
+
 
             /*
            
@@ -4028,6 +4025,15 @@ namespace Materyall
 
             yeniBelgelerPdfBirlestirmeicin.Add(hedefdosya.Replace(metinler.pdf_yatay_bilgisi,""));
             yenidosyasayaci++;
+
+
+
+            //Belgenin hazırlandığını basımtarihine ekleyelim.
+
+            
+
+
+            vtislemleri.basimTarihini_kaydet(BirOgt.oid, basilanTur, basilanUrunKoduTarih_icin);
 
         }
 

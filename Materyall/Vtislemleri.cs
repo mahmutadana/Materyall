@@ -3759,6 +3759,91 @@ namespace Materyall
 
 
 
+        public string basimTarihini_kaydet(int oid, string basilanturudefterplangunukyillikvs, string urun_kodu_id)
+        {
+
+            //Sütun adı vt tabloda tutulduğu şekliyle gelecek.
+            //Defter için defter_kayit_yolu_pdf, plan için plan_kayit_yolu_pdf olmak zorunda.
+
+
+            string sonuc = metinler.islembasarili;
+
+            string sql = "";
+
+
+
+            if (basilanturudefterplangunukyillikvs == "yillikanaders")
+            {
+                sql = "UPDATE " + metinler.neyebakalim_y_anaders_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND dersid=" + int.Parse(urun_kodu_id);
+            
+            } else if (basilanturudefterplangunukyillikvs == "gunlukanaders")
+            {
+                sql = "UPDATE " + metinler.neyebakalim_g_anaders_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND dersid=" + int.Parse(urun_kodu_id);
+           
+            } else if (basilanturudefterplangunukyillikvs == "yillikserbest")
+            {
+                sql = "UPDATE " + metinler.neyebakalim_serbest_ders_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND dersid=" + int.Parse(urun_kodu_id);
+            }
+            else if (basilanturudefterplangunukyillikvs == "defter")
+            {
+                sql = "UPDATE " + metinler.neyebakalim_defter_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND defterkodu=" + int.Parse(urun_kodu_id);
+            }
+            else if (basilanturudefterplangunukyillikvs == "sosyalkulup")
+            {
+                sql = "UPDATE " + metinler.neyebakalim_sosyalkulup_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND kulupkodu=" + int.Parse(urun_kodu_id);
+            }
+            else
+            {
+
+                //Kapak vs. burada tanımlı olmayan ürünler için basım tarihi eklemeyeceğiz.
+                return sonuc;
+            }
+
+
+
+            baglantiKur();
+
+
+            try
+            {
+
+
+
+                MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+
+
+                if (kayitbilgisi == null)
+                {
+
+                    sonuc = metinler.yenikayit_bilinmeyenhata;
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                sonuc = metinler.yenikayit_bilinmeyenhata + " (" + ex.Message + ")";
+                //  MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            yrdsnf.log_yaz(sonuc);
+
+            return sonuc;
+
+        }
+
+
+
+
+
 
 
 
