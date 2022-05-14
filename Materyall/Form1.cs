@@ -3607,17 +3607,20 @@ namespace Materyall
                         //Listedeki seçili öğretmen gösterildi ve işleme alındı.
                         defter_bas_2_islemdekiKayit();
 
+
+
+                        if (rb_defterbas_tektoplu_tek.Checked)
+                        {
+                            //Tek tek bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
+
+                            pdfbirlestir_1(true, false);
+
+                        }
+
                     }
 
 
 
-                    if (rb_defterbas_tektoplu_tek.Checked)
-                    {
-                        //Tek tek bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
-                        
-                        pdfbirlestir_1(true,false);
-
-                    }
 
                 }
 
@@ -3850,7 +3853,7 @@ namespace Materyall
             if (filigranmetni.Trim().Length > 0)
             {
 
-            
+            //Filigran için metin yoksa hiç işlem yapmadan devam ediyoruz.
 
 
                 Microsoft.Office.Interop.Word.Shape txWatermark = null;
@@ -4103,18 +4106,29 @@ namespace Materyall
 
 
             //PDF'leri dizi haline getirip birleştirmeye gönderelim.
-
-            string[] pdfler = new string[yeniBelgelerPdfBirlestirmeicin.Count];
-
-            for (int i=0; i < yeniBelgelerPdfBirlestirmeicin.Count;i++)
+            if (yeniBelgelerPdfBirlestirmeicin.Count > 0)
             {
-                pdfler[i] = yeniBelgelerPdfBirlestirmeicin[i];
+
+
+                    string[] pdfler = new string[yeniBelgelerPdfBirlestirmeicin.Count];
+
+                for (int i=0; i < yeniBelgelerPdfBirlestirmeicin.Count;i++)
+                {
+                    pdfler[i] = yeniBelgelerPdfBirlestirmeicin[i];
+                }
+
+
+           
+                    pdfbirlestir_2(hedef_pdf_dosyamiz_birlesik, pdfler);
+
+            } else
+            {
+
+                MessageBox.Show("Hiçbir PDF oluşturulmadığı için işlem yapılmadı.");
+
             }
 
-
-
-
-            pdfbirlestir_2(hedef_pdf_dosyamiz_birlesik, pdfler);
+           
 
 
          //   MessageBox.Show("bitti pdf");
