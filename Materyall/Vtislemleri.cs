@@ -107,6 +107,43 @@ namespace Materyall
 
 
 
+        public int[] varsayilanlar_bossa_ek_serbestetkinlilkderssaatleri(string yil)
+        {
+            //İlk kullanımda veriler çekilecek.
+
+            int[] sonuc = new int[4];
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //Zaten 1 satır ama yine de limit koyduk.
+            string sql = "SELECT * FROM sis_serbestetkinlikderssaati_tbl WHERE yil='" + yil + "'";
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+                sonuc[int.Parse(oku["sinif"].ToString()) - 1] = int.Parse( oku["derssaati"].ToString());
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return sonuc;
+
+        }
+
+
+
+
+
+
+
 
         //_____Eğitim öğretim yılı bilgilerini alalım.
 
@@ -3844,6 +3881,40 @@ namespace Materyall
 
 
 
+
+
+
+        //Mahalli kurtuluş günlerini alalım.
+
+        public List<string> mahallikurtulusgunubilgilerinigetir(string yeradiil, string yeradiililce)
+        {
+            //Arasında ; olarak kutuadı ve açıklama bilgisini döndüreceğiz. OCAK;5 Ocak Adana'nın Kurtuluşu. gibi.
+            List<string> mahallikurtulusgunu = new List<string>();
+
+            baglantiKur();
+
+            string sql = "SELECT * FROM sis_kurtulus_tbl WHERE yeradi='" + yeradiil + "' OR yeradi='" + yeradiililce + "'";
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+
+                mahallikurtulusgunu.Add(oku["kutu"].ToString() + ";" + oku["aciklama"].ToString());
+                
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            return mahallikurtulusgunu;
+
+        }
 
 
 

@@ -430,9 +430,47 @@ namespace Materyall
 
             varsayilanbossa = vtislemleri.varsayilanlar_bossa();
 
+
+
+            
+
             defter_ve_plan_kayit_konumlarini_yaz();
 
         }
+
+
+
+
+        private void serbestEtkinliklerdeHangiSiniftaKacSaatDersOldugunuAl()
+        {
+
+            //Serbest etkinliklerde hangi sınıfta kaç saat serbest etkinlik dersi olduğu bilgisini de burada tutacağız.
+            //Defterde ve belki birçok planda gerekmeyecek. Bu yüzden ilk gerektiğinde verileri okuyacağız.,
+
+           
+
+            if (varsayilanbossa.serbestderssaati_sinif_4 != 0)
+            {
+               int[] serbestsaatleri = vtislemleri.varsayilanlar_bossa_ek_serbestetkinlilkderssaatleri(BirOgt.yili);
+
+                varsayilanbossa.serbestderssaati_sinif_1 = serbestsaatleri[0];
+                varsayilanbossa.serbestderssaati_sinif_2 = serbestsaatleri[1];
+                varsayilanbossa.serbestderssaati_sinif_3 = serbestsaatleri[2];
+                varsayilanbossa.serbestderssaati_sinif_4 = serbestsaatleri[3];
+
+
+                //Yine bu komut içinde serbest etkinlikleri listeleyeceğiz. Tabserbestler sekmesindeki dgv'ler içine alacağız.
+                //Verileri her seferinde excelden okumak yerine dgv'lerden okuyacağız. Veri alınmışsa zaten o da bir daha okumayacak.
+
+                serbestEtkinlikDersleriniSaatlericinDGVListele();
+
+            }
+
+
+
+
+        }
+
 
 
         private void defter_ve_plan_kayit_konumlarini_yaz()
@@ -3649,15 +3687,14 @@ namespace Materyall
 
             if (cb_baski_basilacak_defterturu.SelectedIndex >= 0)
             {
-            
                
                 istenendefter = filtrelenenDefterlers_sadeceolanlar[cb_baski_basilacak_defterturu.SelectedIndex];
             
-            
-            
             }
-            
 
+
+            //Tüm defterler için ortak olabilecek değerlerle siparişçi excelini oluşturuyoruz.
+            defter_icinAdresMektupSipariscisiHazirla();
 
 
             for (int i=0;i< dgv_talep_defterler_baski.RowCount; i++)
@@ -3684,9 +3721,7 @@ namespace Materyall
 
             //Defter kodu geldi. Asıl defter basma işlemi burada başlayacak.
 
-            //Tüm defterler için ortak olabilecek değerlerle siparişçi excelini oluşturuyoruz.
-            defter_icinAdresMektupSipariscisiHazirla();
-
+           
 
 
 
@@ -3824,6 +3859,385 @@ namespace Materyall
 
 
 
+        //PLAN BASKI İŞLEMLERİ.
+
+
+
+        private void bt_planbas_baskiyabasla_Click(object sender, EventArgs e)
+        {
+            plan_baskisina_basla();
+        }
+
+
+
+        private void plan_baskisina_basla()
+        {
+
+            //Liste mi basacağız, sadece ekrandakini mi_
+            plan_bas_1_basilacaklar();
+
+
+
+        }
+
+        private void plan_bas_1_basilacaklar()
+        {
+
+            //Baskıya başla dediğimizde bu listeyi temizleyip sıfırlan belgeleri ekleyeceğiz.
+            yeniBelgelerPdfBirlestirmeicin.Clear();
+            //Her dosyanın başınamüşteri numarasını ekleyeceğiz, onun yanına da bu değeri ekleyeceğiz. 176_1_defterkapakdosya.pdf gibi olacak.
+            yenidosyasayaci = 1;
+
+
+            if (rb_planbas_ekrandakiicin.Checked)
+            {
+                //Listeden birini seçip göster demiyoruz. Zaten ekrandakini bas demişiz.
+
+
+                plan_bas_2_islemdekiKayit();
+
+                //Ekrandaki kaydı bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
+                pdfbirlestir_1(true, false);
+
+            }
+            else
+            {
+
+                //Döngü ile listedeki kayıtları ekrana getireceğiz ve işleme alarak işlemdeki kayda ait defter basım işlemini başlatacağız.
+                for (int i = 0; i < dgv_alt_aramavelisteleme.Rows.Count; i++)
+                {
+
+                    if (rb_planbas_tektektoplu_tek.Checked)
+                    {
+                        //Tek tek bas demişse her öğretmen çin temiz bir liste hazırlıyoruz.
+                        yeniBelgelerPdfBirlestirmeicin.Clear();
+                        yenidosyasayaci = 1;
+                    }
+
+
+                    //   Burada satır satır alıp göster diyeceğiz ve gösterildikten sonra işlemdeki kaydın defterini bas diyeceğiz.
+
+                    DataGridViewRow dr = dgv_alt_aramavelisteleme.Rows[i];
+
+                    if (dr.Selected)
+                    {
+
+                        tb_bilgi_musterino.Text = dr.Cells[0].Value.ToString();
+
+                        gosterDugmesineBasildi();
+
+                        //Listedeki seçili öğretmen gösterildi ve işleme alındı.
+                        plan_bas_2_islemdekiKayit();
+
+
+
+                        if (rb_planbas_tektektoplu_tek.Checked)
+                        {
+                            //Tek tek bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
+
+                            pdfbirlestir_1(true, false);
+
+                        }
+
+                    }
+
+
+
+
+                }
+
+                if (rb_planbas_tektektoplu_toplu.Checked)
+                {
+                    //Tek tek bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
+
+                    pdfbirlestir_1(false, false);
+
+                }
+
+
+            }
+
+
+        }
+
+
+        //Bunları her kayıt için sıfırlayacağız. Liste döngüsüne girdiğinde her ders için tekrar tekrar basmaması için böyle yapıyoruz. Basınca true yapacağız.
+        private bool kapakbasildimi = false;
+        private bool ondosyabasildimi = false;
+
+
+        private void plan_bas_2_islemdekiKayit()
+        {
+            //O anda ekrandaki kayda ilişkin işlem yapar ama buradaki mantık şu şekildedir. İstenilen kayıt ekrana 
+            //getirilmiştir. Yani burası liste veya ekrandaki kayıt mantığının dışında.
+
+
+            //Tüm planlar için ortak olabilecek değerlerle siparişçi excelini oluşturuyoruz.
+            plan_icinAdresMektupSipariscisiHazirla();
+
+
+            //Öğretmenin seçtiği dersleri tek tek göndermeden önce kapak varsa önce onu basacağız.
+            //Kapaktan sonra ön dosya basılacak. Her ders için ayrı ayrı basmasın diye kapak ve ön dosya basımını döngünün başına alıyoruz.
+
+
+            //Bunları her kayıt için sıfırlayacağız. Liste döngüsüne girdiğinde her ders için tekrar tekrar basmaması için böyle yapıyoruz. Basınca true yapacağız.
+            kapakbasildimi = false;
+            ondosyabasildimi = false;
+
+
+            if (rb_planbas_kapsam_sadeceyillik.Checked)
+            {
+
+                for (int i = 0; i < dgv_talep_yillikplanlar_baski.RowCount; i++)
+                {
+                    DataGridViewRow dr = dgv_talep_yillikplanlar_baski.Rows[i];
+
+                    string basilacakolanplankodu = dr.Cells["dersid"].Value.ToString();
+
+                    plan_bas_3_gelenKaydiBas(basilacakolanplankodu);
+
+                }
+
+            }
+            else
+            {
+
+                for (int i = 0; i < dgv_talep_gunlukplanlar_baski.RowCount; i++)
+                {
+                    DataGridViewRow dr = dgv_talep_gunlukplanlar_baski.Rows[i];
+
+                    string basilacakolanplankodu = dr.Cells["dersid"].Value.ToString();
+
+                    plan_bas_3_gelenKaydiBas(basilacakolanplankodu);
+
+                }
+
+            }
+
+        }
+
+
+
+        private void plan_bas_3_gelenKaydiBas(string basilacakolanplankodu)
+        {
+
+            //Plan kodu geldi. Asıl plan basma işlemi burada başlayacak.
+
+            
+
+
+
+            if (rb_defterbas_secenek_kapakvedefter.Checked)
+            {
+                //Kapak ve defter basımı.
+                //Önce defter kapağı basacağız.
+
+                //Kapağı sadece 1 kere basmak için kontrol işlemi yapıyoruz. Çünkü des listesi döngüsüne göre işlem tekrarlanıyor.
+                if (!kapakbasildimi)
+                {
+                    plan_bas_3_ek_plankapagibas(basilacakolanplankodu, "kapak");
+                    kapakbasildimi = true;
+                }
+
+
+                if (!ondosyabasildimi)
+                {
+                    plan_bas_3_ek_planOnDosyabas("ondosya");
+                    ondosyabasildimi = true;
+                }
+
+
+                plan_bas_3_ek_2_plan_bas(basilacakolanplankodu, "plan");
+
+            }
+            else if (rb_defterbas_secenek_kapak.Checked)
+            {
+                //Sadece kapağı bas.
+                //Kapağı sadece 1 kere basmak için kontrol işlemi yapıyoruz. Çünkü des listesi döngüsüne göre işlem tekrarlanıyor.
+                if (!kapakbasildimi)
+                {
+                    plan_bas_3_ek_plankapagibas(basilacakolanplankodu, "kapak");
+                    kapakbasildimi = true;
+                }
+
+            }
+            else if (rb_defterbas_secenek_defter.Checked)
+            {
+
+                if (!ondosyabasildimi)
+                {
+                    plan_bas_3_ek_planOnDosyabas("ondosya");
+                    ondosyabasildimi = true;
+                }
+
+                plan_bas_3_ek_2_plan_bas(basilacakolanplankodu, "plan");
+            }
+
+
+
+
+            //Kapağa isim verip kaydediyoruz. Ne isim verdiğimizi bileceğiz. müşterino_defterno veya müşterino_defterkapakno gibi.
+            //Sonra bunları sıra ile birleştireceğiz.
+
+
+
+
+        }
+
+
+        private void plan_icinAdresMektupSipariscisiHazirla()
+        {
+
+
+            Dictionary<string, string> adresMesktupBaslikDegerleri = new Dictionary<string, string>();
+            //Kapakta/defterde/planda olması gereken değerleri burada oluşturuyoruz.
+
+            adresMesktupBaslikDegerleri["İLİ"] = BirOgt.ili;
+            adresMesktupBaslikDegerleri["İLÇESİ"] = BirOgt.ilcesi;
+            adresMesktupBaslikDegerleri["OKULU"] = BirOgt.okuladi;
+            adresMesktupBaslikDegerleri["SINIFI"] = BirOgt.sinifi;
+            adresMesktupBaslikDegerleri["ŞUBE"] = BirOgt.subesi;
+            adresMesktupBaslikDegerleri["ADI_SOYADI"] = BirOgt.adisoyadi;
+            adresMesktupBaslikDegerleri["GÖREVİ"] = BirOgt.bransi;
+            adresMesktupBaslikDegerleri["OKUL_MÜDÜR"] = BirOgt.muduradi;
+            adresMesktupBaslikDegerleri["GÖREVİ1"] = BirOgt.mudurunvani;
+
+            //AŞAĞIDA DEĞER ALACAK OLAN BAŞLIKLAR.
+            adresMesktupBaslikDegerleri["ZUMREOGRETMENLERI"] = "";
+
+            adresMesktupBaslikDegerleri["EYLUL"] = "";
+            adresMesktupBaslikDegerleri["EKIM"] = "";
+            adresMesktupBaslikDegerleri["KASIM"] = "";
+            adresMesktupBaslikDegerleri["ARALIK"] = "";
+            adresMesktupBaslikDegerleri["OCAK"] = "";
+            adresMesktupBaslikDegerleri["SUBAT"] = "";
+            adresMesktupBaslikDegerleri["MART"] = "";
+            adresMesktupBaslikDegerleri["NISAN"] = "";
+            adresMesktupBaslikDegerleri["MAYIS"] = "";
+            adresMesktupBaslikDegerleri["HAZIRAN"] = "";
+
+
+            //Öğrenci listesi varsa onu da alalım ve ekleyelim.
+
+            int ogrencisayac = 1;
+
+            foreach (OgrenciListesiSnf veri in talepOgrencilistesis)
+            {
+                adresMesktupBaslikDegerleri["ogrencino_" + ogrencisayac] = veri.numara.ToString();
+                adresMesktupBaslikDegerleri["ogrenciadi_" + ogrencisayac] = veri.adisoyadi;
+                ogrencisayac++;
+            }
+
+
+            //Diğer zümre öğretmenlerinin isimlerini plan siparişçi'sine ekleyelim.
+            //Datagridden alacağız. (İleride belki de vt'den alırız.)
+
+            //Hepsini birleştirip aralarına boşluk koyarak yazacağız. Mahmut Kök     Metin TUNCER gibi.
+            string digerzumreogretmenlerininisimleri = "";
+            foreach (DataGridViewRow dr in dgv_talep_digerzumreogretmenleri.Rows)
+            {
+
+                digerzumreogretmenlerininisimleri += "     " + dr.Cells["dersid"].Value.ToString();
+
+            }
+
+            adresMesktupBaslikDegerleri["ZUMREOGRETMENLERI"] = digerzumreogretmenlerininisimleri.Trim();
+
+
+            //Mahalli kurtuluş günlerini ekleyelim. Eylül-Haziran arası her ay için bir değişken kullanalım.
+
+            //Önce şehir için, sonra da ilçe için kurtuluş gününe bakalım ve olanları art arda birleştirip yazalım.
+            List<string> mahallilist = vtislemleri.mahallikurtulusgunubilgilerinigetir(BirOgt.ili, BirOgt.ili + "-" + BirOgt.ilcesi);
+
+            if (mahallilist.Count > 0)
+            {
+
+                foreach (string kurtulusgunu in mahallilist)
+                {
+
+                    string[] kurtulusbilgileri = kurtulusgunu.Split(';');
+
+                    adresMesktupBaslikDegerleri[kurtulusbilgileri[0]] += kurtulusbilgileri[1] + "   ";
+
+                }
+
+            }
+
+
+
+            //Serbest etkinlik için her bir derse ayrı ayrı değişken atayıp eşleştirme denemesi yapacağız. Bunu da excele atıp adres mektup ile eşleştireceğiz.
+            //Eğer serbest etkinlik dersleri seçilmişse onları döngü halinde ekleyeceğiz.
+
+            
+            //Eğer serbest etkinlik dersi seçilmişse işlem yapacağız. Yoksa bu kısmı atlıyoruz.
+            if (dgv_talep_serbestdersler_yillik.Rows.Count > 0)
+            {
+                //Öncelikle varsayılan ders saati bilgileirni alalım ve serbest etkinliklerin DGV'lerini dolduralım.
+                serbestEtkinliklerdeHangiSiniftaKacSaatDersOldugunuAl();
+
+                int kacsaatvar = varsayilanbossa.serbestderssaati_sinif_1;
+                //Hangi DGV'ye bakacağımızı buradan takip ediyoruz.
+                DataGridView dgv = dgv_serbestetkinlikdersleri_1;
+
+                switch (BirOgt.sinifi)
+                {
+
+                    case "2":
+                        kacsaatvar = varsayilanbossa.serbestderssaati_sinif_2;
+                        dgv = dgv_serbestetkinlikdersleri_2;
+                        break;
+
+                    case "3":
+                        kacsaatvar = varsayilanbossa.serbestderssaati_sinif_3;
+                        dgv = dgv_serbestetkinlikdersleri_3;
+                        break;
+
+                    case "4":
+                        kacsaatvar = varsayilanbossa.serbestderssaati_sinif_4;
+                        dgv = dgv_serbestetkinlikdersleri_4;
+                        break;
+
+                }
+
+                int kachaftavar = dgv_serbestetkinlikdersleri_4.RowCount;
+
+
+                int derssayac = 0; //Bunu seçilen serbest etkinlik dersleri olarak takip etmek için kullanacağız.
+                int saatsayac = 1;  //mesela 74'e kadar gidecek. O sene kaç saat varsa.
+
+                for (int i = 0; i < kachaftavar; i++)
+                {
+
+                    for (int s = 0; s < kacsaatvar; s++)
+                    {
+                        //Dersin adını talep edilen serbet etkinlik DGV'sinden alalım. (Data Grid View)
+                        DataGridViewRow dr = dgv_talep_serbestdersler_yillik.Rows[derssayac];
+
+                        string serbestdersadi = dr.Cells[0].Value.ToString();
+
+
+                        adresMesktupBaslikDegerleri["k" + saatsayac] = dgv.Rows[i].Cells[serbestdersadi].Value.ToString();
+                        //Ders isminin sonunda _A var. Bu da açıklama anlamına geliyor.
+                        adresMesktupBaslikDegerleri["ka" + saatsayac] = dgv.Rows[i].Cells[serbestdersadi + "_A"].Value.ToString();
+
+
+                        saatsayac++;
+                        derssayac++;
+
+                        if (dgv_talep_serbestdersler_yillik.Rows.Count >= derssayac)
+                        {
+                            derssayac = 0;
+                        }
+
+                    }
+
+                }
+
+
+            }
+
+
+            
 
 
 
@@ -3831,7 +4245,115 @@ namespace Materyall
 
 
 
-        //WORD PDF VB İŞLEMLER.
+            excelSnf.adresMektupicinExceliHazirlasiparisci(adresMesktupBaslikDegerleri);
+
+        }
+
+
+        private void plan_bas_3_ek_plankapagibas(string basilacakolanplankodu, string basilanTur)
+        {
+
+            //Plan kodu geldi.
+            //Önce defter kapağı basacağız.
+
+            //Belgeyi açması için filigran ekle komutunu kullanıyoruz. İlk değişken olarak basılacak olan defter kapağını alıyoruz
+            //ve filigran metni olarak bir boşluk " " gönderiyoruz.
+
+            //Kapak için defterkodunu "" olarak giriyoruz. Çünkü kapak için basım tarihi eklemeyeceğiz.
+
+
+            if (rb_planbas_kapsam_sadeceyillik.Checked)
+            {
+                basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "y_kapak_" + basilacakolanplankodu + ".docx", " ", false, false, "", basilanTur);
+
+            }
+            else
+            {
+                basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "g_kapak_" + basilacakolanplankodu + ".docx", " ", false, false, "", basilanTur);
+
+            }
+
+
+
+        }
+
+
+        SERBEST ETKİNLİK DERSLERİNDEN HERHANGİ BİRİ SEÇİLMİŞSE ANA DERSLERE SERBEST ETKİNLİKLER DERSİNİ OTOMATİK OLARAK EKLEYECEĞİZ.
+            HIZLI TALEP İŞLEMİNDE DE BU DURUMU KONTROL EDECEĞİZ.
+
+        private void plan_bas_3_ek_planOnDosyabas(string basilanTur)
+        {
+
+            //Ön Dosyayı basacağız. Sadece Yıllık plan için basılıyor. !!
+            //Yıllık plan seçilmemişse ön dosyayı basmıyoruz.
+
+            if (!rb_planbas_kapsam_sadeceyillik.Checked)
+            {
+                return;
+            }
+
+
+            //Belgeyi açması için filigran ekle komutunu kullanıyoruz. İlk değişken olarak basılacak olan defter kapağını alıyoruz
+            //ve filigran metni olarak bir boşluk " " gönderiyoruz.
+
+            //n dosya için defterkodunu "" olarak giriyoruz. Çünkü kapak için basım tarihi eklemeyeceğiz.
+
+
+                basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\" + "0000.docx", " ", false, false, "", basilanTur);
+
+        }
+
+
+
+
+
+
+        private void plan_bas_3_ek_2_plan_bas(string basilacakolandefterkodu, string basilanTur)
+        {
+
+            //Plan kodu geldi.
+            //Burada planı basıyoruz.
+
+            //Belgeyi açması için filigran ekle komutunu kullanıyoruz. İlk değişken olarak basılacak olan plan kapağını alıyoruz
+            //ve filigran metni olarak öğretmen adını gönderiyoruz.
+
+
+            if (rb_planbas_kapsam_sadeceyillik.Checked)
+            {
+                basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\y_" + basilacakolandefterkodu + ".docx", BirOgt.adisoyadi, false, false, basilacakolandefterkodu, basilanTur);
+
+            } else
+            {
+                basim_1_filigranEkle(varsayilanbossa.gunlukplanyolu + @"\g_" + basilacakolandefterkodu + ".docx", BirOgt.adisoyadi, false, false, basilacakolandefterkodu, basilanTur);
+
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //WORD PDF VB İŞLEMLER. PLAN DEFTER ORTAK.
 
 
 
@@ -4204,6 +4726,58 @@ namespace Materyall
         }
 
 
+
+        //DEFTER PLAN YAZIDRMA İŞLEMLERİNİN SONU.
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void linklbl_serbestetkinlik_dgvler_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+
+
+            serbestEtkinlikDersleriniSaatlericinDGVListele();
+
+
+        }
+
+        private void serbestEtkinlikDersleriniSaatlericinDGVListele ()
+        {
+
+
+            //Tekrar tekrar almakla uğraşmasın diye dgv'lerde dersler listelenmişse tekrar işlem yapmayacağız.
+            
+            if (dgv_serbestetkinlikdersleri_4.Rows.Count > 0)
+            {
+                return;
+            }
+
+            serbestEtkinlikDersleriniSaatlericinDGVListele_2("1", dgv_serbestetkinlikdersleri_1);
+            serbestEtkinlikDersleriniSaatlericinDGVListele_2("2", dgv_serbestetkinlikdersleri_2);
+            serbestEtkinlikDersleriniSaatlericinDGVListele_2("3", dgv_serbestetkinlikdersleri_3);
+            serbestEtkinlikDersleriniSaatlericinDGVListele_2("4", dgv_serbestetkinlikdersleri_4);
+
+        }
+
+        private void serbestEtkinlikDersleriniSaatlericinDGVListele_2(string sinif, DataGridView dgv)
+        {
+
+
+            string dosyaadi = "serbestler.xlsx";
+
+            dgv.DataSource = excelSecildiTalepleriGetir(varsayilanbossa.yillikplanyolu + @"\" + dosyaadi, "SDERS" + sinif);
+
+        }
 
 
 

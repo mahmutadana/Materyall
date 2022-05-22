@@ -42,6 +42,10 @@ namespace Materyall
        
 
 
+        public int serbestderssaati_sinif_1 { get; set; }
+        public int serbestderssaati_sinif_2 { get; set; }
+        public int serbestderssaati_sinif_3 { get; set; }
+        public int serbestderssaati_sinif_4 { get; set; }
 
 
     }
