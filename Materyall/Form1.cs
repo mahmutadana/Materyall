@@ -1686,6 +1686,59 @@ namespace Materyall
 
         //serbest etkinliklerle ilgili işlemler.
 
+        private void serbestEtkinlikSecildiAnaDersOlarakEkle()
+        {
+
+            //Eğer alt kısımdan herhangi bir seçmeli ders eklenirse ana dersler kısmından SERBEST ETKİNLİK dersini ekleyeceğiz.
+            //Daha önce eklenmiş mi diye bakacağız, eklenmemişse ekleyeceğiz.
+
+            string serbestetkinlikdersininadi = metinler.serbestetkinlikdersininadi;
+
+
+            foreach (DataGridViewRow dr in dgv_talep_anadersler_yillik.Rows)
+            {
+
+                if (dr.Cells[0].Value.ToString().Contains(serbestetkinlikdersininadi)){
+                    //Bu ders daha önce eklenmiş. İşlem yapmadan çıkalım.
+                    return;
+                }
+
+            }
+
+
+            //Döngüden çıktığımıza göre bu ders daha önce eklenmemiş. O zaman ekliyoruz.
+
+            string eklenecekolanders = BirOgt.sinifi + "-" + serbestetkinlikdersininadi;
+
+            for (int i = 0; i < filtrelenenAnaDerslers.Count; i++)
+            {
+
+                if (filtrelenenAnaDerslers[i].dersadi.Contains(eklenecekolanders))
+                {
+  
+                    string kayitsonucu = vtislemleri.ekle_y_anaders(BirOgt.oid, filtrelenenAnaDerslers[i].anadersid, filtrelenenAnaDerslers[i].fiyat);
+
+                    if (kayitsonucu.All(char.IsNumber))
+                    {
+                        //Kayıt başarılı.
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("İşlem tamamlanmadı. Serbest etkinlik ana dersi eklenemedi. Öğretmen: " + BirOgt.adisoyadi + " Hata: " + kayitsonucu);
+                        return;
+                    }
+
+                    //Bu dersi bulduysak kaydediyoruz ve döngüden çıkıyoruz.
+                    break;
+
+                }
+
+            }
+
+
+        }
+
 
         private void linklbl_talep_secimiekle_serbest_yillik_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -1710,6 +1763,9 @@ namespace Materyall
 
             if (kayitsonucu.All(char.IsNumber))
             {
+
+                //Otomatik ekleme.
+                serbestEtkinlikSecildiAnaDersOlarakEkle();
 
                 //  MessageBox.Show("başarılı: " + kayitsonucu);
                 varsa_talepBolumu();
@@ -2775,6 +2831,8 @@ namespace Materyall
                             if (kayitsonucu.All(char.IsNumber))
                             {
 
+                                //Otomatik ekleme.
+                                serbestEtkinlikSecildiAnaDersOlarakEkle();
 
 
                             }
@@ -4278,8 +4336,10 @@ namespace Materyall
         }
 
 
-        SERBEST ETKİNLİK DERSLERİNDEN HERHANGİ BİRİ SEÇİLMİŞSE ANA DERSLERE SERBEST ETKİNLİKLER DERSİNİ OTOMATİK OLARAK EKLEYECEĞİZ.
-            HIZLI TALEP İŞLEMİNDE DE BU DURUMU KONTROL EDECEĞİZ.
+     //   SERBEST ETKİNLİK DERSLERİNDEN HERHANGİ BİRİ SEÇİLMİŞSE ANA DERSLERE SERBEST ETKİNLİKLER DERSİNİ OTOMATİK OLARAK EKLEYECEĞİZ.
+     // İnşallah ekledik. 25.05.2022 22.17       HIZLI TALEP İŞLEMİNDE DE BU DURUMU KONTROL EDECEĞİZ.
+
+
 
         private void plan_bas_3_ek_planOnDosyabas(string basilanTur)
         {

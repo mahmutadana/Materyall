@@ -17,6 +17,10 @@ namespace Materyall
         public string pdf_yatay_bilgisi = "xpdfyatayx";
 
 
+        //sERBEST ETKİNLİK DERSİNİ otomatik olarak eklerken kullanacağız.
+        public string serbestetkinlikdersininadi = "SERBEST ETKİNLİKLER";
+
+
 
         //Tablo adları ve ürünid isimleri. neyebakalim bölümü için.
         public string neyebakalim_y_anaders_tablo = "tlp_y_anadersler_tbl";

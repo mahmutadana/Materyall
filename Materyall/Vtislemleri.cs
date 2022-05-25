@@ -1651,7 +1651,7 @@ namespace Materyall
             baglantiKur();
 
             //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
-            string sql = "SELECT b.dersadi, a.dersid, a.taleptarihi, a.basimtarihi, a.fiyat FROM " + metinler.neyebakalim_y_anaders_tablo + " a LEFT JOIN sis_tumdersler_tbl b ON a.dersid=b.dersid WHERE b.yil='" + yili +"' AND oid=" + oid;
+            string sql = "SELECT b.dersadi, a.dersid, a.taleptarihi, a.basimtarihi, a.fiyat FROM " + metinler.neyebakalim_y_anaders_tablo + " a LEFT JOIN sis_tumdersler_tbl b ON a.dersid=b.dersid WHERE b.yil='" + yili +"' AND oid=" + oid + " ORDER BY a.dersid";
 
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
@@ -1803,7 +1803,7 @@ namespace Materyall
             baglantiKur();
 
             //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
-            string sql = "SELECT b.dersadi, a.dersid, a.taleptarihi, a.basimtarihi, a.fiyat FROM " + metinler.neyebakalim_g_anaders_tablo + " a LEFT JOIN sis_tumdersler_tbl b ON a.dersid=b.dersid WHERE b.yil='" + yili + "' AND oid=" + oid;
+            string sql = "SELECT b.dersadi, a.dersid, a.taleptarihi, a.basimtarihi, a.fiyat FROM " + metinler.neyebakalim_g_anaders_tablo + " a LEFT JOIN sis_tumdersler_tbl b ON a.dersid=b.dersid WHERE b.yil='" + yili + "' AND oid=" + oid + " ORDER BY a.dersid"; ;
 
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
@@ -1956,7 +1956,7 @@ namespace Materyall
             baglantiKur();
 
             //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
-            string sql = "SELECT b.dersadi, a.dersid, a.taleptarihi, a.basimtarihi FROM " + metinler.neyebakalim_serbest_ders_tablo + " a LEFT JOIN sis_serbestetkinlikler_tbl b ON a.dersid=b.dersid WHERE b.yil='" + yili + "' AND oid=" + oid;
+            string sql = "SELECT b.dersadi, a.dersid, a.taleptarihi, a.basimtarihi FROM " + metinler.neyebakalim_serbest_ders_tablo + " a LEFT JOIN sis_serbestetkinlikler_tbl b ON a.dersid=b.dersid WHERE b.yil='" + yili + "' AND oid=" + oid + " ORDER BY a.dersid"; ;
 
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
@@ -2192,7 +2192,7 @@ namespace Materyall
             baglantiKur();
 
             //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
-            string sql = "SELECT b.defteradi, a.defterkodu, a.taleptarihi, a.basimtarihi, a.fiyat FROM " + metinler.neyebakalim_defter_tablo + " a LEFT JOIN sis_defterler_tbl b ON a.defterkodu=b.defterkodu WHERE b.yil='" + yili + "' AND oid=" + oid;
+            string sql = "SELECT b.defteradi, a.defterkodu, a.taleptarihi, a.basimtarihi, a.fiyat FROM " + metinler.neyebakalim_defter_tablo + " a LEFT JOIN sis_defterler_tbl b ON a.defterkodu=b.defterkodu WHERE b.yil='" + yili + "' AND oid=" + oid + " ORDER BY a.defterkodu"; ;
 
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
@@ -2494,7 +2494,7 @@ namespace Materyall
             baglantiKur();
 
             //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
-            string sql = "SELECT ogretmenadi FROM " + metinler.neyebakalim_digerzumreogretmenleri_tablo + "  WHERE oid=" + oid;
+            string sql = "SELECT ogretmenadi FROM " + metinler.neyebakalim_digerzumreogretmenleri_tablo + "  WHERE oid=" + oid + " ORDER BY ogretmenadi"; ;
 
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
