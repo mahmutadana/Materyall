@@ -3825,6 +3825,14 @@ namespace Materyall
             adresMesktupBaslikDegerleri["OKULU"] = BirOgt.okuladi;
             adresMesktupBaslikDegerleri["ilcesi"] = BirOgt.ilcesi;
             adresMesktupBaslikDegerleri["sinifi"] = BirOgt.sinifi;
+
+            if (BirOgt.sinifi == "03" || BirOgt.sinifi == "04" || BirOgt.sinifi == "05" || BirOgt.sinifi == "06")
+            {
+                adresMesktupBaslikDegerleri["sinifi"] = metinler.anasinifi_okuloncesi_yazimi;
+            }
+
+
+
             adresMesktupBaslikDegerleri["subesi"] = BirOgt.subesi;
             adresMesktupBaslikDegerleri["adisoyadi"] = BirOgt.adisoyadi;
             adresMesktupBaslikDegerleri["bransi"] = BirOgt.bransi;
@@ -4154,6 +4162,13 @@ namespace Materyall
             adresMesktupBaslikDegerleri["İLÇESİ"] = BirOgt.ilcesi;
             adresMesktupBaslikDegerleri["OKULU"] = BirOgt.okuladi;
             adresMesktupBaslikDegerleri["SINIFI"] = BirOgt.sinifi;
+
+
+            if (BirOgt.sinifi == "03" || BirOgt.sinifi == "04" || BirOgt.sinifi == "05" || BirOgt.sinifi == "06")
+            {
+                adresMesktupBaslikDegerleri["sinifi"] = metinler.anasinifi_okuloncesi_yazimi;
+            }
+
             adresMesktupBaslikDegerleri["ŞUBE"] = BirOgt.subesi;
             adresMesktupBaslikDegerleri["ADI_SOYADI"] = BirOgt.adisoyadi;
             adresMesktupBaslikDegerleri["GÖREVİ"] = BirOgt.bransi;

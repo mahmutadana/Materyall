@@ -2486,6 +2486,8 @@ namespace Materyall
         }
 
 
+      LOGO EKLEMEK İÇİN İLGİLİ KLASÖRDEKİ LOGO DOSYASINI SEÇECEĞİZ VE WORDE EKLERKEN EKLE VE BAĞLA SEÇENEĞİNİ KULLANACAĞIZ. SONRASINDA LOGO DOSYASI AYNI
+      İSİMLE DEĞİŞTİKÇE WORDDEKİ DOSYA DA DEĞİŞECEK.YANİ BİZ ŞİRKET LOGOSUNU HER DEFASINDA ORAYA logo.png OLARAK KAYDEDECEĞİZ.
 
         public DataTable dgv_icin_digerzumreogretmenlerini_getir(int oid)
         {

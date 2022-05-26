@@ -13,9 +13,7 @@ namespace Materyall
         //  public string siparisci_tam_yolu = @"C:\Materyall\SistemDosyaları\siparisci2022\siparisci_2022.xlsx";
         public string siparisci_tam_yolu = @"C:\Materyall\siparisci.xlsx";
 
-        //Yatay pdf'leri dikeye çevirirken aynı ismi kullanamıyoruz. Bu yüzden dikey pdf yaparken dikey pdf'nin adından aşağıdaki metni replace ile sileceğiz.
-        public string pdf_yatay_bilgisi = "xpdfyatayx";
-
+        
 
         //sERBEST ETKİNLİK DERSİNİ otomatik olarak eklerken kullanacağız.
         public string serbestetkinlikdersininadi = "SERBEST ETKİNLİKLER";
@@ -96,6 +94,11 @@ namespace Materyall
         public string ucnokta = "...";
         public string ucnokta_bitisik = "…";
 
+        //Yatay pdf'leri dikeye çevirirken aynı ismi kullanamıyoruz. Bu yüzden dikey pdf yaparken dikey pdf'nin adından aşağıdaki metni replace ile sileceğiz.
+        public string pdf_yatay_bilgisi = "xpdfyatayx";
+
+
+        public string anasinifi_okuloncesi_yazimi = "Ana Sınıfı";
 
     }
 }
