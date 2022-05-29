@@ -76,6 +76,7 @@
             this.dgv_talep_anadersler_gunluk = new System.Windows.Forms.DataGridView();
             this.cb_talep_anadersler_gunluk = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cb_talep_sinifdefteri = new System.Windows.Forms.CheckBox();
             this.cb_talep_pdf = new System.Windows.Forms.CheckBox();
             this.linklabel_talep_tumanadersleriekle_yillik = new System.Windows.Forms.LinkLabel();
             this.linklbl_talep_anadersler_secimiekle_yillik = new System.Windows.Forms.LinkLabel();
@@ -163,6 +164,16 @@
             this.label37 = new System.Windows.Forms.Label();
             this.tb_muhasebe_toplam_borc = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
+            this.tab_serbestetkinlikler = new System.Windows.Forms.TabPage();
+            this.linklbl_serbestetkinlik_dgvler = new System.Windows.Forms.LinkLabel();
+            this.dgv_serbestetkinlikdersleri_4 = new System.Windows.Forms.DataGridView();
+            this.label62 = new System.Windows.Forms.Label();
+            this.dgv_serbestetkinlikdersleri_3 = new System.Windows.Forms.DataGridView();
+            this.label61 = new System.Windows.Forms.Label();
+            this.dgv_serbestetkinlikdersleri_2 = new System.Windows.Forms.DataGridView();
+            this.label59 = new System.Windows.Forms.Label();
+            this.dgv_serbestetkinlikdersleri_1 = new System.Windows.Forms.DataGridView();
+            this.label57 = new System.Windows.Forms.Label();
             this.tab_digerislemler = new System.Windows.Forms.TabPage();
             this.groupBox41 = new System.Windows.Forms.GroupBox();
             this.tb_varsayilan_defterkapakyolu = new System.Windows.Forms.TextBox();
@@ -346,16 +357,6 @@
             this.label48 = new System.Windows.Forms.Label();
             this.tab_alt_loglar = new System.Windows.Forms.TabPage();
             this.tb_logkayitlari = new System.Windows.Forms.TextBox();
-            this.tab_serbestetkinlikler = new System.Windows.Forms.TabPage();
-            this.label57 = new System.Windows.Forms.Label();
-            this.dgv_serbestetkinlikdersleri_1 = new System.Windows.Forms.DataGridView();
-            this.dgv_serbestetkinlikdersleri_2 = new System.Windows.Forms.DataGridView();
-            this.label59 = new System.Windows.Forms.Label();
-            this.dgv_serbestetkinlikdersleri_3 = new System.Windows.Forms.DataGridView();
-            this.label61 = new System.Windows.Forms.Label();
-            this.dgv_serbestetkinlikdersleri_4 = new System.Windows.Forms.DataGridView();
-            this.label62 = new System.Windows.Forms.Label();
-            this.linklbl_serbestetkinlik_dgvler = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -400,6 +401,11 @@
             this.groupBox15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_muhasebe_borclanmalar)).BeginInit();
             this.groupBox14.SuspendLayout();
+            this.tab_serbestetkinlikler.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_1)).BeginInit();
             this.tab_digerislemler.SuspendLayout();
             this.groupBox41.SuspendLayout();
             this.groupBox40.SuspendLayout();
@@ -432,11 +438,6 @@
             this.groupBox11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).BeginInit();
             this.tab_alt_loglar.SuspendLayout();
-            this.tab_serbestetkinlikler.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_4)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -959,6 +960,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cb_talep_sinifdefteri);
             this.groupBox3.Controls.Add(this.cb_talep_pdf);
             this.groupBox3.Controls.Add(this.linklabel_talep_tumanadersleriekle_yillik);
             this.groupBox3.Controls.Add(this.linklbl_talep_anadersler_secimiekle_yillik);
@@ -971,11 +973,24 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Ana Dersler Yıllık Plan";
             // 
+            // cb_talep_sinifdefteri
+            // 
+            this.cb_talep_sinifdefteri.AutoSize = true;
+            this.cb_talep_sinifdefteri.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.cb_talep_sinifdefteri.ForeColor = System.Drawing.Color.Purple;
+            this.cb_talep_sinifdefteri.Location = new System.Drawing.Point(386, 162);
+            this.cb_talep_sinifdefteri.Name = "cb_talep_sinifdefteri";
+            this.cb_talep_sinifdefteri.Size = new System.Drawing.Size(88, 38);
+            this.cb_talep_sinifdefteri.TabIndex = 34;
+            this.cb_talep_sinifdefteri.Text = "DERS\r\nDEFTER";
+            this.cb_talep_sinifdefteri.UseVisualStyleBackColor = true;
+            this.cb_talep_sinifdefteri.Click += new System.EventHandler(this.cb_talep_defter_CheckedChanged);
+            // 
             // cb_talep_pdf
             // 
             this.cb_talep_pdf.AutoSize = true;
             this.cb_talep_pdf.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.cb_talep_pdf.Location = new System.Drawing.Point(386, 159);
+            this.cb_talep_pdf.Location = new System.Drawing.Point(386, 134);
             this.cb_talep_pdf.Name = "cb_talep_pdf";
             this.cb_talep_pdf.Size = new System.Drawing.Size(75, 30);
             this.cb_talep_pdf.TabIndex = 33;
@@ -1918,6 +1933,112 @@
             this.label36.Size = new System.Drawing.Size(67, 13);
             this.label36.TabIndex = 0;
             this.label36.Text = "Toplam Borç";
+            // 
+            // tab_serbestetkinlikler
+            // 
+            this.tab_serbestetkinlikler.Controls.Add(this.linklbl_serbestetkinlik_dgvler);
+            this.tab_serbestetkinlikler.Controls.Add(this.dgv_serbestetkinlikdersleri_4);
+            this.tab_serbestetkinlikler.Controls.Add(this.label62);
+            this.tab_serbestetkinlikler.Controls.Add(this.dgv_serbestetkinlikdersleri_3);
+            this.tab_serbestetkinlikler.Controls.Add(this.label61);
+            this.tab_serbestetkinlikler.Controls.Add(this.dgv_serbestetkinlikdersleri_2);
+            this.tab_serbestetkinlikler.Controls.Add(this.label59);
+            this.tab_serbestetkinlikler.Controls.Add(this.dgv_serbestetkinlikdersleri_1);
+            this.tab_serbestetkinlikler.Controls.Add(this.label57);
+            this.tab_serbestetkinlikler.Location = new System.Drawing.Point(4, 22);
+            this.tab_serbestetkinlikler.Name = "tab_serbestetkinlikler";
+            this.tab_serbestetkinlikler.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_serbestetkinlikler.Size = new System.Drawing.Size(1360, 544);
+            this.tab_serbestetkinlikler.TabIndex = 6;
+            this.tab_serbestetkinlikler.Text = "Serbest Etkinlik Dersleri";
+            this.tab_serbestetkinlikler.UseVisualStyleBackColor = true;
+            // 
+            // linklbl_serbestetkinlik_dgvler
+            // 
+            this.linklbl_serbestetkinlik_dgvler.AutoSize = true;
+            this.linklbl_serbestetkinlik_dgvler.Location = new System.Drawing.Point(1176, 10);
+            this.linklbl_serbestetkinlik_dgvler.Name = "linklbl_serbestetkinlik_dgvler";
+            this.linklbl_serbestetkinlik_dgvler.Size = new System.Drawing.Size(169, 13);
+            this.linklbl_serbestetkinlik_dgvler.TabIndex = 8;
+            this.linklbl_serbestetkinlik_dgvler.TabStop = true;
+            this.linklbl_serbestetkinlik_dgvler.Text = "Bu ekranda işlem yapılmamaktadır.";
+            this.linklbl_serbestetkinlik_dgvler.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_serbestetkinlik_dgvler_LinkClicked);
+            // 
+            // dgv_serbestetkinlikdersleri_4
+            // 
+            this.dgv_serbestetkinlikdersleri_4.AllowUserToAddRows = false;
+            this.dgv_serbestetkinlikdersleri_4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_serbestetkinlikdersleri_4.Enabled = false;
+            this.dgv_serbestetkinlikdersleri_4.Location = new System.Drawing.Point(17, 421);
+            this.dgv_serbestetkinlikdersleri_4.Name = "dgv_serbestetkinlikdersleri_4";
+            this.dgv_serbestetkinlikdersleri_4.Size = new System.Drawing.Size(1333, 99);
+            this.dgv_serbestetkinlikdersleri_4.TabIndex = 7;
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(11, 401);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(39, 13);
+            this.label62.TabIndex = 6;
+            this.label62.Text = "4. Sınıf";
+            // 
+            // dgv_serbestetkinlikdersleri_3
+            // 
+            this.dgv_serbestetkinlikdersleri_3.AllowUserToAddRows = false;
+            this.dgv_serbestetkinlikdersleri_3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_serbestetkinlikdersleri_3.Enabled = false;
+            this.dgv_serbestetkinlikdersleri_3.Location = new System.Drawing.Point(17, 288);
+            this.dgv_serbestetkinlikdersleri_3.Name = "dgv_serbestetkinlikdersleri_3";
+            this.dgv_serbestetkinlikdersleri_3.Size = new System.Drawing.Size(1333, 99);
+            this.dgv_serbestetkinlikdersleri_3.TabIndex = 5;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(11, 268);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(39, 13);
+            this.label61.TabIndex = 4;
+            this.label61.Text = "3. Sınıf";
+            // 
+            // dgv_serbestetkinlikdersleri_2
+            // 
+            this.dgv_serbestetkinlikdersleri_2.AllowUserToAddRows = false;
+            this.dgv_serbestetkinlikdersleri_2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_serbestetkinlikdersleri_2.Enabled = false;
+            this.dgv_serbestetkinlikdersleri_2.Location = new System.Drawing.Point(17, 161);
+            this.dgv_serbestetkinlikdersleri_2.Name = "dgv_serbestetkinlikdersleri_2";
+            this.dgv_serbestetkinlikdersleri_2.Size = new System.Drawing.Size(1333, 99);
+            this.dgv_serbestetkinlikdersleri_2.TabIndex = 3;
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(11, 141);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(39, 13);
+            this.label59.TabIndex = 2;
+            this.label59.Text = "2. Sınıf";
+            // 
+            // dgv_serbestetkinlikdersleri_1
+            // 
+            this.dgv_serbestetkinlikdersleri_1.AllowUserToAddRows = false;
+            this.dgv_serbestetkinlikdersleri_1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_serbestetkinlikdersleri_1.Enabled = false;
+            this.dgv_serbestetkinlikdersleri_1.Location = new System.Drawing.Point(17, 33);
+            this.dgv_serbestetkinlikdersleri_1.Name = "dgv_serbestetkinlikdersleri_1";
+            this.dgv_serbestetkinlikdersleri_1.Size = new System.Drawing.Size(1333, 99);
+            this.dgv_serbestetkinlikdersleri_1.TabIndex = 1;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(11, 13);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(39, 13);
+            this.label57.TabIndex = 0;
+            this.label57.Text = "1. Sınıf";
             // 
             // tab_digerislemler
             // 
@@ -3886,112 +4007,6 @@
             this.tb_logkayitlari.Size = new System.Drawing.Size(1230, 264);
             this.tb_logkayitlari.TabIndex = 0;
             // 
-            // tab_serbestetkinlikler
-            // 
-            this.tab_serbestetkinlikler.Controls.Add(this.linklbl_serbestetkinlik_dgvler);
-            this.tab_serbestetkinlikler.Controls.Add(this.dgv_serbestetkinlikdersleri_4);
-            this.tab_serbestetkinlikler.Controls.Add(this.label62);
-            this.tab_serbestetkinlikler.Controls.Add(this.dgv_serbestetkinlikdersleri_3);
-            this.tab_serbestetkinlikler.Controls.Add(this.label61);
-            this.tab_serbestetkinlikler.Controls.Add(this.dgv_serbestetkinlikdersleri_2);
-            this.tab_serbestetkinlikler.Controls.Add(this.label59);
-            this.tab_serbestetkinlikler.Controls.Add(this.dgv_serbestetkinlikdersleri_1);
-            this.tab_serbestetkinlikler.Controls.Add(this.label57);
-            this.tab_serbestetkinlikler.Location = new System.Drawing.Point(4, 22);
-            this.tab_serbestetkinlikler.Name = "tab_serbestetkinlikler";
-            this.tab_serbestetkinlikler.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_serbestetkinlikler.Size = new System.Drawing.Size(1360, 544);
-            this.tab_serbestetkinlikler.TabIndex = 6;
-            this.tab_serbestetkinlikler.Text = "Serbest Etkinlik Dersleri";
-            this.tab_serbestetkinlikler.UseVisualStyleBackColor = true;
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(11, 13);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(39, 13);
-            this.label57.TabIndex = 0;
-            this.label57.Text = "1. Sınıf";
-            // 
-            // dgv_serbestetkinlikdersleri_1
-            // 
-            this.dgv_serbestetkinlikdersleri_1.AllowUserToAddRows = false;
-            this.dgv_serbestetkinlikdersleri_1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_serbestetkinlikdersleri_1.Enabled = false;
-            this.dgv_serbestetkinlikdersleri_1.Location = new System.Drawing.Point(17, 33);
-            this.dgv_serbestetkinlikdersleri_1.Name = "dgv_serbestetkinlikdersleri_1";
-            this.dgv_serbestetkinlikdersleri_1.Size = new System.Drawing.Size(1333, 99);
-            this.dgv_serbestetkinlikdersleri_1.TabIndex = 1;
-            // 
-            // dgv_serbestetkinlikdersleri_2
-            // 
-            this.dgv_serbestetkinlikdersleri_2.AllowUserToAddRows = false;
-            this.dgv_serbestetkinlikdersleri_2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_serbestetkinlikdersleri_2.Enabled = false;
-            this.dgv_serbestetkinlikdersleri_2.Location = new System.Drawing.Point(17, 161);
-            this.dgv_serbestetkinlikdersleri_2.Name = "dgv_serbestetkinlikdersleri_2";
-            this.dgv_serbestetkinlikdersleri_2.Size = new System.Drawing.Size(1333, 99);
-            this.dgv_serbestetkinlikdersleri_2.TabIndex = 3;
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(11, 141);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(39, 13);
-            this.label59.TabIndex = 2;
-            this.label59.Text = "2. Sınıf";
-            // 
-            // dgv_serbestetkinlikdersleri_3
-            // 
-            this.dgv_serbestetkinlikdersleri_3.AllowUserToAddRows = false;
-            this.dgv_serbestetkinlikdersleri_3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_serbestetkinlikdersleri_3.Enabled = false;
-            this.dgv_serbestetkinlikdersleri_3.Location = new System.Drawing.Point(17, 288);
-            this.dgv_serbestetkinlikdersleri_3.Name = "dgv_serbestetkinlikdersleri_3";
-            this.dgv_serbestetkinlikdersleri_3.Size = new System.Drawing.Size(1333, 99);
-            this.dgv_serbestetkinlikdersleri_3.TabIndex = 5;
-            // 
-            // label61
-            // 
-            this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(11, 268);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(39, 13);
-            this.label61.TabIndex = 4;
-            this.label61.Text = "3. Sınıf";
-            // 
-            // dgv_serbestetkinlikdersleri_4
-            // 
-            this.dgv_serbestetkinlikdersleri_4.AllowUserToAddRows = false;
-            this.dgv_serbestetkinlikdersleri_4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_serbestetkinlikdersleri_4.Enabled = false;
-            this.dgv_serbestetkinlikdersleri_4.Location = new System.Drawing.Point(17, 421);
-            this.dgv_serbestetkinlikdersleri_4.Name = "dgv_serbestetkinlikdersleri_4";
-            this.dgv_serbestetkinlikdersleri_4.Size = new System.Drawing.Size(1333, 99);
-            this.dgv_serbestetkinlikdersleri_4.TabIndex = 7;
-            // 
-            // label62
-            // 
-            this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(11, 401);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(39, 13);
-            this.label62.TabIndex = 6;
-            this.label62.Text = "4. Sınıf";
-            // 
-            // linklbl_serbestetkinlik_dgvler
-            // 
-            this.linklbl_serbestetkinlik_dgvler.AutoSize = true;
-            this.linklbl_serbestetkinlik_dgvler.Location = new System.Drawing.Point(1176, 10);
-            this.linklbl_serbestetkinlik_dgvler.Name = "linklbl_serbestetkinlik_dgvler";
-            this.linklbl_serbestetkinlik_dgvler.Size = new System.Drawing.Size(169, 13);
-            this.linklbl_serbestetkinlik_dgvler.TabIndex = 8;
-            this.linklbl_serbestetkinlik_dgvler.TabStop = true;
-            this.linklbl_serbestetkinlik_dgvler.Text = "Bu ekranda işlem yapılmamaktadır.";
-            this.linklbl_serbestetkinlik_dgvler.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_serbestetkinlik_dgvler_LinkClicked);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4074,6 +4089,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_muhasebe_borclanmalar)).EndInit();
             this.groupBox14.ResumeLayout(false);
             this.groupBox14.PerformLayout();
+            this.tab_serbestetkinlikler.ResumeLayout(false);
+            this.tab_serbestetkinlikler.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_1)).EndInit();
             this.tab_digerislemler.ResumeLayout(false);
             this.tab_digerislemler.PerformLayout();
             this.groupBox41.ResumeLayout(false);
@@ -4127,12 +4148,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).EndInit();
             this.tab_alt_loglar.ResumeLayout(false);
             this.tab_alt_loglar.PerformLayout();
-            this.tab_serbestetkinlikler.ResumeLayout(false);
-            this.tab_serbestetkinlikler.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4466,6 +4481,7 @@
         private System.Windows.Forms.DataGridView dgv_serbestetkinlikdersleri_2;
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.DataGridView dgv_serbestetkinlikdersleri_1;
+        private System.Windows.Forms.CheckBox cb_talep_sinifdefteri;
     }
 }
 

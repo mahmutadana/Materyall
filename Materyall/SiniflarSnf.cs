@@ -78,7 +78,7 @@ namespace Materyall
 
         public string bayikodu { get; set; }
 
-        public bool cd_istiyor { get; set; }
+        public bool defter_istiyor { get; set; }
         public bool pdf_istiyor { get; set; }
 
 

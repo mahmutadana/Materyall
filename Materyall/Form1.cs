@@ -261,6 +261,14 @@ namespace Materyall
                     BirOgt.pdf_istiyor = pdfdurumu;
 
                 }
+                else if(urun.urunadi == "DEFTER")
+                {
+
+                    bool pdfdurumu = vtislemleri.ek_urun_talepEdilmismi(BirOgt.oid, urun.urunkodu);
+                    cb_talep_sinifdefteri.Checked = pdfdurumu;
+                    BirOgt.defter_istiyor = pdfdurumu;
+
+                }
 
 
             }
@@ -325,9 +333,12 @@ namespace Materyall
 
             //Yıllık plan ana dersleri göster.
             dgv_talep_anadersler_yillik.DataSource = vtislemleri.dgv_icin_y_anaderleri_getir(BirOgt.oid, BirOgt.yili);
+            dgv_talep_yillikplanlar_baski.DataSource = dgv_talep_anadersler_yillik.DataSource;
 
             //Günlük plan ana dersleri göster.
             dgv_talep_anadersler_gunluk.DataSource = vtislemleri.dgv_icin_g_anaderleri_getir(BirOgt.oid, BirOgt.yili);
+            dgv_talep_gunlukplanlar_baski.DataSource = dgv_talep_anadersler_gunluk.DataSource;
+
 
 
             //Serbest etkinlik derslerini göster.
@@ -1047,6 +1058,9 @@ namespace Materyall
             tb_bilgi_okulkodu.Text = ogrblg.kurumkodu;
             tb_bilgi_okulu.Text = ogrblg.okuladi;
 
+
+          
+
             if (ogrblg.sinifi != null && ogrblg.sinifi != "")
             {
                 cb_bilgi_sinifi.Text = ogrblg.sinifi.ToString();
@@ -1069,7 +1083,7 @@ namespace Materyall
 
 
             tb_bilgi_logo.Text = ogrblg.ogretmenlogo;
-            ogretmenlogosu_Goster();
+           
 
             tb_bilgi_bayikodu.Text = ogrblg.bayikodu;
 
@@ -1081,6 +1095,7 @@ namespace Materyall
 
             BirOgt = ogrblg;
 
+            ogretmenlogosu_Goster();
 
             secimizrenginikaldir();
 
@@ -1207,7 +1222,7 @@ namespace Materyall
 
             //Filter
             res.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
-            res.InitialDirectory = metinler.ogretmenlogo_ustyolu; // @"C:\";
+            res.InitialDirectory = metinler.logo_wordbaglantili_klasor; // @"C:\";
 
             //When the user select the file
             if (res.ShowDialog() == DialogResult.OK)
@@ -1228,14 +1243,34 @@ namespace Materyall
 
             if (tb_bilgi_logo.Text != "")
             {
-                pb_logo.Image = Image.FromFile(metinler.ogretmenlogo_ustyolu + @"\" + tb_bilgi_logo.Text);
+                pb_logo.Image = Image.FromFile(metinler.logo_wordbaglantili_klasor + tb_bilgi_logo.Text);
 
             } else
             {
                 pb_logo.Image = null;
             }
 
+            logoyu_wordbaglantilidosya_olarak_kaydet();
+
         }
+
+
+        //Logoyu basılacak isimle (logo.png) kaydediyoruz.
+
+       private void logoyu_wordbaglantilidosya_olarak_kaydet()
+        {
+            //Logo varsa onu ilgili klasöre logo.png olarak kaydediyoruz. Böylece word belgesi güncel isimdeki logoyu gösterecek inşallah.
+            //Worde resim eklerken "ekle bağla" seçeneği kullanılacak.
+
+
+            yrdsnf.logoyuKlasoreKaydet(BirOgt.ogretmenlogo);
+
+        }
+
+
+
+
+
 
 
         private void bayikodundanBayiBilgileriniGetir()
@@ -1464,6 +1499,14 @@ namespace Materyall
         {
 
             CD_PDF_islemi_yap(cb_talep_pdf.Checked, "PDF");
+
+        }
+
+
+        private void cb_talep_defter_CheckedChanged(object sender, EventArgs e)
+        {
+
+            CD_PDF_islemi_yap(cb_talep_sinifdefteri.Checked, "DEFTER");
 
         }
 
@@ -3825,17 +3868,22 @@ namespace Materyall
             adresMesktupBaslikDegerleri["OKULU"] = BirOgt.okuladi;
             adresMesktupBaslikDegerleri["ilcesi"] = BirOgt.ilcesi;
             adresMesktupBaslikDegerleri["sinifi"] = BirOgt.sinifi;
+            adresMesktupBaslikDegerleri["SINIFI"] = BirOgt.sinifi;
 
             if (BirOgt.sinifi == "03" || BirOgt.sinifi == "04" || BirOgt.sinifi == "05" || BirOgt.sinifi == "06")
             {
                 adresMesktupBaslikDegerleri["sinifi"] = metinler.anasinifi_okuloncesi_yazimi;
+                adresMesktupBaslikDegerleri["SINIFI"] = metinler.anasinifi_okuloncesi_yazimi;
             }
 
 
 
             adresMesktupBaslikDegerleri["subesi"] = BirOgt.subesi;
+            adresMesktupBaslikDegerleri["ŞUBE"] = BirOgt.subesi;
             adresMesktupBaslikDegerleri["adisoyadi"] = BirOgt.adisoyadi;
+            adresMesktupBaslikDegerleri["ADI_SOYADI"] = BirOgt.adisoyadi;
             adresMesktupBaslikDegerleri["bransi"] = BirOgt.bransi;
+            adresMesktupBaslikDegerleri["GÖREVİ"] = BirOgt.bransi;
             adresMesktupBaslikDegerleri["OKUL_MÜDÜR"] = BirOgt.muduradi;
             adresMesktupBaslikDegerleri["GÖREVİ1"] = BirOgt.mudurunvani;
 
@@ -3844,10 +3892,20 @@ namespace Materyall
 
             int ogrencisayac = 1;
 
+            for (int o = 0; o < 60; o++)
+            {
+                adresMesktupBaslikDegerleri["NO" + ogrencisayac] = "";
+                adresMesktupBaslikDegerleri["ÖĞRENCİ" + ogrencisayac] = "";
+                ogrencisayac++;
+            }
+
+
+            ogrencisayac = 1;
+
             foreach (OgrenciListesiSnf veri in talepOgrencilistesis)
             {
-                adresMesktupBaslikDegerleri["ogrencino_" + ogrencisayac] = veri.numara.ToString();
-                adresMesktupBaslikDegerleri["ogrenciadi_" + ogrencisayac] = veri.adisoyadi;
+                adresMesktupBaslikDegerleri["NO" + ogrencisayac] = veri.numara.ToString();
+                adresMesktupBaslikDegerleri["ÖĞRENCİ" + ogrencisayac] = veri.adisoyadi;
                 ogrencisayac++;
             }
 

@@ -13,7 +13,11 @@ namespace Materyall
         //  public string siparisci_tam_yolu = @"C:\Materyall\SistemDosyaları\siparisci2022\siparisci_2022.xlsx";
         public string siparisci_tam_yolu = @"C:\Materyall\siparisci.xlsx";
 
-        
+     //   public string ogretmenlogo_ustyolu = @"C:\Materyall\Logolar";
+        public string logo_wordbaglantili_klasor = @"C:\Materyall\Logolar\";
+        public string logo_wordbaglantili_dosyaadi = "logo.png";
+
+
 
         //sERBEST ETKİNLİK DERSİNİ otomatik olarak eklerken kullanacağız.
         public string serbestetkinlikdersininadi = "SERBEST ETKİNLİKLER";
@@ -58,7 +62,7 @@ namespace Materyall
 
 
 
-        public string ogretmenlogo_ustyolu = @"C:\Materyall\Logolar";
+        
 
         public string islembasarili = "Başarılı";
         public string mukerrerkayitbilgisiogretmen = "Bu okul, sınıf, şube ve öğretmen adına daha önce açılmış bir hesap bulunmaktadır.";
