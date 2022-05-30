@@ -357,6 +357,7 @@
             this.label48 = new System.Windows.Forms.Label();
             this.tab_alt_loglar = new System.Windows.Forms.TabPage();
             this.tb_logkayitlari = new System.Windows.Forms.TextBox();
+            this.groupBox43 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -438,6 +439,7 @@
             this.groupBox11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).BeginInit();
             this.tab_alt_loglar.SuspendLayout();
+            this.groupBox43.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -479,6 +481,7 @@
             // 
             // tab_talepgiris
             // 
+            this.tab_talepgiris.Controls.Add(this.groupBox43);
             this.tab_talepgiris.Controls.Add(this.groupBox12);
             this.tab_talepgiris.Controls.Add(this.groupBox9);
             this.tab_talepgiris.Controls.Add(this.groupBox8);
@@ -565,9 +568,9 @@
             this.groupBox9.Controls.Add(this.linklbl_talep_defterekle);
             this.groupBox9.Controls.Add(this.dgv_talep_defterler);
             this.groupBox9.Controls.Add(this.cb_talep_defter);
-            this.groupBox9.Location = new System.Drawing.Point(488, 239);
+            this.groupBox9.Location = new System.Drawing.Point(488, 296);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(470, 210);
+            this.groupBox9.Size = new System.Drawing.Size(470, 148);
             this.groupBox9.TabIndex = 6;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Defter Talep Girişleri";
@@ -588,9 +591,9 @@
             this.dgv_talep_defterler.AllowUserToAddRows = false;
             this.dgv_talep_defterler.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv_talep_defterler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_talep_defterler.Location = new System.Drawing.Point(6, 67);
+            this.dgv_talep_defterler.Location = new System.Drawing.Point(6, 61);
             this.dgv_talep_defterler.Name = "dgv_talep_defterler";
-            this.dgv_talep_defterler.Size = new System.Drawing.Size(374, 133);
+            this.dgv_talep_defterler.Size = new System.Drawing.Size(374, 81);
             this.dgv_talep_defterler.TabIndex = 29;
             this.dgv_talep_defterler.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_talep_defter_doubleClick);
             // 
@@ -960,8 +963,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.cb_talep_sinifdefteri);
-            this.groupBox3.Controls.Add(this.cb_talep_pdf);
             this.groupBox3.Controls.Add(this.linklabel_talep_tumanadersleriekle_yillik);
             this.groupBox3.Controls.Add(this.linklbl_talep_anadersler_secimiekle_yillik);
             this.groupBox3.Controls.Add(this.dgv_talep_anadersler_yillik);
@@ -978,11 +979,11 @@
             this.cb_talep_sinifdefteri.AutoSize = true;
             this.cb_talep_sinifdefteri.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_talep_sinifdefteri.ForeColor = System.Drawing.Color.Purple;
-            this.cb_talep_sinifdefteri.Location = new System.Drawing.Point(386, 162);
+            this.cb_talep_sinifdefteri.Location = new System.Drawing.Point(21, 24);
             this.cb_talep_sinifdefteri.Name = "cb_talep_sinifdefteri";
-            this.cb_talep_sinifdefteri.Size = new System.Drawing.Size(88, 38);
+            this.cb_talep_sinifdefteri.Size = new System.Drawing.Size(139, 21);
             this.cb_talep_sinifdefteri.TabIndex = 34;
-            this.cb_talep_sinifdefteri.Text = "DERS\r\nDEFTER";
+            this.cb_talep_sinifdefteri.Text = "DERS DEFTERİ";
             this.cb_talep_sinifdefteri.UseVisualStyleBackColor = true;
             this.cb_talep_sinifdefteri.Click += new System.EventHandler(this.cb_talep_defter_CheckedChanged);
             // 
@@ -990,7 +991,7 @@
             // 
             this.cb_talep_pdf.AutoSize = true;
             this.cb_talep_pdf.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.cb_talep_pdf.Location = new System.Drawing.Point(386, 134);
+            this.cb_talep_pdf.Location = new System.Drawing.Point(282, 16);
             this.cb_talep_pdf.Name = "cb_talep_pdf";
             this.cb_talep_pdf.Size = new System.Drawing.Size(75, 30);
             this.cb_talep_pdf.TabIndex = 33;
@@ -1273,6 +1274,8 @@
             // cb_planbas_ondosya_ekle
             // 
             this.cb_planbas_ondosya_ekle.AutoSize = true;
+            this.cb_planbas_ondosya_ekle.Checked = true;
+            this.cb_planbas_ondosya_ekle.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_planbas_ondosya_ekle.Location = new System.Drawing.Point(6, 161);
             this.cb_planbas_ondosya_ekle.Name = "cb_planbas_ondosya_ekle";
             this.cb_planbas_ondosya_ekle.Size = new System.Drawing.Size(237, 17);
@@ -3370,7 +3373,7 @@
             // 
             this.rb_ara_okumadefteri.AutoSize = true;
             this.rb_ara_okumadefteri.Enabled = false;
-            this.rb_ara_okumadefteri.Location = new System.Drawing.Point(6, 65);
+            this.rb_ara_okumadefteri.Location = new System.Drawing.Point(6, 73);
             this.rb_ara_okumadefteri.Name = "rb_ara_okumadefteri";
             this.rb_ara_okumadefteri.Size = new System.Drawing.Size(93, 17);
             this.rb_ara_okumadefteri.TabIndex = 3;
@@ -3621,9 +3624,9 @@
             this.groupBox25.Controls.Add(this.rb_ara_sosyalkulup);
             this.groupBox25.Controls.Add(this.rb_ara_pdf);
             this.groupBox25.Controls.Add(this.rb_ara_cd);
-            this.groupBox25.Location = new System.Drawing.Point(13, 16);
+            this.groupBox25.Location = new System.Drawing.Point(13, 13);
             this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Size = new System.Drawing.Size(192, 93);
+            this.groupBox25.Size = new System.Drawing.Size(192, 96);
             this.groupBox25.TabIndex = 0;
             this.groupBox25.TabStop = false;
             // 
@@ -3673,7 +3676,7 @@
             // rb_ara_sosyalkulup
             // 
             this.rb_ara_sosyalkulup.AutoSize = true;
-            this.rb_ara_sosyalkulup.Location = new System.Drawing.Point(6, 41);
+            this.rb_ara_sosyalkulup.Location = new System.Drawing.Point(6, 50);
             this.rb_ara_sosyalkulup.Name = "rb_ara_sosyalkulup";
             this.rb_ara_sosyalkulup.Size = new System.Drawing.Size(86, 17);
             this.rb_ara_sosyalkulup.TabIndex = 2;
@@ -3683,23 +3686,23 @@
             // rb_ara_pdf
             // 
             this.rb_ara_pdf.AutoSize = true;
-            this.rb_ara_pdf.Checked = true;
-            this.rb_ara_pdf.Location = new System.Drawing.Point(53, 18);
+            this.rb_ara_pdf.Location = new System.Drawing.Point(6, 30);
             this.rb_ara_pdf.Name = "rb_ara_pdf";
             this.rb_ara_pdf.Size = new System.Drawing.Size(46, 17);
             this.rb_ara_pdf.TabIndex = 1;
-            this.rb_ara_pdf.TabStop = true;
             this.rb_ara_pdf.Text = "PDF";
             this.rb_ara_pdf.UseVisualStyleBackColor = true;
             // 
             // rb_ara_cd
             // 
             this.rb_ara_cd.AutoSize = true;
-            this.rb_ara_cd.Location = new System.Drawing.Point(6, 18);
+            this.rb_ara_cd.Checked = true;
+            this.rb_ara_cd.Location = new System.Drawing.Point(6, 11);
             this.rb_ara_cd.Name = "rb_ara_cd";
-            this.rb_ara_cd.Size = new System.Drawing.Size(40, 17);
+            this.rb_ara_cd.Size = new System.Drawing.Size(81, 17);
             this.rb_ara_cd.TabIndex = 0;
-            this.rb_ara_cd.Text = "CD";
+            this.rb_ara_cd.TabStop = true;
+            this.rb_ara_cd.Text = "Ders Defteri";
             this.rb_ara_cd.UseVisualStyleBackColor = true;
             // 
             // tabPage2
@@ -4007,6 +4010,17 @@
             this.tb_logkayitlari.Size = new System.Drawing.Size(1230, 264);
             this.tb_logkayitlari.TabIndex = 0;
             // 
+            // groupBox43
+            // 
+            this.groupBox43.Controls.Add(this.cb_talep_pdf);
+            this.groupBox43.Controls.Add(this.cb_talep_sinifdefteri);
+            this.groupBox43.Location = new System.Drawing.Point(492, 234);
+            this.groupBox43.Name = "groupBox43";
+            this.groupBox43.Size = new System.Drawing.Size(466, 59);
+            this.groupBox43.TabIndex = 8;
+            this.groupBox43.TabStop = false;
+            this.groupBox43.Text = "Ek Ürünler";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4148,6 +4162,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).EndInit();
             this.tab_alt_loglar.ResumeLayout(false);
             this.tab_alt_loglar.PerformLayout();
+            this.groupBox43.ResumeLayout(false);
+            this.groupBox43.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4482,6 +4498,7 @@
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.DataGridView dgv_serbestetkinlikdersleri_1;
         private System.Windows.Forms.CheckBox cb_talep_sinifdefteri;
+        private System.Windows.Forms.GroupBox groupBox43;
     }
 }
 

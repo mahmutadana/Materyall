@@ -126,7 +126,7 @@ namespace Materyall
 
             while (oku.Read())
             {
-                sonuc[int.Parse(oku["sinif"].ToString()) - 1] = int.Parse( oku["derssaati"].ToString());
+                sonuc[int.Parse(oku["sinif"].ToString()) - 1] = int.Parse( oku["dersaati"].ToString());
             }
 
 
@@ -3534,7 +3534,7 @@ namespace Materyall
 
             string tabloadi = metinler.neyebakalim_sosyalkulup_tablo;
            
-            if (tur == "CD" || tur == "PDF")
+            if (tur == "DEFTER" || tur == "PDF")
             {
                 tabloadi = metinler.neyebakalim_ekurunler_cd_pdf_tablo;
 

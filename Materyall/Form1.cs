@@ -447,6 +447,8 @@ namespace Materyall
 
             defter_ve_plan_kayit_konumlarini_yaz();
 
+
+
         }
 
 
@@ -460,7 +462,7 @@ namespace Materyall
 
            
 
-            if (varsayilanbossa.serbestderssaati_sinif_4 != 0)
+            if (varsayilanbossa.serbestderssaati_sinif_4 == 0)
             {
                int[] serbestsaatleri = vtislemleri.varsayilanlar_bossa_ek_serbestetkinlilkderssaatleri(BirOgt.yili);
 
@@ -3452,7 +3454,7 @@ namespace Materyall
 
             if (rb_ara_cd.Checked)
             {
-                tur = "CD";
+                tur = "DEFTER";
             } else if (rb_ara_sosyalkulup.Checked)
             {
                 tur = "sosyalkulup";
@@ -3466,7 +3468,7 @@ namespace Materyall
 
             //CD veya pdf ise o zaman ürün kodunu da alalım. CD = 101, pdf = 102 gibi.
 
-            if (tur == "CD" || tur == "PDF")
+            if (tur == "DEFTER" || tur == "PDF")
             {
 
                 foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
@@ -4021,7 +4023,8 @@ namespace Materyall
                 plan_bas_2_islemdekiKayit();
 
                 //Ekrandaki kaydı bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
-                pdfbirlestir_1(true, false);
+                pdfbirlestir_1(true, true);
+                
 
             }
             else
@@ -4059,7 +4062,7 @@ namespace Materyall
                         {
                             //Tek tek bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
 
-                            pdfbirlestir_1(true, false);
+                            pdfbirlestir_1(true, true);
 
                         }
 
@@ -4074,7 +4077,7 @@ namespace Materyall
                 {
                     //Tek tek bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
 
-                    pdfbirlestir_1(false, false);
+                    pdfbirlestir_1(false, true);
 
                 }
 
@@ -4151,7 +4154,7 @@ namespace Materyall
 
 
 
-            if (rb_defterbas_secenek_kapakvedefter.Checked)
+            if (rb_planbas_secenek_kapakveplan.Checked)
             {
                 //Kapak ve defter basımı.
                 //Önce defter kapağı basacağız.
@@ -4174,7 +4177,7 @@ namespace Materyall
                 plan_bas_3_ek_2_plan_bas(basilacakolanplankodu, "plan");
 
             }
-            else if (rb_defterbas_secenek_kapak.Checked)
+            else if (rb_planbas_secenek_kapak.Checked)
             {
                 //Sadece kapağı bas.
                 //Kapağı sadece 1 kere basmak için kontrol işlemi yapıyoruz. Çünkü des listesi döngüsüne göre işlem tekrarlanıyor.
@@ -4185,7 +4188,7 @@ namespace Materyall
                 }
 
             }
-            else if (rb_defterbas_secenek_defter.Checked)
+            else if (rb_planbas_secenek_plan.Checked)
             {
 
                 if (!ondosyabasildimi)
@@ -4235,6 +4238,7 @@ namespace Materyall
 
             //AŞAĞIDA DEĞER ALACAK OLAN BAŞLIKLAR.
             adresMesktupBaslikDegerleri["ZUMREOGRETMENLERI"] = "";
+            adresMesktupBaslikDegerleri["M_1ZÜMRE"] = "";
 
             adresMesktupBaslikDegerleri["EYLUL"] = "";
             adresMesktupBaslikDegerleri["EKIM"] = "";
@@ -4252,10 +4256,22 @@ namespace Materyall
 
             int ogrencisayac = 1;
 
+            //Word bunlara bakacağı için mutlaka ekliyoruz. Boş olsa bile ekleyeceğiz.
+            for (int o = 0; o < 60; o++)
+            {
+                adresMesktupBaslikDegerleri["NO" + ogrencisayac] = "";
+                adresMesktupBaslikDegerleri["ÖĞRENCİ" + ogrencisayac] = "";
+                ogrencisayac++;
+            }
+
+
+
+            ogrencisayac = 1;
+
             foreach (OgrenciListesiSnf veri in talepOgrencilistesis)
             {
-                adresMesktupBaslikDegerleri["ogrencino_" + ogrencisayac] = veri.numara.ToString();
-                adresMesktupBaslikDegerleri["ogrenciadi_" + ogrencisayac] = veri.adisoyadi;
+                adresMesktupBaslikDegerleri["NO" + ogrencisayac] = veri.numara.ToString();
+                adresMesktupBaslikDegerleri["ÖĞRENCİ" + ogrencisayac] = veri.adisoyadi;
                 ogrencisayac++;
             }
 
@@ -4273,7 +4289,7 @@ namespace Materyall
             }
 
             adresMesktupBaslikDegerleri["ZUMREOGRETMENLERI"] = digerzumreogretmenlerininisimleri.Trim();
-
+            adresMesktupBaslikDegerleri["M_1ZÜMRE"] = digerzumreogretmenlerininisimleri.Trim();
 
             //Mahalli kurtuluş günlerini ekleyelim. Eylül-Haziran arası her ay için bir değişken kullanalım.
 
@@ -4312,6 +4328,12 @@ namespace Materyall
 
                 switch (BirOgt.sinifi)
                 {
+
+                    case "1":
+                        kacsaatvar = varsayilanbossa.serbestderssaati_sinif_1;
+                        dgv = dgv_serbestetkinlikdersleri_1;
+                        break;
+
 
                     case "2":
                         kacsaatvar = varsayilanbossa.serbestderssaati_sinif_2;
@@ -4371,11 +4393,6 @@ namespace Materyall
             
 
 
-
-
-
-
-
             excelSnf.adresMektupicinExceliHazirlasiparisci(adresMesktupBaslikDegerleri);
 
         }
@@ -4392,15 +4409,18 @@ namespace Materyall
 
             //Kapak için defterkodunu "" olarak giriyoruz. Çünkü kapak için basım tarihi eklemeyeceğiz.
 
+            //yıllık kapak, günlük kapak.
 
+
+            //KAPAKLAR YATAY OLDUĞU İÇİN DİKLEŞTİRECEĞİZ.
             if (rb_planbas_kapsam_sadeceyillik.Checked)
             {
-                basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "y_kapak_" + basilacakolanplankodu + ".docx", " ", false, false, "", basilanTur);
+                basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "y_kapak.docx", " ", true, true, "", basilanTur);
 
             }
             else
             {
-                basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "g_kapak_" + basilacakolanplankodu + ".docx", " ", false, false, "", basilanTur);
+                basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "g_kapak.docx", " ", true, true, "", basilanTur);
 
             }
 
@@ -4432,7 +4452,7 @@ namespace Materyall
             //n dosya için defterkodunu "" olarak giriyoruz. Çünkü kapak için basım tarihi eklemeyeceğiz.
 
 
-                basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\" + "0000.docx", " ", false, false, "", basilanTur);
+                basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\" + "0000.docx", " ", true, false, "", basilanTur);
 
         }
 
@@ -4441,7 +4461,7 @@ namespace Materyall
 
 
 
-        private void plan_bas_3_ek_2_plan_bas(string basilacakolandefterkodu, string basilanTur)
+        private void plan_bas_3_ek_2_plan_bas(string basilacakolanplankodu, string basilanTur)
         {
 
             //Plan kodu geldi.
@@ -4453,11 +4473,11 @@ namespace Materyall
 
             if (rb_planbas_kapsam_sadeceyillik.Checked)
             {
-                basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\y_" + basilacakolandefterkodu + ".docx", BirOgt.adisoyadi, false, false, basilacakolandefterkodu, basilanTur);
+                basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\y_" + basilacakolanplankodu + ".docx", BirOgt.adisoyadi, true, true, basilacakolanplankodu, basilanTur);
 
             } else
             {
-                basim_1_filigranEkle(varsayilanbossa.gunlukplanyolu + @"\g_" + basilacakolandefterkodu + ".docx", BirOgt.adisoyadi, false, false, basilacakolandefterkodu, basilanTur);
+                basim_1_filigranEkle(varsayilanbossa.gunlukplanyolu + @"\g_" + basilacakolanplankodu + ".docx", BirOgt.adisoyadi, true, false, basilacakolanplankodu, basilanTur);
 
             }
 
@@ -4729,7 +4749,11 @@ namespace Materyall
             reader.Close();
 
 
-          //  MessageBox.Show("dikildi");
+            //  MessageBox.Show("dikildi");
+            string[] yataylar = new string[1];
+            yataylar[0] = yataypdf;
+            pdfParcaciklariniSil(yataylar);
+
 
         }
 
@@ -4822,7 +4846,7 @@ namespace Materyall
 
             //Eğer doğrudan yazıcıya gönderme seçeneği seçilmişse yazıcıya gönderelim.
 
-            if (rb_defterbas_sonislem_yaziciyagonder.Checked)
+            if (rb_planbas_son_yazdir.Checked)
             {
                 pdfyiYazdir(hedef_pdf_dosyamiz_birlesik);
             }
