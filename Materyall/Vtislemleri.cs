@@ -1512,7 +1512,7 @@ namespace Materyall
 
 
 
-        public int ilYayineviNoGetir1234Siniflar(string yili, string iladi, string sinifi)
+        public string ilYayineviNoGetir1234Siniflar(string yili, string iladi, string sinifi)
         {
 
 
@@ -1521,14 +1521,14 @@ namespace Materyall
 
             string bakilacakalan = "yayinsnf" + sinifi;
 
-            string adet = "0";
+            string adet = "1";
 
             baglantiKur();
 
-            iladi adından il kodunu bulup burada sorugya dahil edeceğiz.
+            
 
 
-            string sql = "SELECT " + bakilacakalan + "  as kodu FROM sis_ilyayinevino_tbl WHERE yili='" + yili + "' AND " + neyebakalim_urun + "=" + urunid;
+            string sql = "SELECT " + bakilacakalan + "  as kodu FROM sis_ilyayinevino_tbl a LEFT JOIN sis_iller_tbl b ON a.ilkodu=b.ilkodu WHERE a.yili='" + yili + "' AND b.iladi='" + iladi + "'";
 
 
 
@@ -1538,13 +1538,13 @@ namespace Materyall
 
             while (oku.Read())
             {
-                adet = oku["adet"].ToString();
+                adet = oku["kodu"].ToString();
 
             }
 
             baglantikapat(mysqlbaglantisi);
 
-            return adet != "0";
+            return adet;
 
 
         }
@@ -3886,6 +3886,7 @@ namespace Materyall
            
             } else if (basilanturudefterplangunukyillikvs == "yillikserbest")
             {
+                //Serbest etkinlik derslerinin plan basım tarihi olmayacak. Ana ders olarak SERBEST ETKİNLİKLER ekleniyor. Ona tarih basılacak.
                 sql = "UPDATE " + metinler.neyebakalim_serbest_ders_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND dersid=" + int.Parse(urun_kodu_id);
             }
             else if (basilanturudefterplangunukyillikvs == "defter")
@@ -3895,6 +3896,10 @@ namespace Materyall
             else if (basilanturudefterplangunukyillikvs == "sosyalkulup")
             {
                 sql = "UPDATE " + metinler.neyebakalim_sosyalkulup_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND kulupkodu=" + int.Parse(urun_kodu_id);
+            }
+            else if (basilanturudefterplangunukyillikvs == metinler.basilacak_ekurun_defter_adi)
+            {
+                sql = "UPDATE " + metinler.neyebakalim_ekurunler_cd_pdf_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND urunkodu=" + 101; // şimdilik kodu eledik. ama vt'den almamız daha uygun olacak. int.Parse(urun_kodu_id);
             }
             else
             {

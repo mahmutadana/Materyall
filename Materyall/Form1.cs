@@ -4156,20 +4156,90 @@ namespace Materyall
             //Plan kodu geldi. Asıl plan basma işlemi burada başlayacak.
 
 
-            //Ders defteri basılacaksa onun kontrolünü ayrı tutuyoruz.
+            //Ders dolu defteri basılacaksa onun kontrolünü ayrı tutuyoruz.
 
             if (rb_planbas_kapsam_sadecedersdefteri.Checked && basilacakolanplankodu == metinler.basilacak_ekurun_defter_adi)
             {
 
-               
+
                 //İllere göre yayınevi grupları mevcut. Mesela Türkçe-MEB, Türkçe-CEM gibi. İl adına bakıp il grubunu seçeceğiz ve DOLUDEFTER31 gibi basacağız.
                 //Word adı DOLUDEFTER sonrasında SINIF SEVİYESİ sonrasında İLGRUBU .docx olacak.
-                
+
+
+                string ilegoreyayinevikodu = vtislemleri.ilYayineviNoGetir1234Siniflar(BirOgt.yili, BirOgt.ili, BirOgt.sinifi);
+                string belgeadi = metinler.basilacak_ekurun_defter_adi.Replace(" ","") + BirOgt.sinifi + ilegoreyayinevikodu; //docx sonra eklenecek. + ".docx";
+
+
+                //KAPAK VE PLAN VS SEÇENEKLERİ BURADA DA AYRICA KULLANIYORUZ. (DOLU DEFTER İÇİN)
+
+                if (rb_planbas_secenek_kapakveplan.Checked)
+                {
+                    //Kapak ve defter basımı.
+                    //Önce defter kapağı basacağız.
+
+                    //Kapağı sadece 1 kere basmak için kontrol işlemi yapıyoruz. Çünkü des listesi döngüsüne göre işlem tekrarlanıyor.
+                    if (!kapakbasildimi)
+                    {
+                        plan_bas_3_ek_plankapagibas(metinler.basilacak_ekurun_defter_adi, "kapak");
+                        kapakbasildimi = true;
+                    }
+
+                    //DOLU DEFTERDE ÖN DOSYA KULLANMIYORUZ.
+                    /*
+                    if (!ondosyabasildimi)
+                    {
+                        plan_bas_3_ek_planOnDosyabas("ondosya");
+                        ondosyabasildimi = true;
+                    }
+                    */
+
+
+                    plan_bas_3_ek_2_plan_bas(belgeadi, "plan");
+
+
+
+                }
+                else if (rb_planbas_secenek_kapak.Checked)
+                {
+
+                    //Sadece kapağı bas.
+                    //Kapağı sadece 1 kere basmak için kontrol işlemi yapıyoruz. Çünkü des listesi döngüsüne göre işlem tekrarlanıyor.
+                    if (!kapakbasildimi)
+                    {
+                        plan_bas_3_ek_plankapagibas(metinler.basilacak_ekurun_defter_adi, "kapak");
+                        kapakbasildimi = true;
+                    }
+
+                }
+                else if (rb_planbas_secenek_plan.Checked)
+                {
+
+
+                    //DOLU DEFTERDE ÖN DOSYA KULLANMIYORUZ.
+                    /*
+                    if (!ondosyabasildimi)
+                    {
+                        plan_bas_3_ek_planOnDosyabas("ondosya");
+                        ondosyabasildimi = true;
+                    }
+                    */
+
+
+                    plan_bas_3_ek_2_plan_bas(belgeadi, metinler.basilacak_ekurun_defter_adi);
+                }
+
+
+                //DOLU DEFTER ŞARTLARININ SONU.
+
+
+
+
+
 
 
             } else
             {
-                //DEFTER DEĞİL PLAN BASIMI TALEP EDİLDİ.
+                //DOLU DEFTER DEĞİL PLAN BASIMI TALEP EDİLDİ.
 
                 if (rb_planbas_secenek_kapakveplan.Checked)
                 {
@@ -4191,7 +4261,14 @@ namespace Materyall
                     }
 
 
-                    plan_bas_3_ek_2_plan_bas(basilacakolanplankodu, "plan");
+                    //Basım tarihi eklerken buna bakıyoruz ve ürün koduna bakıyoruz.
+                    string urunturu = "gunlukanaders";
+                    if (rb_planbas_kapsam_sadeceyillik.Checked)
+                    {
+                        urunturu = "yillikanaders";
+                    }
+
+                    plan_bas_3_ek_2_plan_bas(basilacakolanplankodu, urunturu);
 
                 }
                 else if (rb_planbas_secenek_kapak.Checked)
@@ -4436,7 +4513,13 @@ namespace Materyall
 
 
             //KAPAKLAR YATAY OLDUĞU İÇİN DİKLEŞTİRECEĞİZ.
-            if (rb_planbas_kapsam_sadeceyillik.Checked)
+
+            if (basilacakolanplankodu == metinler.basilacak_ekurun_defter_adi)
+            {
+                basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "dolukapak.docx", " ", true, true, "", basilanTur);
+
+            } 
+            else if (rb_planbas_kapsam_sadeceyillik.Checked)
             {
                 basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "y_kapak.docx", " ", true, true, "", basilanTur);
 
@@ -4494,7 +4577,16 @@ namespace Materyall
             //ve filigran metni olarak öğretmen adını gönderiyoruz.
 
 
-            if (rb_planbas_kapsam_sadeceyillik.Checked)
+            //Dolu defter basılacak ise önce onun kontrolünü dosya adından yararlanarak sağlıyoruz.
+
+            if (basilacakolanplankodu.Contains(metinler.basilacak_ekurun_defter_adi.Replace(" ", ""))){
+                //Demek ki dolu defter basılacak. Onu gönderiyoruz.
+
+                basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\" + basilacakolanplankodu + ".docx", BirOgt.adisoyadi, true, true, basilacakolanplankodu, basilanTur);
+
+
+            }
+            else if (rb_planbas_kapsam_sadeceyillik.Checked)
             {
                 basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\y_" + basilacakolanplankodu + ".docx", BirOgt.adisoyadi, true, true, basilacakolanplankodu, basilanTur);
 
