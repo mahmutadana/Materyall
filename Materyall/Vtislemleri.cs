@@ -1509,6 +1509,48 @@ namespace Materyall
 
 
 
+
+
+
+        public int ilYayineviNoGetir1234Siniflar(string yili, string iladi, string sinifi)
+        {
+
+
+            //Hangi ilin 1-2-3-4. sınıflarda 
+
+
+            string bakilacakalan = "yayinsnf" + sinifi;
+
+            string adet = "0";
+
+            baglantiKur();
+
+            iladi adından il kodunu bulup burada sorugya dahil edeceğiz.
+
+
+            string sql = "SELECT " + bakilacakalan + "  as kodu FROM sis_ilyayinevino_tbl WHERE yili='" + yili + "' AND " + neyebakalim_urun + "=" + urunid;
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+                adet = oku["adet"].ToString();
+
+            }
+
+            baglantikapat(mysqlbaglantisi);
+
+            return adet != "0";
+
+
+        }
+
+
+
         public bool ek_urun_talepEdilmismi(int oid, int urunkodu)
         {
 
@@ -1517,6 +1559,31 @@ namespace Materyall
         }
 
 
+
+        public DataTable dgv_icin_ekurunleri_getir(int oid, String yili)
+        {
+
+
+            baglantiKur();
+
+            //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
+            string sql = "SELECT b.urunadi, a.urunkodu, a.taleptarihi, a.basimtarihi, a.fiyat FROM " + metinler.neyebakalim_ekurunler_cd_pdf_tablo + " a LEFT JOIN sis_ekurunler_tbl b ON a.urunkodu=b.urunkodu WHERE b.yil='" + yili + "' AND oid=" + oid + " ORDER BY a.urunkodu"; ;
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
 
 
 
@@ -3534,7 +3601,7 @@ namespace Materyall
 
             string tabloadi = metinler.neyebakalim_sosyalkulup_tablo;
            
-            if (tur == "DEFTER" || tur == "PDF")
+            if (tur == metinler.basilacak_ekurun_defter_adi || tur == "PDF")
             {
                 tabloadi = metinler.neyebakalim_ekurunler_cd_pdf_tablo;
 

@@ -246,34 +246,26 @@ namespace Materyall
         {
 
 
+            /*
+             * Ek ürünleri de DGV sistemine aldık.
             //Ek ürünleri en başa alıyoruz. Aradan çıkarmak için. Aşağıdakiler birbirine benzer kodlar olduğu için bir arada tutuyoruz.
             //CD ve PDF var mı diye bakacağız.
 
             foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
             {
-                //Şimdilik 1 ürün. Daha sonra eklenirse ekürünler buraya eklenecek.
-
-                if (urun.urunadi == "PDF")
-                {
+                //Ürünlere tek tek bakıp burada listeliyoruz.
+              
 
                     bool pdfdurumu = vtislemleri.ek_urun_talepEdilmismi(BirOgt.oid, urun.urunkodu);
                     cb_talep_pdf.Checked = pdfdurumu;
                     BirOgt.pdf_istiyor = pdfdurumu;
 
-                }
-                else if(urun.urunadi == "DEFTER")
-                {
-
-                    bool pdfdurumu = vtislemleri.ek_urun_talepEdilmismi(BirOgt.oid, urun.urunkodu);
-                    cb_talep_sinifdefteri.Checked = pdfdurumu;
-                    BirOgt.defter_istiyor = pdfdurumu;
-
-                }
-
+               
 
             }
+            */
 
-
+            dgv_talep_ekurunler.DataSource = vtislemleri.dgv_icin_ekurunleri_getir(BirOgt.oid, BirOgt.yili);
 
             //Sosyal kulüp bilgisini çekiyoruz.
             BirOgt.sosyalkuluptalebi = vtislemleri.talepedilensosyalKulup(BirOgt.oid);
@@ -694,8 +686,15 @@ namespace Materyall
 
             //Ek ürünlerin bilgilerini bellekte tutuyoruz.
 
+            cb_talep_ekurunler.Items.Clear();
+
             filtrelenenEkUrunlers = vtislemleri.filtre_ekurunler(BirOgt.yili, BirOgt.bayibilgileri.ucretgrubu.ToString());
 
+            foreach (FiltrelenenEkUrunler s in filtrelenenEkUrunlers)
+            {
+
+                cb_talep_ekurunler.Items.Add(s.urunadi);
+            }
 
         }
 
@@ -1497,20 +1496,6 @@ namespace Materyall
         //Change olayı gibi olsa da click olayına tanımla.
        
 
-        private void cb_talep_pdf_CheckedChanged(object sender, EventArgs e)
-        {
-
-            CD_PDF_islemi_yap(cb_talep_pdf.Checked, "PDF");
-
-        }
-
-
-        private void cb_talep_defter_CheckedChanged(object sender, EventArgs e)
-        {
-
-            CD_PDF_islemi_yap(cb_talep_sinifdefteri.Checked, "DEFTER");
-
-        }
 
         private void CD_PDF_islemi_yap(bool eklensinmi, string urunadi)
         {
@@ -3454,7 +3439,7 @@ namespace Materyall
 
             if (rb_ara_cd.Checked)
             {
-                tur = "DEFTER";
+                tur = metinler.basilacak_ekurun_defter_adi;
             } else if (rb_ara_sosyalkulup.Checked)
             {
                 tur = "sosyalkulup";
@@ -3468,7 +3453,7 @@ namespace Materyall
 
             //CD veya pdf ise o zaman ürün kodunu da alalım. CD = 101, pdf = 102 gibi.
 
-            if (tur == "DEFTER" || tur == "PDF")
+            if (tur == metinler.basilacak_ekurun_defter_adi || tur == "PDF")
             {
 
                 foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
@@ -4126,7 +4111,7 @@ namespace Materyall
                 }
 
             }
-            else
+            else if (rb_planbas_kapsam_sadecegunluk.Checked)
             {
 
                 for (int i = 0; i < dgv_talep_gunlukplanlar_baski.RowCount; i++)
@@ -4136,6 +4121,26 @@ namespace Materyall
                     string basilacakolanplankodu = dr.Cells["dersid"].Value.ToString();
 
                     plan_bas_3_gelenKaydiBas(basilacakolanplankodu);
+
+                }
+
+            }
+            else
+            {
+                //DERS DEFTERİ.
+               
+                for (int i = 0; i < dgv_talep_gunlukplanlar_baski.RowCount; i++)
+                {
+                    DataGridViewRow dr = dgv_talep_ekurunler_baski.Rows[i];
+
+                    if (dr.Cells["urunadi"].Value.ToString() == metinler.basilacak_ekurun_defter_adi)
+                    {
+
+                        plan_bas_3_gelenKaydiBas(metinler.basilacak_ekurun_defter_adi);
+
+                    }
+
+                   
 
                 }
 
@@ -4150,55 +4155,73 @@ namespace Materyall
 
             //Plan kodu geldi. Asıl plan basma işlemi burada başlayacak.
 
-            
 
+            //Ders defteri basılacaksa onun kontrolünü ayrı tutuyoruz.
 
-
-            if (rb_planbas_secenek_kapakveplan.Checked)
-            {
-                //Kapak ve defter basımı.
-                //Önce defter kapağı basacağız.
-
-                //Kapağı sadece 1 kere basmak için kontrol işlemi yapıyoruz. Çünkü des listesi döngüsüne göre işlem tekrarlanıyor.
-                if (!kapakbasildimi)
-                {
-                    plan_bas_3_ek_plankapagibas(basilacakolanplankodu, "kapak");
-                    kapakbasildimi = true;
-                }
-
-
-                if (!ondosyabasildimi)
-                {
-                    plan_bas_3_ek_planOnDosyabas("ondosya");
-                    ondosyabasildimi = true;
-                }
-
-
-                plan_bas_3_ek_2_plan_bas(basilacakolanplankodu, "plan");
-
-            }
-            else if (rb_planbas_secenek_kapak.Checked)
-            {
-                //Sadece kapağı bas.
-                //Kapağı sadece 1 kere basmak için kontrol işlemi yapıyoruz. Çünkü des listesi döngüsüne göre işlem tekrarlanıyor.
-                if (!kapakbasildimi)
-                {
-                    plan_bas_3_ek_plankapagibas(basilacakolanplankodu, "kapak");
-                    kapakbasildimi = true;
-                }
-
-            }
-            else if (rb_planbas_secenek_plan.Checked)
+            if (rb_planbas_kapsam_sadecedersdefteri.Checked && basilacakolanplankodu == metinler.basilacak_ekurun_defter_adi)
             {
 
-                if (!ondosyabasildimi)
+               
+                //İllere göre yayınevi grupları mevcut. Mesela Türkçe-MEB, Türkçe-CEM gibi. İl adına bakıp il grubunu seçeceğiz ve DOLUDEFTER31 gibi basacağız.
+                //Word adı DOLUDEFTER sonrasında SINIF SEVİYESİ sonrasında İLGRUBU .docx olacak.
+                
+
+
+            } else
+            {
+                //DEFTER DEĞİL PLAN BASIMI TALEP EDİLDİ.
+
+                if (rb_planbas_secenek_kapakveplan.Checked)
                 {
-                    plan_bas_3_ek_planOnDosyabas("ondosya");
-                    ondosyabasildimi = true;
+                    //Kapak ve defter basımı.
+                    //Önce defter kapağı basacağız.
+
+                    //Kapağı sadece 1 kere basmak için kontrol işlemi yapıyoruz. Çünkü des listesi döngüsüne göre işlem tekrarlanıyor.
+                    if (!kapakbasildimi)
+                    {
+                        plan_bas_3_ek_plankapagibas(basilacakolanplankodu, "kapak");
+                        kapakbasildimi = true;
+                    }
+
+
+                    if (!ondosyabasildimi)
+                    {
+                        plan_bas_3_ek_planOnDosyabas("ondosya");
+                        ondosyabasildimi = true;
+                    }
+
+
+                    plan_bas_3_ek_2_plan_bas(basilacakolanplankodu, "plan");
+
+                }
+                else if (rb_planbas_secenek_kapak.Checked)
+                {
+
+                    //Sadece kapağı bas.
+                    //Kapağı sadece 1 kere basmak için kontrol işlemi yapıyoruz. Çünkü des listesi döngüsüne göre işlem tekrarlanıyor.
+                    if (!kapakbasildimi)
+                    {
+                        plan_bas_3_ek_plankapagibas(basilacakolanplankodu, "kapak");
+                        kapakbasildimi = true;
+                    }
+
+                }
+                else if (rb_planbas_secenek_plan.Checked)
+                {
+
+                    if (!ondosyabasildimi)
+                    {
+                        plan_bas_3_ek_planOnDosyabas("ondosya");
+                        ondosyabasildimi = true;
+                    }
+
+                    plan_bas_3_ek_2_plan_bas(basilacakolanplankodu, "plan");
                 }
 
-                plan_bas_3_ek_2_plan_bas(basilacakolanplankodu, "plan");
+
             }
+
+
 
 
 
@@ -4933,6 +4956,53 @@ namespace Materyall
             string dosyaadi = "serbestler.xlsx";
 
             dgv.DataSource = excelSecildiTalepleriGetir(varsayilanbossa.yillikplanyolu + @"\" + dosyaadi, "SDERS" + sinif);
+
+        }
+
+        private void linklbl_talep_ekle_ekurun_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            if (cb_talep_ekurunler.SelectedIndex < 1)
+            {
+
+                MessageBox.Show("Eklenecek ürünü seçmelisiniz.");
+                return;
+
+            }
+
+            //Eklemek için true gönderiyoruz. Silmek için (dgv çift tıklama) ürün adı ile birlikte false göndereceğiz.
+            CD_PDF_islemi_yap(true, filtrelenenEkUrunlers[cb_talep_ekurunler.SelectedIndex].urunadi);
+
+          //Ekleme komutu içinde çağrılıyor.  varsa_talepBolumu();
+
+        }
+
+        private void dgv_talep_ekurunler_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+            string urunadi = dgv_talep_ekurunler.Rows[e.RowIndex].Cells["urunadi"].Value.ToString();
+
+            //  MessageBox.Show(dersid);
+
+            DialogResult dialogResult = MessageBox.Show("Onaylayın", "Seçtiğiniz kayıt kalıcı olarak silinecektir. Onaylıyor musunuz?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+
+
+                CD_PDF_islemi_yap(false, urunadi);
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+
 
         }
 
