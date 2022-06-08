@@ -1528,7 +1528,7 @@ namespace Materyall
             
 
 
-            string sql = "SELECT " + bakilacakalan + "  as kodu FROM sis_ilyayinevino_tbl a LEFT JOIN sis_iller_tbl b ON a.ilkodu=b.ilkodu WHERE a.yili='" + yili + "' AND b.iladi='" + iladi + "'";
+            string sql = "SELECT " + bakilacakalan + "  as kodu FROM sis_ilyayinevino_tbl a LEFT JOIN sis_iller_tbl b ON a.ilkodu=b.ilkodu WHERE a.yil='" + yili + "' AND b.iladi='" + iladi + "'";
 
 
 
@@ -2435,6 +2435,39 @@ namespace Materyall
             return soskulubum;
 
         }
+
+
+
+
+
+        public DataTable dgv_icin_kuluptalebini_getir(int oid, String yili)
+        {
+
+
+            baglantiKur();
+
+            //    string sql = "SELECT * FROM " + metinler.neyebakalim_y_anaders_tablo + " WHERE oid=" + oid;
+            string sql = "SELECT b.kulupadi, a.kulupkodu, a.taleptarihi, a.basimtarihi, a.ikinciogretmen, a.fiyat FROM " + metinler.neyebakalim_sosyalkulup_tablo + " a LEFT JOIN sis_sosyalkulupler_tbl b ON a.kulupkodu=b.kulupkodu WHERE b.yil='" + yili + "' AND oid=" + oid + " ORDER BY a.kulupkodu"; ;
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
+
+
+
+
 
 
 

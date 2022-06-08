@@ -66,6 +66,11 @@ namespace Materyall
         YardimciSnf yrdsnf = new YardimciSnf();
         ExcelSnf excelSnf = new ExcelSnf();
 
+        //Plan, defter veya sosyal kulüp yazdırılırken pdf olarak mı kalacak, yazıcıya gönderilecek mi kısmı için kullanıacak.
+        //Basıma başla dedindiği anda buna değer atanacak.
+        bool YAZDIRILACAKMI1_PDFMI0;
+
+
         public Form1()
         {
             InitializeComponent();
@@ -266,6 +271,7 @@ namespace Materyall
             */
 
             dgv_talep_ekurunler.DataSource = vtislemleri.dgv_icin_ekurunleri_getir(BirOgt.oid, BirOgt.yili);
+            dgv_talep_ekurunler_baski.DataSource = dgv_talep_ekurunler.DataSource;
 
             //Sosyal kulüp bilgisini çekiyoruz.
             BirOgt.sosyalkuluptalebi = vtislemleri.talepedilensosyalKulup(BirOgt.oid);
@@ -302,6 +308,9 @@ namespace Materyall
 
             //Öğretmen adını her türlü yazıyoruz.
             tb_talep_sosyalkulupikinciogretmen.Text = BirOgt.sosyalkuluptalebi.sosyalkulupikinciogretmen;
+
+            //BASKI EKRANI İÇİN AYNI ZAMANDA DGV İÇİNDE GÖSTERİYORUZ.
+            dgv_talep_kulupler_baski.DataSource = vtislemleri.dgv_icin_kuluptalebini_getir(BirOgt.oid, BirOgt.yili);
 
 
 
@@ -3667,16 +3676,32 @@ namespace Materyall
 
         private void bt_defterbas_baskiyabasla_Click(object sender, EventArgs e)
         {
-           
+            Bekleyinform bekleyinform = new Bekleyinform();
+
+            bekleyinform.Show();
 
 
             defter_baskisina_basla();
+
+
+            bekleyinform.Close();
 
         }
 
 
         private void defter_baskisina_basla()
         {
+
+
+            //Son işlemi hemen tanımlıyoruz.
+            if (rb_defterbas_sonislem_yaziciyagonder.Checked)
+            {
+                YAZDIRILACAKMI1_PDFMI0 = true;
+            } else
+            {
+                YAZDIRILACAKMI1_PDFMI0 = false;
+            }
+
 
             //Liste mi basacağız, sadece ekrandakini mi_
             defter_bas_1_basilacaklar();
@@ -3976,13 +4001,34 @@ namespace Materyall
 
         private void bt_planbas_baskiyabasla_Click(object sender, EventArgs e)
         {
+
+            Bekleyinform bekleyinform = new Bekleyinform();
+
+            bekleyinform.Show();
+
+
             plan_baskisina_basla();
+
+
+            bekleyinform.Close();
+
         }
 
 
 
         private void plan_baskisina_basla()
         {
+
+
+            //Son işlemi hemen tanımlıyoruz.
+            if (rb_planbas_son_yazdir.Checked)
+            {
+                YAZDIRILACAKMI1_PDFMI0 = true;
+            }
+            else
+            {
+                YAZDIRILACAKMI1_PDFMI0 = false;
+            }
 
             //Liste mi basacağız, sadece ekrandakini mi_
             plan_bas_1_basilacaklar();
@@ -4127,9 +4173,9 @@ namespace Materyall
             }
             else
             {
-                //DERS DEFTERİ.
+                //DOLU DERS DEFTERİ.
                
-                for (int i = 0; i < dgv_talep_gunlukplanlar_baski.RowCount; i++)
+                for (int i = 0; i < dgv_talep_ekurunler_baski.RowCount; i++)
                 {
                     DataGridViewRow dr = dgv_talep_ekurunler_baski.Rows[i];
 
@@ -4194,7 +4240,7 @@ namespace Materyall
                     */
 
 
-                    plan_bas_3_ek_2_plan_bas(belgeadi, "plan");
+                    plan_bas_3_ek_2_plan_bas(belgeadi, metinler.basilacak_ekurun_defter_adi);
 
 
 
@@ -4469,7 +4515,7 @@ namespace Materyall
                         string serbestdersadi = dr.Cells[0].Value.ToString();
 
 
-                        adresMesktupBaslikDegerleri["k" + saatsayac] = dgv.Rows[i].Cells[serbestdersadi].Value.ToString();
+                        adresMesktupBaslikDegerleri["k" + saatsayac] = serbestdersadi + ": " + dgv.Rows[i].Cells[serbestdersadi].Value.ToString();
                         //Ders isminin sonunda _A var. Bu da açıklama anlamına geliyor.
                         adresMesktupBaslikDegerleri["ka" + saatsayac] = dgv.Rows[i].Cells[serbestdersadi + "_A"].Value.ToString();
 
@@ -4582,6 +4628,7 @@ namespace Materyall
             if (basilacakolanplankodu.Contains(metinler.basilacak_ekurun_defter_adi.Replace(" ", ""))){
                 //Demek ki dolu defter basılacak. Onu gönderiyoruz.
 
+
                 basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\" + basilacakolanplankodu + ".docx", BirOgt.adisoyadi, true, true, basilacakolanplankodu, basilanTur);
 
 
@@ -4652,7 +4699,7 @@ namespace Materyall
                 {
                     txWatermark = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Shapes.AddTextEffect(
                         MsoPresetTextEffect.msoTextEffect1,
-                                            filigranmetni, "Arial", (float)40,
+                                            filigranmetni, "Arial", (float)40, //Arial idi.
                                              MsoTriState.msoTrue,
                                              MsoTriState.msoFalse,
                                              0, 0, ref oMissing);
@@ -4960,11 +5007,17 @@ namespace Materyall
 
 
             //Eğer doğrudan yazıcıya gönderme seçeneği seçilmişse yazıcıya gönderelim.
-
-            if (rb_planbas_son_yazdir.Checked)
+            //Yapılan işleme bakıp ona göre yazdırıp yazdırmayacağımıza bakacağız. Defter, plan veya kulüp olabilir.
+            
+            if (YAZDIRILACAKMI1_PDFMI0)
             {
-                pdfyiYazdir(hedef_pdf_dosyamiz_birlesik);
+               // if (rb_planbas_son_yazdir.Checked)
+               // {
+                    pdfyiYazdir(hedef_pdf_dosyamiz_birlesik);
+               // }
             }
+
+           
 
         }
 
@@ -5099,6 +5152,245 @@ namespace Materyall
         }
 
 
+
+
+
+
+
+
+        //KULUP KULUP KULUP
+
+
+
+        private void bt_kulupbas_Click(object sender, EventArgs e)
+        {
+            Bekleyinform bekleyinform = new Bekleyinform();
+
+            bekleyinform.Show();
+
+
+            kulup_baskisina_basla();
+
+
+            bekleyinform.Close();
+            
+
+        }
+
+        private void kulup_baskisina_basla()
+        {
+
+
+            //Son işlemi hemen tanımlıyoruz.
+            if (rb_kulupbas_sonislem_yaziciyagonder.Checked)
+            {
+                YAZDIRILACAKMI1_PDFMI0 = true;
+            }
+            else
+            {
+                YAZDIRILACAKMI1_PDFMI0 = false;
+            }
+
+
+            //Liste mi basacağız, sadece ekrandakini mi_
+            kulup_bas_1_basilacaklar();
+
+
+
+        }
+
+        private void kulup_bas_1_basilacaklar()
+        {
+
+            //Baskıya başla dediğimizde bu listeyi temizleyip sıfırlan belgeleri ekleyeceğiz.
+            yeniBelgelerPdfBirlestirmeicin.Clear();
+            //Her dosyanın başınamüşteri numarasını ekleyeceğiz, onun yanına da bu değeri ekleyeceğiz. 176_1_defterkapakdosya.pdf gibi olacak.
+            yenidosyasayaci = 1;
+
+
+            if (rb_kulup_bas_ekrandakikayiticinislemyap.Checked)
+            {
+                //Listeden birini seçip göster demiyoruz. Zaten ekrandakini bas demişiz.
+
+
+                kulup_bas_2_islemdekiKayit();
+
+                //Ekrandaki kaydı bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
+                pdfbirlestir_1(true, false);
+
+            }
+            else
+            {
+
+                //Döngü ile listedeki kayıtları ekrana getireceğiz ve işleme alarak işlemdeki kayda ait defter basım işlemini başlatacağız.
+                for (int i = 0; i < dgv_alt_aramavelisteleme.Rows.Count; i++)
+                {
+
+                    if (rb_kulupbas_tektoplu_tek.Checked)
+                    {
+                        //Tek tek bas demişse her öğretmen çin temiz bir liste hazırlıyoruz.
+                        yeniBelgelerPdfBirlestirmeicin.Clear();
+                        yenidosyasayaci = 1;
+                    }
+
+
+                    //   Burada satır satır alıp göster diyeceğiz ve gösterildikten sonra işlemdeki kaydın defterini bas diyeceğiz.
+
+                    DataGridViewRow dr = dgv_alt_aramavelisteleme.Rows[i];
+
+                    if (dr.Selected)
+                    {
+
+                        tb_bilgi_musterino.Text = dr.Cells[0].Value.ToString();
+
+                        gosterDugmesineBasildi();
+
+                        //Listedeki seçili öğretmen gösterildi ve işleme alındı.
+                        kulup_bas_2_islemdekiKayit();
+
+
+
+                        if (rb_kulupbas_tektoplu_tek.Checked)
+                        {
+                            //Tek tek bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
+
+                            pdfbirlestir_1(true, false);
+
+                        }
+
+                    }
+
+
+
+
+                }
+
+                if (rb_kulupbas_tektoplu_toplu.Checked)
+                {
+                    //Tek tek bas demişse diğer öğretmene geçmeden önce öğretmenpdf'si oluşturalım.
+
+                    pdfbirlestir_1(false, false);
+
+                }
+
+
+            }
+
+
+        }
+
+
+
+        private void kulup_bas_2_islemdekiKayit()
+        {
+            //O anda ekrandaki kayda ilişkin işlem yapar ama buradaki mantık şu şekildedir. İstenilen kayıt ekrana 
+            //getirilmiştir. Yani burası liste veya ekrandaki kayıt mantığının dışında.
+
+            FiltrelenenSosyalKulupler istenenkulup = null;
+
+            if (cb_baski_basilacak_kulup.SelectedIndex >= 0)
+            {
+
+                istenenkulup = filtrelenenSosyalKuluplers[cb_baski_basilacak_kulup.SelectedIndex];
+
+            }
+
+
+            //Tüm defterler için ortak olabilecek değerlerle siparişçi excelini oluşturuyoruz.
+            kulup_icinAdresMektupSipariscisiHazirla();
+
+
+            for (int i = 0; i < dgv_talep_kulupler_baski.RowCount; i++)
+            {
+                DataGridViewRow dr = dgv_talep_kulupler_baski.Rows[i];
+
+                string basilacakolankulupkodu = dr.Cells["kulupkodu"].Value.ToString();
+
+                if (istenenkulup == null || (istenenkulup.kulupkodu.ToString() == basilacakolankulupkodu))
+                {
+                    //Eğer herhangi bir defter seçilmemişse tüm defterler basılacak demektir. Defter seçilmişse aynı defter mi diye bakıyoruz.
+                    kulup_bas_3_gelenKaydiBas(basilacakolankulupkodu);
+
+                }
+
+            }
+
+        }
+
+
+
+        private void kulup_bas_3_gelenKaydiBas(string basilacakolankulupkodu)
+        {
+
+            //Kulüp kodu geldi. 
+
+            
+                kulup_bas_3_ek_2_defter_bas(basilacakolankulupkodu, "sosyalkulup");
+           
+
+            //Kapağa isim verip kaydediyoruz. Ne isim verdiğimizi bileceğiz. müşterino_defterno veya müşterino_defterkapakno gibi.
+            //Sonra bunları sıra ile birleştireceğiz.
+
+
+
+
+        }
+
+
+        private void kulup_icinAdresMektupSipariscisiHazirla()
+        {
+
+
+            Dictionary<string, string> adresMesktupBaslikDegerleri = new Dictionary<string, string>();
+            //Kapakta/defterde/planda olması gereken değerleri burada oluşturuyoruz.
+
+            adresMesktupBaslikDegerleri["İLİ"] = BirOgt.ili;
+            adresMesktupBaslikDegerleri["ili"] = BirOgt.ili;
+            adresMesktupBaslikDegerleri["İLÇESİ"] = BirOgt.ilcesi;
+            adresMesktupBaslikDegerleri["OKULU"] = BirOgt.okuladi;
+            adresMesktupBaslikDegerleri["ilcesi"] = BirOgt.ilcesi;
+            adresMesktupBaslikDegerleri["sinifi"] = BirOgt.sinifi;
+            adresMesktupBaslikDegerleri["SINIFI"] = BirOgt.sinifi;
+
+            if (BirOgt.sinifi == "03" || BirOgt.sinifi == "04" || BirOgt.sinifi == "05" || BirOgt.sinifi == "06")
+            {
+                adresMesktupBaslikDegerleri["sinifi"] = metinler.anasinifi_okuloncesi_yazimi;
+                adresMesktupBaslikDegerleri["SINIFI"] = metinler.anasinifi_okuloncesi_yazimi;
+            }
+
+
+
+            adresMesktupBaslikDegerleri["subesi"] = BirOgt.subesi;
+            adresMesktupBaslikDegerleri["ŞUBE"] = BirOgt.subesi;
+            adresMesktupBaslikDegerleri["adisoyadi"] = BirOgt.adisoyadi;
+            adresMesktupBaslikDegerleri["ADI_SOYADI"] = BirOgt.adisoyadi;
+            adresMesktupBaslikDegerleri["bransi"] = BirOgt.bransi;
+            adresMesktupBaslikDegerleri["GÖREVİ"] = BirOgt.bransi;
+            adresMesktupBaslikDegerleri["OKUL_MÜDÜR"] = BirOgt.muduradi;
+            adresMesktupBaslikDegerleri["GÖREVİ1"] = BirOgt.mudurunvani;
+
+
+
+            excelSnf.adresMektupicinExceliHazirlasiparisci(adresMesktupBaslikDegerleri);
+
+        }
+
+
+
+
+
+        private void kulup_bas_3_ek_2_defter_bas(string basilacakolankulupkodu, string basilanTur)
+        {
+
+            //Kulüp kodu geldi.
+            //Burada defteri basıyoruz.
+
+            //Belgeyi açması için filigran ekle komutunu kullanıyoruz. İlk değişken olarak basılacak olan defter kapağını alıyoruz
+            //ve filigran olarak bir boşluk gönderiyoruz.
+
+            basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\" + basilacakolankulupkodu + ".docx", " ", false, false, basilacakolankulupkodu, basilanTur);
+
+        }
 
 
 
