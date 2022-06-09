@@ -912,7 +912,7 @@ namespace Materyall
 
             ogrblg.ilcesi = cb_bilgi_ilcesi.Text;
             ogrblg.kurumkodu = tb_bilgi_okulkodu.Text;
-            ogrblg.okuladi = tb_bilgi_okulu.Text;
+            ogrblg.okuladi = yrdsnf.ismiduzelt(tb_bilgi_okulu.Text, "ilce");
             ogrblg.sinifi = cb_bilgi_sinifi.Text;
             ogrblg.subesi = tb_bilgi_subesi.Text;
 
@@ -1066,7 +1066,7 @@ namespace Materyall
 
 
             tb_bilgi_okulkodu.Text = ogrblg.kurumkodu;
-            tb_bilgi_okulu.Text = ogrblg.okuladi;
+            tb_bilgi_okulu.Text = yrdsnf.ismiduzelt(ogrblg.okuladi, "ilce");
 
 
           
@@ -2597,7 +2597,7 @@ namespace Materyall
 
 
             tb_bilgi_okulkodu.Text = dr.Cells[excelbilgisutunlari.okulkodu_stn - 1].Value.ToString();
-            tb_bilgi_okulu.Text = dr.Cells[excelbilgisutunlari.okuladi_stn - 1].Value.ToString();
+            tb_bilgi_okulu.Text = yrdsnf.ismiduzelt(dr.Cells[excelbilgisutunlari.okuladi_stn - 1].Value.ToString(), "ilce");
 
             //Sınıfı burada olduğu gibi alıyoruz.
             cb_bilgi_sinifi.Text = dr.Cells[excelbilgisutunlari.sinif_stn - 1].Value.ToString();
@@ -3240,7 +3240,7 @@ namespace Materyall
 
 
             tb_bilgi_okulkodu.Text = dr.Cells[excelbilgisutunlari.okulkodu_stn - 1].Value.ToString();
-            tb_bilgi_okulu.Text = dr.Cells[excelbilgisutunlari.okuladi_stn - 1].Value.ToString();
+            tb_bilgi_okulu.Text = yrdsnf.ismiduzelt(dr.Cells[excelbilgisutunlari.okuladi_stn - 1].Value.ToString(), "ilce");
 
             //Sınıfı burada olduğu gibi alıyoruz.
             cb_bilgi_sinifi.Text = dr.Cells[excelbilgisutunlari.sinif_stn - 1].Value.ToString();
