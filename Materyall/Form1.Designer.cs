@@ -2275,7 +2275,6 @@
             // 
             this.dgv_serbestetkinlikdersleri_3.AllowUserToAddRows = false;
             this.dgv_serbestetkinlikdersleri_3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_serbestetkinlikdersleri_3.Enabled = false;
             this.dgv_serbestetkinlikdersleri_3.Location = new System.Drawing.Point(17, 288);
             this.dgv_serbestetkinlikdersleri_3.Name = "dgv_serbestetkinlikdersleri_3";
             this.dgv_serbestetkinlikdersleri_3.Size = new System.Drawing.Size(1333, 99);

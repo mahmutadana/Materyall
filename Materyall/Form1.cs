@@ -4498,7 +4498,7 @@ namespace Materyall
 
                 }
 
-                int kachaftavar = dgv_serbestetkinlikdersleri_4.RowCount;
+                int kachaftavar = dgv.RowCount;
 
 
                 int derssayac = 0; //Bunu seçilen serbest etkinlik dersleri olarak takip etmek için kullanacağız.
@@ -4523,7 +4523,7 @@ namespace Materyall
                         saatsayac++;
                         derssayac++;
 
-                        if (dgv_talep_serbestdersler_yillik.Rows.Count >= derssayac)
+                        if (derssayac >= dgv_talep_serbestdersler_yillik.Rows.Count)
                         {
                             derssayac = 0;
                         }
@@ -4699,7 +4699,7 @@ namespace Materyall
                 {
                     txWatermark = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Shapes.AddTextEffect(
                         MsoPresetTextEffect.msoTextEffect1,
-                                            filigranmetni, "Arial", (float)40, //Arial idi.
+                                            filigranmetni, "diskusmed", (float)40, //Arial idi.
                                              MsoTriState.msoTrue,
                                              MsoTriState.msoFalse,
                                              0, 0, ref oMissing);
@@ -4748,7 +4748,8 @@ namespace Materyall
             // string word_dosyamiz = @"C:\materyall\wordler\1001.docm";  //"c:\final.docx"; //this is where your result file locate
 
 
-            string hedef_pdf_dosyamiz = varsayilanbossa.plan_kayit_yolu_pdf;  //@"C:\materyall\wordler\1001pdf.pdf";                                                      //   Mailmerge(sourceFile, filePath, nr, dt.Columns);
+            string hedef_pdf_dosyamiz = varsayilanbossa.plan_kayit_yolu_pdf;  //@"C:\materyall\wordler\1001pdf.pdf";      
+            //   Mailmerge(sourceFile, filePath, nr, dt.Columns);
 
             if (!planmi1_deftermi0)
             {
@@ -4775,24 +4776,73 @@ namespace Materyall
         private void adresmektupBirlestir2(Application word_Uygulamasi, Document word_Belgesi, string hedefpdfdosyamiz, bool pdfyataydir_donecekmi, string basilanUrunKoduTarih_icin, string basilanTur)
         {
 
-            string excelAdresMektupbilgileri = metinler.siparisci_tam_yolu;
+           // string excelAdresMektupbilgileri = metinler.siparisci_tam_yolu;
+
+            string excelAdresMektupbilgileri = metinler.siparisci_tam_yolu_csv;
+
 
             //  Microsoft.Office.Interop.Word.Application wordApplication = new Microsoft.Office.Interop.Word.Application();
 
             // var document = new Document();
             // document = wordApplication.Documents.Add(Template: word_dosyamiz);
 
+            /*
+                        word_Belgesi.MailMerge.OpenDataSource(Name: excelAdresMektupbilgileri, ConfirmConversions: false, ReadOnly: true, LinkToSource: true,
+                            AddToRecentFiles: false, PasswordDocument: "", PasswordTemplate: "", WritePasswordDocument: "", WritePasswordTemplate: "", Revert: false,
+                            Format: WdOpenFormat.wdOpenFormatAuto, Connection: "Provider=Microsoft.Jet.OLEDB.4.0;Password='';User ID=Admin;Data Source=" + excelAdresMektupbilgileri + ";Mode=Read;Extended Properties=HDR=YES;IMEX=1;'';Jet OLEDB:System database='';Jet OLEDB:Registry Path='';Jet OLEDB:Database P",
+                            SQLStatement: "SELECT * FROM `Sayfa1$`", SQLStatement1: "", SubType: WdMergeSubType.wdMergeSubTypeAccess);
 
-            word_Belgesi.MailMerge.OpenDataSource(Name: excelAdresMektupbilgileri, ConfirmConversions: false, ReadOnly: true, LinkToSource: true,
+            excelden adres mektup birleştirmede alan sayıı sınırı var. Bunu aşmak için csv kullanacağız inşallah.
+             */
+
+
+
+            
+                      word_Belgesi.MailMerge.OpenDataSource(Name: excelAdresMektupbilgileri, ConfirmConversions: false, ReadOnly: true, LinkToSource: true,
+                          AddToRecentFiles: false, PasswordDocument: "", PasswordTemplate: "", WritePasswordDocument: "", WritePasswordTemplate: "", Revert: false,
+                          Format: WdOpenFormat.wdOpenFormatAuto, Connection: "Provider=Microsoft.Jet.OLEDB.4.0;Password='';User ID=Admin;Data Source=" + excelAdresMektupbilgileri + ";Mode=Read;Extended Properties=HDR=YES;IMEX=1;'';Jet OLEDB:System database='';Jet OLEDB:Registry Path='';Jet OLEDB:Database P",
+                          SQLStatement: "SELECT * FROM `siparisciCSV$`", SQLStatement1: "", SubType: WdMergeSubType.wdMergeSubTypeAccess);
+
+
+                            //Gösterilmesini sağlıyoruz.
+                            word_Belgesi.ActiveWindow.View.MailMergeDataView = true;
+
+
+            /*
+             word_Belgesi.MailMerge.OpenDataSource(Name: excelAdresMektupbilgileri, ConfirmConversions: false, ReadOnly: true, LinkToSource: true,
                 AddToRecentFiles: false, PasswordDocument: "", PasswordTemplate: "", WritePasswordDocument: "", WritePasswordTemplate: "", Revert: false,
-                Format: WdOpenFormat.wdOpenFormatAuto, Connection: "Provider=Microsoft.Jet.OLEDB.4.0;Password='';User ID=Admin;Data Source=" + excelAdresMektupbilgileri + ";Mode=Read;Extended Properties=HDR=YES;IMEX=1;'';Jet OLEDB:System database='';Jet OLEDB:Registry Path='';Jet OLEDB:Database P",
-                SQLStatement: "SELECT * FROM `Sayfa1$`", SQLStatement1: "", SubType: WdMergeSubType.wdMergeSubTypeAccess);
+                Format: WdOpenFormat.wdOpenFormatAuto, Connection: "",
+                SQLStatement: "", SQLStatement1: "", SubType: WdMergeSubType.wdMergeSubTypeAccess);
 
-            //"SELECT * FROM `Sayfa1$`" Tek tırnak farklı.
 
-            //   document.MailMerge.ViewMailMergeFieldCodes = WdConstants.wdToggle;
-            word_Belgesi.ActiveWindow.View.MailMergeDataView = true;
-           
+
+             //"SELECT * FROM `Sayfa1$`" Tek tırnak farklı.
+
+             //document.MailMerge.ViewMailMergeFieldCodes = WdConstants.wdToggle;
+             word_Belgesi.ActiveWindow.View.MailMergeDataView = true;
+            */
+
+
+
+            /*
+
+             //xml olarak deneyelim.
+             DataSet customersDs = new DataSet();
+             customersDs.ReadXml(metinler.siparisci_tam_yolu_xml);
+
+             /*
+             MessageBox.Show(customersDs.Tables.Count + " adet tablo var." + customersDs.Tables[0].TableName);
+
+             word_Belgesi.MailMerge.Execute(customersDs.Tables["customer"]);
+             //   word_Belgesi.getMailMerge().execute(customersDs.getTables().get("Customer"));
+             
+
+            MailMerge.ReferenceEquals(word_Belgesi, customersDs.Tables[0]);
+            word_Belgesi.MailMerge.Execute(true);
+
+            */
+
+
 
             //Şimdi de pdf olarak kaydedelim.
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Materyall
 {
@@ -99,6 +100,93 @@ namespace Materyall
 
             Metinler metinler = new Metinler();
 
+            /*
+            //Kendi mxl dosyasımı oluşturalım.
+            // string ilksati = """"<?xml version="1.0" encoding="utf - 8"?>""";
+
+            string tagac = "<bilgiler> \n <bilgi ";
+            string tagkapat = "/> \n </bilgiler>";
+
+            string aracumle = "";
+
+            foreach (string s in adresMesktupBaslikDegerleri.Keys)
+            {
+                aracumle += " " + s + "=" + "\"" + adresMesktupBaslikDegerleri[s].Replace("\"","'") + "\"";
+
+            }
+
+            string xmlm = tagac + aracumle + tagkapat;
+         //   System.IO.File.WriteAllText(metinler.siparisci_tam_yolu_xml, xmlm);
+            */
+
+
+            /*
+            //xml deneyelim.
+            adres mektup desteklemiyor.
+           
+            XElement el = new XElement("root",
+                adresMesktupBaslikDegerleri.Select(kv => new XElement(kv.Key, kv.Value)));
+
+            System.IO.File.WriteAllText(metinler.siparisci_tam_yolu, el.ToString());
+            */
+
+
+            /*
+            String csv = String.Join( "", adresMesktupBaslikDegerleri.Select(d => $"{d.Key};"));
+
+            csv += Environment.NewLine + String.Join("", adresMesktupBaslikDegerleri.Select(d => $"{d.Value};"));
+
+            System.IO.File.WriteAllText(metinler.siparisci_tam_yolu_csv, csv);
+            */
+
+            //Kendimiz yazalım.
+            
+                        string bir = "";
+                        string iki = "";
+                        string uc = "";
+                        string csv;
+
+
+                       foreach (string s in adresMesktupBaslikDegerleri.Keys)
+                       {
+                           bir += s + "\t";
+                           iki += adresMesktupBaslikDegerleri[s] + "\t";
+                            uc += "x\t";
+                       }
+                       
+
+
+            /*
+            for (int i = 1; i < 5; i++)
+            {
+                bir += "başlık" + i + ";";
+               iki += "bilgi" + i + ";";
+            }
+
+            */
+
+            csv = bir + "\n" + iki + "\n" + uc + "\n";
+
+            System.IO.File.WriteAllText(metinler.siparisci_tam_yolu_csv, csv);
+           
+
+
+
+
+
+
+
+            /*
+             * 
+            String csv = String.Join(
+    Environment.NewLine,
+    adresMesktupBaslikDegerleri.Select(d => $"{d.Key};{d.Value};"));
+            System.IO.File.WriteAllText(metinler.siparisci_tam_yolu, csv);
+
+            */
+
+            /*
+          
             //Gelen başlıkları 1. satıra, değerleri 2. satıra yazarak bir excel belgesi oluşturuyoruz. (Eski siparişçi) Adı siparisci2022.xls olabilir.
 
             //Exceli açalım.
@@ -123,8 +211,12 @@ namespace Materyall
             }
 
 
+
+            ktp.SaveAs(Filename: metinler.siparisci_tam_yolu_csv, FileFormat: Microsoft.Office.Interop.Excel.XlFileFormat.xlCSV, CreateBackup: false);
+
             ktp.Close(true);
             uyg.Quit();
+            */
 
         }
 

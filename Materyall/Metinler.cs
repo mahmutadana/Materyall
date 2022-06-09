@@ -12,8 +12,10 @@ namespace Materyall
 
         //  public string siparisci_tam_yolu = @"C:\Materyall\SistemDosyaları\siparisci2022\siparisci_2022.xlsx";
         public string siparisci_tam_yolu = @"C:\Materyall\siparisci.xlsx";
+        public string siparisci_tam_yolu_csv = @"C:\Materyall\siparisciCSV.csv";
+       public string siparisci_tam_yolu_xml = @"C:\Materyall\sipariscixml.xml";
 
-     //   public string ogretmenlogo_ustyolu = @"C:\Materyall\Logolar";
+        //   public string ogretmenlogo_ustyolu = @"C:\Materyall\Logolar";
         public string logo_wordbaglantili_klasor = @"C:\Materyall\Logolar\";
         public string logo_wordbaglantili_dosyaadi = "logo.png";
 
