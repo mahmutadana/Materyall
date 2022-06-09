@@ -135,13 +135,13 @@ namespace Materyall
             String csv = String.Join( "", adresMesktupBaslikDegerleri.Select(d => $"{d.Key};"));
 
             csv += Environment.NewLine + String.Join("", adresMesktupBaslikDegerleri.Select(d => $"{d.Value};"));
-
+            “
             System.IO.File.WriteAllText(metinler.siparisci_tam_yolu_csv, csv);
             */
 
             //Kendimiz yazalım.
-            
-                        string bir = "";
+
+            string bir = "";
                         string iki = "";
                         string uc = "";
                         string csv;
@@ -150,7 +150,7 @@ namespace Materyall
                        foreach (string s in adresMesktupBaslikDegerleri.Keys)
                        {
                            bir += s + "\t";
-                           iki += adresMesktupBaslikDegerleri[s] + "\t";
+                           iki += adresMesktupBaslikDegerleri[s].Replace("“","'").Replace("”", "'").Replace("\"", "'") + "\t";
                             uc += "x\t";
                        }
                        
