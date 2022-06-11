@@ -1745,6 +1745,11 @@ namespace Materyall
             }
 
 
+
+           
+
+
+
             //Döngüden çıktığımıza göre bu ders daha önce eklenmemiş. O zaman ekliyoruz.
 
             string eklenecekolanders = BirOgt.sinifi + "-" + serbestetkinlikdersininadi;
@@ -1764,6 +1769,13 @@ namespace Materyall
                     }
                     else
                     {
+
+                        if (kayitsonucu == metinler.mukerrerkayitbilgisitalep)
+                        {
+                          //  Daha önce eklenmiş. Uyarı vermiyoruz. Başka bir hata olursa uyarı vereceğiz.
+                            return;
+                        }
+
                         MessageBox.Show("İşlem tamamlanmadı. Serbest etkinlik ana dersi eklenemedi. Öğretmen: " + BirOgt.adisoyadi + " Hata: " + kayitsonucu);
                         return;
                     }
@@ -1777,6 +1789,8 @@ namespace Materyall
 
 
         }
+
+
 
 
         private void linklbl_talep_secimiekle_serbest_yillik_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
