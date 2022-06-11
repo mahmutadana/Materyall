@@ -15,6 +15,11 @@ namespace Materyall
         public string siparisci_tam_yolu_csv = @"C:\Materyall\siparisciCSV.csv";
        public string siparisci_tam_yolu_xml = @"C:\Materyall\sipariscixml.xml";
 
+
+        public string pdf_alt_klasoru_plan = "planlar";
+        public string pdf_alt_klasoru_defter = "defterler";
+        public string pdf_alt_klasoru_sosyalkulup = "sosyalkulupler";
+        
         //   public string ogretmenlogo_ustyolu = @"C:\Materyall\Logolar";
         public string logo_wordbaglantili_klasor = @"C:\Materyall\Logolar\";
         public string logo_wordbaglantili_dosyaadi = "logo.png";

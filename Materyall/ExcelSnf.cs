@@ -150,7 +150,7 @@ namespace Materyall
                        foreach (string s in adresMesktupBaslikDegerleri.Keys)
                        {
                            bir += s + "\t";
-                           iki += adresMesktupBaslikDegerleri[s].Replace("“","'").Replace("”", "'").Replace("\"", "'") + "\t";
+                           iki += adresMesktupBaslikDegerleri[s].Replace("“","'").Replace("”", "'").Replace("\"", "'").Replace("\t", " ").Replace("\n", "'").Replace("\r", "'").Replace("\r\n", "'") + "\t";
                             uc += "x\t";
                        }
                        

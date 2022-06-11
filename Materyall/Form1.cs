@@ -69,7 +69,7 @@ namespace Materyall
         //Plan, defter veya sosyal kulüp yazdırılırken pdf olarak mı kalacak, yazıcıya gönderilecek mi kısmı için kullanıacak.
         //Basıma başla dedindiği anda buna değer atanacak.
         bool YAZDIRILACAKMI1_PDFMI0;
-
+        string PDF_CIKTI_KLASORU_ALT_BASLIK = "planlar";
 
         public Form1()
         {
@@ -3676,6 +3676,9 @@ namespace Materyall
 
         private void bt_defterbas_baskiyabasla_Click(object sender, EventArgs e)
         {
+
+            PDF_CIKTI_KLASORU_ALT_BASLIK = metinler.pdf_alt_klasoru_defter;
+
             Bekleyinform bekleyinform = new Bekleyinform();
 
             bekleyinform.Show();
@@ -4001,6 +4004,8 @@ namespace Materyall
 
         private void bt_planbas_baskiyabasla_Click(object sender, EventArgs e)
         {
+
+            PDF_CIKTI_KLASORU_ALT_BASLIK = metinler.pdf_alt_klasoru_plan;
 
             Bekleyinform bekleyinform = new Bekleyinform();
 
@@ -4697,10 +4702,13 @@ namespace Materyall
                 Microsoft.Office.Interop.Word.Shape txWatermark = null;
                 foreach (Microsoft.Office.Interop.Word.Section section in wordDoc.Sections)
                 {
+
+                   
+
                     txWatermark = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Shapes.AddTextEffect(
                         MsoPresetTextEffect.msoTextEffect1,
-                                            filigranmetni, "diskusmed", (float)40, //Arial idi.
-                                             MsoTriState.msoTrue,
+                                            filigranmetni, "DiskusDMed", (float)20, //Arial idi.
+                                             MsoTriState.msoFalse,
                                              MsoTriState.msoFalse,
                                              0, 0, ref oMissing);
 
@@ -4715,9 +4723,9 @@ namespace Materyall
                                                Microsoft.Office.Interop.Word.WdRelativeVerticalPosition.wdRelativeVerticalPositionMargin;
                     txWatermark.Left = (float)Microsoft.Office.Interop.Word.WdShapePosition.wdShapeCenter;
                     txWatermark.Top = (float)Microsoft.Office.Interop.Word.WdShapePosition.wdShapeCenter;
-                    txWatermark.Height = wordApp.InchesToPoints(2.4f);
-                    txWatermark.Width = wordApp.InchesToPoints(6f);
-                    txWatermark.Rotation = -60;
+                    txWatermark.Height = wordApp.InchesToPoints(1.0f);
+                    txWatermark.Width = wordApp.InchesToPoints(10f);
+                    txWatermark.Rotation = -50;
 
                     //SADECE 1 BÖLÜME EKLESEK YETERLİ. YOKSA KAÇ BÖLÜM VARSA AYNISINI O KADAR EKLİYOR.
                     break;
@@ -4989,15 +4997,61 @@ namespace Materyall
                 hedef_pdf_dosyamiz_birlesik = varsayilanbossa.defter_kayit_yolu_pdf;
             }
 
+
+            //Varsayılan kayıt konumunun altına ilgili klasörü ekleyeceğiz. Hepsi aynı klasör olarak seçilmiş ise altta karışmaması için.
+
+            hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + PDF_CIKTI_KLASORU_ALT_BASLIK;
+
+            string path = hedef_pdf_dosyamiz_birlesik;
+
+            try
+            {
+                // Determine whether the directory exists.
+                if (Directory.Exists(path))
+                {
+                    Console.WriteLine("That path exists already.");
+                   
+                } else
+                {
+
+                        // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(path);
+                            Console.WriteLine("The directory was created successfully at {0}.", Directory.GetCreationTime(path));
+
+                            /*
+                            // Delete the directory.
+                            di.Delete();
+                            Console.WriteLine("The directory was deleted successfully.");
+                            */
+                }
+
+               
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            }
+            finally { }
+
+
+            //Alt klasör ekleme işleminin sonu.
+
+
+
+            //Dosya adı ayarlama işlemi
+            string pdf_dosya_adi = yazdirilacak_pdf_dosya_adini_ayarla();
+
+
+
             //Tek tek değil de toplu ise o zaman toplupdf ifadesini ekleyeceğiz.
             if (!tektek1_toplu0)
             {
-                hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + "toplu" + BirOgt.oid + ".pdf";
+                hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + "Tpl_" + pdf_dosya_adi + ".pdf";
 
             }
             else
             {
-                hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + BirOgt.oid + ".pdf";
+                hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + pdf_dosya_adi + ".pdf";
             }
 
 
@@ -5107,6 +5161,70 @@ namespace Materyall
 
 
 
+        private string yazdirilacak_pdf_dosya_adini_ayarla()
+        {
+
+            string kayit_pdf_adi = ""; // Eğer boş olursa oid ekleyeceğiz. "pdf" + BirOgt.oid;
+
+            if (cb_pdfadi_ili.Checked)
+            {
+                kayit_pdf_adi += BirOgt.ili;
+            }
+
+
+            if (cb_pdfadi_ilcesi.Checked)
+            {
+                kayit_pdf_adi += "_" + BirOgt.ilcesi;
+            }
+
+            if (cb_pdfadi_kurumkodu.Checked)
+            {
+                kayit_pdf_adi += "_" + BirOgt.kurumkodu;
+            }
+
+            if (cb_pdfadi_kurumadi.Checked)
+            {
+                kayit_pdf_adi += "_" + BirOgt.okuladi;
+            }
+
+            if (cb_pdfadi_sinifi.Checked)
+            {
+                kayit_pdf_adi += "_" + BirOgt.sinifi;
+            }
+
+            if (cb_pdfadi_subesi.Checked)
+            {
+                kayit_pdf_adi += "_" + BirOgt.subesi;
+            }
+
+            if (cb_pdfadi_ogretmenadi.Checked)
+            {
+                kayit_pdf_adi += "_" + BirOgt.adisoyadi;
+            }
+
+            if (cb_pdfadi_musterino.Checked)
+            {
+                kayit_pdf_adi += "_" + BirOgt.oid;
+            }
+
+
+
+            if (kayit_pdf_adi == "")
+            {
+                kayit_pdf_adi =  "pdf_" + BirOgt.oid;
+            }
+
+
+
+            if (kayit_pdf_adi.StartsWith("_"))
+            {
+                kayit_pdf_adi = kayit_pdf_adi.Substring(1);
+            }
+
+
+
+            return kayit_pdf_adi;
+        }
 
 
 
@@ -5214,6 +5332,9 @@ namespace Materyall
 
         private void bt_kulupbas_Click(object sender, EventArgs e)
         {
+
+            PDF_CIKTI_KLASORU_ALT_BASLIK = metinler.pdf_alt_klasoru_sosyalkulup;
+
             Bekleyinform bekleyinform = new Bekleyinform();
 
             bekleyinform.Show();
@@ -5438,7 +5559,7 @@ namespace Materyall
             //Belgeyi açması için filigran ekle komutunu kullanıyoruz. İlk değişken olarak basılacak olan defter kapağını alıyoruz
             //ve filigran olarak bir boşluk gönderiyoruz.
 
-            basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\" + basilacakolankulupkodu + ".docx", " ", false, false, basilacakolankulupkodu, basilanTur);
+            basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\kulup_" + basilacakolankulupkodu + ".docx", " ", false, false, basilacakolankulupkodu, basilanTur);
 
         }
 
