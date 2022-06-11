@@ -952,6 +952,7 @@ namespace Materyall
                 }
                 else
                 {
+                    tb_bilgi_musterino.Text = "";
                     MessageBox.Show(kayitsonucu);
                 }
 
@@ -2467,7 +2468,7 @@ namespace Materyall
 
                     lbl_bekleyin.Text = "Tamamlandı. Adet: " + datagridSunucuTalepleri.RowCount;
 
-
+                    pb_defterhizlikayit.Value = 0;
 
                 }
                 else
@@ -2547,11 +2548,17 @@ namespace Materyall
         private void verileriVtYeKaydet()
         {
 
-          //  MessageBox.Show(datagridSunucuTalepleri.Rows.Count.ToString(), "Satır");
+            //  MessageBox.Show(datagridSunucuTalepleri.Rows.Count.ToString(), "Satır");
+            pb_defterhizlikayit.Maximum = datagridSunucuTalepleri.RowCount;
 
 
-            for (int i = 0; i < datagridSunucuTalepleri.Rows.Count; i++)
+              
+
+                for (int i = 0; i < datagridSunucuTalepleri.Rows.Count; i++)
             {
+
+                pb_defterhizlikayit.Value = i; // +1 gerekir ama eklemiyoruz.
+
                 DataGridViewRow dr = datagridSunucuTalepleri.Rows[i];
 
                 if (dr.Cells[excelbilgisutunlari.adisoyadi_stn].Value.ToString() != "")
@@ -2639,8 +2646,18 @@ namespace Materyall
             //Öğretmen bilgisi kaydedelim. //Bilgileri forma yazmıştık, bilgileri oradan okutup kaydettiyoruz.
             yeniKayitYapveyaGuncelle(true, false);
 
-            //Dersleri vs getirelim. (ile, bayiye göre...)
-            varsayilanTalepleilgiliVeriler();
+            if (tb_bilgi_musterino.Text == "")
+            {
+                return 0;
+
+            } else
+            {
+                //KAyıt başarılı olmuşsa bu işlemi yapalım. Yoksa gereksiz yere yapmayalım.
+                //Dersleri vs getirelim. (ile, bayiye göre...)
+                varsayilanTalepleilgiliVeriler();
+            }
+
+           
 
             //Yeni kayıt soununda oluşan müşteri numarasını döndürüyoruz.
             return int.Parse(tb_bilgi_musterino.Text);

@@ -26,6 +26,10 @@ namespace Materyall
         public string ismiduzelt(string isim, string turu)
         {
 
+            if (isim == null)
+            {
+                return null;
+            }
 
             //Türü isim ise son kelime büyük, ilçr ise sadece ilk harfi büyük olacak. Tamamı büyükse işlem yapmıyor. O yüzden önce küçüğe çevirdik.
             isim = CultureInfo.CurrentCulture.TextInfo.ToLower(isim.Trim());
@@ -73,7 +77,7 @@ namespace Materyall
             //Eğer bir logo adı gelmişse tam yol haline getiriyoruz.
             string logomuz = metinler.logo_wordbaglantili_klasor + logoadi;
 
-            if (logoadi.Trim() == "")
+            if (logoadi == null || logoadi.Trim() == "")
             {
                 //Eğer logo yoksa varsayılan logoyu kullanıyoruz. Logo ismi dolu gelirse zaten logonun tam yolu gelecek.
                 logomuz = logohedefklasoru + "meb_logo.png";
