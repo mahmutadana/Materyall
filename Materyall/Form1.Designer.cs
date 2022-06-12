@@ -198,6 +198,15 @@
             this.dgv_serbestetkinlikdersleri_1 = new System.Windows.Forms.DataGridView();
             this.label57 = new System.Windows.Forms.Label();
             this.tab_digerislemler = new System.Windows.Forms.TabPage();
+            this.groupBox54 = new System.Windows.Forms.GroupBox();
+            this.cb_pdfadi_ogretmenadi = new System.Windows.Forms.CheckBox();
+            this.cb_pdfadi_subesi = new System.Windows.Forms.CheckBox();
+            this.cb_pdfadi_sinifi = new System.Windows.Forms.CheckBox();
+            this.cb_pdfadi_kurumadi = new System.Windows.Forms.CheckBox();
+            this.cb_pdfadi_kurumkodu = new System.Windows.Forms.CheckBox();
+            this.cb_pdfadi_ilcesi = new System.Windows.Forms.CheckBox();
+            this.cb_pdfadi_ili = new System.Windows.Forms.CheckBox();
+            this.cb_pdfadi_musterino = new System.Windows.Forms.CheckBox();
             this.groupBox41 = new System.Windows.Forms.GroupBox();
             this.tb_varsayilan_defterkapakyolu = new System.Windows.Forms.TextBox();
             this.bt_varsayilan_degistir_defterkapakyolu = new System.Windows.Forms.Button();
@@ -380,15 +389,6 @@
             this.label48 = new System.Windows.Forms.Label();
             this.tab_alt_loglar = new System.Windows.Forms.TabPage();
             this.tb_logkayitlari = new System.Windows.Forms.TextBox();
-            this.groupBox54 = new System.Windows.Forms.GroupBox();
-            this.cb_pdfadi_musterino = new System.Windows.Forms.CheckBox();
-            this.cb_pdfadi_ili = new System.Windows.Forms.CheckBox();
-            this.cb_pdfadi_ilcesi = new System.Windows.Forms.CheckBox();
-            this.cb_pdfadi_kurumkodu = new System.Windows.Forms.CheckBox();
-            this.cb_pdfadi_kurumadi = new System.Windows.Forms.CheckBox();
-            this.cb_pdfadi_sinifi = new System.Windows.Forms.CheckBox();
-            this.cb_pdfadi_subesi = new System.Windows.Forms.CheckBox();
-            this.cb_pdfadi_ogretmenadi = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -450,6 +450,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_1)).BeginInit();
             this.tab_digerislemler.SuspendLayout();
+            this.groupBox54.SuspendLayout();
             this.groupBox41.SuspendLayout();
             this.groupBox40.SuspendLayout();
             this.groupBox19.SuspendLayout();
@@ -481,7 +482,6 @@
             this.groupBox11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).BeginInit();
             this.tab_alt_loglar.SuspendLayout();
-            this.groupBox54.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -2354,6 +2354,115 @@
             this.tab_digerislemler.Text = "Diğer İşlemler";
             this.tab_digerislemler.UseVisualStyleBackColor = true;
             // 
+            // groupBox54
+            // 
+            this.groupBox54.Controls.Add(this.cb_pdfadi_ogretmenadi);
+            this.groupBox54.Controls.Add(this.cb_pdfadi_subesi);
+            this.groupBox54.Controls.Add(this.cb_pdfadi_sinifi);
+            this.groupBox54.Controls.Add(this.cb_pdfadi_kurumadi);
+            this.groupBox54.Controls.Add(this.cb_pdfadi_kurumkodu);
+            this.groupBox54.Controls.Add(this.cb_pdfadi_ilcesi);
+            this.groupBox54.Controls.Add(this.cb_pdfadi_ili);
+            this.groupBox54.Controls.Add(this.cb_pdfadi_musterino);
+            this.groupBox54.Location = new System.Drawing.Point(623, 423);
+            this.groupBox54.Name = "groupBox54";
+            this.groupBox54.Size = new System.Drawing.Size(339, 107);
+            this.groupBox54.TabIndex = 15;
+            this.groupBox54.TabStop = false;
+            this.groupBox54.Text = "Pdf Dosya Adı";
+            // 
+            // cb_pdfadi_ogretmenadi
+            // 
+            this.cb_pdfadi_ogretmenadi.AutoSize = true;
+            this.cb_pdfadi_ogretmenadi.Location = new System.Drawing.Point(153, 44);
+            this.cb_pdfadi_ogretmenadi.Name = "cb_pdfadi_ogretmenadi";
+            this.cb_pdfadi_ogretmenadi.Size = new System.Drawing.Size(90, 17);
+            this.cb_pdfadi_ogretmenadi.TabIndex = 7;
+            this.cb_pdfadi_ogretmenadi.Text = "Öğretmen Adı";
+            this.cb_pdfadi_ogretmenadi.UseVisualStyleBackColor = true;
+            // 
+            // cb_pdfadi_subesi
+            // 
+            this.cb_pdfadi_subesi.AutoSize = true;
+            this.cb_pdfadi_subesi.Checked = true;
+            this.cb_pdfadi_subesi.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_pdfadi_subesi.Location = new System.Drawing.Point(91, 44);
+            this.cb_pdfadi_subesi.Name = "cb_pdfadi_subesi";
+            this.cb_pdfadi_subesi.Size = new System.Drawing.Size(51, 17);
+            this.cb_pdfadi_subesi.TabIndex = 6;
+            this.cb_pdfadi_subesi.Text = "Şube";
+            this.cb_pdfadi_subesi.UseVisualStyleBackColor = true;
+            // 
+            // cb_pdfadi_sinifi
+            // 
+            this.cb_pdfadi_sinifi.AutoSize = true;
+            this.cb_pdfadi_sinifi.Checked = true;
+            this.cb_pdfadi_sinifi.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_pdfadi_sinifi.Location = new System.Drawing.Point(28, 44);
+            this.cb_pdfadi_sinifi.Name = "cb_pdfadi_sinifi";
+            this.cb_pdfadi_sinifi.Size = new System.Drawing.Size(46, 17);
+            this.cb_pdfadi_sinifi.TabIndex = 5;
+            this.cb_pdfadi_sinifi.Text = "Sınıf";
+            this.cb_pdfadi_sinifi.UseVisualStyleBackColor = true;
+            // 
+            // cb_pdfadi_kurumadi
+            // 
+            this.cb_pdfadi_kurumadi.AutoSize = true;
+            this.cb_pdfadi_kurumadi.Checked = true;
+            this.cb_pdfadi_kurumadi.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_pdfadi_kurumadi.Location = new System.Drawing.Point(249, 19);
+            this.cb_pdfadi_kurumadi.Name = "cb_pdfadi_kurumadi";
+            this.cb_pdfadi_kurumadi.Size = new System.Drawing.Size(74, 17);
+            this.cb_pdfadi_kurumadi.TabIndex = 4;
+            this.cb_pdfadi_kurumadi.Text = "Kurum Adı";
+            this.cb_pdfadi_kurumadi.UseVisualStyleBackColor = true;
+            // 
+            // cb_pdfadi_kurumkodu
+            // 
+            this.cb_pdfadi_kurumkodu.AutoSize = true;
+            this.cb_pdfadi_kurumkodu.Location = new System.Drawing.Point(153, 19);
+            this.cb_pdfadi_kurumkodu.Name = "cb_pdfadi_kurumkodu";
+            this.cb_pdfadi_kurumkodu.Size = new System.Drawing.Size(84, 17);
+            this.cb_pdfadi_kurumkodu.TabIndex = 3;
+            this.cb_pdfadi_kurumkodu.Text = "Kurum Kodu";
+            this.cb_pdfadi_kurumkodu.UseVisualStyleBackColor = true;
+            // 
+            // cb_pdfadi_ilcesi
+            // 
+            this.cb_pdfadi_ilcesi.AutoSize = true;
+            this.cb_pdfadi_ilcesi.Checked = true;
+            this.cb_pdfadi_ilcesi.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_pdfadi_ilcesi.Location = new System.Drawing.Point(91, 19);
+            this.cb_pdfadi_ilcesi.Name = "cb_pdfadi_ilcesi";
+            this.cb_pdfadi_ilcesi.Size = new System.Drawing.Size(43, 17);
+            this.cb_pdfadi_ilcesi.TabIndex = 2;
+            this.cb_pdfadi_ilcesi.Text = "İlçe";
+            this.cb_pdfadi_ilcesi.UseVisualStyleBackColor = true;
+            // 
+            // cb_pdfadi_ili
+            // 
+            this.cb_pdfadi_ili.AutoSize = true;
+            this.cb_pdfadi_ili.Checked = true;
+            this.cb_pdfadi_ili.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_pdfadi_ili.Location = new System.Drawing.Point(28, 19);
+            this.cb_pdfadi_ili.Name = "cb_pdfadi_ili";
+            this.cb_pdfadi_ili.Size = new System.Drawing.Size(31, 17);
+            this.cb_pdfadi_ili.TabIndex = 1;
+            this.cb_pdfadi_ili.Text = "İl";
+            this.cb_pdfadi_ili.UseVisualStyleBackColor = true;
+            // 
+            // cb_pdfadi_musterino
+            // 
+            this.cb_pdfadi_musterino.AutoSize = true;
+            this.cb_pdfadi_musterino.Checked = true;
+            this.cb_pdfadi_musterino.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_pdfadi_musterino.Location = new System.Drawing.Point(249, 44);
+            this.cb_pdfadi_musterino.Name = "cb_pdfadi_musterino";
+            this.cb_pdfadi_musterino.Size = new System.Drawing.Size(66, 17);
+            this.cb_pdfadi_musterino.TabIndex = 0;
+            this.cb_pdfadi_musterino.Text = "Kayıt No";
+            this.cb_pdfadi_musterino.UseVisualStyleBackColor = true;
+            // 
             // groupBox41
             // 
             this.groupBox41.Controls.Add(this.tb_varsayilan_defterkapakyolu);
@@ -3252,8 +3361,6 @@
             // 
             this.cb_bilgi_musterinokilitli.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cb_bilgi_musterinokilitli.AutoSize = true;
-            this.cb_bilgi_musterinokilitli.Checked = true;
-            this.cb_bilgi_musterinokilitli.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_bilgi_musterinokilitli.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_bilgi_musterinokilitli.Location = new System.Drawing.Point(178, 16);
             this.cb_bilgi_musterinokilitli.Name = "cb_bilgi_musterinokilitli";
@@ -3276,7 +3383,6 @@
             // tb_bilgi_musterino
             // 
             this.tb_bilgi_musterino.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tb_bilgi_musterino.Enabled = false;
             this.tb_bilgi_musterino.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tb_bilgi_musterino.Location = new System.Drawing.Point(87, 9);
             this.tb_bilgi_musterino.Name = "tb_bilgi_musterino";
@@ -4305,115 +4411,6 @@
             this.tb_logkayitlari.Size = new System.Drawing.Size(1230, 264);
             this.tb_logkayitlari.TabIndex = 0;
             // 
-            // groupBox54
-            // 
-            this.groupBox54.Controls.Add(this.cb_pdfadi_ogretmenadi);
-            this.groupBox54.Controls.Add(this.cb_pdfadi_subesi);
-            this.groupBox54.Controls.Add(this.cb_pdfadi_sinifi);
-            this.groupBox54.Controls.Add(this.cb_pdfadi_kurumadi);
-            this.groupBox54.Controls.Add(this.cb_pdfadi_kurumkodu);
-            this.groupBox54.Controls.Add(this.cb_pdfadi_ilcesi);
-            this.groupBox54.Controls.Add(this.cb_pdfadi_ili);
-            this.groupBox54.Controls.Add(this.cb_pdfadi_musterino);
-            this.groupBox54.Location = new System.Drawing.Point(623, 423);
-            this.groupBox54.Name = "groupBox54";
-            this.groupBox54.Size = new System.Drawing.Size(339, 107);
-            this.groupBox54.TabIndex = 15;
-            this.groupBox54.TabStop = false;
-            this.groupBox54.Text = "Pdf Dosya Adı";
-            // 
-            // cb_pdfadi_musterino
-            // 
-            this.cb_pdfadi_musterino.AutoSize = true;
-            this.cb_pdfadi_musterino.Checked = true;
-            this.cb_pdfadi_musterino.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_pdfadi_musterino.Location = new System.Drawing.Point(249, 44);
-            this.cb_pdfadi_musterino.Name = "cb_pdfadi_musterino";
-            this.cb_pdfadi_musterino.Size = new System.Drawing.Size(66, 17);
-            this.cb_pdfadi_musterino.TabIndex = 0;
-            this.cb_pdfadi_musterino.Text = "Kayıt No";
-            this.cb_pdfadi_musterino.UseVisualStyleBackColor = true;
-            // 
-            // cb_pdfadi_ili
-            // 
-            this.cb_pdfadi_ili.AutoSize = true;
-            this.cb_pdfadi_ili.Checked = true;
-            this.cb_pdfadi_ili.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_pdfadi_ili.Location = new System.Drawing.Point(28, 19);
-            this.cb_pdfadi_ili.Name = "cb_pdfadi_ili";
-            this.cb_pdfadi_ili.Size = new System.Drawing.Size(31, 17);
-            this.cb_pdfadi_ili.TabIndex = 1;
-            this.cb_pdfadi_ili.Text = "İl";
-            this.cb_pdfadi_ili.UseVisualStyleBackColor = true;
-            // 
-            // cb_pdfadi_ilcesi
-            // 
-            this.cb_pdfadi_ilcesi.AutoSize = true;
-            this.cb_pdfadi_ilcesi.Checked = true;
-            this.cb_pdfadi_ilcesi.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_pdfadi_ilcesi.Location = new System.Drawing.Point(91, 19);
-            this.cb_pdfadi_ilcesi.Name = "cb_pdfadi_ilcesi";
-            this.cb_pdfadi_ilcesi.Size = new System.Drawing.Size(43, 17);
-            this.cb_pdfadi_ilcesi.TabIndex = 2;
-            this.cb_pdfadi_ilcesi.Text = "İlçe";
-            this.cb_pdfadi_ilcesi.UseVisualStyleBackColor = true;
-            // 
-            // cb_pdfadi_kurumkodu
-            // 
-            this.cb_pdfadi_kurumkodu.AutoSize = true;
-            this.cb_pdfadi_kurumkodu.Location = new System.Drawing.Point(153, 19);
-            this.cb_pdfadi_kurumkodu.Name = "cb_pdfadi_kurumkodu";
-            this.cb_pdfadi_kurumkodu.Size = new System.Drawing.Size(84, 17);
-            this.cb_pdfadi_kurumkodu.TabIndex = 3;
-            this.cb_pdfadi_kurumkodu.Text = "Kurum Kodu";
-            this.cb_pdfadi_kurumkodu.UseVisualStyleBackColor = true;
-            // 
-            // cb_pdfadi_kurumadi
-            // 
-            this.cb_pdfadi_kurumadi.AutoSize = true;
-            this.cb_pdfadi_kurumadi.Checked = true;
-            this.cb_pdfadi_kurumadi.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_pdfadi_kurumadi.Location = new System.Drawing.Point(249, 19);
-            this.cb_pdfadi_kurumadi.Name = "cb_pdfadi_kurumadi";
-            this.cb_pdfadi_kurumadi.Size = new System.Drawing.Size(74, 17);
-            this.cb_pdfadi_kurumadi.TabIndex = 4;
-            this.cb_pdfadi_kurumadi.Text = "Kurum Adı";
-            this.cb_pdfadi_kurumadi.UseVisualStyleBackColor = true;
-            // 
-            // cb_pdfadi_sinifi
-            // 
-            this.cb_pdfadi_sinifi.AutoSize = true;
-            this.cb_pdfadi_sinifi.Checked = true;
-            this.cb_pdfadi_sinifi.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_pdfadi_sinifi.Location = new System.Drawing.Point(28, 44);
-            this.cb_pdfadi_sinifi.Name = "cb_pdfadi_sinifi";
-            this.cb_pdfadi_sinifi.Size = new System.Drawing.Size(46, 17);
-            this.cb_pdfadi_sinifi.TabIndex = 5;
-            this.cb_pdfadi_sinifi.Text = "Sınıf";
-            this.cb_pdfadi_sinifi.UseVisualStyleBackColor = true;
-            // 
-            // cb_pdfadi_subesi
-            // 
-            this.cb_pdfadi_subesi.AutoSize = true;
-            this.cb_pdfadi_subesi.Checked = true;
-            this.cb_pdfadi_subesi.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_pdfadi_subesi.Location = new System.Drawing.Point(91, 44);
-            this.cb_pdfadi_subesi.Name = "cb_pdfadi_subesi";
-            this.cb_pdfadi_subesi.Size = new System.Drawing.Size(51, 17);
-            this.cb_pdfadi_subesi.TabIndex = 6;
-            this.cb_pdfadi_subesi.Text = "Şube";
-            this.cb_pdfadi_subesi.UseVisualStyleBackColor = true;
-            // 
-            // cb_pdfadi_ogretmenadi
-            // 
-            this.cb_pdfadi_ogretmenadi.AutoSize = true;
-            this.cb_pdfadi_ogretmenadi.Location = new System.Drawing.Point(153, 44);
-            this.cb_pdfadi_ogretmenadi.Name = "cb_pdfadi_ogretmenadi";
-            this.cb_pdfadi_ogretmenadi.Size = new System.Drawing.Size(90, 17);
-            this.cb_pdfadi_ogretmenadi.TabIndex = 7;
-            this.cb_pdfadi_ogretmenadi.Text = "Öğretmen Adı";
-            this.cb_pdfadi_ogretmenadi.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4519,6 +4516,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_1)).EndInit();
             this.tab_digerislemler.ResumeLayout(false);
             this.tab_digerislemler.PerformLayout();
+            this.groupBox54.ResumeLayout(false);
+            this.groupBox54.PerformLayout();
             this.groupBox41.ResumeLayout(false);
             this.groupBox41.PerformLayout();
             this.groupBox40.ResumeLayout(false);
@@ -4570,8 +4569,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).EndInit();
             this.tab_alt_loglar.ResumeLayout(false);
             this.tab_alt_loglar.PerformLayout();
-            this.groupBox54.ResumeLayout(false);
-            this.groupBox54.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

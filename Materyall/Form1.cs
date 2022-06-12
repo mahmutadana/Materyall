@@ -927,7 +927,7 @@ namespace Materyall
 
             ogrblg.ogretmenlogo = tb_bilgi_logo.Text;
 
-            ogrblg.bayikodu = tb_bilgi_bayikodu.Text;
+            ogrblg.bayikodu = tb_bilgi_bayikodu.Text.ToUpper();
 
             
 
@@ -996,7 +996,7 @@ namespace Materyall
 
 
             if (cb_yili.Text == "" || tb_bilgi_adisoyadi.Text == "" || cb_bilgi_bransi.Text == "" || cb_bilgi_ili.Text == "" ||
-                 cb_bilgi_ilcesi.Text == "" || tb_bilgi_okulkodu.Text == "" || tb_bilgi_okulu.Text == "" || cb_bilgi_sinifi.Text == "" ||
+                 cb_bilgi_ilcesi.Text == "" || tb_bilgi_okulu.Text == "" || cb_bilgi_sinifi.Text == "" ||
                  tb_bilgi_subesi.Text == "" || tb_bilgi_muduradi.Text == "" || cb_bilgi_mudurunvani.Text == "" || tb_bilgi_bayikodu.Text == "" )
             {
                 return false;
@@ -1287,7 +1287,7 @@ namespace Materyall
         private void bayikodundanBayiBilgileriniGetir()
         {
 
-            int indeks = tum_bayi_bilgileris.FindIndex(a => a.bayikodu == tb_bilgi_bayikodu.Text);
+            int indeks = tum_bayi_bilgileris.FindIndex(a => a.bayikodu == tb_bilgi_bayikodu.Text.ToUpper());
 
             //  BirBayi = vtislemleri.bayiaBilgileriniGetir_bayikodundan(tb_bilgi_bayikodu.Text);
 
@@ -2743,7 +2743,7 @@ namespace Materyall
 
                             //Döngüde bu dersin adının bulunup bulunmadığına bakmak için kullanacağız.
                             bool ders_bulunup_islendimi = false;
-                            string eklenecekolanders = snf + "-" + birders;
+                            string eklenecekolanders = snf + "-" + birders.Trim();
 
                             //Seçilen dersi ve sınıfı birleştirip filtrelenlerde var mı diye bakacağız. (İçeriyor mu diye bakacağız. Sonundaki yayınevi olmayacak çünkü.)
                             //filtrelenlerde ders adı sınıfla birlikte geliyor. 1-Hayat Bilgisi-MEB gibi
@@ -2802,7 +2802,7 @@ namespace Materyall
 
                             //Döngüde bu dersin adının bulunup bulunmadığına bakmak için kullanacağız.
                             bool ders_bulunup_islendimi = false;
-                            string eklenecekolanders = snf + "-" + birders;
+                            string eklenecekolanders = snf + "-" + birders.Trim();
 
                             //Seçilen dersi ve sınıfı birleştirip filtrelenlerde var mı diye bakacağız. (İçeriyor mu diye bakacağız. Sonundaki yayınevi olmayacak çünkü.)
                             //filtrelenlerde ders adı sınıfla birlikte geliyor. 1-Hayat Bilgisi-MEB gibi
@@ -2880,7 +2880,7 @@ namespace Materyall
 
                     //Döngüde bu dersin adının bulunup bulunmadığına bakmak için kullanacağız.
                     bool ders_bulunup_islendimi = false;
-                    string eklenecekolanders = birders;
+                    string eklenecekolanders = birders.Trim();
 
                     //Seçilen dersi ve sınıfı birleştirip filtrelenlerde var mı diye bakacağız. (İçeriyor mu diye bakacağız. Sonundaki yayınevi olmayacak çünkü.)
                     //filtrelenlerde ders adı sınıfla birlikte geliyor. 1-Hayat Bilgisi-MEB gibi
@@ -5306,7 +5306,7 @@ namespace Materyall
         private void linklbl_talep_ekle_ekurun_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
-            if (cb_talep_ekurunler.SelectedIndex < 1)
+            if (cb_talep_ekurunler.SelectedIndex < 0)
             {
 
                 MessageBox.Show("Eklenecek ürünü seçmelisiniz.");

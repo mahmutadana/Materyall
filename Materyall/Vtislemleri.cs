@@ -3548,8 +3548,8 @@ namespace Materyall
             string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
                " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " " +
                " UNION " +
-               " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + " ) " +
-               "  GROUP BY b.oid  ORDER BY b.oid";
+               " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + " )" +
+               "  GROUP BY b.oid   ";
 
 
             if (planyillik)
@@ -3587,7 +3587,7 @@ namespace Materyall
 
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql_son, mysqlbaglantisi);
-
+            da.SelectCommand.CommandTimeout = 600;
 
 
             DataTable dt = new DataTable();
@@ -3670,7 +3670,7 @@ namespace Materyall
 
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql_son, mysqlbaglantisi);
-
+            da.SelectCommand.CommandTimeout = 600;
 
 
             DataTable dt = new DataTable();
@@ -3754,7 +3754,7 @@ namespace Materyall
 
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql_son, mysqlbaglantisi);
-
+            da.SelectCommand.CommandTimeout = 600;
 
 
             DataTable dt = new DataTable();
@@ -3816,7 +3816,7 @@ namespace Materyall
 
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql_son, mysqlbaglantisi);
-
+            da.SelectCommand.CommandTimeout = 600;
 
 
             DataTable dt = new DataTable();
