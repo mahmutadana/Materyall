@@ -2455,7 +2455,7 @@ namespace Materyall
                 datagridSunucuTalepleri.DataSource = excelSecildiTalepleriGetir(ofd.FileName, "talep");
 
 
-                if (datagridSunucuTalepleri.Rows.Count > 1)
+                if (datagridSunucuTalepleri.Rows.Count >= 1)
                 {
                     //Veri var, işleme devam edelim.
 
@@ -2634,11 +2634,11 @@ namespace Materyall
             //Excelden adres bilgis gelmiyor.
             //  tb_bilgi_adres.Text = dr.Cells[excelbilgisutunlari.aciklama_stn - 1].Value.ToString();
 
-            tb_bilgi_aciklama.Text = dr.Cells[excelbilgisutunlari.aciklama_stn - 1].Value.ToString();
+            tb_bilgi_aciklama.Text = dr.Cells[excelbilgisutunlari.aciklama_stn - 1].Value.ToString().Replace("'","");
 
 
            
-            tb_bilgi_bayikodu.Text = dr.Cells[excelbilgisutunlari.bayikodu_stn - 1].Value.ToString();
+            tb_bilgi_bayikodu.Text = dr.Cells[excelbilgisutunlari.bayikodu_stn - 1].Value.ToString().ToUpper();
             //Bayi adı otomatik gelecek inşallah.
            // bayikodundanBayiBilgileriniGetir();
 
@@ -2766,7 +2766,7 @@ namespace Materyall
                                     }
                                     else
                                     {
-                                        MessageBox.Show("İşlem tamamlanmadı. Çıkılıyor. Öğretmen: " + BirOgt.adisoyadi + " Hata: " + kayitsonucu);
+                                        MessageBox.Show("İşlem tamamlanmadı. Çıkılıyor. Öğretmen: " + BirOgt.adisoyadi +  " ders: " + eklenecekolanders + "  Hata: " + kayitsonucu);
                                         return false;
                                     }
 
