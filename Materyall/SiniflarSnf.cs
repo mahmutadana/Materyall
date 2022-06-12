@@ -14,6 +14,42 @@ namespace Materyall
     }
 
 
+    public class VarsayilanYilBayivbBossaSnf
+    {
+        //Eğer yıl veya bayi seçilmezse varsayılan olarak bu değerler yazılacak.
+
+        public int varsayilankimliktablo { get; set; }
+        public int yilkodu { get; set; }
+        public string yilgorunen { get; set; }
+
+
+        public string bayikodu { get; set; }
+        public string bayigorunen { get; set; }
+
+
+
+        public string yillikplanyolu { get; set; }
+        public string gunlukplanyolu { get; set; }
+        public string plankapakyolu { get; set; }
+
+        public string plan_kayit_yolu_pdf { get; set; }
+
+
+        public string defteryolu { get; set; }
+        public string defterkapakyolu { get; set; }
+        public string defter_kayit_yolu_pdf { get; set; }
+
+       
+
+
+        public int serbestderssaati_sinif_1 { get; set; }
+        public int serbestderssaati_sinif_2 { get; set; }
+        public int serbestderssaati_sinif_3 { get; set; }
+        public int serbestderssaati_sinif_4 { get; set; }
+
+
+    }
+
 
     //Bunun içine alt sınıflar ekleyeceğiz. Mesela anaderslerSnf ögesi ekleyip verileri orada tutacağız. (İnşallah)
     public class OgretmenBilgileriSnf
@@ -26,7 +62,7 @@ namespace Materyall
         public string ilcesi { get; set; }
         public string kurumkodu { get; set; }
         public string okuladi { get; set; }
-        public int sinifi { get; set; }
+        public string sinifi { get; set; }
         public string subesi { get; set; }
         public string muduradi { get; set; }
         public string mudurunvani { get; set; }
@@ -42,7 +78,7 @@ namespace Materyall
 
         public string bayikodu { get; set; }
 
-        public bool cd_istiyor { get; set; }
+        public bool defter_istiyor { get; set; }
         public bool pdf_istiyor { get; set; }
 
 
@@ -52,12 +88,12 @@ namespace Materyall
       //Buna gerek olmayabilir. Sadece bilgileri hafızada tutup diğerlerini öğretmen id'si ile çekeceğiz.
       //public talepedilenAnaDerslerYillik[] anaDerslers { get; set; }
 
+        public TalepedilensosyalKulup sosyalkuluptalebi { get; set; }
 
 
 
 
 
-        
     }
 
 
@@ -100,7 +136,7 @@ namespace Materyall
     public class TalepedilensosyalKulup
     {
         public int sosyalkulupkimliktablo { get; set; }
-        public int kulupid { get; set; }
+        public int kulupkodu { get; set; }
         public string sosyalkulupikinciogretmen { get; set; }
         public double fiyat { get; set; }
         public string taleptarihi { get; set; }
@@ -257,6 +293,79 @@ namespace Materyall
         public double fiyat { get; set; }
 
     }
+
+
+    public class FiltrelenenNobetYeriSablonlari
+    {
+        public int nobetyerikimliktablo { get; set; }
+        public string nobetyerisablonadi { get; set; }
+        public string nobetyeri_1 { get; set; }
+        public string nobetyeri_2 { get; set; }
+        public string nobetyeri_3 { get; set; }
+        public string nobetyeri_4 { get; set; }
+        public string nobetyeri_5 { get; set; }
+        public string nobetyeri_6 { get; set; }
+        public string nobetyeri_7 { get; set; }
+        public string nobetyeri_8 { get; set; }
+        public string nobetyeri_9 { get; set; }
+        public string nobetyeri_10 { get; set; }
+        public string nobetyeri_11 { get; set; }
+        public string nobetyeri_12 { get; set; }
+
+
+    }
+
+
+
+
+    public class OgrenciListesiSnf
+    {
+        public int ogrencikimliktablo { get; set; }
+        public int numara { get; set; }
+        public string adisoyadi { get; set; }
+       
+
+    }
+
+
+
+    public class MuhasebeGenelDurumSnf
+    {
+       
+        public double toplamborc { get; set; }
+        public double toplamodeme { get; set; }
+        public double toplambakiye { get; set; }
+
+
+    }
+
+
+
+    public class ExcelSutunEslestir_Bilgi_Snf
+    {
+        //Eğer yıl veya bayi seçilmezse varsayılan olarak bu değerler yazılacak.
+
+       
+        public int bayikodu_stn { get; set; }
+        public int aciklama_stn { get; set; }
+        public int okulkodu_stn { get; set; }
+        public int il_stn { get; set; }
+        public int ilce_stn { get; set; }
+        public int okuladi_stn { get; set; }
+        public int sinif_stn { get; set; }
+        public int sube_stn { get; set; }
+        public int adisoyadi_stn { get; set; }
+        public int bransgorevi_stn { get; set; }
+        public int muduradi_stn { get; set; }
+        public int mudurunvani_stn { get; set; }
+        public int eposta_stn { get; set; }
+        public int telefon_stn { get; set; }
+        public int notumuz_stn { get; set; }
+
+
+    }
+
+
 
 
 }
