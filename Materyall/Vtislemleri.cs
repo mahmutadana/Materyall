@@ -3527,6 +3527,9 @@ namespace Materyall
            
 
             string basimdurumu;
+            string basimdurumu_ikili = " ";
+
+            //Eğer 2 türlü seçim istenmişse o zaman 2 farklı where cümlesi kullanacağız.
             
             if (durumtumu)
             {
@@ -3536,33 +3539,62 @@ namespace Materyall
             {
                 basimdurumu = " WHERE basimtarihi IS NOT NULL ";
 
+                basimdurumu_ikili = " WHERE x.basimtarihi IS NOT NULL AND y.basimtarihi IS NOT NULL ";
+
             } else
             {
                 //Basılmamışlar isteniyorsa.
                 basimdurumu = " WHERE basimtarihi IS NULL ";
+                basimdurumu_ikili = " WHERE x.basimtarihi IS  NULL AND y.basimtarihi IS NULL ";
             }
 
 
 
             //Varsaılan olarak ikisi de seçili.
+            //iyice kilitlendi.
+            /*
+            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+              " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT x.oid FROM " + metinler.neyebakalim_y_anaders_tablo + " x  JOIN " + metinler.neyebakalim_g_anaders_tablo + " y ON x.oid=y.oid "
+              + basimdurumu_ikili + " )" +
+              "  GROUP BY b.oid  LIMIT 5 ";
+            */
+
+            /*
             string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
                " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " " +
-               " UNION " +
+               " UNION ALL " +
                " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + " )" +
-               "  GROUP BY b.oid   ";
+               "   GROUP BY b.oid     ";
+            */
+
+            /*
+            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+               " WHERE b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " AND yili='" + yili + "' " +
+               " UNION ALL " +
+               " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + " AND yili='" + yili + "' AND oid NOT IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " AND yili='" + yili + "'))" +
+               "   GROUP BY b.oid     ";
+            */
+
+            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+              " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " " +
+              " UNION ALL " +
+              " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + " )" +
+              "   GROUP BY b.oid LIMIT 1000 ";
+
+
 
 
             if (planyillik)
             {
                 sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
                                 " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + ") " +
-                                "  GROUP BY b.oid  ORDER BY b.oid";
+                                "    ORDER BY b.oid";
 
             } else if (plangunluk)
             {
                 sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
                                 " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + ") " +
-                                "  GROUP BY b.oid  ORDER BY b.oid";
+                                "    ORDER BY b.oid";
             }
 
            

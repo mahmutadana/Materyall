@@ -389,6 +389,7 @@
             this.label48 = new System.Windows.Forms.Label();
             this.tab_alt_loglar = new System.Windows.Forms.TabPage();
             this.tb_logkayitlari = new System.Windows.Forms.TextBox();
+            this.rb_planbas_kapsam_yillikvegunlukartarda = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -1291,7 +1292,7 @@
             // 
             this.bt_planbas_baskiyabasla.Location = new System.Drawing.Point(12, 460);
             this.bt_planbas_baskiyabasla.Name = "bt_planbas_baskiyabasla";
-            this.bt_planbas_baskiyabasla.Size = new System.Drawing.Size(312, 78);
+            this.bt_planbas_baskiyabasla.Size = new System.Drawing.Size(443, 78);
             this.bt_planbas_baskiyabasla.TabIndex = 46;
             this.bt_planbas_baskiyabasla.Text = "BASKIYA BAŞLA";
             this.bt_planbas_baskiyabasla.UseVisualStyleBackColor = true;
@@ -1304,7 +1305,7 @@
             this.groupBox44.Controls.Add(this.rb_planbas_son_pdf);
             this.groupBox44.Location = new System.Drawing.Point(12, 369);
             this.groupBox44.Name = "groupBox44";
-            this.groupBox44.Size = new System.Drawing.Size(312, 85);
+            this.groupBox44.Size = new System.Drawing.Size(443, 85);
             this.groupBox44.TabIndex = 45;
             this.groupBox44.TabStop = false;
             this.groupBox44.Text = "Son İşlem";
@@ -1351,7 +1352,7 @@
             this.groupBox45.Controls.Add(this.rb_planbas_secenek_kapak);
             this.groupBox45.Location = new System.Drawing.Point(12, 88);
             this.groupBox45.Name = "groupBox45";
-            this.groupBox45.Size = new System.Drawing.Size(312, 184);
+            this.groupBox45.Size = new System.Drawing.Size(443, 184);
             this.groupBox45.TabIndex = 43;
             this.groupBox45.TabStop = false;
             this.groupBox45.Text = "Baskı Seçenekleri";
@@ -1371,12 +1372,13 @@
             // groupBox48
             // 
             this.groupBox48.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.groupBox48.Controls.Add(this.rb_planbas_kapsam_yillikvegunlukartarda);
             this.groupBox48.Controls.Add(this.rb_planbas_kapsam_sadecedersdefteri);
             this.groupBox48.Controls.Add(this.rb_planbas_kapsam_sadecegunluk);
             this.groupBox48.Controls.Add(this.rb_planbas_kapsam_sadeceyillik);
             this.groupBox48.Location = new System.Drawing.Point(6, 23);
             this.groupBox48.Name = "groupBox48";
-            this.groupBox48.Size = new System.Drawing.Size(300, 65);
+            this.groupBox48.Size = new System.Drawing.Size(431, 65);
             this.groupBox48.TabIndex = 5;
             this.groupBox48.TabStop = false;
             this.groupBox48.Text = "Yıılık-Günlük Plan / Doldurulmuş Ders Defteri";
@@ -1384,7 +1386,7 @@
             // rb_planbas_kapsam_sadecedersdefteri
             // 
             this.rb_planbas_kapsam_sadecedersdefteri.AutoSize = true;
-            this.rb_planbas_kapsam_sadecedersdefteri.Location = new System.Drawing.Point(196, 24);
+            this.rb_planbas_kapsam_sadecedersdefteri.Location = new System.Drawing.Point(321, 24);
             this.rb_planbas_kapsam_sadecedersdefteri.Name = "rb_planbas_kapsam_sadecedersdefteri";
             this.rb_planbas_kapsam_sadecedersdefteri.Size = new System.Drawing.Size(104, 30);
             this.rb_planbas_kapsam_sadecedersdefteri.TabIndex = 3;
@@ -1462,7 +1464,7 @@
             this.groupBox46.Controls.Add(this.rb_planbas_tektektoplu_tek);
             this.groupBox46.Location = new System.Drawing.Point(12, 278);
             this.groupBox46.Name = "groupBox46";
-            this.groupBox46.Size = new System.Drawing.Size(312, 85);
+            this.groupBox46.Size = new System.Drawing.Size(443, 85);
             this.groupBox46.TabIndex = 44;
             this.groupBox46.TabStop = false;
             this.groupBox46.Text = "Tek - Toplu Baskı";
@@ -1506,7 +1508,7 @@
             this.groupBox47.Controls.Add(this.rb_planbas_ekrandakiicin);
             this.groupBox47.Location = new System.Drawing.Point(12, 10);
             this.groupBox47.Name = "groupBox47";
-            this.groupBox47.Size = new System.Drawing.Size(312, 72);
+            this.groupBox47.Size = new System.Drawing.Size(443, 72);
             this.groupBox47.TabIndex = 42;
             this.groupBox47.TabStop = false;
             this.groupBox47.Text = "Tek Tek veya Listeden Basım Seçenekleri";
@@ -4411,6 +4413,16 @@
             this.tb_logkayitlari.Size = new System.Drawing.Size(1230, 264);
             this.tb_logkayitlari.TabIndex = 0;
             // 
+            // rb_planbas_kapsam_yillikvegunlukartarda
+            // 
+            this.rb_planbas_kapsam_yillikvegunlukartarda.AutoSize = true;
+            this.rb_planbas_kapsam_yillikvegunlukartarda.Location = new System.Drawing.Point(185, 24);
+            this.rb_planbas_kapsam_yillikvegunlukartarda.Name = "rb_planbas_kapsam_yillikvegunlukartarda";
+            this.rb_planbas_kapsam_yillikvegunlukartarda.Size = new System.Drawing.Size(120, 30);
+            this.rb_planbas_kapsam_yillikvegunlukartarda.TabIndex = 4;
+            this.rb_planbas_kapsam_yillikvegunlukartarda.Text = "YILLIK ve GÜNLÜK\r\nBİRLİKTE";
+            this.rb_planbas_kapsam_yillikvegunlukartarda.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4935,6 +4947,7 @@
         private System.Windows.Forms.CheckBox cb_pdfadi_ilcesi;
         private System.Windows.Forms.CheckBox cb_pdfadi_ili;
         private System.Windows.Forms.CheckBox cb_pdfadi_musterino;
+        private System.Windows.Forms.RadioButton rb_planbas_kapsam_yillikvegunlukartarda;
     }
 }
 

@@ -925,6 +925,12 @@ namespace Materyall
 
             ogrblg.aciklama = tb_bilgi_aciklama.Text;
 
+
+            if (tb_bilgi_logo.Text == "")
+            {
+                tb_bilgi_logo.Text = metinler.logo_varsayilan_meblogo_dosyaadi;
+            }
+
             ogrblg.ogretmenlogo = tb_bilgi_logo.Text;
 
             ogrblg.bayikodu = tb_bilgi_bayikodu.Text.ToUpper();
@@ -1092,6 +1098,10 @@ namespace Materyall
 
             tb_bilgi_aciklama.Text = ogrblg.aciklama;
 
+            if (ogrblg.ogretmenlogo == "")
+            {
+                ogrblg.ogretmenlogo = metinler.logo_varsayilan_meblogo_dosyaadi;
+            }
 
             tb_bilgi_logo.Text = ogrblg.ogretmenlogo;
            
@@ -4159,8 +4169,9 @@ namespace Materyall
         private bool kapakbasildimi = false;
         private bool ondosyabasildimi = false;
 
-
-        private void plan_bas_2_islemdekiKayit()
+        string urunturu = "gunlukanaders";
+                   
+    private void plan_bas_2_islemdekiKayit()
         {
             //O anda ekrandaki kayda ilişkin işlem yapar ama buradaki mantık şu şekildedir. İstenilen kayıt ekrana 
             //getirilmiştir. Yani burası liste veya ekrandaki kayıt mantığının dışında.
@@ -4179,7 +4190,39 @@ namespace Materyall
             ondosyabasildimi = false;
 
 
-            if (rb_planbas_kapsam_sadeceyillik.Checked)
+            if (rb_planbas_kapsam_yillikvegunlukartarda.Checked)
+            {
+
+                //Yıllık bitince günlük basımına devam edeceğiz.
+
+                for (int i = 0; i < dgv_talep_yillikplanlar_baski.RowCount; i++)
+                {
+                    DataGridViewRow dr = dgv_talep_yillikplanlar_baski.Rows[i];
+
+                    string basilacakolanplankodu = dr.Cells["dersid"].Value.ToString();
+
+                    urunturu = "yillikanaders";
+
+                    plan_bas_3_gelenKaydiBas(basilacakolanplankodu);
+
+                }
+
+                //Günlük basımı ile devam et.
+
+                for (int i = 0; i < dgv_talep_gunlukplanlar_baski.RowCount; i++)
+                {
+                    DataGridViewRow dr = dgv_talep_gunlukplanlar_baski.Rows[i];
+
+                    string basilacakolanplankodu = dr.Cells["dersid"].Value.ToString();
+                    urunturu = "gunlukanaders";
+
+                    plan_bas_3_gelenKaydiBas(basilacakolanplankodu);
+
+                }
+
+
+            }
+            else if (rb_planbas_kapsam_sadeceyillik.Checked)
             {
 
                 for (int i = 0; i < dgv_talep_yillikplanlar_baski.RowCount; i++)
@@ -4187,6 +4230,8 @@ namespace Materyall
                     DataGridViewRow dr = dgv_talep_yillikplanlar_baski.Rows[i];
 
                     string basilacakolanplankodu = dr.Cells["dersid"].Value.ToString();
+                    
+                    urunturu = "yillikanaders";
 
                     plan_bas_3_gelenKaydiBas(basilacakolanplankodu);
 
@@ -4201,6 +4246,8 @@ namespace Materyall
                     DataGridViewRow dr = dgv_talep_gunlukplanlar_baski.Rows[i];
 
                     string basilacakolanplankodu = dr.Cells["dersid"].Value.ToString();
+
+                    urunturu = "gunlukanaders";
 
                     plan_bas_3_gelenKaydiBas(basilacakolanplankodu);
 
@@ -4217,7 +4264,7 @@ namespace Materyall
 
                     if (dr.Cells["urunadi"].Value.ToString() == metinler.basilacak_ekurun_defter_adi)
                     {
-
+                        urunturu = "doludefter";
                         plan_bas_3_gelenKaydiBas(metinler.basilacak_ekurun_defter_adi);
 
                     }
@@ -4344,11 +4391,14 @@ namespace Materyall
 
 
                     //Basım tarihi eklerken buna bakıyoruz ve ürün koduna bakıyoruz.
+                    /* Döngü içinde tanımlayacağız.
                     string urunturu = "gunlukanaders";
                     if (rb_planbas_kapsam_sadeceyillik.Checked)
                     {
                         urunturu = "yillikanaders";
                     }
+                    */
+
 
                     plan_bas_3_ek_2_plan_bas(basilacakolanplankodu, urunturu);
 
@@ -4601,7 +4651,7 @@ namespace Materyall
                 basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "dolukapak.docx", " ", true, true, "", basilanTur);
 
             } 
-            else if (rb_planbas_kapsam_sadeceyillik.Checked)
+            else if (urunturu == "yillikanaders") //(rb_planbas_kapsam_sadeceyillik.Checked)
             {
                 basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "y_kapak.docx", " ", true, true, "", basilanTur);
 
@@ -4628,7 +4678,7 @@ namespace Materyall
             //Ön Dosyayı basacağız. Sadece Yıllık plan için basılıyor. !!
             //Yıllık plan seçilmemişse ön dosyayı basmıyoruz.
 
-            if (!rb_planbas_kapsam_sadeceyillik.Checked)
+            if (urunturu != "yillikanaders") //(!rb_planbas_kapsam_sadeceyillik.Checked)
             {
                 return;
             }
@@ -4669,7 +4719,7 @@ namespace Materyall
 
 
             }
-            else if (rb_planbas_kapsam_sadeceyillik.Checked)
+            else if (urunturu == "yillikanaders")//(rb_planbas_kapsam_sadeceyillik.Checked)
             {
                 basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\y_" + basilacakolanplankodu + ".docx", BirOgt.adisoyadi, true, true, basilacakolanplankodu, basilanTur);
 

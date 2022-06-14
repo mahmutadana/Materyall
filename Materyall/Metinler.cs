@@ -23,6 +23,7 @@ namespace Materyall
         //   public string ogretmenlogo_ustyolu = @"C:\Materyall\Logolar";
         public string logo_wordbaglantili_klasor = @"C:\Materyall\Logolar\";
         public string logo_wordbaglantili_dosyaadi = "logo.png";
+        public string logo_varsayilan_meblogo_dosyaadi = "meb_logo.png";
 
 
 
