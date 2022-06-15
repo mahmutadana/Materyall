@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Globalization;
 using System.Windows.Forms;
-using System.Threading.Tasks;
 using System.Text;
 using System.Data.OleDb;
 
-using Microsoft.Office.Interop;
 using Microsoft.Office.Interop.Word;
 using Microsoft.Office.Core;
 using PdfSharp.Pdf;
@@ -25,6 +21,10 @@ namespace Materyall
 
     public partial class Form1 : Form
     {
+
+        //VT'de öğretmen bilgileri tablosunun içine mükerreri önlemek için bir alan ekleyeceğiz. islemturu:1 (Plan) ve islemturu:2 (Defter) olacak.
+        //vt'dekideki tüm işelmlerde bu anahtar mutlaka kullanılacak. Mükerrere bakarken, listelerken, basarken vs. öğretmen bilgileri tablosunda olacak.
+        public static int ISLEM_TURU_TABLO_DEGERI;
 
         string ikaz_metni;
 
@@ -95,6 +95,24 @@ namespace Materyall
             dgv_talep_defterler.Font = linklbl_talep_kulup_sil.Font;
             dgv_talep_digerzumreogretmenleri.Font = linklbl_talep_kulup_sil.Font;
             */
+
+
+
+            if (rb_vt_islemturu_defter.Checked)
+            {
+                ISLEM_TURU_TABLO_DEGERI = 2;
+
+            } 
+            else if (rb_vt_islemturu_plan.Checked)
+            {
+                ISLEM_TURU_TABLO_DEGERI = 1;
+            }
+            else
+            {
+                //Veritabanında işlem türü plan için 1, defter için 2 olarak kullanılacak. Bu değerin mutlaka atanmış olması gerekir. (Zaten her halükarda atanacaktır.)
+                MessageBox.Show("ÖNEMLİ! İŞLEM TÜRÜ SEÇİLMEDİ. BU İŞLEMİ MUTLAKA TAMAMLAYIN. KODLARI İNCELEYİN.");
+            }
+
 
         }
 
@@ -5642,6 +5660,16 @@ namespace Materyall
 
             basim_1_filigranEkle(varsayilanbossa.yillikplanyolu + @"\kulup_" + basilacakolankulupkodu + ".docx", " ", false, false, basilacakolankulupkodu, basilanTur);
 
+        }
+
+        private void rb_vt_islemturu_plan_CheckedChanged(object sender, EventArgs e)
+        {
+            ISLEM_TURU_TABLO_DEGERI = 1;
+        }
+
+        private void rb_vt_islemturu_defter_CheckedChanged(object sender, EventArgs e)
+        {
+            ISLEM_TURU_TABLO_DEGERI = 2;
         }
 
 

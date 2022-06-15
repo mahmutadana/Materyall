@@ -253,7 +253,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT DISTINCT(ilce) as veri FROM tlp_ogretmenbilgileri_tbl WHERE il='" + il + "' ORDER BY veri";
+            string sql = "SELECT DISTINCT(ilce) as veri FROM tlp_ogretmenbilgileri_tbl WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND il='" + il + "' ORDER BY veri";
 
             MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
 
@@ -1014,9 +1014,9 @@ namespace Materyall
             try
             {
 
-                string sql = "INSERT INTO tlp_ogretmenbilgileri_tbl (yili, adisoyadi, brans, il, ilce, kurumkodu, okuladi, sinif, sube, " +
+                string sql = "INSERT INTO tlp_ogretmenbilgileri_tbl (islemturu, yili, adisoyadi, brans, il, ilce, kurumkodu, okuladi, sinif, sube, " +
                     "muduradi, mudurunvani, cep, eposta, adres, aciklama, bayi,logoadi) " +
-                    "VALUES ('" + ogtblg.yili + "','" + ogtblg.adisoyadi + "','" + ogtblg.bransi + "','" + ogtblg.ili + "','" + ogtblg.ilcesi + "','" +
+                    "VALUES (" + Form1.ISLEM_TURU_TABLO_DEGERI + "'" + ogtblg.yili + "','" + ogtblg.adisoyadi + "','" + ogtblg.bransi + "','" + ogtblg.ili + "','" + ogtblg.ilcesi + "','" +
                     ogtblg.kurumkodu + "','" + ogtblg.okuladi + "','" + ogtblg.sinifi + "','" + ogtblg.subesi + "','" + ogtblg.muduradi + "','" + ogtblg.mudurunvani
                     + "','" + ogtblg.telefon + "','" + ogtblg.eposta + "','" + ogtblg.adres + "','" + ogtblg.aciklama + "','" + ogtblg.bayikodu + "','" + ogtblg.ogretmenlogo + "')";
 
@@ -1086,6 +1086,7 @@ namespace Materyall
             {
 
                 string sql = "UPDATE tlp_ogretmenbilgileri_tbl SET " +
+                    "islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + ", " +
                     "yili='" + ogtblg.yili + "', " +
                     "adisoyadi='" + ogtblg.adisoyadi + "', " +
                     "brans='" + ogtblg.bransi + "', " +
@@ -1146,7 +1147,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE yili='" + yili + "' AND kurumkodu='" + kurumkodu + "' AND il='" + il + "' AND ilce='" + ilce + "' AND okuladi='" + okuladi + "' AND sinif='" + sinif + "' AND sube='" + sube + "' AND adisoyadi='" + adisoyadi + "'";
+            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND yili='" + yili + "' AND kurumkodu='" + kurumkodu + "' AND il='" + il + "' AND ilce='" + ilce + "' AND okuladi='" + okuladi + "' AND sinif='" + sinif + "' AND sube='" + sube + "' AND adisoyadi='" + adisoyadi + "'";
 
 
 
@@ -1175,7 +1176,7 @@ namespace Materyall
             string adet = "0";
 
             baglantiKur();
-
+                                            //BURAYA İŞLEM (islemturu) TÜRÜ KOYMUYORUZ ÇÜNKÜ BU İKİ TARAF İÇİN DE ÖNEMLİ.  HEPSİNE BAKMASI LAZIM !!!!!!
             string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE oid=" + oid;
 
 
@@ -1228,7 +1229,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT * FROM tlp_ogretmenbilgileri_tbl WHERE oid=" + musterino + " LIMIT 1";
+            string sql = "SELECT * FROM tlp_ogretmenbilgileri_tbl WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND oid=" + musterino + " LIMIT 1";
 
 
 
@@ -1306,7 +1307,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT il, ilce, okuladi, muduradi, mudurunvani FROM tlp_ogretmenbilgileri_tbl WHERE kurumkodu='" + kurumkodu + "' ORDER BY kayittarihi LIMIT 1";
+            string sql = "SELECT il, ilce, okuladi, muduradi, mudurunvani FROM tlp_ogretmenbilgileri_tbl WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND kurumkodu='" + kurumkodu + "' ORDER BY kayittarihi LIMIT 1";
 
 
 
@@ -3491,7 +3492,7 @@ namespace Materyall
             string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
                 "LEFT JOIN " + metinler.neyebakalim_y_anaders_tablo + " y ON y.oid=b.oid " +
                 "LEFT JOIN " + metinler.neyebakalim_g_anaders_tablo + " g ON g.oid=b.oid " +
-                " WHERE b.yili='" + yili + "' GROUP BY b.oid";
+                " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' GROUP BY b.oid";
             
 
                 string sql2 = " ";
@@ -3576,10 +3577,10 @@ namespace Materyall
             */
 
             string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
-              " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " " +
+              " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " " +
               " UNION ALL " +
               " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + " )" +
-              "   GROUP BY b.oid LIMIT 1000 ";
+              "   GROUP BY b.oid LIMIT 100 ";
 
 
 
@@ -3587,13 +3588,13 @@ namespace Materyall
             if (planyillik)
             {
                 sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
-                                " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + ") " +
+                                " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND  b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + ") " +
                                 "    ORDER BY b.oid";
 
             } else if (plangunluk)
             {
                 sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
-                                " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + ") " +
+                                " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND  b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + ") " +
                                 "    ORDER BY b.oid";
             }
 
@@ -3687,7 +3688,7 @@ namespace Materyall
 
             //Varsaılan olarak ikisi de seçili.
             string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
-                                " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + tabloadi + " " + basimdurumu + ") " +
+                                " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + tabloadi + " " + basimdurumu + ") " +
                                 "  GROUP BY b.oid  ORDER BY b.oid";
 
 
@@ -3770,7 +3771,7 @@ namespace Materyall
             string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube, d.defterkodu, f.defteradi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
                 " LEFT JOIN " + tabloadi + " d ON d.oid=b.oid" +
                 " LEFT JOIN sis_defterler_tbl f ON f.defterkodu=d.defterkodu " +
-                " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + tabloadi + " " + basimdurumu + ") ORDER BY b.oid";
+                " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + tabloadi + " " + basimdurumu + ") ORDER BY b.oid";
                           
             //Group by demiyoruz. Kişiye kayıtlı kaç defter varsa görünsün. "  GROUP BY b.oid";
 
@@ -3814,7 +3815,7 @@ namespace Materyall
 
 
            
-            string wheree = " LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi WHERE b.yili='" + yili + "' AND b.il LIKE '" + iladi + "%' AND b.ilce LIKE '" + ilceadi + "%' AND okuladi LIKE '" + okuladi + "%' AND" +
+            string wheree = " LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' AND b.il LIKE '" + iladi + "%' AND b.ilce LIKE '" + ilceadi + "%' AND okuladi LIKE '" + okuladi + "%' AND" +
                 " b.adisoyadi LIKE '%" + musteriadi + "%' AND b.bayi IN (SELECT bayikodu FROM sis_bayiler_tbl WHERE bayiadi LIKE '%" + bayiadi + "%') ";
             
 
