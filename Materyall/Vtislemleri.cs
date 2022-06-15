@@ -253,7 +253,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT DISTINCT(ilce) as veri FROM tlp_ogretmenbilgileri_tbl WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND il='" + il + "' ORDER BY veri";
+            string sql = "SELECT DISTINCT(ilce) as veri FROM tlp_ogretmenbilgileri_tbl WHERE islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND il='" + il + "' ORDER BY veri";
 
             MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
 
@@ -1016,7 +1016,7 @@ namespace Materyall
 
                 string sql = "INSERT INTO tlp_ogretmenbilgileri_tbl (islemturu, yili, adisoyadi, brans, il, ilce, kurumkodu, okuladi, sinif, sube, " +
                     "muduradi, mudurunvani, cep, eposta, adres, aciklama, bayi,logoadi) " +
-                    "VALUES (" + Form1.ISLEM_TURU_TABLO_DEGERI + "'" + ogtblg.yili + "','" + ogtblg.adisoyadi + "','" + ogtblg.bransi + "','" + ogtblg.ili + "','" + ogtblg.ilcesi + "','" +
+                    "VALUES (" + Form1.ISLEM_TURU_TABLO_DEGERI + ",'" + ogtblg.yili + "','" + ogtblg.adisoyadi + "','" + ogtblg.bransi + "','" + ogtblg.ili + "','" + ogtblg.ilcesi + "','" +
                     ogtblg.kurumkodu + "','" + ogtblg.okuladi + "','" + ogtblg.sinifi + "','" + ogtblg.subesi + "','" + ogtblg.muduradi + "','" + ogtblg.mudurunvani
                     + "','" + ogtblg.telefon + "','" + ogtblg.eposta + "','" + ogtblg.adres + "','" + ogtblg.aciklama + "','" + ogtblg.bayikodu + "','" + ogtblg.ogretmenlogo + "')";
 
@@ -1147,7 +1147,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND yili='" + yili + "' AND kurumkodu='" + kurumkodu + "' AND il='" + il + "' AND ilce='" + ilce + "' AND okuladi='" + okuladi + "' AND sinif='" + sinif + "' AND sube='" + sube + "' AND adisoyadi='" + adisoyadi + "'";
+            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND yili='" + yili + "' AND kurumkodu='" + kurumkodu + "' AND il='" + il + "' AND ilce='" + ilce + "' AND okuladi='" + okuladi + "' AND sinif='" + sinif + "' AND sube='" + sube + "' AND adisoyadi='" + adisoyadi + "'";
 
 
 
@@ -1229,7 +1229,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT * FROM tlp_ogretmenbilgileri_tbl WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND oid=" + musterino + " LIMIT 1";
+            string sql = "SELECT * FROM tlp_ogretmenbilgileri_tbl WHERE islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND oid=" + musterino + " LIMIT 1";
 
 
 
@@ -1307,7 +1307,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT il, ilce, okuladi, muduradi, mudurunvani FROM tlp_ogretmenbilgileri_tbl WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND kurumkodu='" + kurumkodu + "' ORDER BY kayittarihi LIMIT 1";
+            string sql = "SELECT il, ilce, okuladi, muduradi, mudurunvani FROM tlp_ogretmenbilgileri_tbl WHERE islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND kurumkodu='" + kurumkodu + "' ORDER BY kayittarihi LIMIT 1";
 
 
 
