@@ -394,6 +394,8 @@
             this.groupBox58 = new System.Windows.Forms.GroupBox();
             this.rb_vt_islemturu_defter = new System.Windows.Forms.RadioButton();
             this.rb_vt_islemturu_plan = new System.Windows.Forms.RadioButton();
+            this.bt_oncekimusterino = new System.Windows.Forms.Button();
+            this.bt_sonrakimusterino = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -3297,6 +3299,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.bt_sonrakimusterino);
+            this.groupBox2.Controls.Add(this.bt_oncekimusterino);
             this.groupBox2.Controls.Add(this.pb_logo);
             this.groupBox2.Controls.Add(this.linklbl_logo_gozat);
             this.groupBox2.Controls.Add(this.btn_ikaz_lambasi);
@@ -3369,7 +3373,7 @@
             // 
             // btn_ikaz_lambasi
             // 
-            this.btn_ikaz_lambasi.Location = new System.Drawing.Point(240, 15);
+            this.btn_ikaz_lambasi.Location = new System.Drawing.Point(348, 15);
             this.btn_ikaz_lambasi.Name = "btn_ikaz_lambasi";
             this.btn_ikaz_lambasi.Size = new System.Drawing.Size(25, 23);
             this.btn_ikaz_lambasi.TabIndex = 34;
@@ -3400,7 +3404,7 @@
             this.linklbl_musteri_no_ogrt_bilgisi_getir.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.linklbl_musteri_no_ogrt_bilgisi_getir.AutoSize = true;
             this.linklbl_musteri_no_ogrt_bilgisi_getir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.linklbl_musteri_no_ogrt_bilgisi_getir.Location = new System.Drawing.Point(277, 16);
+            this.linklbl_musteri_no_ogrt_bilgisi_getir.Location = new System.Drawing.Point(253, 14);
             this.linklbl_musteri_no_ogrt_bilgisi_getir.Name = "linklbl_musteri_no_ogrt_bilgisi_getir";
             this.linklbl_musteri_no_ogrt_bilgisi_getir.Size = new System.Drawing.Size(95, 24);
             this.linklbl_musteri_no_ogrt_bilgisi_getir.TabIndex = 40;
@@ -3413,7 +3417,7 @@
             this.cb_bilgi_musterinokilitli.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cb_bilgi_musterinokilitli.AutoSize = true;
             this.cb_bilgi_musterinokilitli.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.cb_bilgi_musterinokilitli.Location = new System.Drawing.Point(178, 16);
+            this.cb_bilgi_musterinokilitli.Location = new System.Drawing.Point(9, 25);
             this.cb_bilgi_musterinokilitli.Name = "cb_bilgi_musterinokilitli";
             this.cb_bilgi_musterinokilitli.Size = new System.Drawing.Size(56, 22);
             this.cb_bilgi_musterinokilitli.TabIndex = 39;
@@ -3425,7 +3429,7 @@
             // 
             this.label20.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(6, 21);
+            this.label20.Location = new System.Drawing.Point(6, 14);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(61, 13);
             this.label20.TabIndex = 38;
@@ -4476,6 +4480,26 @@
             this.rb_vt_islemturu_plan.UseVisualStyleBackColor = true;
             this.rb_vt_islemturu_plan.CheckedChanged += new System.EventHandler(this.rb_vt_islemturu_plan_CheckedChanged);
             // 
+            // bt_oncekimusterino
+            // 
+            this.bt_oncekimusterino.Location = new System.Drawing.Point(178, 9);
+            this.bt_oncekimusterino.Name = "bt_oncekimusterino";
+            this.bt_oncekimusterino.Size = new System.Drawing.Size(29, 31);
+            this.bt_oncekimusterino.TabIndex = 45;
+            this.bt_oncekimusterino.Text = "<";
+            this.bt_oncekimusterino.UseVisualStyleBackColor = true;
+            this.bt_oncekimusterino.Click += new System.EventHandler(this.bt_oncekimusterino_Click);
+            // 
+            // bt_sonrakimusterino
+            // 
+            this.bt_sonrakimusterino.Location = new System.Drawing.Point(206, 9);
+            this.bt_sonrakimusterino.Name = "bt_sonrakimusterino";
+            this.bt_sonrakimusterino.Size = new System.Drawing.Size(29, 31);
+            this.bt_sonrakimusterino.TabIndex = 46;
+            this.bt_sonrakimusterino.Text = ">";
+            this.bt_sonrakimusterino.UseVisualStyleBackColor = true;
+            this.bt_sonrakimusterino.Click += new System.EventHandler(this.bt_sonrakimusterino_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5007,6 +5031,8 @@
         private System.Windows.Forms.GroupBox groupBox58;
         private System.Windows.Forms.RadioButton rb_vt_islemturu_defter;
         private System.Windows.Forms.RadioButton rb_vt_islemturu_plan;
+        private System.Windows.Forms.Button bt_sonrakimusterino;
+        private System.Windows.Forms.Button bt_oncekimusterino;
     }
 }
 

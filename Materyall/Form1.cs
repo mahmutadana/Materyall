@@ -929,12 +929,18 @@ namespace Materyall
             cb_bilgi_ilcesi.Text = yrdsnf.ismiduzelt(cb_bilgi_ilcesi.Text, "ilce");
 
             ogrblg.ilcesi = cb_bilgi_ilcesi.Text;
+
             ogrblg.kurumkodu = tb_bilgi_okulkodu.Text;
-            ogrblg.okuladi = yrdsnf.ismiduzelt(tb_bilgi_okulu.Text, "ilce");
+
+            tb_bilgi_okulu.Text = yrdsnf.ismiduzelt(tb_bilgi_okulu.Text, "ilce");
+            ogrblg.okuladi = tb_bilgi_okulu.Text
+                ;
             ogrblg.sinifi = cb_bilgi_sinifi.Text;
             ogrblg.subesi = tb_bilgi_subesi.Text;
 
+            tb_bilgi_muduradi.Text = yrdsnf.ismiduzelt(tb_bilgi_muduradi.Text, "isim");
             ogrblg.muduradi = tb_bilgi_muduradi.Text;
+
             ogrblg.mudurunvani = cb_bilgi_mudurunvani.Text;
 
             ogrblg.telefon = tb_bilgi_telefon.Text;
@@ -3736,6 +3742,13 @@ namespace Materyall
         private void bt_defterbas_baskiyabasla_Click(object sender, EventArgs e)
         {
 
+
+            if (rb_defter_bas_ekrandakikayiticinislemyap.Checked && BirOgt == null)
+            {
+                MessageBox.Show("Öncelikle öğretmen seçmelisiniz.");
+                return;
+            }
+
             PDF_CIKTI_KLASORU_ALT_BASLIK = metinler.pdf_alt_klasoru_defter;
 
             Bekleyinform bekleyinform = new Bekleyinform();
@@ -4063,6 +4076,15 @@ namespace Materyall
 
         private void bt_planbas_baskiyabasla_Click(object sender, EventArgs e)
         {
+
+            if (rb_planbas_ekrandakiicin.Checked && BirOgt == null)
+            {
+                MessageBox.Show("Öncelikle öğretmen seçmelisiniz.");
+                return;
+            }
+
+
+
 
             PDF_CIKTI_KLASORU_ALT_BASLIK = metinler.pdf_alt_klasoru_plan;
 
@@ -5672,7 +5694,42 @@ namespace Materyall
             ISLEM_TURU_TABLO_DEGERI = 2;
         }
 
+        private void bt_oncekimusterino_Click(object sender, EventArgs e)
+        {
+            int musterinom = 1;
+            if (tb_bilgi_musterino.Text.Trim() != "")
+            {
+                musterinom = int.Parse(tb_bilgi_musterino.Text) - 1;
+            }
 
+            if (musterinom < 1)
+            {
+                musterinom = 1;
+            }
+
+            musterinoartieksiSecildi(musterinom);
+
+        }
+
+        private void bt_sonrakimusterino_Click(object sender, EventArgs e)
+        {
+            int musterinom = 1;
+            if (tb_bilgi_musterino.Text.Trim() != "")
+            {
+                musterinom = int.Parse(tb_bilgi_musterino.Text) + 1;
+            }
+
+            musterinoartieksiSecildi(musterinom);
+        }
+
+        private void musterinoartieksiSecildi(int musterino)
+        {
+
+            tb_bilgi_musterino.Text = musterino.ToString();
+
+            gosterDugmesineBasildi();
+
+        }
 
 
 
