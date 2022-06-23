@@ -1366,10 +1366,52 @@ namespace Materyall
                 BirBayi = tum_bayi_bilgileris[indeks];
                 cb_bilgi_bayiadi.Text = BirBayi.bayiadi + "-" + BirBayi.bayikodu;
 
+                //Table kısmına bayi bilgilerini yazalım.
+                //Bayi sekmesindeki bayi bilgilerini dolduralım.
+                tb_bb_bayikodu.Text = BirBayi.bayikodu;
+                tb_bb_baiyadi_kullaniciadi.Text = BirBayi.bayiadi;
+                tb_bb_ili.Text = BirBayi.iladi;
+                tb_bb_ilcesi.Text = BirBayi.ilceadi;
+                tb_bb_ucretgrubu.Text = BirBayi.ucretgrubu;
+                tb_bb_bayitamadi.Text = BirBayi.bayitamadi;
+                tb_bb_yetkili.Text = BirBayi.yetkili;
+                tb_bb_ceptel.Text = BirBayi.ceptel;
+                tb_bb_istel.Text = BirBayi.istel;
+                tb_bb_adres.Text = BirBayi.adres;
+                tb_bb_vergidairesi.Text = BirBayi.vergidairesi;
+                tb_bb_vergino.Text = BirBayi.verginumarasi;
+                tb_bb_tckimlikno.Text = BirBayi.tckimlikno;
+                tb_bb_eposta.Text = BirBayi.eposta;
+                tb_bb_web.Text = BirBayi.web;
+                tb_bb_odemesekli.Text = BirBayi.odemesekli;
+
+
+
             } else
             {
                 BirBayi = null;
                 cb_bilgi_bayiadi.Text = metinler.veribulunamadi;
+
+
+                //Table kısmına bayi bilgilerini yazalım.
+                //Bayi sekmesindeki bayi bilgilerini dolduralım.
+                tb_bb_bayikodu.Text = "";
+                tb_bb_baiyadi_kullaniciadi.Text = "";
+                tb_bb_ili.Text = "";
+                tb_bb_ilcesi.Text = "";
+                tb_bb_ucretgrubu.Text = "";
+                tb_bb_bayitamadi.Text = "";
+                tb_bb_yetkili.Text = "";
+                tb_bb_ceptel.Text = "";
+                tb_bb_istel.Text = "";
+                tb_bb_adres.Text = "";
+                tb_bb_vergidairesi.Text = "";
+                tb_bb_vergino.Text = "";
+                tb_bb_tckimlikno.Text = "";
+                tb_bb_eposta.Text = "";
+                tb_bb_web.Text = "";
+                tb_bb_odemesekli.Text = "";
+
             }
 
 

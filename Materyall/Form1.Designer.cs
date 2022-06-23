@@ -287,6 +287,40 @@
             this.linklbl_sablon_nobetyeri_sablonukaydet = new System.Windows.Forms.LinkLabel();
             this.tabPagebayiBilgileri = new System.Windows.Forms.TabPage();
             this.groupBox59 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label78 = new System.Windows.Forms.Label();
+            this.tb_bb_odemesekli = new System.Windows.Forms.TextBox();
+            this.label77 = new System.Windows.Forms.Label();
+            this.tb_bb_web = new System.Windows.Forms.TextBox();
+            this.label76 = new System.Windows.Forms.Label();
+            this.tb_bb_eposta = new System.Windows.Forms.TextBox();
+            this.label75 = new System.Windows.Forms.Label();
+            this.tb_bb_tckimlikno = new System.Windows.Forms.TextBox();
+            this.label74 = new System.Windows.Forms.Label();
+            this.tb_bb_vergino = new System.Windows.Forms.TextBox();
+            this.label73 = new System.Windows.Forms.Label();
+            this.tb_bb_vergidairesi = new System.Windows.Forms.TextBox();
+            this.label72 = new System.Windows.Forms.Label();
+            this.tb_bb_adres = new System.Windows.Forms.TextBox();
+            this.label71 = new System.Windows.Forms.Label();
+            this.tb_bb_istel = new System.Windows.Forms.TextBox();
+            this.label70 = new System.Windows.Forms.Label();
+            this.tb_bb_ceptel = new System.Windows.Forms.TextBox();
+            this.label69 = new System.Windows.Forms.Label();
+            this.tb_bb_yetkili = new System.Windows.Forms.TextBox();
+            this.label68 = new System.Windows.Forms.Label();
+            this.tb_bb_bayitamadi = new System.Windows.Forms.TextBox();
+            this.label67 = new System.Windows.Forms.Label();
+            this.tb_bb_ucretgrubu = new System.Windows.Forms.TextBox();
+            this.label66 = new System.Windows.Forms.Label();
+            this.tb_bb_ilcesi = new System.Windows.Forms.TextBox();
+            this.label65 = new System.Windows.Forms.Label();
+            this.tb_bb_ili = new System.Windows.Forms.TextBox();
+            this.label64 = new System.Windows.Forms.Label();
+            this.tb_bb_baiyadi_kullaniciadi = new System.Windows.Forms.TextBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.tb_bb_bayikodu = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.bt_bayibilgilerinigoster = new System.Windows.Forms.Button();
             this.bt_sonrakimusterino = new System.Windows.Forms.Button();
@@ -399,40 +433,6 @@
             this.groupBox58 = new System.Windows.Forms.GroupBox();
             this.rb_vt_islemturu_defter = new System.Windows.Forms.RadioButton();
             this.rb_vt_islemturu_plan = new System.Windows.Forms.RadioButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tb_bb_bayikodu = new System.Windows.Forms.TextBox();
-            this.label63 = new System.Windows.Forms.Label();
-            this.tb_bb_baiyadi_kullaniciadi = new System.Windows.Forms.TextBox();
-            this.label64 = new System.Windows.Forms.Label();
-            this.tb_bb_ili = new System.Windows.Forms.TextBox();
-            this.label65 = new System.Windows.Forms.Label();
-            this.tb_bb_ilcesi = new System.Windows.Forms.TextBox();
-            this.label66 = new System.Windows.Forms.Label();
-            this.tb_bb_ucretgrubu = new System.Windows.Forms.TextBox();
-            this.label67 = new System.Windows.Forms.Label();
-            this.tb_bb_bayitamadi = new System.Windows.Forms.TextBox();
-            this.label68 = new System.Windows.Forms.Label();
-            this.tb_bb_yetkili = new System.Windows.Forms.TextBox();
-            this.label69 = new System.Windows.Forms.Label();
-            this.tb_bb_ceptel = new System.Windows.Forms.TextBox();
-            this.label70 = new System.Windows.Forms.Label();
-            this.tb_bb_istel = new System.Windows.Forms.TextBox();
-            this.label71 = new System.Windows.Forms.Label();
-            this.tb_bb_adres = new System.Windows.Forms.TextBox();
-            this.label72 = new System.Windows.Forms.Label();
-            this.tb_bb_vergidairesi = new System.Windows.Forms.TextBox();
-            this.label73 = new System.Windows.Forms.Label();
-            this.tb_bb_vergino = new System.Windows.Forms.TextBox();
-            this.label74 = new System.Windows.Forms.Label();
-            this.tb_bb_tckimlikno = new System.Windows.Forms.TextBox();
-            this.label75 = new System.Windows.Forms.Label();
-            this.tb_bb_eposta = new System.Windows.Forms.TextBox();
-            this.label76 = new System.Windows.Forms.Label();
-            this.tb_bb_web = new System.Windows.Forms.TextBox();
-            this.label77 = new System.Windows.Forms.Label();
-            this.tb_bb_odemesekli = new System.Windows.Forms.TextBox();
-            this.label78 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -503,6 +503,8 @@
             this.groupBox10.SuspendLayout();
             this.tabPagebayiBilgileri.SuspendLayout();
             this.groupBox59.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_logo)).BeginInit();
             this.tabControl2.SuspendLayout();
@@ -530,8 +532,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).BeginInit();
             this.tab_alt_loglar.SuspendLayout();
             this.groupBox58.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -3360,6 +3360,397 @@
             this.groupBox59.TabStop = false;
             this.groupBox59.Text = "Bayi Bilgileri";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 16);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(457, 489);
+            this.panel1.TabIndex = 1;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoScroll = true;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.63457F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.36543F));
+            this.tableLayoutPanel1.Controls.Add(this.label78, 0, 15);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_odemesekli, 1, 15);
+            this.tableLayoutPanel1.Controls.Add(this.label77, 0, 14);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_web, 1, 14);
+            this.tableLayoutPanel1.Controls.Add(this.label76, 0, 13);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_eposta, 1, 13);
+            this.tableLayoutPanel1.Controls.Add(this.label75, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_tckimlikno, 1, 12);
+            this.tableLayoutPanel1.Controls.Add(this.label74, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_vergino, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.label73, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_vergidairesi, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.label72, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_adres, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.label71, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_istel, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.label70, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_ceptel, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label69, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_yetkili, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label68, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_bayitamadi, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label67, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_ucretgrubu, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label66, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_ilcesi, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label65, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_ili, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label64, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_baiyadi_kullaniciadi, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label63, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tb_bb_bayikodu, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 17;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(457, 489);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label78.Location = new System.Drawing.Point(3, 448);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(67, 30);
+            this.label78.TabIndex = 30;
+            this.label78.Text = "Ödeme Şekli";
+            this.label78.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_odemesekli
+            // 
+            this.tb_bb_odemesekli.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_odemesekli.Location = new System.Drawing.Point(142, 451);
+            this.tb_bb_odemesekli.Multiline = true;
+            this.tb_bb_odemesekli.Name = "tb_bb_odemesekli";
+            this.tb_bb_odemesekli.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_odemesekli.TabIndex = 31;
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label77.Location = new System.Drawing.Point(3, 418);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(30, 30);
+            this.label77.TabIndex = 28;
+            this.label77.Text = "Web";
+            this.label77.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_web
+            // 
+            this.tb_bb_web.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_web.Location = new System.Drawing.Point(142, 421);
+            this.tb_bb_web.Multiline = true;
+            this.tb_bb_web.Name = "tb_bb_web";
+            this.tb_bb_web.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_web.TabIndex = 29;
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label76.Location = new System.Drawing.Point(3, 388);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(44, 30);
+            this.label76.TabIndex = 26;
+            this.label76.Text = "E-Posta";
+            this.label76.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_eposta
+            // 
+            this.tb_bb_eposta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_eposta.Location = new System.Drawing.Point(142, 391);
+            this.tb_bb_eposta.Multiline = true;
+            this.tb_bb_eposta.Name = "tb_bb_eposta";
+            this.tb_bb_eposta.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_eposta.TabIndex = 27;
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label75.Location = new System.Drawing.Point(3, 358);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(68, 30);
+            this.label75.TabIndex = 24;
+            this.label75.Text = "TC Kimlik No";
+            this.label75.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_tckimlikno
+            // 
+            this.tb_bb_tckimlikno.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_tckimlikno.Location = new System.Drawing.Point(142, 361);
+            this.tb_bb_tckimlikno.Multiline = true;
+            this.tb_bb_tckimlikno.Name = "tb_bb_tckimlikno";
+            this.tb_bb_tckimlikno.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_tckimlikno.TabIndex = 25;
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label74.Location = new System.Drawing.Point(3, 328);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(78, 30);
+            this.label74.TabIndex = 22;
+            this.label74.Text = "Vergi Numarası";
+            this.label74.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_vergino
+            // 
+            this.tb_bb_vergino.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_vergino.Location = new System.Drawing.Point(142, 331);
+            this.tb_bb_vergino.Multiline = true;
+            this.tb_bb_vergino.Name = "tb_bb_vergino";
+            this.tb_bb_vergino.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_vergino.TabIndex = 23;
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label73.Location = new System.Drawing.Point(3, 298);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(66, 30);
+            this.label73.TabIndex = 20;
+            this.label73.Text = "Vergi Dairesi";
+            this.label73.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_vergidairesi
+            // 
+            this.tb_bb_vergidairesi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_vergidairesi.Location = new System.Drawing.Point(142, 301);
+            this.tb_bb_vergidairesi.Multiline = true;
+            this.tb_bb_vergidairesi.Name = "tb_bb_vergidairesi";
+            this.tb_bb_vergidairesi.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_vergidairesi.TabIndex = 21;
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label72.Location = new System.Drawing.Point(3, 268);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(34, 30);
+            this.label72.TabIndex = 18;
+            this.label72.Text = "Adres";
+            this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_adres
+            // 
+            this.tb_bb_adres.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_adres.Location = new System.Drawing.Point(142, 271);
+            this.tb_bb_adres.Multiline = true;
+            this.tb_bb_adres.Name = "tb_bb_adres";
+            this.tb_bb_adres.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_adres.TabIndex = 19;
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label71.Location = new System.Drawing.Point(3, 238);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(60, 30);
+            this.label71.TabIndex = 16;
+            this.label71.Text = "İş Telefonu";
+            this.label71.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_istel
+            // 
+            this.tb_bb_istel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_istel.Location = new System.Drawing.Point(142, 241);
+            this.tb_bb_istel.Multiline = true;
+            this.tb_bb_istel.Name = "tb_bb_istel";
+            this.tb_bb_istel.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_istel.TabIndex = 17;
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label70.Location = new System.Drawing.Point(3, 208);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(71, 30);
+            this.label70.TabIndex = 14;
+            this.label70.Text = "Cep Telefonu";
+            this.label70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_ceptel
+            // 
+            this.tb_bb_ceptel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_ceptel.Location = new System.Drawing.Point(142, 211);
+            this.tb_bb_ceptel.Multiline = true;
+            this.tb_bb_ceptel.Name = "tb_bb_ceptel";
+            this.tb_bb_ceptel.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_ceptel.TabIndex = 15;
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label69.Location = new System.Drawing.Point(3, 178);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(35, 30);
+            this.label69.TabIndex = 12;
+            this.label69.Text = "Yetkili";
+            this.label69.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_yetkili
+            // 
+            this.tb_bb_yetkili.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_yetkili.Location = new System.Drawing.Point(142, 181);
+            this.tb_bb_yetkili.Multiline = true;
+            this.tb_bb_yetkili.Name = "tb_bb_yetkili";
+            this.tb_bb_yetkili.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_yetkili.TabIndex = 13;
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label68.Location = new System.Drawing.Point(3, 146);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(69, 32);
+            this.label68.TabIndex = 10;
+            this.label68.Text = "Bayi Tam Adı";
+            this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_bayitamadi
+            // 
+            this.tb_bb_bayitamadi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_bayitamadi.Location = new System.Drawing.Point(142, 149);
+            this.tb_bb_bayitamadi.Multiline = true;
+            this.tb_bb_bayitamadi.Name = "tb_bb_bayitamadi";
+            this.tb_bb_bayitamadi.Size = new System.Drawing.Size(312, 26);
+            this.tb_bb_bayitamadi.TabIndex = 11;
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label67.Location = new System.Drawing.Point(3, 116);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(65, 30);
+            this.label67.TabIndex = 8;
+            this.label67.Text = "Ücret Grubu";
+            this.label67.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_ucretgrubu
+            // 
+            this.tb_bb_ucretgrubu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_ucretgrubu.Location = new System.Drawing.Point(142, 119);
+            this.tb_bb_ucretgrubu.Multiline = true;
+            this.tb_bb_ucretgrubu.Name = "tb_bb_ucretgrubu";
+            this.tb_bb_ucretgrubu.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_ucretgrubu.TabIndex = 9;
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label66.Location = new System.Drawing.Point(3, 86);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(31, 30);
+            this.label66.TabIndex = 6;
+            this.label66.Text = "İlçesi";
+            this.label66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_ilcesi
+            // 
+            this.tb_bb_ilcesi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_ilcesi.Location = new System.Drawing.Point(142, 89);
+            this.tb_bb_ilcesi.Multiline = true;
+            this.tb_bb_ilcesi.Name = "tb_bb_ilcesi";
+            this.tb_bb_ilcesi.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_ilcesi.TabIndex = 7;
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label65.Location = new System.Drawing.Point(3, 56);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(14, 30);
+            this.label65.TabIndex = 4;
+            this.label65.Text = "İli";
+            this.label65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_ili
+            // 
+            this.tb_bb_ili.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_ili.Location = new System.Drawing.Point(142, 59);
+            this.tb_bb_ili.Multiline = true;
+            this.tb_bb_ili.Name = "tb_bb_ili";
+            this.tb_bb_ili.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_ili.TabIndex = 5;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label64.Location = new System.Drawing.Point(3, 26);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(87, 30);
+            this.label64.TabIndex = 2;
+            this.label64.Text = "Bayi Kullanıcı Adı";
+            this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_baiyadi_kullaniciadi
+            // 
+            this.tb_bb_baiyadi_kullaniciadi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_baiyadi_kullaniciadi.Location = new System.Drawing.Point(142, 29);
+            this.tb_bb_baiyadi_kullaniciadi.Multiline = true;
+            this.tb_bb_baiyadi_kullaniciadi.Name = "tb_bb_baiyadi_kullaniciadi";
+            this.tb_bb_baiyadi_kullaniciadi.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_baiyadi_kullaniciadi.TabIndex = 3;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label63.Location = new System.Drawing.Point(3, 0);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(88, 26);
+            this.label63.TabIndex = 0;
+            this.label63.Text = "Bayi Kodu (Sabit)";
+            this.label63.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_bayikodu
+            // 
+            this.tb_bb_bayikodu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_bayikodu.Enabled = false;
+            this.tb_bb_bayikodu.Location = new System.Drawing.Point(142, 3);
+            this.tb_bb_bayikodu.Name = "tb_bb_bayikodu";
+            this.tb_bb_bayikodu.Size = new System.Drawing.Size(312, 20);
+            this.tb_bb_bayikodu.TabIndex = 1;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.bt_bayibilgilerinigoster);
@@ -4487,6 +4878,7 @@
             // 
             // lbl_ara_bulunankayit_sayisi
             // 
+            this.lbl_ara_bulunankayit_sayisi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_ara_bulunankayit_sayisi.AutoSize = true;
             this.lbl_ara_bulunankayit_sayisi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lbl_ara_bulunankayit_sayisi.Location = new System.Drawing.Point(87, 247);
@@ -4511,6 +4903,7 @@
             // 
             // label48
             // 
+            this.label48.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label48.AutoSize = true;
             this.label48.Location = new System.Drawing.Point(6, 249);
             this.label48.Name = "label48";
@@ -4573,397 +4966,6 @@
             this.rb_vt_islemturu_plan.Text = "Plan";
             this.rb_vt_islemturu_plan.UseVisualStyleBackColor = true;
             this.rb_vt_islemturu_plan.CheckedChanged += new System.EventHandler(this.rb_vt_islemturu_plan_CheckedChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.tableLayoutPanel1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 16);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(457, 489);
-            this.panel1.TabIndex = 1;
-            // 
-            // tb_bb_bayikodu
-            // 
-            this.tb_bb_bayikodu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_bayikodu.Enabled = false;
-            this.tb_bb_bayikodu.Location = new System.Drawing.Point(137, 3);
-            this.tb_bb_bayikodu.Name = "tb_bb_bayikodu";
-            this.tb_bb_bayikodu.Size = new System.Drawing.Size(300, 20);
-            this.tb_bb_bayikodu.TabIndex = 1;
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label63.Location = new System.Drawing.Point(3, 0);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(88, 26);
-            this.label63.TabIndex = 0;
-            this.label63.Text = "Bayi Kodu (Sabit)";
-            this.label63.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_baiyadi_kullaniciadi
-            // 
-            this.tb_bb_baiyadi_kullaniciadi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_baiyadi_kullaniciadi.Location = new System.Drawing.Point(137, 29);
-            this.tb_bb_baiyadi_kullaniciadi.Multiline = true;
-            this.tb_bb_baiyadi_kullaniciadi.Name = "tb_bb_baiyadi_kullaniciadi";
-            this.tb_bb_baiyadi_kullaniciadi.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_baiyadi_kullaniciadi.TabIndex = 3;
-            // 
-            // label64
-            // 
-            this.label64.AutoSize = true;
-            this.label64.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label64.Location = new System.Drawing.Point(3, 26);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(87, 30);
-            this.label64.TabIndex = 2;
-            this.label64.Text = "Bayi Kullanıcı Adı";
-            this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_ili
-            // 
-            this.tb_bb_ili.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_ili.Location = new System.Drawing.Point(137, 59);
-            this.tb_bb_ili.Multiline = true;
-            this.tb_bb_ili.Name = "tb_bb_ili";
-            this.tb_bb_ili.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_ili.TabIndex = 5;
-            // 
-            // label65
-            // 
-            this.label65.AutoSize = true;
-            this.label65.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label65.Location = new System.Drawing.Point(3, 56);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(14, 30);
-            this.label65.TabIndex = 4;
-            this.label65.Text = "İli";
-            this.label65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_ilcesi
-            // 
-            this.tb_bb_ilcesi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_ilcesi.Location = new System.Drawing.Point(137, 89);
-            this.tb_bb_ilcesi.Multiline = true;
-            this.tb_bb_ilcesi.Name = "tb_bb_ilcesi";
-            this.tb_bb_ilcesi.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_ilcesi.TabIndex = 7;
-            // 
-            // label66
-            // 
-            this.label66.AutoSize = true;
-            this.label66.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label66.Location = new System.Drawing.Point(3, 86);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(31, 30);
-            this.label66.TabIndex = 6;
-            this.label66.Text = "İlçesi";
-            this.label66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_ucretgrubu
-            // 
-            this.tb_bb_ucretgrubu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_ucretgrubu.Location = new System.Drawing.Point(137, 119);
-            this.tb_bb_ucretgrubu.Multiline = true;
-            this.tb_bb_ucretgrubu.Name = "tb_bb_ucretgrubu";
-            this.tb_bb_ucretgrubu.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_ucretgrubu.TabIndex = 9;
-            // 
-            // label67
-            // 
-            this.label67.AutoSize = true;
-            this.label67.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label67.Location = new System.Drawing.Point(3, 116);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(65, 30);
-            this.label67.TabIndex = 8;
-            this.label67.Text = "Ücret Grubu";
-            this.label67.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_bayitamadi
-            // 
-            this.tb_bb_bayitamadi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_bayitamadi.Location = new System.Drawing.Point(137, 149);
-            this.tb_bb_bayitamadi.Multiline = true;
-            this.tb_bb_bayitamadi.Name = "tb_bb_bayitamadi";
-            this.tb_bb_bayitamadi.Size = new System.Drawing.Size(300, 26);
-            this.tb_bb_bayitamadi.TabIndex = 11;
-            // 
-            // label68
-            // 
-            this.label68.AutoSize = true;
-            this.label68.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label68.Location = new System.Drawing.Point(3, 146);
-            this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(69, 32);
-            this.label68.TabIndex = 10;
-            this.label68.Text = "Bayi Tam Adı";
-            this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_yetkili
-            // 
-            this.tb_bb_yetkili.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_yetkili.Location = new System.Drawing.Point(137, 181);
-            this.tb_bb_yetkili.Multiline = true;
-            this.tb_bb_yetkili.Name = "tb_bb_yetkili";
-            this.tb_bb_yetkili.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_yetkili.TabIndex = 13;
-            // 
-            // label69
-            // 
-            this.label69.AutoSize = true;
-            this.label69.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label69.Location = new System.Drawing.Point(3, 178);
-            this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(35, 30);
-            this.label69.TabIndex = 12;
-            this.label69.Text = "Yetkili";
-            this.label69.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_ceptel
-            // 
-            this.tb_bb_ceptel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_ceptel.Location = new System.Drawing.Point(137, 211);
-            this.tb_bb_ceptel.Multiline = true;
-            this.tb_bb_ceptel.Name = "tb_bb_ceptel";
-            this.tb_bb_ceptel.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_ceptel.TabIndex = 15;
-            // 
-            // label70
-            // 
-            this.label70.AutoSize = true;
-            this.label70.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label70.Location = new System.Drawing.Point(3, 208);
-            this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(71, 30);
-            this.label70.TabIndex = 14;
-            this.label70.Text = "Cep Telefonu";
-            this.label70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_istel
-            // 
-            this.tb_bb_istel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_istel.Location = new System.Drawing.Point(137, 241);
-            this.tb_bb_istel.Multiline = true;
-            this.tb_bb_istel.Name = "tb_bb_istel";
-            this.tb_bb_istel.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_istel.TabIndex = 17;
-            // 
-            // label71
-            // 
-            this.label71.AutoSize = true;
-            this.label71.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label71.Location = new System.Drawing.Point(3, 238);
-            this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(60, 30);
-            this.label71.TabIndex = 16;
-            this.label71.Text = "İş Telefonu";
-            this.label71.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_adres
-            // 
-            this.tb_bb_adres.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_adres.Location = new System.Drawing.Point(137, 271);
-            this.tb_bb_adres.Multiline = true;
-            this.tb_bb_adres.Name = "tb_bb_adres";
-            this.tb_bb_adres.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_adres.TabIndex = 19;
-            // 
-            // label72
-            // 
-            this.label72.AutoSize = true;
-            this.label72.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label72.Location = new System.Drawing.Point(3, 268);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(34, 30);
-            this.label72.TabIndex = 18;
-            this.label72.Text = "Adres";
-            this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_vergidairesi
-            // 
-            this.tb_bb_vergidairesi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_vergidairesi.Location = new System.Drawing.Point(137, 301);
-            this.tb_bb_vergidairesi.Multiline = true;
-            this.tb_bb_vergidairesi.Name = "tb_bb_vergidairesi";
-            this.tb_bb_vergidairesi.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_vergidairesi.TabIndex = 21;
-            // 
-            // label73
-            // 
-            this.label73.AutoSize = true;
-            this.label73.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label73.Location = new System.Drawing.Point(3, 298);
-            this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(66, 30);
-            this.label73.TabIndex = 20;
-            this.label73.Text = "Vergi Dairesi";
-            this.label73.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_vergino
-            // 
-            this.tb_bb_vergino.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_vergino.Location = new System.Drawing.Point(137, 331);
-            this.tb_bb_vergino.Multiline = true;
-            this.tb_bb_vergino.Name = "tb_bb_vergino";
-            this.tb_bb_vergino.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_vergino.TabIndex = 23;
-            // 
-            // label74
-            // 
-            this.label74.AutoSize = true;
-            this.label74.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label74.Location = new System.Drawing.Point(3, 328);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(78, 30);
-            this.label74.TabIndex = 22;
-            this.label74.Text = "Vergi Numarası";
-            this.label74.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_tckimlikno
-            // 
-            this.tb_bb_tckimlikno.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_tckimlikno.Location = new System.Drawing.Point(137, 361);
-            this.tb_bb_tckimlikno.Multiline = true;
-            this.tb_bb_tckimlikno.Name = "tb_bb_tckimlikno";
-            this.tb_bb_tckimlikno.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_tckimlikno.TabIndex = 25;
-            // 
-            // label75
-            // 
-            this.label75.AutoSize = true;
-            this.label75.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label75.Location = new System.Drawing.Point(3, 358);
-            this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(68, 30);
-            this.label75.TabIndex = 24;
-            this.label75.Text = "TC Kimlik No";
-            this.label75.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_eposta
-            // 
-            this.tb_bb_eposta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_eposta.Location = new System.Drawing.Point(137, 391);
-            this.tb_bb_eposta.Multiline = true;
-            this.tb_bb_eposta.Name = "tb_bb_eposta";
-            this.tb_bb_eposta.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_eposta.TabIndex = 27;
-            // 
-            // label76
-            // 
-            this.label76.AutoSize = true;
-            this.label76.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label76.Location = new System.Drawing.Point(3, 388);
-            this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(44, 30);
-            this.label76.TabIndex = 26;
-            this.label76.Text = "E-Posta";
-            this.label76.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_web
-            // 
-            this.tb_bb_web.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_web.Location = new System.Drawing.Point(137, 421);
-            this.tb_bb_web.Multiline = true;
-            this.tb_bb_web.Name = "tb_bb_web";
-            this.tb_bb_web.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_web.TabIndex = 29;
-            // 
-            // label77
-            // 
-            this.label77.AutoSize = true;
-            this.label77.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label77.Location = new System.Drawing.Point(3, 418);
-            this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(30, 30);
-            this.label77.TabIndex = 28;
-            this.label77.Text = "Web";
-            this.label77.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_odemesekli
-            // 
-            this.tb_bb_odemesekli.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_odemesekli.Location = new System.Drawing.Point(137, 451);
-            this.tb_bb_odemesekli.Multiline = true;
-            this.tb_bb_odemesekli.Name = "tb_bb_odemesekli";
-            this.tb_bb_odemesekli.Size = new System.Drawing.Size(300, 24);
-            this.tb_bb_odemesekli.TabIndex = 31;
-            // 
-            // label78
-            // 
-            this.label78.AutoSize = true;
-            this.label78.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label78.Location = new System.Drawing.Point(3, 448);
-            this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(67, 30);
-            this.label78.TabIndex = 30;
-            this.label78.Text = "Ödeme Şekli";
-            this.label78.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.AutoScroll = true;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.63457F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.36543F));
-            this.tableLayoutPanel1.Controls.Add(this.label78, 0, 15);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_odemesekli, 1, 15);
-            this.tableLayoutPanel1.Controls.Add(this.label77, 0, 14);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_web, 1, 14);
-            this.tableLayoutPanel1.Controls.Add(this.label76, 0, 13);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_eposta, 1, 13);
-            this.tableLayoutPanel1.Controls.Add(this.label75, 0, 12);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_tckimlikno, 1, 12);
-            this.tableLayoutPanel1.Controls.Add(this.label74, 0, 11);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_vergino, 1, 11);
-            this.tableLayoutPanel1.Controls.Add(this.label73, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_vergidairesi, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.label72, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_adres, 1, 9);
-            this.tableLayoutPanel1.Controls.Add(this.label71, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_istel, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.label70, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_ceptel, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.label69, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_yetkili, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label68, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_bayitamadi, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.label67, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_ucretgrubu, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label66, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_ilcesi, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label65, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_ili, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label64, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_baiyadi_kullaniciadi, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label63, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tb_bb_bayikodu, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 17;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(457, 489);
-            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // Form1
             // 
@@ -5084,6 +5086,9 @@
             this.groupBox10.PerformLayout();
             this.tabPagebayiBilgileri.ResumeLayout(false);
             this.groupBox59.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_logo)).EndInit();
@@ -5127,9 +5132,6 @@
             this.tab_alt_loglar.PerformLayout();
             this.groupBox58.ResumeLayout(false);
             this.groupBox58.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
