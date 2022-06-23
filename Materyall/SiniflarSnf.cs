@@ -203,7 +203,24 @@ namespace Materyall
         public string iladi { get; set; }
         public string ilceadi { get; set; }
         public string ucretgrubu { get; set; }
-       
+
+
+        //Sonradan eklenen alanlar.
+
+        public string bayitamadi { get; set; }
+        public string yetkili { get; set; }
+        public string ceptel { get; set; }
+        public string istel { get; set; }
+        public string adres { get; set; }
+        public string vergidairesi { get; set; }
+        public string verginumarasi { get; set; }
+        public string tckimlikno { get; set; }
+        public string eposta { get; set; }
+        public string web { get; set; }
+        public string odemesekli { get; set; }
+
+
+
 
     }
 

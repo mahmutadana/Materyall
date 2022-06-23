@@ -395,6 +395,23 @@ namespace Materyall
                 oge.ilceadi = oku["ilceadi"].ToString();
                 oge.ucretgrubu = oku["ucretgrubu"].ToString();
 
+                //Yeni ögeler.
+                oge.bayitamadi = oku["bayitamadi"].ToString();
+                oge.yetkili = oku["yetkili"].ToString();
+                oge.ceptel = oku["ceptel"].ToString();
+                oge.istel = oku["istel"].ToString();
+                oge.adres = oku["adres"].ToString();
+                oge.vergidairesi = oku["vergidairesi"].ToString();
+                oge.verginumarasi = oku["verginumarasi"].ToString();
+                oge.tckimlikno = oku["tckimlikno"].ToString();
+                oge.eposta = oku["eposta"].ToString();
+                oge.web = oku["web"].ToString();
+                oge.odemesekli = oku["odemesekli"].ToString();
+               
+
+                //________________________________________
+                //Sonradan eklenen alanlar.
+
 
                 list.Add(oge);
 
@@ -1368,6 +1385,26 @@ namespace Materyall
                 bayibilgileri.iladi = oku["iladi"].ToString();
                 bayibilgileri.ilceadi = oku["ilceadi"].ToString();
                 bayibilgileri.ucretgrubu = oku["ucretgrubu"].ToString();
+
+                //Yeni bilgiler.
+                bayibilgileri.bayikodu = oku["bayikodu"].ToString();
+                bayibilgileri.bayiadi = oku["bayiadi"].ToString();
+                bayibilgileri.iladi = oku["iladi"].ToString();
+                bayibilgileri.ilceadi = oku["ilceadi"].ToString();
+                bayibilgileri.ucretgrubu = oku["ucretgrubu"].ToString();
+
+                //Yeni ögeler.
+                bayibilgileri.bayitamadi = oku["bayitamadi"].ToString();
+                bayibilgileri.yetkili = oku["yetkili"].ToString();
+                bayibilgileri.ceptel = oku["ceptel"].ToString();
+                bayibilgileri.istel = oku["istel"].ToString();
+                bayibilgileri.adres = oku["adres"].ToString();
+                bayibilgileri.vergidairesi = oku["vergidairesi"].ToString();
+                bayibilgileri.verginumarasi = oku["verginumarasi"].ToString();
+                bayibilgileri.tckimlikno = oku["tckimlikno"].ToString();
+                bayibilgileri.eposta = oku["eposta"].ToString();
+                bayibilgileri.web = oku["web"].ToString();
+                bayibilgileri.odemesekli = oku["odemesekli"].ToString();
 
             }
 

@@ -87,6 +87,13 @@ namespace Materyall
 
             varsayilanDegerleriGuncelleAsync();
 
+
+
+            //0:plan,  : defter için kullanılacka.
+            tabControl3.SelectedIndex = 1;
+
+
+
             /*
              * Muhasebe sekmesinin rengini kırmızı yapmak için kullanmak istedik ama görünrü kötüleşti. Vazgeçtik.
             dgv_talep_anadersler_yillik.Font = linklbl_talep_kulup_sil.Font;
@@ -886,7 +893,7 @@ namespace Materyall
                 return;
             }
 
-
+            
 
 
             if (!tumAlanlarDoldurulmusmu())
@@ -1136,6 +1143,34 @@ namespace Materyall
 
             //Diğer bağlı sınıflardan bilgiler.
             cb_bilgi_bayiadi.Text = ogrblg.bayibilgileri.bayiadi;
+
+            //Bayi sekmesindeki bayi bilgilerini dolduralım.
+            tb_bb_bayikodu.Text = ogrblg.bayibilgileri.bayikodu;
+            tb_bb_baiyadi_kullaniciadi.Text = ogrblg.bayibilgileri.bayiadi;
+            tb_bb_ili.Text = ogrblg.bayibilgileri.iladi;
+            tb_bb_ilcesi.Text = ogrblg.bayibilgileri.ilceadi;
+            tb_bb_ucretgrubu.Text = ogrblg.bayibilgileri.ucretgrubu;
+            tb_bb_bayitamadi.Text = ogrblg.bayibilgileri.bayitamadi;
+            tb_bb_yetkili.Text = ogrblg.bayibilgileri.yetkili;
+            tb_bb_ceptel.Text = ogrblg.bayibilgileri.ceptel;
+            tb_bb_istel.Text = ogrblg.bayibilgileri.istel;
+            tb_bb_adres.Text = ogrblg.bayibilgileri.adres;
+            tb_bb_vergidairesi.Text = ogrblg.bayibilgileri.vergidairesi;
+            tb_bb_vergino.Text = ogrblg.bayibilgileri.verginumarasi;
+            tb_bb_tckimlikno.Text = ogrblg.bayibilgileri.tckimlikno;
+            tb_bb_eposta.Text = ogrblg.bayibilgileri.eposta;
+            tb_bb_web.Text = ogrblg.bayibilgileri.web;
+            tb_bb_odemesekli.Text = ogrblg.bayibilgileri.odemesekli;
+
+
+            //Adres alanının boyutlandırılması.
+            const int padding = 3;
+            // get number of lines (first line is 0, so add 1)
+            int numLines = this.tb_bb_adres.GetLineFromCharIndex(this.tb_bb_adres.TextLength) + 1;
+            // get border thickness
+            int border = this.tb_bb_adres.Height - this.tb_bb_adres.ClientSize.Height;
+            // set height (height of one line * number of lines + spacing)
+            this.tb_bb_adres.Height = this.tb_bb_adres.Font.Height * numLines + padding + border;
 
 
             BirOgt = ogrblg;
@@ -1431,7 +1466,7 @@ namespace Materyall
             {
 
                 //  MessageBox.Show("başarılı: " + kayitsonucu);
-                varsa_talepBolumu();
+          //      varsa_talepBolumu();
 
             }
             else
@@ -1439,6 +1474,27 @@ namespace Materyall
                 MessageBox.Show(kayitsonucu);
             }
 
+
+
+
+            //DOLU DEFTERİ OTOMATİK OLARAK EKLİYORUZ. (dAHA ÖNCE EKLENMEMİŞSE...)
+            bool oncedeneklenmismi = false;
+            foreach (DataGridViewRow dr in dgv_talep_ekurunler.Rows)
+            {
+
+            if (dr.Cells[1].Value.ToString() == metinler.basilacak_ekurun_defter_urunkodu)
+                {
+                    oncedeneklenmismi = true; break;
+                }
+            }
+
+            if (!oncedeneklenmismi)
+            {
+                doluDefteriOtomatikOlarakEkle();
+            }
+
+
+            varsa_talepBolumu();
 
         }
 
@@ -2720,8 +2776,9 @@ namespace Materyall
 
             int okumadefteri_talep_sutun = 51;
             int sosyalkulup_talep_sutun = 52;
-            int cd_talep_sutun = 53;
+            int PDF_talep_sutun = 53;
 
+            int doludefter_sutun = 55;
 
 
             //Şimdi yıllık planı istenen derslerin adlarını EVET yazan sütunların ilk satırındaki güncel isimden alarak aralarında - ile birleştirelim.
@@ -2761,6 +2818,9 @@ namespace Materyall
             string[] yillik_istenen_dersler_dizi = yillikplanistenedersler.Split('-');
             string[] gunluk_istenen_dersler_dizi = gunlukplanistenedersler.Split('-');
 
+            //Yıllık plan talebi varsa dolu defteri otomatik olarak ekleyeceğiz.
+            bool yillikplantalebivar_DoludefterEkle = false;
+
             foreach (string snf in siniflar)
             {
                 if (snf.Trim().Length > 0)
@@ -2796,6 +2856,8 @@ namespace Materyall
                                     if (kayitsonucu.All(char.IsNumber))
                                     {
                                         //Kayıt başarılı.
+
+                                        yillikplantalebivar_DoludefterEkle = true;
 
                                     }
                                     else
@@ -3020,16 +3082,16 @@ namespace Materyall
 
             // PDF kaydına ait excelde veri yok.
 
-            // CD İŞLEMİ. Evet yazıyorsa işlem yapacağız.
+            // CD İŞLEMİ (pdf olarak güncelliyoruz.) Cd>PDF oldu.. Evet yazıyorsa işlem yapacağız.
 
-            string cdTalebi = dr.Cells[cd_talep_sutun - 1].Value.ToString();
+            string cdTalebi = dr.Cells[PDF_talep_sutun - 1].Value.ToString();
 
             if (cdTalebi.Length > 0)
             {
                 foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
                 {
 
-                    if (urun.urunadi == "CD")
+                    if (urun.urunadi == "PDF")
                     {
 
 
@@ -3056,8 +3118,64 @@ namespace Materyall
             }
 
 
+
+            //dolu defter için yıllık plan talebi varsa da ekleyeceğiz.
+
+            // CD İŞLEMİ (pdf olarak güncelliyoruz.) Cd>PDF oldu.. Evet yazıyorsa işlem yapacağız.
+
+            string doludefterTalebi = dr.Cells[doludefter_sutun - 1].Value.ToString();
+
+            if (doludefterTalebi.Length > 0 || yillikplantalebivar_DoludefterEkle)
+            {
+              if (!doluDefteriOtomatikOlarakEkle())
+                {
+                    return false;
+                }
+            }
+
+            //Dolu defter sonu.
+
+
+
             return true;
         }
+
+
+        private bool doluDefteriOtomatikOlarakEkle()
+        {
+            //cd_pdf_ekleme 
+            foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
+            {
+
+                if (urun.urunadi == metinler.basilacak_ekurun_defter_adi)
+                {
+
+
+                    string kayitsonucu = vtislemleri.ekle_ek_urunler(BirOgt.oid, urun.urunkodu, urun.fiyat);
+
+                    if (kayitsonucu.All(char.IsNumber))
+                    {
+
+                        //  MessageBox.Show("başarılı: " + kayitsonucu);
+                        return true;
+
+                    }
+                    else
+                    {
+                        MessageBox.Show(kayitsonucu);
+                        return false;
+                    }
+
+
+                }
+            }
+
+
+            MessageBox.Show("Dolu defter otomatik olarak eklenemedi.");
+            return false;
+
+        }
+
 
         private void bt_sil_seciliveriler_Click(object sender, EventArgs e)
         {
@@ -5728,6 +5846,13 @@ namespace Materyall
             tb_bilgi_musterino.Text = musterino.ToString();
 
             gosterDugmesineBasildi();
+
+        }
+
+        private void bt_bayibilgilerinigoster_Click(object sender, EventArgs e)
+        {
+
+
 
         }
 
