@@ -5327,12 +5327,12 @@ namespace Materyall
             //Tek tek değil de toplu ise o zaman toplupdf ifadesini ekleyeceğiz.
             if (!tektek1_toplu0)
             {
-                hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + "Tpl_" + pdf_dosya_adi + ".pdf";
+                hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + "Tpl_" + pdf_dosya_adi; // + ".pdf";
 
             }
             else
             {
-                hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + pdf_dosya_adi + ".pdf";
+                hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + pdf_dosya_adi; // PDF'LERİ MÜKERRER DOSYA İSİMLERİNİN SONUNA EKLİYORUZ. AŞAĞIDA. + ".pdf";
             }
 
 
@@ -5350,8 +5350,26 @@ namespace Materyall
                 }
 
 
-           
-                    pdfbirlestir_2(hedef_pdf_dosyamiz_birlesik, pdfler);
+                //AYNI İSİMDE PDF VARSA SONUA _1 _2 _3 GİBİ SAYI EKLEYECEĞİZ. _BAŞI
+
+                int dosyasonu_sonek = 1;
+
+                string kontrolmaclidosyaadi = hedef_pdf_dosyamiz_birlesik;
+                //.pdf normalde ekli değil. en son biz ekliyoruz. birkaçsatır aşağıda.
+                while ( File.Exists(kontrolmaclidosyaadi + ".pdf"))
+                    {
+
+                    kontrolmaclidosyaadi = hedef_pdf_dosyamiz_birlesik + "_" + dosyasonu_sonek;
+                    dosyasonu_sonek++;
+
+                    }
+
+                //Asıl ismimizi uygun şekilde terkar yazıp gönderelim.
+                hedef_pdf_dosyamiz_birlesik = kontrolmaclidosyaadi + ".pdf";
+
+                //AYNI İSİMDE PDF VARSA SONUA _1 _2 _3 GİBİ SAYI EKLEYECEĞİZ. _SONU
+
+                pdfbirlestir_2(hedef_pdf_dosyamiz_birlesik, pdfler);
 
             } else
             {
