@@ -14,6 +14,7 @@ using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using Application = Microsoft.Office.Interop.Word.Application;
 using System.Diagnostics;
+using DataTable = System.Data.DataTable;
 
 namespace Materyall
 {
@@ -55,6 +56,8 @@ namespace Materyall
         List<FiltrelenenNobetYeriSablonlari> filtrelenenNobetyerisablonlars = new List<FiltrelenenNobetYeriSablonlari>();
 
         List<OgrenciListesiSnf> talepOgrencilistesis = new List<OgrenciListesiSnf>();
+
+        List<FiltrelenenOdemeBilgileriListesiSnf> filtrelenenOdemeBilgilerilistesis = new List<FiltrelenenOdemeBilgileriListesiSnf>();
 
 
         //Excelden veri alırken hangi bilginin hangi sütunda olduğuna dair bilgileri tutacağız. İleride değişirse sadece VT'de değişiklik yapmak yeterli olsun.
@@ -822,12 +825,15 @@ namespace Materyall
 
             cb_muhasebe_odemeal_odeme_turu.Items.Clear();
 
-            string[] veriler = vtislemleri.filtre_odemeturleri();
 
-            foreach (string s in veriler)
+            filtrelenenOdemeBilgilerilistesis = vtislemleri.filtre_odemeturleri();
+
+           // string[] veriler = vtislemleri.filtre_odemeturleri();
+
+            foreach (FiltrelenenOdemeBilgileriListesiSnf s in filtrelenenOdemeBilgilerilistesis)
             {
 
-                cb_muhasebe_odemeal_odeme_turu.Items.Add(s);
+                cb_muhasebe_odemeal_odeme_turu.Items.Add(s.odemeturu);
             }
 
 
@@ -2530,6 +2536,15 @@ namespace Materyall
 
         private void linklbl_muhasebe_odemeal_odeme_kaydet_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+
+            if (cb_muhasebe_odemeal_odeme_turu.SelectedIndex < 0 || tb_muhasebe_odemeal_odenen_miktar.Text.Trim() == "")
+            {
+
+                MessageBox.Show("Ödeme tutarı, ödeme türü girmelisiniz.");
+                return;
+            }
+
+
             Odeme_Kaydet();
         }
 
@@ -2540,7 +2555,9 @@ namespace Materyall
             string odenentutarnoktali = tb_muhasebe_odemeal_odenen_miktar.Text.Replace(",", ".");
 
 
-            string kayitsonucu = vtislemleri.ekle_odeme(BirOgt.oid, odenentutarnoktali, cb_muhasebe_odemeal_odeme_turu.Text, tb_muhasebe_odemeal_odeme_tarihi.Text, tb_muhasebe_odemeal_aciklama.Text);
+
+
+            string kayitsonucu = vtislemleri.ekle_odeme(BirOgt.oid, odenentutarnoktali, filtrelenenOdemeBilgilerilistesis[cb_muhasebe_odemeal_odeme_turu.SelectedIndex].odemekodu, tb_muhasebe_odemeal_odeme_tarihi.Text, tb_muhasebe_odemeal_aciklama.Text);
 
 
             if (kayitsonucu.All(char.IsNumber))
@@ -2568,6 +2585,27 @@ namespace Materyall
 
         private void btn_taleplerial_excelden_Click(object sender, EventArgs e)
         {
+
+
+            if (rb_vt_islemturu_defter.Checked)
+            {
+
+
+                DialogResult result = MessageBox.Show("Devam etmek istiyor musunuz?", "Hatalı VT İşlem Türü Seçimi", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    exceldenHizliTalepAl();
+                    return;
+                }
+                else if (result == DialogResult.No)
+                {
+                    return;
+                }
+
+
+            }
+
+
 
             exceldenHizliTalepAl();
         }
@@ -3343,6 +3381,25 @@ namespace Materyall
 
         private void btn_defter_talepleriniHizliAl_Click(object sender, EventArgs e)
         {
+
+            if (rb_vt_islemturu_plan.Checked)
+            {
+
+
+                DialogResult result = MessageBox.Show("Devam etmek istiyor musunuz?", "Hatalı VT İşlem Türü Seçimi", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    exceldenHizliDefterTalepleriniAl();
+                    return;
+                }
+                else if (result == DialogResult.No)
+                {
+                    return;
+                }
+
+
+            }
+
 
             exceldenHizliDefterTalepleriniAl();
 
@@ -5912,6 +5969,80 @@ namespace Materyall
         private void bt_bayibilgilerinigoster_Click(object sender, EventArgs e)
         {
 
+
+
+        }
+
+        private void linklbl_listeMuhasebeRaporuHazirla_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            //Excelden başlık sütünlarını alıyoruz.
+
+            DataTable dt = new DataTable();
+
+
+          
+
+            //İlk olarak tablodaki sütun başlıklarını tanımlıyoruz.
+
+            dt.Columns.Add("Sıra");
+            dt.Columns.Add("KAYITNO");
+            dt.Columns.Add("BAYİ");
+            dt.Columns.Add("İL-İLÇE");
+            dt.Columns.Add("OKUL_ADI");
+            dt.Columns.Add("SINIF");
+            dt.Columns.Add("ADISOYADI");
+            dt.Columns.Add("ÜRÜNLER");
+            dt.Columns.Add("TOPLAM");
+            dt.Columns.Add("İNDİRİM");
+            dt.Columns.Add("ÖDEME");
+            dt.Columns.Add("BAKİYE");
+
+
+            //Döngü ile bir tablo oluşturacağız ve bunu dgv'de göstereceğiz.
+
+            for (int i = 0; i < dgv_alt_aramavelisteleme.Rows.Count; i++)
+            {
+
+                DataGridViewRow dr = dgv_alt_aramavelisteleme.Rows[i];
+                //Öğretmen oid bilgisini alıyoruz.
+               string oidmiz = dr.Cells[0].Value.ToString();
+
+                //Yeni bir satır oluşturduk.
+                var ys = dt.NewRow();
+
+
+                //Her sütun için bilgi ekleyeceğiz.
+                //Her satır için ayrı ayrı sorgu çalıştıracağız.
+                //Çok sağlıklı bir yöntem değil ama daha iyi bir çözüm bulana kadar şimdilik böyle yapacağız.
+
+                MuhasebeGenelDurumSnf geneldurum = vtislemleri.getirMuhasebeGenelDurumTumListe(int.Parse(oidmiz));
+
+                ys[0] = i + 1;
+                ys[1] = int.Parse(oidmiz);
+                ys[2] = dr.Cells["bayi"].Value.ToString() + "-" + dr.Cells["bayiadi"].Value.ToString();
+                ys[3] = dr.Cells["il"].Value.ToString() + "-" + dr.Cells["ilce"].Value.ToString();
+                ys[4] = dr.Cells["okuladi"].Value.ToString();
+                ys[5] = dr.Cells["sinif"].Value.ToString() + "-" + dr.Cells["sube"].Value.ToString();
+                ys[6] = dr.Cells["adisoyadi"].Value.ToString();
+
+                ys[7] = "Listelenmedi";
+
+                ys[8] = geneldurum.toplamborc;
+                ys[9] = geneldurum.toplamindirim;
+                ys[10] = geneldurum.toplamodeme;
+                ys[11] = geneldurum.toplambakiye;
+
+                //Satırı tabloya ekliyoruz.
+                dt.Rows.Add(ys);
+
+            }
+
+
+
+
+            //Liste rapor dgv'sinde verileri gösteriyoruz.
+            dgv_liste_muhasebe_rapor.DataSource = dt;
 
 
         }

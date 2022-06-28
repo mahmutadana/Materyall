@@ -308,15 +308,15 @@ namespace Materyall
 
 
 
-        public string[] filtre_odemeturleri()
+        public List<FiltrelenenOdemeBilgileriListesiSnf> filtre_odemeturleri()
         {
-            List<string> list = new List<string>();
+            List<FiltrelenenOdemeBilgileriListesiSnf> list = new List<FiltrelenenOdemeBilgileriListesiSnf>();
 
             //Bağlantı kısmı.
 
             baglantiKur();
 
-            string sql = "SELECT odemeturu FROM sis_odemeturu_tbl";
+            string sql = "SELECT odemekodu, odemeturu FROM sis_odemeturu_tbl";
 
             MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
 
@@ -324,7 +324,12 @@ namespace Materyall
 
             while (oku.Read())
             {
-                list.Add(oku["odemeturu"].ToString());
+                FiltrelenenOdemeBilgileriListesiSnf oge = new FiltrelenenOdemeBilgileriListesiSnf();
+
+                oge.odemekodu = int.Parse(oku["odemekodu"].ToString());
+                oge.odemeturu = oku["odemeturu"].ToString();
+                
+                list.Add(oge);
 
             }
 
@@ -333,7 +338,7 @@ namespace Materyall
 
             //Bağlantı kısımları.
 
-            return list.ToArray();
+            return list;
 
         }
 
@@ -3080,6 +3085,75 @@ namespace Materyall
 
         //MUHASEBE İŞLEMLERİ (Yeniden Bismillah)
 
+        //Arama listesindeki tüm öğretmenlerin muhasebe bilgilerini göstereceğiz inşallah.
+        
+        public MuhasebeGenelDurumSnf getirMuhasebeGenelDurumTumListe(int oid)
+        {
+
+
+
+            MuhasebeGenelDurumSnf oge = new MuhasebeGenelDurumSnf();
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  ödemetürü 5 = indirim. İndirimi ayrı hesaplıyoruz.
+
+            string sql = "SELECT SUM(t.fiyat) as toplamborc, (SELECT SUM(tutar) FROM odemeler_tbl WHERE oid=" + oid + " AND odemekodu != 5) as toplamodeme," +
+                " (SELECT SUM(tutar) FROM odemeler_tbl WHERE oid=" + oid + " AND odemekodu=5) as toplamindirim" +
+                " FROM (" +
+                "SELECT fiyat FROM tlp_defterler_tbl WHERE oid=" + oid + " " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_ekurunler_tbl WHERE oid=" + oid + " " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_g_anadersler_tbl WHERE oid=" + oid + " " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_g_serbestler_tbl WHERE oid=" + oid + " " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_sosyalkulup_tbl WHERE oid=" + oid + " " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_y_anadersler_tbl WHERE oid=" + oid + " ) t";
+
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            MySqlDataReader oku = cmd.ExecuteReader();
+
+            while (oku.Read())
+            {
+
+
+
+                oge.toplamborc = double.Parse("0" + oku["toplamborc"].ToString());
+                oge.toplamodeme = double.Parse("0" + oku["toplamodeme"].ToString());
+                oge.toplamindirim = double.Parse("0" + oku["toplamindirim"].ToString());
+                oge.toplambakiye = oge.toplamborc - (oge.toplamodeme + oge.toplamindirim);
+
+
+
+            }
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return oge;
+
+
+        }
+
+
+
+
+
+
+
+
+        //Seçili hesap / Seçili müşteri / Seçili öğretmen.
 
         public MuhasebeGenelDurumSnf getirMuhasebeGenelDurum(int oid)
         {
@@ -3138,7 +3212,7 @@ namespace Materyall
 
 
 
-        public string ekle_odeme(int oid, string odenenmiktar, string odemeturu, string odemezamani, string aciklama)
+        public string ekle_odeme(int oid, string odenenmiktar, int odemekodu, string odemezamani, string aciklama)
         {
             //Talep tarihi now() komutuyla eklenecek. Basım tarihi basım zamanı now() ile eklenecek.
 
@@ -3156,8 +3230,8 @@ namespace Materyall
             {
 
                 string sql = "INSERT INTO " + metinler.neyebakalim_muhasebe_odeme_tablo + " " +
-                    "(oid, islemturu, tutar, aciklama, odemetarihi, otomatiktarih) " +
-                    "VALUES (" + oid + ",'" + odemeturu + "'," + odenenmiktar + ",'" + aciklama + "', STR_TO_DATE('" + odemezamani + "', '%d.%m.%Y %H:%i:%s'), now())";
+                    "(oid, odemekodu, tutar, aciklama, odemetarihi, otomatiktarih) " +
+                    "VALUES (" + oid + "," + odemekodu + "," + odenenmiktar + ",'" + aciklama + "', STR_TO_DATE('" + odemezamani + "', '%d.%m.%Y %H:%i:%s'), now())";
 
 
                 MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
@@ -3588,32 +3662,8 @@ namespace Materyall
 
 
 
-            //Varsaılan olarak ikisi de seçili.
-            //iyice kilitlendi.
-            /*
-            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
-              " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT x.oid FROM " + metinler.neyebakalim_y_anaders_tablo + " x  JOIN " + metinler.neyebakalim_g_anaders_tablo + " y ON x.oid=y.oid "
-              + basimdurumu_ikili + " )" +
-              "  GROUP BY b.oid  LIMIT 5 ";
-            */
 
-            /*
-            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
-               " WHERE b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " " +
-               " UNION ALL " +
-               " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + " )" +
-               "   GROUP BY b.oid     ";
-            */
-
-            /*
-            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
-               " WHERE b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " AND yili='" + yili + "' " +
-               " UNION ALL " +
-               " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + " AND yili='" + yili + "' AND oid NOT IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " AND yili='" + yili + "'))" +
-               "   GROUP BY b.oid     ";
-            */
-
-            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+            string sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.bayi, y.bayiadi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
               " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " " +
               " UNION ALL " +
               " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + " )" +
@@ -3624,13 +3674,13 @@ namespace Materyall
 
             if (planyillik)
             {
-                sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.bayi, y.bayiadi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
                                 " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND  b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + ") " +
                                 "    ORDER BY b.oid";
 
             } else if (plangunluk)
             {
-                sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                sql1 = "SELECT b.oid, b.adisoyadi, b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.bayi, y.bayiadi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
                                 " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND  b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + ") " +
                                 "    ORDER BY b.oid";
             }
@@ -3670,6 +3720,9 @@ namespace Materyall
             return dt;
 
         }
+
+
+
 
 
         //Ek ürünleri arama ve listeleme

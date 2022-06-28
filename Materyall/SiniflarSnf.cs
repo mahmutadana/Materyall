@@ -346,6 +346,16 @@ namespace Materyall
 
 
 
+    public class FiltrelenenOdemeBilgileriListesiSnf
+    {
+        public int odemekimliktablo { get; set; }
+        public int odemekodu { get; set; }
+        public string odemeturu { get; set; }
+
+
+    }
+
+
     public class MuhasebeGenelDurumSnf
     {
        
@@ -353,6 +363,11 @@ namespace Materyall
         public double toplamodeme { get; set; }
         public double toplambakiye { get; set; }
 
+
+        //Burası gerekli durumlarda kullanılacaktır. Eğer indirim toplam ödemeye dahil edilmişse buraya dikkat etmek gerekir.
+        //Çünkü indirimler de ödeme tutarı gibi görünmektedir. Ayrıştırılmazsa toplam ödemede görülür.
+        //Toplam ödemeye dahil edilip bu ayrıca gösterilebilir veya kullanım durumuna göre toplam ödeme ayrı, indirim ayrı gösterilebilir.
+        public double toplamindirim { get; set; }
 
     }
 
