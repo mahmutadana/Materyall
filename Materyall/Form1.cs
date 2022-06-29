@@ -671,6 +671,8 @@ namespace Materyall
                 cb_bilgi_bayiadi.Items.Add(s.bayiadi + "-" + s.bayikodu);
             }
 
+            //Komboboks genişliği.
+            cb_bilgi_bayiadi.DropDownWidth = yrdsnf.comboboxGenisligi(cb_bilgi_bayiadi) * 2;
 
         }
 

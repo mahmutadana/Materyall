@@ -96,6 +96,25 @@ namespace Materyall
 
 
 
+       public int comboboxGenisligi(ComboBox myCombo)
+        {
+            int maxWidth = 0;
+            int temp = 0;
+            Label label1 = new Label();
+
+            foreach (var obj in myCombo.Items)
+            {
+                label1.Text = obj.ToString();
+                temp = label1.PreferredWidth;
+                if (temp > maxWidth)
+                {
+                    maxWidth = temp;
+                }
+            }
+            label1.Dispose();
+            return maxWidth;
+        }
+
 
 
         //Sınıf sonu.
