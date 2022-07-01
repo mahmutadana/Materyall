@@ -170,12 +170,7 @@
             this.linklbl_listeMuhasebeRaporuHazirla = new System.Windows.Forms.LinkLabel();
             this.dgv_liste_muhasebe_rapor = new System.Windows.Forms.DataGridView();
             this.groupBox61 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label79 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label80 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label81 = new System.Windows.Forms.Label();
+            this.dgv_muhasebe_listeozeti = new System.Windows.Forms.DataGridView();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
             this.btn_muhasebe_miktar_uyari_bilgi = new System.Windows.Forms.Button();
             this.linklbl_muhasebe_odemeal_odeme_kaydet = new System.Windows.Forms.LinkLabel();
@@ -443,6 +438,10 @@
             this.groupBox58 = new System.Windows.Forms.GroupBox();
             this.rb_vt_islemturu_defter = new System.Windows.Forms.RadioButton();
             this.rb_vt_islemturu_plan = new System.Windows.Forms.RadioButton();
+            this.dtp_ilk = new System.Windows.Forms.DateTimePicker();
+            this.groupBox62 = new System.Windows.Forms.GroupBox();
+            this.dtp_son = new System.Windows.Forms.DateTimePicker();
+            this.linklbl_tariharaliginagorefiltrele = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -494,7 +493,7 @@
             this.tab_muhasebe.SuspendLayout();
             this.groupBox60.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_liste_muhasebe_rapor)).BeginInit();
-            this.groupBox61.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_muhasebe_listeozeti)).BeginInit();
             this.groupBox17.SuspendLayout();
             this.groupBox16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_muhasebe_odemeler)).BeginInit();
@@ -545,6 +544,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).BeginInit();
             this.tab_alt_loglar.SuspendLayout();
             this.groupBox58.SuspendLayout();
+            this.groupBox62.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -1503,9 +1503,9 @@
             this.rb_planbas_secenek_kapakveplan.AutoSize = true;
             this.rb_planbas_secenek_kapakveplan.Location = new System.Drawing.Point(6, 140);
             this.rb_planbas_secenek_kapakveplan.Name = "rb_planbas_secenek_kapakveplan";
-            this.rb_planbas_secenek_kapakveplan.Size = new System.Drawing.Size(145, 17);
+            this.rb_planbas_secenek_kapakveplan.Size = new System.Drawing.Size(139, 17);
             this.rb_planbas_secenek_kapakveplan.TabIndex = 2;
-            this.rb_planbas_secenek_kapakveplan.Text = "KAPAK ve PLAN art arda";
+            this.rb_planbas_secenek_kapakveplan.Text = "KAPAK ve PLAN birlikte";
             this.rb_planbas_secenek_kapakveplan.UseVisualStyleBackColor = true;
             // 
             // rb_planbas_secenek_plan
@@ -2106,7 +2106,7 @@
             // linklbl_listeMuhasebeRaporuHazirla
             // 
             this.linklbl_listeMuhasebeRaporuHazirla.AutoSize = true;
-            this.linklbl_listeMuhasebeRaporuHazirla.Location = new System.Drawing.Point(304, 29);
+            this.linklbl_listeMuhasebeRaporuHazirla.Location = new System.Drawing.Point(330, 178);
             this.linklbl_listeMuhasebeRaporuHazirla.Name = "linklbl_listeMuhasebeRaporuHazirla";
             this.linklbl_listeMuhasebeRaporuHazirla.Size = new System.Drawing.Size(135, 13);
             this.linklbl_listeMuhasebeRaporuHazirla.TabIndex = 3;
@@ -2124,69 +2124,23 @@
             // 
             // groupBox61
             // 
-            this.groupBox61.Controls.Add(this.textBox1);
-            this.groupBox61.Controls.Add(this.label79);
-            this.groupBox61.Controls.Add(this.textBox2);
-            this.groupBox61.Controls.Add(this.label80);
-            this.groupBox61.Controls.Add(this.textBox3);
-            this.groupBox61.Controls.Add(this.label81);
             this.groupBox61.Location = new System.Drawing.Point(6, 19);
             this.groupBox61.Name = "groupBox61";
-            this.groupBox61.Size = new System.Drawing.Size(275, 159);
+            this.groupBox61.Size = new System.Drawing.Size(476, 84);
             this.groupBox61.TabIndex = 1;
             this.groupBox61.TabStop = false;
             this.groupBox61.Text = "Genel Durum (Tüm Liste)";
             // 
-            // textBox1
+            // dgv_muhasebe_listeozeti
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBox1.Location = new System.Drawing.Point(101, 111);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(153, 32);
-            this.textBox1.TabIndex = 5;
-            // 
-            // label79
-            // 
-            this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(15, 123);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(39, 13);
-            this.label79.TabIndex = 4;
-            this.label79.Text = "Bakiye";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBox2.Location = new System.Drawing.Point(101, 65);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(153, 32);
-            this.textBox2.TabIndex = 3;
-            // 
-            // label80
-            // 
-            this.label80.AutoSize = true;
-            this.label80.Location = new System.Drawing.Point(15, 77);
-            this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(79, 13);
-            this.label80.TabIndex = 2;
-            this.label80.Text = "Toplam Ödeme";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBox3.Location = new System.Drawing.Point(101, 23);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(153, 32);
-            this.textBox3.TabIndex = 1;
-            // 
-            // label81
-            // 
-            this.label81.AutoSize = true;
-            this.label81.Location = new System.Drawing.Point(15, 35);
-            this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(67, 13);
-            this.label81.TabIndex = 0;
-            this.label81.Text = "Toplam Borç";
+            this.dgv_muhasebe_listeozeti.AllowUserToAddRows = false;
+            this.dgv_muhasebe_listeozeti.AllowUserToDeleteRows = false;
+            this.dgv_muhasebe_listeozeti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgv_muhasebe_listeozeti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_muhasebe_listeozeti.Location = new System.Drawing.Point(480, 212);
+            this.dgv_muhasebe_listeozeti.Name = "dgv_muhasebe_listeozeti";
+            this.dgv_muhasebe_listeozeti.Size = new System.Drawing.Size(386, 47);
+            this.dgv_muhasebe_listeozeti.TabIndex = 0;
             // 
             // groupBox17
             // 
@@ -4978,6 +4932,8 @@
             // 
             this.groupBox11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox11.Controls.Add(this.groupBox62);
+            this.groupBox11.Controls.Add(this.dgv_muhasebe_listeozeti);
             this.groupBox11.Controls.Add(this.lbl_ara_bulunankayit_sayisi);
             this.groupBox11.Controls.Add(this.dgv_alt_aramavelisteleme);
             this.groupBox11.Controls.Add(this.label48);
@@ -4992,7 +4948,7 @@
             this.lbl_ara_bulunankayit_sayisi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_ara_bulunankayit_sayisi.AutoSize = true;
             this.lbl_ara_bulunankayit_sayisi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lbl_ara_bulunankayit_sayisi.Location = new System.Drawing.Point(87, 247);
+            this.lbl_ara_bulunankayit_sayisi.Location = new System.Drawing.Point(6, 245);
             this.lbl_ara_bulunankayit_sayisi.Name = "lbl_ara_bulunankayit_sayisi";
             this.lbl_ara_bulunankayit_sayisi.Size = new System.Drawing.Size(16, 17);
             this.lbl_ara_bulunankayit_sayisi.TabIndex = 1;
@@ -5009,7 +4965,7 @@
             this.dgv_alt_aramavelisteleme.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_alt_aramavelisteleme.Location = new System.Drawing.Point(7, 12);
             this.dgv_alt_aramavelisteleme.Name = "dgv_alt_aramavelisteleme";
-            this.dgv_alt_aramavelisteleme.Size = new System.Drawing.Size(859, 233);
+            this.dgv_alt_aramavelisteleme.Size = new System.Drawing.Size(859, 198);
             this.dgv_alt_aramavelisteleme.TabIndex = 0;
             this.dgv_alt_aramavelisteleme.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ara_alttaki_cellDoubleClick);
             // 
@@ -5017,7 +4973,7 @@
             // 
             this.label48.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(6, 249);
+            this.label48.Location = new System.Drawing.Point(6, 226);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(75, 13);
             this.label48.TabIndex = 0;
@@ -5078,6 +5034,47 @@
             this.rb_vt_islemturu_plan.Text = "Plan";
             this.rb_vt_islemturu_plan.UseVisualStyleBackColor = true;
             this.rb_vt_islemturu_plan.CheckedChanged += new System.EventHandler(this.rb_vt_islemturu_plan_CheckedChanged);
+            // 
+            // dtp_ilk
+            // 
+            this.dtp_ilk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.dtp_ilk.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtp_ilk.Location = new System.Drawing.Point(6, 14);
+            this.dtp_ilk.Name = "dtp_ilk";
+            this.dtp_ilk.Size = new System.Drawing.Size(112, 26);
+            this.dtp_ilk.TabIndex = 2;
+            // 
+            // groupBox62
+            // 
+            this.groupBox62.Controls.Add(this.linklbl_tariharaliginagorefiltrele);
+            this.groupBox62.Controls.Add(this.dtp_son);
+            this.groupBox62.Controls.Add(this.dtp_ilk);
+            this.groupBox62.Location = new System.Drawing.Point(106, 212);
+            this.groupBox62.Name = "groupBox62";
+            this.groupBox62.Size = new System.Drawing.Size(336, 47);
+            this.groupBox62.TabIndex = 3;
+            this.groupBox62.TabStop = false;
+            this.groupBox62.Text = "Tarih Aralığına Göre Filtrele";
+            // 
+            // dtp_son
+            // 
+            this.dtp_son.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.dtp_son.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtp_son.Location = new System.Drawing.Point(124, 14);
+            this.dtp_son.Name = "dtp_son";
+            this.dtp_son.Size = new System.Drawing.Size(108, 26);
+            this.dtp_son.TabIndex = 3;
+            // 
+            // linklbl_tariharaliginagorefiltrele
+            // 
+            this.linklbl_tariharaliginagorefiltrele.AutoSize = true;
+            this.linklbl_tariharaliginagorefiltrele.Location = new System.Drawing.Point(252, 22);
+            this.linklbl_tariharaliginagorefiltrele.Name = "linklbl_tariharaliginagorefiltrele";
+            this.linklbl_tariharaliginagorefiltrele.Size = new System.Drawing.Size(57, 13);
+            this.linklbl_tariharaliginagorefiltrele.TabIndex = 4;
+            this.linklbl_tariharaliginagorefiltrele.TabStop = true;
+            this.linklbl_tariharaliginagorefiltrele.Text = "FİLTRELE";
+            this.linklbl_tariharaliginagorefiltrele.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_tariharaliginagorefiltrele_LinkClicked);
             // 
             // Form1
             // 
@@ -5170,8 +5167,7 @@
             this.groupBox60.ResumeLayout(false);
             this.groupBox60.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_liste_muhasebe_rapor)).EndInit();
-            this.groupBox61.ResumeLayout(false);
-            this.groupBox61.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_muhasebe_listeozeti)).EndInit();
             this.groupBox17.ResumeLayout(false);
             this.groupBox17.PerformLayout();
             this.groupBox16.ResumeLayout(false);
@@ -5249,6 +5245,8 @@
             this.tab_alt_loglar.PerformLayout();
             this.groupBox58.ResumeLayout(false);
             this.groupBox58.PerformLayout();
+            this.groupBox62.ResumeLayout(false);
+            this.groupBox62.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5661,14 +5659,13 @@
         private System.Windows.Forms.TextBox tb_bb_bayikodu;
         private System.Windows.Forms.GroupBox groupBox60;
         private System.Windows.Forms.GroupBox groupBox61;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label79;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label80;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label81;
         private System.Windows.Forms.DataGridView dgv_liste_muhasebe_rapor;
         private System.Windows.Forms.LinkLabel linklbl_listeMuhasebeRaporuHazirla;
+        private System.Windows.Forms.DataGridView dgv_muhasebe_listeozeti;
+        private System.Windows.Forms.GroupBox groupBox62;
+        private System.Windows.Forms.LinkLabel linklbl_tariharaliginagorefiltrele;
+        private System.Windows.Forms.DateTimePicker dtp_son;
+        private System.Windows.Forms.DateTimePicker dtp_ilk;
     }
 }
 

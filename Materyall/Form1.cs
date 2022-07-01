@@ -73,6 +73,8 @@ namespace Materyall
         //Basıma başla dedindiği anda buna değer atanacak.
         bool YAZDIRILACAKMI1_PDFMI0;
         string PDF_CIKTI_KLASORU_ALT_BASLIK = "planlar";
+        string PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "yıllık";
+        string PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_2 = "kapak";
 
         public Form1()
         {
@@ -3683,6 +3685,24 @@ namespace Materyall
         private void ara_sonucu_bulunan_kayit_sayisini_yaz()
         {
             lbl_ara_bulunankayit_sayisi.Text = dgv_alt_aramavelisteleme.RowCount.ToString();
+
+
+            //Liste bakiyesi hesapla:
+
+            string idler = "0";
+
+            for (int i = 0; i < dgv_alt_aramavelisteleme.Rows.Count; i++)
+            {
+
+                DataGridViewRow dr = dgv_alt_aramavelisteleme.Rows[i];
+                //Öğretmen oid bilgisini alıyoruz.
+                string oidmiz = dr.Cells[0].Value.ToString();
+
+                idler = idler + "," + oidmiz;
+            }
+
+            dgv_muhasebe_listeozeti.DataSource = vtislemleri.dgv_icin_getirMuhasebeGenelDurumTumListeninOzeti(idler);
+
         }
 
 
@@ -3969,6 +3989,33 @@ namespace Materyall
             }
 
             PDF_CIKTI_KLASORU_ALT_BASLIK = metinler.pdf_alt_klasoru_defter;
+
+            //KUYRUKLARI AYARLAYALIM. 1
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "DEFTERLER";
+           
+
+            //KUYRUKLARI AYARLAYALIM 2
+            if (rb_defterbas_secenek_kapak.Checked)
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_2 = "kapaklar";
+            }
+            else if (rb_defterbas_secenek_defter.Checked)
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_2 = "defterler";
+            }
+            else if (rb_defterbas_secenek_kapakvedefter.Checked)
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_2 = "kapak_defter";
+            }
+            else
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_2 = "belirsiz";
+            }
+
+
+
+
+
 
             Bekleyinform bekleyinform = new Bekleyinform();
 
@@ -4275,8 +4322,7 @@ namespace Materyall
             //Defter kodu geldi.
            //Burada defteri basıyoruz.
 
-            //Belgeyi açması için filigran ekle komutunu kullanıyoruz. İlk değişken olarak basılacak olan defter kapağını alıyoruz
-            //ve filigran olarak bir boşluk gönderiyoruz.
+            //Belgeyi açması için filigran ekle komutunu kullanıyoruz. 
 
             basim_1_filigranEkle(varsayilanbossa.defteryolu + @"\" + basilacakolandefterkodu + ".docx", " ", false, false, basilacakolandefterkodu, basilanTur);
 
@@ -4306,6 +4352,44 @@ namespace Materyall
 
 
             PDF_CIKTI_KLASORU_ALT_BASLIK = metinler.pdf_alt_klasoru_plan;
+
+            //KUYRUKLARI AYARLAYALIM. 1
+            if (rb_planbas_kapsam_sadeceyillik.Checked)
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "YILLIK";
+            } else if (rb_planbas_kapsam_sadecegunluk.Checked)
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "GUNLUK";
+
+            } else if (rb_planbas_kapsam_yillikvegunlukartarda.Checked)
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "YILLIK_GUNLUK";
+            } else if (rb_planbas_kapsam_sadecedersdefteri.Checked)
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "DOLUDEFTER";
+            } else
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "TANIMSIZ";
+            }
+
+            //KUYRUKLARI AYARLAYALIM 2
+            if (rb_planbas_secenek_kapak.Checked)
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_2 = "kapaklar";
+            } else if (rb_planbas_secenek_plan.Checked)
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_2 = "planlar";
+            } else if (rb_planbas_secenek_kapakveplan.Checked)
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_2 = "kapak_plan";
+            } else
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_2 = "belirsiz";
+            }
+
+
+
+
 
             Bekleyinform bekleyinform = new Bekleyinform();
 
@@ -4683,7 +4767,7 @@ namespace Materyall
                         ondosyabasildimi = true;
                     }
 
-                    plan_bas_3_ek_2_plan_bas(basilacakolanplankodu, "plan");
+                    plan_bas_3_ek_2_plan_bas(basilacakolanplankodu, urunturu);
                 }
 
 
@@ -5340,7 +5424,13 @@ namespace Materyall
 
             //Varsayılan kayıt konumunun altına ilgili klasörü ekleyeceğiz. Hepsi aynı klasör olarak seçilmiş ise altta karışmaması için.
 
-            hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + PDF_CIKTI_KLASORU_ALT_BASLIK;
+           
+
+            
+            
+
+
+            hedef_pdf_dosyamiz_birlesik = hedef_pdf_dosyamiz_birlesik + @"\" + PDF_CIKTI_KLASORU_ALT_BASLIK + @"\" + PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 + @"\" + PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_2;
 
             string path = hedef_pdf_dosyamiz_birlesik;
 
@@ -5978,12 +6068,38 @@ namespace Materyall
         private void linklbl_listeMuhasebeRaporuHazirla_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
+            //İlk değer olarak sıfır gönderiliyor. Zaten sıfır yok. Virgül sorunu için.
+            string idler = "0";
+
+            for (int i = 0; i < dgv_alt_aramavelisteleme.Rows.Count; i++)
+            {
+
+                DataGridViewRow dr = dgv_alt_aramavelisteleme.Rows[i];
+                //Öğretmen oid bilgisini alıyoruz.
+                string oidmiz = dr.Cells[0].Value.ToString();
+
+                idler = idler + "," + oidmiz;
+            }
+
+
+
+            dgv_liste_muhasebe_rapor.DataSource = vtislemleri.dgv_icin_getirMuhasebeGenelDurumTumListe(idler);
+
+
+        }
+
+
+
+
+        private void donguileTekTekListeMuhasebeKaydiAl()
+        {
+
             //Excelden başlık sütünlarını alıyoruz.
 
             DataTable dt = new DataTable();
 
 
-          
+
 
             //İlk olarak tablodaki sütun başlıklarını tanımlıyoruz.
 
@@ -6008,7 +6124,7 @@ namespace Materyall
 
                 DataGridViewRow dr = dgv_alt_aramavelisteleme.Rows[i];
                 //Öğretmen oid bilgisini alıyoruz.
-               string oidmiz = dr.Cells[0].Value.ToString();
+                string oidmiz = dr.Cells[0].Value.ToString();
 
                 //Yeni bir satır oluşturduk.
                 var ys = dt.NewRow();
@@ -6046,18 +6162,52 @@ namespace Materyall
             //Liste rapor dgv'sinde verileri gösteriyoruz.
             dgv_liste_muhasebe_rapor.DataSource = dt;
 
+        }
 
+        private void linklbl_tariharaliginagorefiltrele_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            tarihAraliginaGoreFiltrele();
+               
+        }
+
+
+        private void tarihAraliginaGoreFiltrele()
+        {
+
+            DateTime ilktarih = dtp_ilk.Value.Date;
+            DateTime sontarih = dtp_son.Value.Date;
+
+
+
+            for (int i = dgv_alt_aramavelisteleme.Rows.Count; i > 0; i--)
+            {
+
+                DataGridViewRow dr = dgv_alt_aramavelisteleme.Rows[i - 1];
+                //Öğretmen oid bilgisini alıyoruz.
+                DateTime listedekitarih = DateTime.Parse(dr.Cells["kayittarihi"].Value.ToString());
+
+
+
+                if (listedekitarih > sontarih || listedekitarih < ilktarih)
+                {
+                    dgv_alt_aramavelisteleme.Rows.Remove(dr);
+                }
+
+
+
+            }
+
+
+            MessageBox.Show("Tarih aralığına göre filtreleme tamamlandı.");
         }
 
 
 
 
 
-
-
-
-        //Sınıf sonu.
-    }
+            //Sınıf sonu.
+        }
 
 
 }

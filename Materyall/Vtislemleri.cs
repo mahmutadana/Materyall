@@ -3149,6 +3149,141 @@ namespace Materyall
 
 
 
+        public DataTable dgv_icin_getirMuhasebeGenelDurumTumListe(string oidler)
+        {
+
+
+
+            MuhasebeGenelDurumSnf oge = new MuhasebeGenelDurumSnf();
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  ödemetürü 5 = indirim. İndirimi ayrı hesaplıyoruz.
+
+            /*
+             * Bu tamamını tek seferde alıyor. Özet. Bunu yine kullanacağız. Özet bilgi vermek için kullanacağız.
+            string sql = "SELECT SUM(t.fiyat) as toplamborc, (SELECT SUM(tutar) FROM odemeler_tbl WHERE oid IN (" + oidler + ") AND odemekodu != 5) as toplamodeme," +
+                " (SELECT SUM(tutar) FROM odemeler_tbl WHERE oid IN (" + oidler + ") AND odemekodu=5) as toplamindirim" +
+                " FROM (" +
+                "SELECT fiyat FROM tlp_defterler_tbl WHERE oid IN (" + oidler + ")  " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_ekurunler_tbl WHERE oid IN (" + oidler + ")  " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_g_anadersler_tbl WHERE oid IN (" + oidler + ")  " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_g_serbestler_tbl WHERE oid IN (" + oidler + ")  " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_sosyalkulup_tbl WHERE oid IN (" + oidler + ")  " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_y_anadersler_tbl WHERE oid IN (" + oidler + ")  ) t";
+            */
+
+            /*
+             * 
+             * Bu yavaş, daha hızlı yöntem deniyoruz.
+            string sql = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi," +
+                " (IFNULL(e.fiyat,0) + IFNULL(f.fiyat,0) + IFNULL(g.fiyat,0) + IFNULL(h.fiyat,0) + IFNULL(i.fiyat,0) + IFNULL(j.fiyat,0) ) AS toplamBorc , " +
+                " (SELECT SUM(tutar) FROM odemeler_tbl WHERE oid=b.oid AND odemekodu != 5) as toplamodeme, " +
+                " (SELECT SUM(tutar) FROM odemeler_tbl WHERE oid=b.oid AND odemekodu=5) as toplamindirim " +
+                " FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                " LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
+                " LEFT JOIN tlp_defterler_tbl e ON e.oid=b.oid " +
+                " LEFT JOIN tlp_ekurunler_tbl f ON f.oid=b.oid " +
+                " LEFT JOIN tlp_g_anadersler_tbl g ON g.oid=b.oid " +
+                " LEFT JOIN tlp_g_serbestler_tbl h ON h.oid=b.oid " +
+                " LEFT JOIN tlp_sosyalkulup_tbl i ON i.oid=b.oid " +
+                " LEFT JOIN tlp_y_anadersler_tbl j ON j.oid=b.oid " +
+                               " WHERE b.oid IN (" + oidler + ") " +
+                               " GROUP BY b.oid ORDER BY b.oid";
+            */
+
+
+
+            string sql = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi," +
+                " (IFNULL((SELECT SUM(fiyat) FROM tlp_defterler_tbl WHERE oid = b.oid), 0) + " +
+                "IFNULL((SELECT SUM(fiyat) FROM tlp_ekurunler_tbl WHERE oid=b.oid),0) + " +
+                "IFNULL((SELECT SUM(fiyat) FROM tlp_defterler_tbl WHERE oid=b.oid),0) + " +
+                "IFNULL((SELECT SUM(fiyat) FROM tlp_g_anadersler_tbl WHERE oid=b.oid),0) +" +
+                "IFNULL((SELECT SUM(fiyat) FROM tlp_g_serbestler_tbl WHERE oid=b.oid),0) +" +
+                "IFNULL((SELECT SUM(fiyat) FROM tlp_sosyalkulup_tbl WHERE oid=b.oid),0) +" +
+                "IFNULL((SELECT SUM(fiyat) FROM tlp_y_anadersler_tbl WHERE oid=b.oid),0) ) AS toplamBorc, " +
+                " IFNULL((SELECT SUM(tutar) FROM odemeler_tbl WHERE oid=b.oid AND odemekodu != 5),0) as toplamodeme, " +
+                " IFNULL((SELECT SUM(tutar) FROM odemeler_tbl WHERE oid=b.oid AND odemekodu=5),0) as toplamindirim " +
+                " FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                " LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
+                               " WHERE b.oid IN (" + oidler + ") " +
+                               " GROUP BY b.oid ORDER BY b.oid";
+
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+
+        }
+
+
+
+        public DataTable dgv_icin_getirMuhasebeGenelDurumTumListeninOzeti(string oidler)
+        {
+
+            //Bu arama listesindeki tüm kayıtların özet bilgisini verir.
+
+            MuhasebeGenelDurumSnf oge = new MuhasebeGenelDurumSnf();
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  ödemetürü 5 = indirim. İndirimi ayrı hesaplıyoruz.
+
+           
+            string sql = "SELECT Borc, Odeme, indirim, (Borc - Odeme - indirim) as bakiye  FROM ( SELECT SUM(t.fiyat) as Borc, ifnull((SELECT SUM(tutar) FROM odemeler_tbl WHERE oid IN (" + oidler + ") AND odemekodu != 5),0) as Odeme," +
+                " ifnull((SELECT SUM(tutar) FROM odemeler_tbl WHERE oid IN (" + oidler + ") AND odemekodu=5),0) as indirim " +
+                " FROM (" +
+                "SELECT fiyat FROM tlp_defterler_tbl WHERE oid IN (" + oidler + ")  " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_ekurunler_tbl WHERE oid IN (" + oidler + ")  " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_g_anadersler_tbl WHERE oid IN (" + oidler + ")  " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_g_serbestler_tbl WHERE oid IN (" + oidler + ")  " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_sosyalkulup_tbl WHERE oid IN (" + oidler + ")  " +
+                "UNION ALL " +
+                "SELECT fiyat FROM tlp_y_anadersler_tbl WHERE oid IN (" + oidler + ")  )  t ) X";
+            
+
+
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+
+        }
 
 
 
@@ -3661,26 +3796,48 @@ namespace Materyall
             }
 
 
-
-
-            string sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
+            
+            string sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, b.kayittarihi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
               " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + " " +
               " UNION ALL " +
               " SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + " )" +
               "   GROUP BY b.oid LIMIT 100 ";
+           
+           
 
+            /*
+            int[] idler = { 1, 2, 3, 4, 5, 6 };
+
+            string sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
+              " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' AND b.oid IN (" + idler + ")" +
+              "   GROUP BY b.oid LIMIT 100 ";
+            */
+
+
+
+
+            /*
+           string icsorgu = "SELECT y.oid FROM " + metinler.neyebakalim_y_anaders_tablo + " y " +
+            " INNER JOIN " + metinler.neyebakalim_g_anaders_tablo + " x " + basimdurumu_ikili;
+
+
+           string sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
+            " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' AND b.oid IN (" + icsorgu + ")" +
+            "    ";
+
+            */
 
 
 
             if (planyillik)
             {
-                sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
+                sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, b.kayittarihi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
                                 " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND  b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_y_anaders_tablo + " " + basimdurumu + ") " +
                                 "    ORDER BY b.oid";
 
             } else if (plangunluk)
             {
-                sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
+                sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, b.kayittarihi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
                                 " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND  b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + metinler.neyebakalim_g_anaders_tablo + " " + basimdurumu + ") " +
                                 "    ORDER BY b.oid";
             }
@@ -3776,7 +3933,7 @@ namespace Materyall
 
                                                                                            
             //Varsaılan olarak ikisi de seçili.
-            string sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
+            string sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, b.kayittarihi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
                                 " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + tabloadi + " " + basimdurumu + ") " +
                                 "  GROUP BY b.oid  ORDER BY b.oid";
 
@@ -3856,7 +4013,7 @@ namespace Materyall
 
           
             //Varsaılan olarak ikisi de seçili.
-            string sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, d.defterkodu, f.defteradi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
+            string sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, d.defterkodu, f.defteradi, b.kayittarihi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi " +
                 " LEFT JOIN " + tabloadi + " d ON d.oid=b.oid" +
                 " LEFT JOIN sis_defterler_tbl f ON f.defterkodu=d.defterkodu " +
                 " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' AND b.oid IN (SELECT oid FROM " + tabloadi + " " + basimdurumu + ") ORDER BY b.oid";
@@ -3917,7 +4074,7 @@ namespace Materyall
 
 
             //Varsaılan olarak ikisi de seçili.             Buradaki left join biraz farklı çünkü yukarıdaki where kısmında tanımlanmış.
-            string sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+            string sql1 = "SELECT b.oid, b.bayi, y.bayiadi,  b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, b.kayittarihi FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
                 " " + wheree + " ORDER BY b.oid";
 
             //Group by demiyoruz. Kişiye kayıtlı kaç defter varsa görünsün. "  GROUP BY b.oid";
