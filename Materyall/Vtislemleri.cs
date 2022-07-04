@@ -3219,7 +3219,7 @@ namespace Materyall
 
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
-
+            da.SelectCommand.CommandTimeout = 1200;
 
 
             DataTable dt = new DataTable();

@@ -6068,6 +6068,13 @@ namespace Materyall
         private void linklbl_listeMuhasebeRaporuHazirla_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
+
+
+
+            Bekleyinform bekleyinform = new Bekleyinform();
+
+            bekleyinform.Show();
+
             //İlk değer olarak sıfır gönderiliyor. Zaten sıfır yok. Virgül sorunu için.
             string idler = "0";
 
@@ -6085,6 +6092,8 @@ namespace Materyall
 
             dgv_liste_muhasebe_rapor.DataSource = vtislemleri.dgv_icin_getirMuhasebeGenelDurumTumListe(idler);
 
+
+            bekleyinform.Close();
 
         }
 
