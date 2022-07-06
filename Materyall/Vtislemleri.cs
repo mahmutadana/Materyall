@@ -4207,7 +4207,11 @@ namespace Materyall
             }
             else if (basilanturudefterplangunukyillikvs == metinler.basilacak_ekurun_defter_adi)
             {
-                sql = "UPDATE " + metinler.neyebakalim_ekurunler_cd_pdf_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND urunkodu=" + 101; // şimdilik kodu eledik. ama vt'den almamız daha uygun olacak. int.Parse(urun_kodu_id);
+                sql = "UPDATE " + metinler.neyebakalim_ekurunler_cd_pdf_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND urunkodu=" + 101; // şimdilik kodu eKledik. ama vt'den almamız daha uygun olacak. int.Parse(urun_kodu_id);
+            }
+            else if (basilanturudefterplangunukyillikvs == "OZELPDF")
+            {
+                sql = "UPDATE " + metinler.neyebakalim_ekurunler_cd_pdf_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND urunkodu=" + 102; // şimdilik kodu eKledik. ama vt'den almamız daha uygun olacak. int.Parse(urun_kodu_id);
             }
             else
             {
@@ -4295,6 +4299,83 @@ namespace Materyall
             return mahallikurtulusgunu;
 
         }
+
+
+
+
+
+
+        //TARİH EKLEME VE SİLME İŞLEMLERİ. (BASILDI OLARAK İŞARETLE GİBİ...)
+
+        public bool isle_listeyiBasimTarihiEkle_veya_Sil(string oidler, string islemyapilacakolantablo, int ekurunsekodu, string basimtarihi, bool eklensinTrue_silinsinFalse)
+        {
+
+
+            ////Dolu defter ve pdf için basım tarihi eklenirken farklı bir sql cümlesi kurulacak.
+           
+
+
+            bool durum;
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  ödemetürü 5 = indirim. İndirimi ayrı hesaplıyoruz.
+
+            string sql = "UPDATE " + islemyapilacakolantablo + " SET basimtarihi='" + basimtarihi + "' WHERE oid IN (" + oidler + ")";
+
+            if (ekurunsekodu != 0)
+            {
+                sql = "UPDATE " + islemyapilacakolantablo + " SET basimtarihi='" + basimtarihi + "' WHERE urunkodu=" + ekurunsekodu + " AND oid IN (" + oidler + ")";
+            }
+
+
+
+
+            //EĞER SİLME İŞLEMİ İSE YUKARIDAKİ SQL CÜMLELERİ DEĞİŞECEK.
+
+            if (eklensinTrue_silinsinFalse == false)
+            {
+
+                    sql = "UPDATE " + islemyapilacakolantablo + " SET basimtarihi=NULL WHERE oid IN (" + oidler + ")";
+
+                if (ekurunsekodu != 0)
+                {
+                    sql = "UPDATE " + islemyapilacakolantablo + " SET basimtarihi=NULL WHERE urunkodu=" + ekurunsekodu + " AND oid IN (" + oidler + ")";
+                }
+
+            }
+
+
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            try
+            {
+                object kayitbilgisi = cmd.ExecuteNonQuery();
+                durum = true;
+
+            } catch (Exception)
+            {
+
+                durum = false;
+
+            }
+           
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return durum;
+
+
+        }
+
+
 
 
 

@@ -405,7 +405,7 @@
             this.rb_ara_ekurun_durum_tumu = new System.Windows.Forms.RadioButton();
             this.rb_ara_sosyalkulup = new System.Windows.Forms.RadioButton();
             this.rb_ara_pdf = new System.Windows.Forms.RadioButton();
-            this.rb_ara_cd = new System.Windows.Forms.RadioButton();
+            this.rb_ara_cd_doludefter = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox28 = new System.Windows.Forms.GroupBox();
             this.groupBox30 = new System.Windows.Forms.GroupBox();
@@ -430,6 +430,17 @@
             this.tb_yil_ara_bilgileregore_il = new System.Windows.Forms.TextBox();
             this.groupBox27 = new System.Windows.Forms.GroupBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.groupBox63 = new System.Windows.Forms.GroupBox();
+            this.label79 = new System.Windows.Forms.Label();
+            this.linklbl__listedekitarihleri_sil = new System.Windows.Forms.LinkLabel();
+            this.linklbl_listeye_ekle = new System.Windows.Forms.LinkLabel();
+            this.rb_listeye_tarih_ekle_defterler = new System.Windows.Forms.RadioButton();
+            this.rb_listeye_tarih_ekle_sosyalkulup = new System.Windows.Forms.RadioButton();
+            this.rb_listeye_tarih_ekle_pdf = new System.Windows.Forms.RadioButton();
+            this.rb_listeye_tarih_ekle_doludefter = new System.Windows.Forms.RadioButton();
+            this.rb_listeye_tarih_ekle_gunlukplanlar = new System.Windows.Forms.RadioButton();
+            this.rb_listeye_tarih_ekle_yillikplan = new System.Windows.Forms.RadioButton();
+            this.dtp_listeye_ekle_tarih = new System.Windows.Forms.DateTimePicker();
             this.groupBox62 = new System.Windows.Forms.GroupBox();
             this.linklbl_tariharaliginagorefiltrele = new System.Windows.Forms.LinkLabel();
             this.dtp_son = new System.Windows.Forms.DateTimePicker();
@@ -442,16 +453,7 @@
             this.groupBox58 = new System.Windows.Forms.GroupBox();
             this.rb_vt_islemturu_defter = new System.Windows.Forms.RadioButton();
             this.rb_vt_islemturu_plan = new System.Windows.Forms.RadioButton();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.groupBox63 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
+            this.cb_planbas_kapsam_ozel_pdf = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -551,11 +553,11 @@
             this.groupBox31.SuspendLayout();
             this.groupBox27.SuspendLayout();
             this.groupBox11.SuspendLayout();
+            this.groupBox63.SuspendLayout();
             this.groupBox62.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).BeginInit();
             this.tab_alt_loglar.SuspendLayout();
             this.groupBox58.SuspendLayout();
-            this.groupBox63.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -1366,7 +1368,7 @@
             // 
             this.bt_planbas_baskiyabasla.Location = new System.Drawing.Point(12, 460);
             this.bt_planbas_baskiyabasla.Name = "bt_planbas_baskiyabasla";
-            this.bt_planbas_baskiyabasla.Size = new System.Drawing.Size(443, 78);
+            this.bt_planbas_baskiyabasla.Size = new System.Drawing.Size(523, 78);
             this.bt_planbas_baskiyabasla.TabIndex = 46;
             this.bt_planbas_baskiyabasla.Text = "BASKIYA BAŞLA";
             this.bt_planbas_baskiyabasla.UseVisualStyleBackColor = true;
@@ -1379,7 +1381,7 @@
             this.groupBox44.Controls.Add(this.rb_planbas_son_pdf);
             this.groupBox44.Location = new System.Drawing.Point(12, 369);
             this.groupBox44.Name = "groupBox44";
-            this.groupBox44.Size = new System.Drawing.Size(443, 85);
+            this.groupBox44.Size = new System.Drawing.Size(523, 85);
             this.groupBox44.TabIndex = 45;
             this.groupBox44.TabStop = false;
             this.groupBox44.Text = "Son İşlem";
@@ -1426,7 +1428,7 @@
             this.groupBox45.Controls.Add(this.rb_planbas_secenek_kapak);
             this.groupBox45.Location = new System.Drawing.Point(12, 88);
             this.groupBox45.Name = "groupBox45";
-            this.groupBox45.Size = new System.Drawing.Size(443, 184);
+            this.groupBox45.Size = new System.Drawing.Size(523, 184);
             this.groupBox45.TabIndex = 43;
             this.groupBox45.TabStop = false;
             this.groupBox45.Text = "Baskı Seçenekleri";
@@ -1446,13 +1448,14 @@
             // groupBox48
             // 
             this.groupBox48.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.groupBox48.Controls.Add(this.cb_planbas_kapsam_ozel_pdf);
             this.groupBox48.Controls.Add(this.rb_planbas_kapsam_yillikvegunlukartarda);
             this.groupBox48.Controls.Add(this.rb_planbas_kapsam_sadecedersdefteri);
             this.groupBox48.Controls.Add(this.rb_planbas_kapsam_sadecegunluk);
             this.groupBox48.Controls.Add(this.rb_planbas_kapsam_sadeceyillik);
             this.groupBox48.Location = new System.Drawing.Point(6, 23);
             this.groupBox48.Name = "groupBox48";
-            this.groupBox48.Size = new System.Drawing.Size(431, 65);
+            this.groupBox48.Size = new System.Drawing.Size(508, 65);
             this.groupBox48.TabIndex = 5;
             this.groupBox48.TabStop = false;
             this.groupBox48.Text = "Yıılık-Günlük Plan / Doldurulmuş Ders Defteri";
@@ -1548,7 +1551,7 @@
             this.groupBox46.Controls.Add(this.rb_planbas_tektektoplu_tek);
             this.groupBox46.Location = new System.Drawing.Point(12, 278);
             this.groupBox46.Name = "groupBox46";
-            this.groupBox46.Size = new System.Drawing.Size(443, 85);
+            this.groupBox46.Size = new System.Drawing.Size(523, 85);
             this.groupBox46.TabIndex = 44;
             this.groupBox46.TabStop = false;
             this.groupBox46.Text = "Tek - Toplu Baskı";
@@ -1592,7 +1595,7 @@
             this.groupBox47.Controls.Add(this.rb_planbas_ekrandakiicin);
             this.groupBox47.Location = new System.Drawing.Point(12, 10);
             this.groupBox47.Name = "groupBox47";
-            this.groupBox47.Size = new System.Drawing.Size(443, 72);
+            this.groupBox47.Size = new System.Drawing.Size(523, 72);
             this.groupBox47.TabIndex = 42;
             this.groupBox47.TabStop = false;
             this.groupBox47.Text = "Tek Tek veya Listeden Basım Seçenekleri";
@@ -4619,7 +4622,7 @@
             this.groupBox25.Controls.Add(this.rb_ara_okumadefteri);
             this.groupBox25.Controls.Add(this.rb_ara_sosyalkulup);
             this.groupBox25.Controls.Add(this.rb_ara_pdf);
-            this.groupBox25.Controls.Add(this.rb_ara_cd);
+            this.groupBox25.Controls.Add(this.rb_ara_cd_doludefter);
             this.groupBox25.Location = new System.Drawing.Point(13, 13);
             this.groupBox25.Name = "groupBox25";
             this.groupBox25.Size = new System.Drawing.Size(192, 96);
@@ -4689,17 +4692,17 @@
             this.rb_ara_pdf.Text = "PDF";
             this.rb_ara_pdf.UseVisualStyleBackColor = true;
             // 
-            // rb_ara_cd
+            // rb_ara_cd_doludefter
             // 
-            this.rb_ara_cd.AutoSize = true;
-            this.rb_ara_cd.Checked = true;
-            this.rb_ara_cd.Location = new System.Drawing.Point(6, 11);
-            this.rb_ara_cd.Name = "rb_ara_cd";
-            this.rb_ara_cd.Size = new System.Drawing.Size(79, 17);
-            this.rb_ara_cd.TabIndex = 0;
-            this.rb_ara_cd.TabStop = true;
-            this.rb_ara_cd.Text = "Dolu Defter";
-            this.rb_ara_cd.UseVisualStyleBackColor = true;
+            this.rb_ara_cd_doludefter.AutoSize = true;
+            this.rb_ara_cd_doludefter.Checked = true;
+            this.rb_ara_cd_doludefter.Location = new System.Drawing.Point(6, 11);
+            this.rb_ara_cd_doludefter.Name = "rb_ara_cd_doludefter";
+            this.rb_ara_cd_doludefter.Size = new System.Drawing.Size(79, 17);
+            this.rb_ara_cd_doludefter.TabIndex = 0;
+            this.rb_ara_cd_doludefter.TabStop = true;
+            this.rb_ara_cd_doludefter.Text = "Dolu Defter";
+            this.rb_ara_cd_doludefter.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -4955,6 +4958,130 @@
             this.groupBox11.TabIndex = 34;
             this.groupBox11.TabStop = false;
             // 
+            // groupBox63
+            // 
+            this.groupBox63.Controls.Add(this.label79);
+            this.groupBox63.Controls.Add(this.linklbl__listedekitarihleri_sil);
+            this.groupBox63.Controls.Add(this.linklbl_listeye_ekle);
+            this.groupBox63.Controls.Add(this.rb_listeye_tarih_ekle_defterler);
+            this.groupBox63.Controls.Add(this.rb_listeye_tarih_ekle_sosyalkulup);
+            this.groupBox63.Controls.Add(this.rb_listeye_tarih_ekle_pdf);
+            this.groupBox63.Controls.Add(this.rb_listeye_tarih_ekle_doludefter);
+            this.groupBox63.Controls.Add(this.rb_listeye_tarih_ekle_gunlukplanlar);
+            this.groupBox63.Controls.Add(this.rb_listeye_tarih_ekle_yillikplan);
+            this.groupBox63.Controls.Add(this.dtp_listeye_ekle_tarih);
+            this.groupBox63.Location = new System.Drawing.Point(759, 12);
+            this.groupBox63.Name = "groupBox63";
+            this.groupBox63.Size = new System.Drawing.Size(107, 247);
+            this.groupBox63.TabIndex = 5;
+            this.groupBox63.TabStop = false;
+            this.groupBox63.Text = "Basım Tarihi Ekle";
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.ForeColor = System.Drawing.Color.ForestGreen;
+            this.label79.Location = new System.Drawing.Point(4, 229);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(103, 13);
+            this.label79.TabIndex = 13;
+            this.label79.Text = "Sadece seçili satırlar";
+            // 
+            // linklbl__listedekitarihleri_sil
+            // 
+            this.linklbl__listedekitarihleri_sil.AutoSize = true;
+            this.linklbl__listedekitarihleri_sil.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.linklbl__listedekitarihleri_sil.Location = new System.Drawing.Point(3, 204);
+            this.linklbl__listedekitarihleri_sil.Name = "linklbl__listedekitarihleri_sil";
+            this.linklbl__listedekitarihleri_sil.Size = new System.Drawing.Size(98, 13);
+            this.linklbl__listedekitarihleri_sil.TabIndex = 12;
+            this.linklbl__listedekitarihleri_sil.TabStop = true;
+            this.linklbl__listedekitarihleri_sil.Text = "BASIM TARİHİ SİL";
+            this.linklbl__listedekitarihleri_sil.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl__listedekitarihleri_sil_LinkClicked);
+            // 
+            // linklbl_listeye_ekle
+            // 
+            this.linklbl_listeye_ekle.AutoSize = true;
+            this.linklbl_listeye_ekle.Location = new System.Drawing.Point(26, 183);
+            this.linklbl_listeye_ekle.Name = "linklbl_listeye_ekle";
+            this.linklbl_listeye_ekle.Size = new System.Drawing.Size(70, 13);
+            this.linklbl_listeye_ekle.TabIndex = 11;
+            this.linklbl_listeye_ekle.TabStop = true;
+            this.linklbl_listeye_ekle.Text = "TARİH EKLE";
+            this.linklbl_listeye_ekle.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_listeye_ekle_LinkClicked);
+            // 
+            // rb_listeye_tarih_ekle_defterler
+            // 
+            this.rb_listeye_tarih_ekle_defterler.AutoSize = true;
+            this.rb_listeye_tarih_ekle_defterler.Checked = true;
+            this.rb_listeye_tarih_ekle_defterler.Location = new System.Drawing.Point(10, 158);
+            this.rb_listeye_tarih_ekle_defterler.Name = "rb_listeye_tarih_ekle_defterler";
+            this.rb_listeye_tarih_ekle_defterler.Size = new System.Drawing.Size(89, 17);
+            this.rb_listeye_tarih_ekle_defterler.TabIndex = 10;
+            this.rb_listeye_tarih_ekle_defterler.TabStop = true;
+            this.rb_listeye_tarih_ekle_defterler.Text = "DEFTERLER";
+            this.rb_listeye_tarih_ekle_defterler.UseVisualStyleBackColor = true;
+            // 
+            // rb_listeye_tarih_ekle_sosyalkulup
+            // 
+            this.rb_listeye_tarih_ekle_sosyalkulup.AutoSize = true;
+            this.rb_listeye_tarih_ekle_sosyalkulup.Location = new System.Drawing.Point(10, 137);
+            this.rb_listeye_tarih_ekle_sosyalkulup.Name = "rb_listeye_tarih_ekle_sosyalkulup";
+            this.rb_listeye_tarih_ekle_sosyalkulup.Size = new System.Drawing.Size(86, 17);
+            this.rb_listeye_tarih_ekle_sosyalkulup.TabIndex = 9;
+            this.rb_listeye_tarih_ekle_sosyalkulup.Text = "Sosyal Kulüp";
+            this.rb_listeye_tarih_ekle_sosyalkulup.UseVisualStyleBackColor = true;
+            // 
+            // rb_listeye_tarih_ekle_pdf
+            // 
+            this.rb_listeye_tarih_ekle_pdf.AutoSize = true;
+            this.rb_listeye_tarih_ekle_pdf.Location = new System.Drawing.Point(10, 116);
+            this.rb_listeye_tarih_ekle_pdf.Name = "rb_listeye_tarih_ekle_pdf";
+            this.rb_listeye_tarih_ekle_pdf.Size = new System.Drawing.Size(46, 17);
+            this.rb_listeye_tarih_ekle_pdf.TabIndex = 8;
+            this.rb_listeye_tarih_ekle_pdf.Text = "PDF";
+            this.rb_listeye_tarih_ekle_pdf.UseVisualStyleBackColor = true;
+            // 
+            // rb_listeye_tarih_ekle_doludefter
+            // 
+            this.rb_listeye_tarih_ekle_doludefter.AutoSize = true;
+            this.rb_listeye_tarih_ekle_doludefter.Location = new System.Drawing.Point(10, 93);
+            this.rb_listeye_tarih_ekle_doludefter.Name = "rb_listeye_tarih_ekle_doludefter";
+            this.rb_listeye_tarih_ekle_doludefter.Size = new System.Drawing.Size(79, 17);
+            this.rb_listeye_tarih_ekle_doludefter.TabIndex = 7;
+            this.rb_listeye_tarih_ekle_doludefter.Text = "Dolu Defter";
+            this.rb_listeye_tarih_ekle_doludefter.UseVisualStyleBackColor = true;
+            // 
+            // rb_listeye_tarih_ekle_gunlukplanlar
+            // 
+            this.rb_listeye_tarih_ekle_gunlukplanlar.AutoSize = true;
+            this.rb_listeye_tarih_ekle_gunlukplanlar.Location = new System.Drawing.Point(10, 73);
+            this.rb_listeye_tarih_ekle_gunlukplanlar.Name = "rb_listeye_tarih_ekle_gunlukplanlar";
+            this.rb_listeye_tarih_ekle_gunlukplanlar.Size = new System.Drawing.Size(83, 17);
+            this.rb_listeye_tarih_ekle_gunlukplanlar.TabIndex = 6;
+            this.rb_listeye_tarih_ekle_gunlukplanlar.Text = "Günlük Plan";
+            this.rb_listeye_tarih_ekle_gunlukplanlar.UseVisualStyleBackColor = true;
+            // 
+            // rb_listeye_tarih_ekle_yillikplan
+            // 
+            this.rb_listeye_tarih_ekle_yillikplan.AutoSize = true;
+            this.rb_listeye_tarih_ekle_yillikplan.Location = new System.Drawing.Point(10, 52);
+            this.rb_listeye_tarih_ekle_yillikplan.Name = "rb_listeye_tarih_ekle_yillikplan";
+            this.rb_listeye_tarih_ekle_yillikplan.Size = new System.Drawing.Size(70, 17);
+            this.rb_listeye_tarih_ekle_yillikplan.TabIndex = 5;
+            this.rb_listeye_tarih_ekle_yillikplan.Text = "Yıllık Plan";
+            this.rb_listeye_tarih_ekle_yillikplan.UseVisualStyleBackColor = true;
+            // 
+            // dtp_listeye_ekle_tarih
+            // 
+            this.dtp_listeye_ekle_tarih.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.dtp_listeye_ekle_tarih.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.dtp_listeye_ekle_tarih.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtp_listeye_ekle_tarih.Location = new System.Drawing.Point(4, 20);
+            this.dtp_listeye_ekle_tarih.Name = "dtp_listeye_ekle_tarih";
+            this.dtp_listeye_ekle_tarih.Size = new System.Drawing.Size(100, 26);
+            this.dtp_listeye_ekle_tarih.TabIndex = 4;
+            // 
             // groupBox62
             // 
             this.groupBox62.Controls.Add(this.linklbl_tariharaliginagorefiltrele);
@@ -5088,120 +5215,18 @@
             this.rb_vt_islemturu_plan.UseVisualStyleBackColor = true;
             this.rb_vt_islemturu_plan.CheckedChanged += new System.EventHandler(this.rb_vt_islemturu_plan_CheckedChanged);
             // 
-            // dateTimePicker1
+            // cb_planbas_kapsam_ozel_pdf
             // 
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(4, 20);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(100, 26);
-            this.dateTimePicker1.TabIndex = 4;
-            // 
-            // groupBox63
-            // 
-            this.groupBox63.Controls.Add(this.linkLabel4);
-            this.groupBox63.Controls.Add(this.linkLabel3);
-            this.groupBox63.Controls.Add(this.radioButton6);
-            this.groupBox63.Controls.Add(this.radioButton5);
-            this.groupBox63.Controls.Add(this.radioButton4);
-            this.groupBox63.Controls.Add(this.radioButton3);
-            this.groupBox63.Controls.Add(this.radioButton2);
-            this.groupBox63.Controls.Add(this.radioButton1);
-            this.groupBox63.Controls.Add(this.dateTimePicker1);
-            this.groupBox63.Location = new System.Drawing.Point(759, 12);
-            this.groupBox63.Name = "groupBox63";
-            this.groupBox63.Size = new System.Drawing.Size(107, 247);
-            this.groupBox63.TabIndex = 5;
-            this.groupBox63.TabStop = false;
-            this.groupBox63.Text = "Basım Tarihi Ekle";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(10, 52);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(70, 17);
-            this.radioButton1.TabIndex = 5;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Yıllık Plan";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(10, 73);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(83, 17);
-            this.radioButton2.TabIndex = 6;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Günlük Plan";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(10, 93);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(79, 17);
-            this.radioButton3.TabIndex = 7;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Dolu Defter";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(10, 116);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(46, 17);
-            this.radioButton4.TabIndex = 8;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "PDF";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(10, 137);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(86, 17);
-            this.radioButton5.TabIndex = 9;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Sosyal Kulüp";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            // 
-            // radioButton6
-            // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(10, 158);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(89, 17);
-            this.radioButton6.TabIndex = 10;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "DEFTERLER";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            // 
-            // linkLabel3
-            // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(19, 189);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(70, 13);
-            this.linkLabel3.TabIndex = 11;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "TARİH EKLE";
-            // 
-            // linkLabel4
-            // 
-            this.linkLabel4.AutoSize = true;
-            this.linkLabel4.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.linkLabel4.Location = new System.Drawing.Point(6, 225);
-            this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(98, 13);
-            this.linkLabel4.TabIndex = 12;
-            this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "BASIM TARİHİ SİL";
+            this.cb_planbas_kapsam_ozel_pdf.AutoSize = true;
+            this.cb_planbas_kapsam_ozel_pdf.Location = new System.Drawing.Point(448, 25);
+            this.cb_planbas_kapsam_ozel_pdf.Name = "cb_planbas_kapsam_ozel_pdf";
+            this.cb_planbas_kapsam_ozel_pdf.Size = new System.Drawing.Size(47, 30);
+            this.cb_planbas_kapsam_ozel_pdf.TabIndex = 5;
+            this.cb_planbas_kapsam_ozel_pdf.Text = "Özel\r\nPDF";
+            this.toolTip1.SetToolTip(this.cb_planbas_kapsam_ozel_pdf, "PDF talepleri içindir. Yapılan baskı işlemini özel pdf klasöründe tutar. Sayfalar" +
+        "ı çeivrmez, renkli filigran kullanır ve yazıcıya göndermez. Basım tarihi talebi " +
+        "varsa PDF ek ürününe kaydedilir.");
+            this.cb_planbas_kapsam_ozel_pdf.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -5367,6 +5392,8 @@
             this.groupBox27.ResumeLayout(false);
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
+            this.groupBox63.ResumeLayout(false);
+            this.groupBox63.PerformLayout();
             this.groupBox62.ResumeLayout(false);
             this.groupBox62.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).EndInit();
@@ -5374,8 +5401,6 @@
             this.tab_alt_loglar.PerformLayout();
             this.groupBox58.ResumeLayout(false);
             this.groupBox58.PerformLayout();
-            this.groupBox63.ResumeLayout(false);
-            this.groupBox63.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5578,7 +5603,7 @@
         private System.Windows.Forms.RadioButton rb_ara_okumadefteri;
         private System.Windows.Forms.RadioButton rb_ara_sosyalkulup;
         private System.Windows.Forms.RadioButton rb_ara_pdf;
-        private System.Windows.Forms.RadioButton rb_ara_cd;
+        private System.Windows.Forms.RadioButton rb_ara_cd_doludefter;
         private System.Windows.Forms.LinkLabel lnklbl_ara_plan;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage1;
@@ -5796,15 +5821,17 @@
         private System.Windows.Forms.DateTimePicker dtp_son;
         private System.Windows.Forms.DateTimePicker dtp_ilk;
         private System.Windows.Forms.GroupBox groupBox63;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.LinkLabel linkLabel4;
-        private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.DateTimePicker dtp_listeye_ekle_tarih;
+        private System.Windows.Forms.RadioButton rb_listeye_tarih_ekle_gunlukplanlar;
+        private System.Windows.Forms.RadioButton rb_listeye_tarih_ekle_yillikplan;
+        private System.Windows.Forms.LinkLabel linklbl__listedekitarihleri_sil;
+        private System.Windows.Forms.LinkLabel linklbl_listeye_ekle;
+        private System.Windows.Forms.RadioButton rb_listeye_tarih_ekle_defterler;
+        private System.Windows.Forms.RadioButton rb_listeye_tarih_ekle_sosyalkulup;
+        private System.Windows.Forms.RadioButton rb_listeye_tarih_ekle_pdf;
+        private System.Windows.Forms.RadioButton rb_listeye_tarih_ekle_doludefter;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.CheckBox cb_planbas_kapsam_ozel_pdf;
     }
 }
 

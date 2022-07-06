@@ -15,6 +15,7 @@ using PdfSharp.Pdf.IO;
 using Application = Microsoft.Office.Interop.Word.Application;
 using System.Diagnostics;
 using DataTable = System.Data.DataTable;
+using PdfSharp.Pdf.Security;
 
 namespace Materyall
 {
@@ -71,6 +72,7 @@ namespace Materyall
 
         //Plan, defter veya sosyal kulüp yazdırılırken pdf olarak mı kalacak, yazıcıya gönderilecek mi kısmı için kullanıacak.
         //Basıma başla dedindiği anda buna değer atanacak.
+        bool OZEL_PDF_MI = false;
         bool YAZDIRILACAKMI1_PDFMI0;
         string PDF_CIKTI_KLASORU_ALT_BASLIK = "planlar";
         string PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "yıllık";
@@ -3750,9 +3752,11 @@ namespace Materyall
 
             string tur = "PDF";
 
-            if (rb_ara_cd.Checked)
+            if (rb_ara_cd_doludefter.Checked)
             {
+                //DOLU DEFTER
                 tur = metinler.basilacak_ekurun_defter_adi;
+
             } else if (rb_ara_sosyalkulup.Checked)
             {
                 tur = "sosyalkulup";
@@ -3764,7 +3768,7 @@ namespace Materyall
 
             int turkodu = 0;
 
-            //CD veya pdf ise o zaman ürün kodunu da alalım. CD = 101, pdf = 102 gibi.
+            //CD veya pdf ise o zaman ürün kodunu da alalım. DOLU DEFTER = 101, pdf = 102 gibi.
 
             if (tur == metinler.basilacak_ekurun_defter_adi || tur == "PDF")
             {
@@ -3981,6 +3985,8 @@ namespace Materyall
         private void bt_defterbas_baskiyabasla_Click(object sender, EventArgs e)
         {
 
+            //Diğer plan basımından hafıza kalmışsa diye...
+            OZEL_PDF_MI = false;
 
             if (rb_defter_bas_ekrandakikayiticinislemyap.Checked && BirOgt == null)
             {
@@ -4349,6 +4355,8 @@ namespace Materyall
             }
 
 
+            
+
 
 
             PDF_CIKTI_KLASORU_ALT_BASLIK = metinler.pdf_alt_klasoru_plan;
@@ -4367,10 +4375,24 @@ namespace Materyall
             } else if (rb_planbas_kapsam_sadecedersdefteri.Checked)
             {
                 PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "DOLUDEFTER";
-            } else
+            }
+            else
             {
                 PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "TANIMSIZ";
             }
+
+
+            //ÖZEL PDF OLARAK AYARLANMIŞSA BURADA GEREKLİ İŞLEMİ YAPIYORUZ.
+            OZEL_PDF_MI = false;
+
+            if (cb_planbas_kapsam_ozel_pdf.Checked)
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "PDF_ÖZEL";
+                OZEL_PDF_MI = true;
+            }
+            //ÖZEL PDF OLARAK AYARLANMIŞSA BURADA GEREKLİ İŞLEMİ YAPIYORUZ.
+
+
 
             //KUYRUKLARI AYARLAYALIM 2
             if (rb_planbas_secenek_kapak.Checked)
@@ -4418,6 +4440,16 @@ namespace Materyall
             {
                 YAZDIRILACAKMI1_PDFMI0 = false;
             }
+
+
+
+            //Özel pdf ise Yazıcı gönderme seçili olsa bile yazdırmıyoruz.
+            if (OZEL_PDF_MI)
+            {
+                YAZDIRILACAKMI1_PDFMI0 = false;
+            }
+
+
 
             //Liste mi basacağız, sadece ekrandakini mi_
             plan_bas_1_basilacaklar();
@@ -5108,6 +5140,14 @@ namespace Materyall
             //ORTAK İŞLEMLER...
             //Plan basılıyorsa true, defter basılıyorsa false. PDF klasörünü ayırmak için kullanacağız.
 
+            Int32 renkkodumuz = (Int32)Microsoft.Office.Interop.Word.WdColor.wdColorGray30;
+
+            if (OZEL_PDF_MI)
+            {
+                renkkodumuz = (Int32)Microsoft.Office.Interop.Word.WdColor.wdColorRed;
+            }
+
+
             object oMissing = System.Type.Missing;
 
             Document wordDoc = null;
@@ -5140,7 +5180,7 @@ namespace Materyall
                     txWatermark.Fill.Visible = MsoTriState.msoTrue;
                     txWatermark.Line.Visible = MsoTriState.msoFalse;
                     txWatermark.Fill.Solid();
-                    txWatermark.Fill.ForeColor.RGB = (Int32)Microsoft.Office.Interop.Word.WdColor.wdColorGray30; //wdColorRed;
+                    txWatermark.Fill.ForeColor.RGB = renkkodumuz; //(Int32)Microsoft.Office.Interop.Word.WdColor.wdColorGray30; //wdColorRed;
                     txWatermark.RelativeHorizontalPosition =
                                            Microsoft.Office.Interop.Word.WdRelativeHorizontalPosition.wdRelativeHorizontalPositionMargin;
                     txWatermark.RelativeVerticalPosition =
@@ -5351,8 +5391,15 @@ namespace Materyall
 
             
 
+            if (OZEL_PDF_MI)
+            {
+                vtislemleri.basimTarihini_kaydet(BirOgt.oid, "OZELPDF", ekurunkodunugetir("PDF").ToString());
+            } else
+            {
+                vtislemleri.basimTarihini_kaydet(BirOgt.oid, basilanTur, basilanUrunKoduTarih_icin);
+            }
 
-            vtislemleri.basimTarihini_kaydet(BirOgt.oid, basilanTur, basilanUrunKoduTarih_icin);
+           
 
         }
 
@@ -5363,6 +5410,17 @@ namespace Materyall
         //PDF ÜZERİNDEKİ İŞLEMLER.
         private void pdfDikeyYap(string yataypdf)
         {
+
+
+            Int32 donmeacisi = 270;
+
+            if (OZEL_PDF_MI)
+            {
+                //Normalde bu kısımda hiç işlem yapılmasa daha iyi ama yata halinin ismi farklı ve birleştirme silme işlemlerindeki işlemler
+                // devreye gireceği için bu koddaki tüm işlemleri yine uyguluyoruz ancak giç döndürmeden yeni bir kopya oluşturmuş oluyoruz.
+                donmeacisi = 0;
+            }
+
 
             string yadaybelge = yataypdf; //@"C:\materyall\pdfler\2YILLIK.pdf";
             string dikeybelge = yataypdf.Replace(metinler.pdf_yatay_bilgisi, ""); // @"C:\materyall\pdfler\2YILLIKD.pdf";
@@ -5378,7 +5436,7 @@ namespace Materyall
 
                 iTextSharp.text.pdf.PdfDictionary page = reader.GetPageN(i + 1);
                 iTextSharp.text.pdf.PdfNumber rotate = page.GetAsNumber(iTextSharp.text.pdf.PdfName.ROTATE);
-                page.Put(iTextSharp.text.pdf.PdfName.ROTATE, new iTextSharp.text.pdf.PdfNumber(270));
+                page.Put(iTextSharp.text.pdf.PdfName.ROTATE, new iTextSharp.text.pdf.PdfNumber(donmeacisi));
 
             }
 
@@ -5549,6 +5607,34 @@ namespace Materyall
                     }
                 }
 
+
+
+                //Şifreleme işleminin başı.
+                if (OZEL_PDF_MI)
+                {
+                    PdfSecuritySettings securitySettings = hedefDoc.SecuritySettings;
+
+                    // Setting one of the passwords automatically sets the security level to 
+                    // PdfDocumentSecurityLevel.Encrypted128Bit.
+                 //   securitySettings.UserPassword = "ERYAYIN";
+                    securitySettings.OwnerPassword = "Er" + BirOgt.oid;
+
+                    // Don't use 40 bit encryption unless needed for compatibility reasons
+                    //securitySettings.DocumentSecurityLevel = PdfDocumentSecurityLevel.Encrypted40Bit;
+
+                    // Restrict some rights.
+                    securitySettings.PermitAccessibilityExtractContent = false;
+                    securitySettings.PermitAnnotations = false;
+                    securitySettings.PermitAssembleDocument = false;
+                    securitySettings.PermitExtractContent = false;
+                    securitySettings.PermitFormsFill = false;
+                    securitySettings.PermitFullQualityPrint = false;
+                    securitySettings.PermitModifyDocument = false;
+                    securitySettings.PermitPrint = false;
+                }
+
+                //Şifreleme işleminin sonu.
+
                 hedefDoc.Save(hedef_pdf_dosyamiz_birlesik);
             }
 
@@ -5563,10 +5649,8 @@ namespace Materyall
             
             if (YAZDIRILACAKMI1_PDFMI0)
             {
-               // if (rb_planbas_son_yazdir.Checked)
-               // {
                     pdfyiYazdir(hedef_pdf_dosyamiz_birlesik);
-               // }
+              
             }
 
            
@@ -5780,6 +5864,10 @@ namespace Materyall
 
         private void bt_kulupbas_Click(object sender, EventArgs e)
         {
+
+            //Diğer plan basımından hafıza kalmışsa diye...
+            OZEL_PDF_MI = false;
+
 
             PDF_CIKTI_KLASORU_ALT_BASLIK = metinler.pdf_alt_klasoru_sosyalkulup;
 
@@ -6075,19 +6163,8 @@ namespace Materyall
 
             bekleyinform.Show();
 
-            //İlk değer olarak sıfır gönderiliyor. Zaten sıfır yok. Virgül sorunu için.
-            string idler = "0";
 
-            for (int i = 0; i < dgv_alt_aramavelisteleme.Rows.Count; i++)
-            {
-
-                DataGridViewRow dr = dgv_alt_aramavelisteleme.Rows[i];
-                //Öğretmen oid bilgisini alıyoruz.
-                string oidmiz = dr.Cells[0].Value.ToString();
-
-                idler = idler + "," + oidmiz;
-            }
-
+            string idler = listedekiIDleriGetir(true);
 
 
             dgv_liste_muhasebe_rapor.DataSource = vtislemleri.dgv_icin_getirMuhasebeGenelDurumTumListe(idler);
@@ -6211,12 +6288,178 @@ namespace Materyall
             MessageBox.Show("Tarih aralığına göre filtreleme tamamlandı.");
         }
 
+        private void linklbl_listeye_ekle_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
 
+            arama_listesine_tarih_eklensin_veya_silinsin(true);
 
-
-
-            //Sınıf sonu.
         }
+
+
+        private void arama_listesine_tarih_eklensin_veya_silinsin(bool ekle_sil)
+        {
+
+            //Mesaj kutusu gösterelim.
+
+            //Ekleme işlemi için true, silme işlemi için false.
+
+            string sorumesaji = "Seçtiğin işlem türüne ait kayıtlara belirttiğiniz tarih BASIM TARİHİ olarak eklenecek ve bu ürünler basılmış sayılacak. Onaylıyor musunuz?";
+
+            if (!ekle_sil)
+            {
+                sorumesaji = "Seçtiğin işlem türüne ait kayıtlardaki BASIM TARİHLERİ veritabanından SİLİNECEK ve bu ürünler BASILMAMIŞ sayılacak. Onaylıyor musunuz?";
+            }
+
+
+            DialogResult result = MessageBox.Show(sorumesaji, "Devam etmek istiyor musunuz?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+
+                //Sadece seçililere yönelik işlem yapıyoruz.
+                string idler = listedekiIDleriGetir(false);
+
+                //Varsayılan defter.
+                string islemyapilacakolantablo = metinler.neyebakalim_defter_tablo; //"tlp_defterler_tbl"; // Bu ÖRNEK
+
+                int ekurunse_turkodu = 0;
+
+
+                if (rb_listeye_tarih_ekle_yillikplan.Checked)
+                {
+                    islemyapilacakolantablo = metinler.neyebakalim_y_anaders_tablo;
+                }
+                else if (rb_listeye_tarih_ekle_gunlukplanlar.Checked)
+                {
+                    islemyapilacakolantablo = metinler.neyebakalim_g_anaders_tablo;
+                }
+                else if (rb_listeye_tarih_ekle_doludefter.Checked)
+                {
+                    islemyapilacakolantablo = metinler.neyebakalim_ekurunler_cd_pdf_tablo;
+                    ekurunse_turkodu = ekurunkodunugetir(metinler.basilacak_ekurun_defter_adi);
+                }
+                else if (rb_listeye_tarih_ekle_pdf.Checked)
+                {
+                    islemyapilacakolantablo = metinler.neyebakalim_ekurunler_cd_pdf_tablo;
+                    ekurunse_turkodu = ekurunkodunugetir("PDF");
+                }
+                else if (rb_listeye_tarih_ekle_sosyalkulup.Checked)
+                {
+                    islemyapilacakolantablo = metinler.neyebakalim_sosyalkulup_tablo;
+                }
+
+
+
+
+
+                if (vtislemleri.isle_listeyiBasimTarihiEkle_veya_Sil(idler, islemyapilacakolantablo, ekurunse_turkodu, dtp_listeye_ekle_tarih.Value.ToString("yyyy-MM-dd HH:mm"), ekle_sil))
+                {
+
+                    MessageBox.Show("Tarih işlemi tamamlandı.");
+
+                }
+                else
+                {
+
+                    MessageBox.Show("Bir hata meydana geldi. Tarihler eklenemedi.");
+                }
+
+
+            }
+            else if (result == DialogResult.No)
+            {
+                return;
+            }
+
+
+
+
+        }
+
+
+
+        private int ekurunkodunugetir(string tur)
+        {
+
+            int turkodu = 0;
+
+            if (tur == metinler.basilacak_ekurun_defter_adi || tur == "PDF")
+            {
+
+                foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
+                {
+
+                    if (urun.urunadi == tur)
+                    {
+
+                        turkodu = urun.urunkodu;
+                        break;
+                    }
+
+                }
+            }
+
+
+            return turkodu;
+        }
+
+
+        private void linklbl__listedekitarihleri_sil_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            arama_listesine_tarih_eklensin_veya_silinsin(false);
+
+        }
+
+
+
+
+
+
+
+        private string listedekiIDleriGetir (bool tamamimiTRUE_secililermiFALSE)
+        {
+
+            //İlk değer olarak sıfır gönderiliyor. Zaten sıfır yok. Virgül sorunu için.
+            string idler = "0";
+
+            for (int i = 0; i < dgv_alt_aramavelisteleme.Rows.Count; i++)
+            {
+
+                DataGridViewRow dr = dgv_alt_aramavelisteleme.Rows[i];
+
+                if (tamamimiTRUE_secililermiFALSE || dr.Selected)
+                {
+
+                    //Öğretmen oid bilgisini alıyoruz.
+                    string oidmiz = dr.Cells[0].Value.ToString();
+
+                    idler = idler + "," + oidmiz;
+
+                }
+               
+
+
+
+            }
+
+
+
+            return idler;
+
+        }
+
+
+
+
+
+
+
+        //Sınıf sonu.
+    }
+
+
+
+
 
 
 }
