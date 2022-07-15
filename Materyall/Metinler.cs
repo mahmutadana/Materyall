@@ -29,8 +29,11 @@ namespace Materyall
 
         //pLAN SEKMESİNDEN defer basımı yaparken bruadaki isme bakacağız. VT'de yazıldığı halinin bu olması gerekir.
         public string basilacak_ekurun_defter_adi = "DOLU DEFTER";
-        public string basilacak_ekurun_defter_urunkodu = "101";
+      //  public string basilacak_ekurun_defter_urunkodu = "101";
 
+
+        public string basilacak_ekurun_ingilizce_defter_adi = "İNGİLİZCE DOLU DEFTER";
+        public string basilacak_ekurun_ingilizce_defter_bransi = "İngilizce Öğretmeni";
 
         //sERBEST ETKİNLİK DERSİNİ otomatik olarak eklerken kullanacağız.
         public string serbestetkinlikdersininadi = "SERBEST ETKİNLİKLER";

@@ -93,7 +93,8 @@ namespace Materyall
                 veriler.defterkapakyolu = oku["defterkapakyolu"].ToString();
                 veriler.defter_kayit_yolu_pdf = oku["defter_kayit_yolu_pdf"].ToString();
 
-               
+                veriler.epostametni = oku["epostametni"].ToString();
+
             }
 
 
@@ -811,6 +812,8 @@ namespace Materyall
                 oge.fiyat = double.Parse(oku[fiyatgrubu].ToString());
 
                 oge.anadersmi = (oku["anadersmi"].ToString().Length > 0);
+
+                oge.bransmi = (oku["bransmi"].ToString().Length > 0);
 
                 list.Add(oge);
 
@@ -3914,7 +3917,7 @@ namespace Materyall
 
             string tabloadi = metinler.neyebakalim_sosyalkulup_tablo;
            
-            if (tur == metinler.basilacak_ekurun_defter_adi || tur == "PDF")
+            if (tur == metinler.basilacak_ekurun_defter_adi || tur == metinler.basilacak_ekurun_ingilizce_defter_adi || tur == "PDF")
             {
                 tabloadi = metinler.neyebakalim_ekurunler_cd_pdf_tablo;
 
@@ -4208,6 +4211,10 @@ namespace Materyall
             else if (basilanturudefterplangunukyillikvs == metinler.basilacak_ekurun_defter_adi)
             {
                 sql = "UPDATE " + metinler.neyebakalim_ekurunler_cd_pdf_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND urunkodu=" + 101; // şimdilik kodu eKledik. ama vt'den almamız daha uygun olacak. int.Parse(urun_kodu_id);
+            }
+            else if (basilanturudefterplangunukyillikvs == metinler.basilacak_ekurun_ingilizce_defter_adi)
+            {
+                sql = "UPDATE " + metinler.neyebakalim_ekurunler_cd_pdf_tablo + " SET basimtarihi=NOW() WHERE oid=" + oid + " AND urunkodu=" + 103; // şimdilik kodu eKledik. ama vt'den almamız daha uygun olacak. int.Parse(urun_kodu_id);
             }
             else if (basilanturudefterplangunukyillikvs == "OZELPDF")
             {

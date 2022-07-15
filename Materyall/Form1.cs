@@ -476,8 +476,6 @@ namespace Materyall
 
 
 
-            
-
             defter_ve_plan_kayit_konumlarini_yaz();
 
 
@@ -531,6 +529,8 @@ namespace Materyall
             tb_varsayilan_defteryolu.Text = varsayilanbossa.defteryolu;
             tb_varsayilan_defterkapakyolu.Text = varsayilanbossa.defterkapakyolu;
             tb_varsayilan_kayit_konumu_pdf.Text = varsayilanbossa.defter_kayit_yolu_pdf;
+
+            tb_epostametni.Text = varsayilanbossa.epostametni;
 
         }
 
@@ -1531,16 +1531,29 @@ namespace Materyall
 
 
 
-            //DOLU DEFTERİ OTOMATİK OLARAK EKLİYORUZ. (dAHA ÖNCE EKLENMEMİŞSE...)
+            //DOLU DEFTERİ OTOMATİK OLARAK EKLİYORUZ. (DAHA ÖNCE EKLENMEMİŞSE... ve ilkokulda braş dersi değilse)
             bool oncedeneklenmismi = false;
+
+            //Braşs dersi ise yine önceeklenmişolarak tanımlıyoruz.
+
+            if (filtrelenenAnaDerslers[cb_talep_anadersler_yillik.SelectedIndex].bransmi)
+            {
+                oncedeneklenmismi = true;
+            }
+        //    BURADA KALDIK.
+
+            //Yine de eklenmiş mi diye de bakalım.
             foreach (DataGridViewRow dr in dgv_talep_ekurunler.Rows)
             {
 
-            if (dr.Cells[1].Value.ToString() == metinler.basilacak_ekurun_defter_urunkodu)
-                {
+           // if (dr.Cells[1].Value.ToString() == metinler.basilacak_ekurun_defter_urunkodu)
+            if (dr.Cells[0].Value.ToString() == metinler.basilacak_ekurun_defter_adi)
+                    {
                     oncedeneklenmismi = true; break;
                 }
             }
+
+
 
             if (!oncedeneklenmismi)
             {
@@ -3749,7 +3762,7 @@ namespace Materyall
                 filtrelenenEkUrunlers = vtislemleri.filtre_ekurunler(cb_yil_ara.Text, "1");
             }
 
-
+            //Varsayılanımız pdf.
             string tur = "PDF";
 
             if (rb_ara_cd_doludefter.Checked)
@@ -3757,7 +3770,12 @@ namespace Materyall
                 //DOLU DEFTER
                 tur = metinler.basilacak_ekurun_defter_adi;
 
-            } else if (rb_ara_sosyalkulup.Checked)
+            }
+            else if (rb_ara_cd_ingilizce_doludefter.Checked)
+            {
+                tur = metinler.basilacak_ekurun_ingilizce_defter_adi;
+            }
+            else if (rb_ara_sosyalkulup.Checked)
             {
                 tur = "sosyalkulup";
             } else if (rb_ara_okumadefteri.Checked)
@@ -3770,7 +3788,7 @@ namespace Materyall
 
             //CD veya pdf ise o zaman ürün kodunu da alalım. DOLU DEFTER = 101, pdf = 102 gibi.
 
-            if (tur == metinler.basilacak_ekurun_defter_adi || tur == "PDF")
+            if (tur == metinler.basilacak_ekurun_defter_adi || tur == metinler.basilacak_ekurun_ingilizce_defter_adi || tur == "PDF")
             {
 
                 foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
@@ -4375,6 +4393,10 @@ namespace Materyall
             } else if (rb_planbas_kapsam_sadecedersdefteri.Checked)
             {
                 PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "DOLUDEFTER";
+            } 
+            else if (rb_planbas_kapsam_sadeceingilizcedersdefteri.Checked)
+            {
+                PDF_CIKTI_KLASORU_ALT_BASLIK_KUYRUK_1 = "İNGİLİZCE_DOLUDEFTER";
             }
             else
             {
@@ -4628,6 +4650,26 @@ namespace Materyall
 
                 }
 
+            } else if (rb_planbas_kapsam_sadeceingilizcedersdefteri.Checked)
+            {
+                //İNGİLİZCE DOLU DERS DEFTERİ.
+
+                for (int i = 0; i < dgv_talep_ekurunler_baski.RowCount; i++)
+                {
+                    DataGridViewRow dr = dgv_talep_ekurunler_baski.Rows[i];
+
+                    if (dr.Cells["urunadi"].Value.ToString() == metinler.basilacak_ekurun_ingilizce_defter_adi)
+                    {
+                        urunturu = "ingilizcedoludefter";
+                        plan_bas_3_gelenKaydiBas(metinler.basilacak_ekurun_ingilizce_defter_adi);
+
+                    }
+
+
+
+                }
+
+
             }
             else
             {
@@ -4662,7 +4704,8 @@ namespace Materyall
 
             //Ders dolu defteri basılacaksa onun kontrolünü ayrı tutuyoruz.
 
-            if (rb_planbas_kapsam_sadecedersdefteri.Checked && basilacakolanplankodu == metinler.basilacak_ekurun_defter_adi)
+            if ((rb_planbas_kapsam_sadecedersdefteri.Checked && basilacakolanplankodu == metinler.basilacak_ekurun_defter_adi) ||
+                (rb_planbas_kapsam_sadeceingilizcedersdefteri.Checked && basilacakolanplankodu == metinler.basilacak_ekurun_ingilizce_defter_adi))
             {
 
 
@@ -4672,6 +4715,16 @@ namespace Materyall
 
                 string ilegoreyayinevikodu = vtislemleri.ilYayineviNoGetir1234Siniflar(BirOgt.yili, BirOgt.ili, BirOgt.sinifi);
                 string belgeadi = metinler.basilacak_ekurun_defter_adi.Replace(" ","") + BirOgt.sinifi + ilegoreyayinevikodu; //docx sonra eklenecek. + ".docx";
+
+                //Her seferinde if kontrolü yapmamak için burada tanımlıyoruz.
+                string islemgorenekurunadi = metinler.basilacak_ekurun_defter_adi;
+
+                if (basilacakolanplankodu == metinler.basilacak_ekurun_ingilizce_defter_adi)
+                {
+                    belgeadi = metinler.basilacak_ekurun_ingilizce_defter_adi.Replace(" ", "");
+                    islemgorenekurunadi = metinler.basilacak_ekurun_ingilizce_defter_adi;
+                }
+
 
 
                 //KAPAK VE PLAN VS SEÇENEKLERİ BURADA DA AYRICA KULLANIYORUZ. (DOLU DEFTER İÇİN)
@@ -4684,7 +4737,7 @@ namespace Materyall
                     //Kapağı sadece 1 kere basmak için kontrol işlemi yapıyoruz. Çünkü des listesi döngüsüne göre işlem tekrarlanıyor.
                     if (!kapakbasildimi)
                     {
-                        plan_bas_3_ek_plankapagibas(metinler.basilacak_ekurun_defter_adi, "kapak");
+                        plan_bas_3_ek_plankapagibas(islemgorenekurunadi, "kapak");
                         kapakbasildimi = true;
                     }
 
@@ -4698,7 +4751,7 @@ namespace Materyall
                     */
 
 
-                    plan_bas_3_ek_2_plan_bas(belgeadi, metinler.basilacak_ekurun_defter_adi);
+                    plan_bas_3_ek_2_plan_bas(belgeadi, islemgorenekurunadi);
 
 
 
@@ -4710,7 +4763,7 @@ namespace Materyall
                     //Kapağı sadece 1 kere basmak için kontrol işlemi yapıyoruz. Çünkü des listesi döngüsüne göre işlem tekrarlanıyor.
                     if (!kapakbasildimi)
                     {
-                        plan_bas_3_ek_plankapagibas(metinler.basilacak_ekurun_defter_adi, "kapak");
+                        plan_bas_3_ek_plankapagibas(islemgorenekurunadi, "kapak");
                         kapakbasildimi = true;
                     }
 
@@ -4729,7 +4782,7 @@ namespace Materyall
                     */
 
 
-                    plan_bas_3_ek_2_plan_bas(belgeadi, metinler.basilacak_ekurun_defter_adi);
+                    plan_bas_3_ek_2_plan_bas(belgeadi, islemgorenekurunadi);
                 }
 
 
@@ -5025,7 +5078,12 @@ namespace Materyall
             {
                 basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "dolukapak.docx", " ", true, true, "", basilanTur);
 
-            } 
+            }
+            else if (basilacakolanplankodu == metinler.basilacak_ekurun_ingilizce_defter_adi) 
+            {
+                basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "ingilizcedolukapak.docx", " ", true, true, "", basilanTur);
+
+            }
             else if (urunturu == "yillikanaders") //(rb_planbas_kapsam_sadeceyillik.Checked)
             {
                 basim_1_filigranEkle(varsayilanbossa.plankapakyolu + @"\" + "y_kapak.docx", " ", true, true, "", basilanTur);
@@ -5086,7 +5144,9 @@ namespace Materyall
 
             //Dolu defter basılacak ise önce onun kontrolünü dosya adından yararlanarak sağlıyoruz.
 
-            if (basilacakolanplankodu.Contains(metinler.basilacak_ekurun_defter_adi.Replace(" ", ""))){
+            if (basilacakolanplankodu.Contains(metinler.basilacak_ekurun_defter_adi.Replace(" ", "")) ||
+                basilacakolanplankodu.Contains(metinler.basilacak_ekurun_ingilizce_defter_adi.Replace(" ", "")))
+            {
                 //Demek ki dolu defter basılacak. Onu gönderiyoruz.
 
 
@@ -5171,7 +5231,7 @@ namespace Materyall
 
                     txWatermark = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Shapes.AddTextEffect(
                         MsoPresetTextEffect.msoTextEffect1,
-                                            filigranmetni, "DiskusDMed", (float)20, //Arial idi.
+                                            filigranmetni, "DiskusDMed", (float)40, //Arial idi.
                                              MsoTriState.msoFalse,
                                              MsoTriState.msoFalse,
                                              0, 0, ref oMissing);
@@ -5187,8 +5247,8 @@ namespace Materyall
                                                Microsoft.Office.Interop.Word.WdRelativeVerticalPosition.wdRelativeVerticalPositionMargin;
                     txWatermark.Left = (float)Microsoft.Office.Interop.Word.WdShapePosition.wdShapeCenter;
                     txWatermark.Top = (float)Microsoft.Office.Interop.Word.WdShapePosition.wdShapeCenter;
-                    txWatermark.Height = wordApp.InchesToPoints(1.0f);
-                    txWatermark.Width = wordApp.InchesToPoints(10f);
+                    txWatermark.Height = wordApp.InchesToPoints(0.7f);
+                    txWatermark.Width = wordApp.InchesToPoints(7f);
                     txWatermark.Rotation = -50;
 
                     //SADECE 1 BÖLÜME EKLESEK YETERLİ. YOKSA KAÇ BÖLÜM VARSA AYNISINI O KADAR EKLİYOR.
@@ -6448,6 +6508,37 @@ namespace Materyall
 
         }
 
+        private void lnklbl_epostametni_kaydet_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            eposta_varsayilanKaydet();
+            
+        }
+
+        private void eposta_varsayilanKaydet()
+        {
+
+            //Zaten varsayılan tablosunda olduğu için dosya yolu kaydetme metodunu kullanıyoruz.
+
+
+            string sutunbasligi = "epostametni";
+            string varsayilanmetnimiz = tb_epostametni.Text;
+
+            string islemsonucu = vtislemleri.varsayilan_kayit_yeri_kaydet(sutunbasligi, varsayilanmetnimiz);
+
+          if (islemsonucu != metinler.islembasarili)
+            {
+                MessageBox.Show(islemsonucu);
+            } else
+            {
+
+
+                bossa_varsayilanlarYilBayivs();
+
+            }
+
+
+        }
 
 
 

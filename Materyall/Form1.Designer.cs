@@ -108,6 +108,7 @@
             this.groupBox45 = new System.Windows.Forms.GroupBox();
             this.cb_planbas_ondosya_ekle = new System.Windows.Forms.CheckBox();
             this.groupBox48 = new System.Windows.Forms.GroupBox();
+            this.cb_planbas_kapsam_ozel_pdf = new System.Windows.Forms.CheckBox();
             this.rb_planbas_kapsam_yillikvegunlukartarda = new System.Windows.Forms.RadioButton();
             this.rb_planbas_kapsam_sadecedersdefteri = new System.Windows.Forms.RadioButton();
             this.rb_planbas_kapsam_sadecegunluk = new System.Windows.Forms.RadioButton();
@@ -203,6 +204,9 @@
             this.dgv_serbestetkinlikdersleri_1 = new System.Windows.Forms.DataGridView();
             this.label57 = new System.Windows.Forms.Label();
             this.tab_digerislemler = new System.Windows.Forms.TabPage();
+            this.groupBox64 = new System.Windows.Forms.GroupBox();
+            this.lnklbl_epostametni_kaydet = new System.Windows.Forms.LinkLabel();
+            this.tb_epostametni = new System.Windows.Forms.TextBox();
             this.groupBox57 = new System.Windows.Forms.GroupBox();
             this.btn_varsayilanlariguncelle = new System.Windows.Forms.Button();
             this.groupBox54 = new System.Windows.Forms.GroupBox();
@@ -453,7 +457,8 @@
             this.groupBox58 = new System.Windows.Forms.GroupBox();
             this.rb_vt_islemturu_defter = new System.Windows.Forms.RadioButton();
             this.rb_vt_islemturu_plan = new System.Windows.Forms.RadioButton();
-            this.cb_planbas_kapsam_ozel_pdf = new System.Windows.Forms.CheckBox();
+            this.rb_ara_cd_ingilizce_doludefter = new System.Windows.Forms.RadioButton();
+            this.rb_planbas_kapsam_sadeceingilizcedersdefteri = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -517,6 +522,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_1)).BeginInit();
             this.tab_digerislemler.SuspendLayout();
+            this.groupBox64.SuspendLayout();
             this.groupBox57.SuspendLayout();
             this.groupBox54.SuspendLayout();
             this.groupBox41.SuspendLayout();
@@ -1381,7 +1387,7 @@
             this.groupBox44.Controls.Add(this.rb_planbas_son_pdf);
             this.groupBox44.Location = new System.Drawing.Point(12, 369);
             this.groupBox44.Name = "groupBox44";
-            this.groupBox44.Size = new System.Drawing.Size(523, 85);
+            this.groupBox44.Size = new System.Drawing.Size(688, 85);
             this.groupBox44.TabIndex = 45;
             this.groupBox44.TabStop = false;
             this.groupBox44.Text = "Son İşlem";
@@ -1428,7 +1434,7 @@
             this.groupBox45.Controls.Add(this.rb_planbas_secenek_kapak);
             this.groupBox45.Location = new System.Drawing.Point(12, 88);
             this.groupBox45.Name = "groupBox45";
-            this.groupBox45.Size = new System.Drawing.Size(523, 184);
+            this.groupBox45.Size = new System.Drawing.Size(688, 184);
             this.groupBox45.TabIndex = 43;
             this.groupBox45.TabStop = false;
             this.groupBox45.Text = "Baskı Seçenekleri";
@@ -1448,6 +1454,7 @@
             // groupBox48
             // 
             this.groupBox48.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.groupBox48.Controls.Add(this.rb_planbas_kapsam_sadeceingilizcedersdefteri);
             this.groupBox48.Controls.Add(this.cb_planbas_kapsam_ozel_pdf);
             this.groupBox48.Controls.Add(this.rb_planbas_kapsam_yillikvegunlukartarda);
             this.groupBox48.Controls.Add(this.rb_planbas_kapsam_sadecedersdefteri);
@@ -1455,10 +1462,23 @@
             this.groupBox48.Controls.Add(this.rb_planbas_kapsam_sadeceyillik);
             this.groupBox48.Location = new System.Drawing.Point(6, 23);
             this.groupBox48.Name = "groupBox48";
-            this.groupBox48.Size = new System.Drawing.Size(508, 65);
+            this.groupBox48.Size = new System.Drawing.Size(676, 65);
             this.groupBox48.TabIndex = 5;
             this.groupBox48.TabStop = false;
             this.groupBox48.Text = "Yıılık-Günlük Plan / Doldurulmuş Ders Defteri";
+            // 
+            // cb_planbas_kapsam_ozel_pdf
+            // 
+            this.cb_planbas_kapsam_ozel_pdf.AutoSize = true;
+            this.cb_planbas_kapsam_ozel_pdf.Location = new System.Drawing.Point(623, 25);
+            this.cb_planbas_kapsam_ozel_pdf.Name = "cb_planbas_kapsam_ozel_pdf";
+            this.cb_planbas_kapsam_ozel_pdf.Size = new System.Drawing.Size(47, 30);
+            this.cb_planbas_kapsam_ozel_pdf.TabIndex = 5;
+            this.cb_planbas_kapsam_ozel_pdf.Text = "Özel\r\nPDF";
+            this.toolTip1.SetToolTip(this.cb_planbas_kapsam_ozel_pdf, "PDF talepleri içindir. Yapılan baskı işlemini özel pdf klasöründe tutar. Sayfalar" +
+        "ı çeivrmez, renkli filigran kullanır ve yazıcıya göndermez. Basım tarihi talebi " +
+        "varsa PDF ek ürününe kaydedilir.");
+            this.cb_planbas_kapsam_ozel_pdf.UseVisualStyleBackColor = true;
             // 
             // rb_planbas_kapsam_yillikvegunlukartarda
             // 
@@ -1551,7 +1571,7 @@
             this.groupBox46.Controls.Add(this.rb_planbas_tektektoplu_tek);
             this.groupBox46.Location = new System.Drawing.Point(12, 278);
             this.groupBox46.Name = "groupBox46";
-            this.groupBox46.Size = new System.Drawing.Size(523, 85);
+            this.groupBox46.Size = new System.Drawing.Size(688, 85);
             this.groupBox46.TabIndex = 44;
             this.groupBox46.TabStop = false;
             this.groupBox46.Text = "Tek - Toplu Baskı";
@@ -1595,7 +1615,7 @@
             this.groupBox47.Controls.Add(this.rb_planbas_ekrandakiicin);
             this.groupBox47.Location = new System.Drawing.Point(12, 10);
             this.groupBox47.Name = "groupBox47";
-            this.groupBox47.Size = new System.Drawing.Size(523, 72);
+            this.groupBox47.Size = new System.Drawing.Size(688, 72);
             this.groupBox47.TabIndex = 42;
             this.groupBox47.TabStop = false;
             this.groupBox47.Text = "Tek Tek veya Listeden Basım Seçenekleri";
@@ -2469,6 +2489,7 @@
             // 
             // tab_digerislemler
             // 
+            this.tab_digerislemler.Controls.Add(this.groupBox64);
             this.tab_digerislemler.Controls.Add(this.groupBox57);
             this.tab_digerislemler.Controls.Add(this.groupBox54);
             this.tab_digerislemler.Controls.Add(this.groupBox41);
@@ -2485,12 +2506,42 @@
             this.tab_digerislemler.Text = "Diğer İşlemler";
             this.tab_digerislemler.UseVisualStyleBackColor = true;
             // 
+            // groupBox64
+            // 
+            this.groupBox64.Controls.Add(this.lnklbl_epostametni_kaydet);
+            this.groupBox64.Controls.Add(this.tb_epostametni);
+            this.groupBox64.Location = new System.Drawing.Point(973, 299);
+            this.groupBox64.Name = "groupBox64";
+            this.groupBox64.Size = new System.Drawing.Size(372, 164);
+            this.groupBox64.TabIndex = 33;
+            this.groupBox64.TabStop = false;
+            this.groupBox64.Text = "E-posta Metni (Varsayılan metin)";
+            // 
+            // lnklbl_epostametni_kaydet
+            // 
+            this.lnklbl_epostametni_kaydet.AutoSize = true;
+            this.lnklbl_epostametni_kaydet.Location = new System.Drawing.Point(241, 144);
+            this.lnklbl_epostametni_kaydet.Name = "lnklbl_epostametni_kaydet";
+            this.lnklbl_epostametni_kaydet.Size = new System.Drawing.Size(125, 13);
+            this.lnklbl_epostametni_kaydet.TabIndex = 1;
+            this.lnklbl_epostametni_kaydet.TabStop = true;
+            this.lnklbl_epostametni_kaydet.Text = "Varsayılan Olarak Kaydet";
+            this.lnklbl_epostametni_kaydet.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklbl_epostametni_kaydet_LinkClicked);
+            // 
+            // tb_epostametni
+            // 
+            this.tb_epostametni.Location = new System.Drawing.Point(11, 23);
+            this.tb_epostametni.Multiline = true;
+            this.tb_epostametni.Name = "tb_epostametni";
+            this.tb_epostametni.Size = new System.Drawing.Size(355, 113);
+            this.tb_epostametni.TabIndex = 0;
+            // 
             // groupBox57
             // 
             this.groupBox57.Controls.Add(this.btn_varsayilanlariguncelle);
-            this.groupBox57.Location = new System.Drawing.Point(978, 423);
+            this.groupBox57.Location = new System.Drawing.Point(978, 469);
             this.groupBox57.Name = "groupBox57";
-            this.groupBox57.Size = new System.Drawing.Size(367, 107);
+            this.groupBox57.Size = new System.Drawing.Size(367, 61);
             this.groupBox57.TabIndex = 32;
             this.groupBox57.TabStop = false;
             this.groupBox57.Text = "Diğer İşlemler";
@@ -2871,7 +2922,7 @@
             this.groupBox19.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.groupBox19.Location = new System.Drawing.Point(968, 9);
             this.groupBox19.Name = "groupBox19";
-            this.groupBox19.Size = new System.Drawing.Size(377, 408);
+            this.groupBox19.Size = new System.Drawing.Size(377, 280);
             this.groupBox19.TabIndex = 9;
             this.groupBox19.TabStop = false;
             this.groupBox19.Text = "Veri Silme";
@@ -2879,7 +2930,7 @@
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(203, 333);
+            this.label47.Location = new System.Drawing.Point(197, 215);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(31, 13);
             this.label47.TabIndex = 14;
@@ -2887,7 +2938,7 @@
             // 
             // tb_sil_sifre
             // 
-            this.tb_sil_sifre.Location = new System.Drawing.Point(250, 330);
+            this.tb_sil_sifre.Location = new System.Drawing.Point(244, 212);
             this.tb_sil_sifre.Name = "tb_sil_sifre";
             this.tb_sil_sifre.Size = new System.Drawing.Size(100, 20);
             this.tb_sil_sifre.TabIndex = 13;
@@ -2898,7 +2949,7 @@
             this.bt_sil_seciliveriler.BackColor = System.Drawing.Color.Red;
             this.bt_sil_seciliveriler.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.bt_sil_seciliveriler.ForeColor = System.Drawing.Color.White;
-            this.bt_sil_seciliveriler.Location = new System.Drawing.Point(187, 352);
+            this.bt_sil_seciliveriler.Location = new System.Drawing.Point(181, 234);
             this.bt_sil_seciliveriler.Name = "bt_sil_seciliveriler";
             this.bt_sil_seciliveriler.Size = new System.Drawing.Size(176, 37);
             this.bt_sil_seciliveriler.TabIndex = 12;
@@ -2919,7 +2970,7 @@
             // cb_sil_odemeler
             // 
             this.cb_sil_odemeler.AutoSize = true;
-            this.cb_sil_odemeler.Location = new System.Drawing.Point(22, 303);
+            this.cb_sil_odemeler.Location = new System.Drawing.Point(22, 211);
             this.cb_sil_odemeler.Name = "cb_sil_odemeler";
             this.cb_sil_odemeler.Size = new System.Drawing.Size(99, 17);
             this.cb_sil_odemeler.TabIndex = 10;
@@ -2929,7 +2980,7 @@
             // cb_sil_cdpdf
             // 
             this.cb_sil_cdpdf.AutoSize = true;
-            this.cb_sil_cdpdf.Location = new System.Drawing.Point(22, 280);
+            this.cb_sil_cdpdf.Location = new System.Drawing.Point(205, 185);
             this.cb_sil_cdpdf.Name = "cb_sil_cdpdf";
             this.cb_sil_cdpdf.Size = new System.Drawing.Size(112, 17);
             this.cb_sil_cdpdf.TabIndex = 9;
@@ -2939,7 +2990,7 @@
             // cb_sil_kuluptalebi
             // 
             this.cb_sil_kuluptalebi.AutoSize = true;
-            this.cb_sil_kuluptalebi.Location = new System.Drawing.Point(22, 257);
+            this.cb_sil_kuluptalebi.Location = new System.Drawing.Point(22, 188);
             this.cb_sil_kuluptalebi.Name = "cb_sil_kuluptalebi";
             this.cb_sil_kuluptalebi.Size = new System.Drawing.Size(85, 17);
             this.cb_sil_kuluptalebi.TabIndex = 8;
@@ -2949,7 +3000,7 @@
             // cb_sil_ogrencilistesi
             // 
             this.cb_sil_ogrencilistesi.AutoSize = true;
-            this.cb_sil_ogrencilistesi.Location = new System.Drawing.Point(22, 234);
+            this.cb_sil_ogrencilistesi.Location = new System.Drawing.Point(205, 162);
             this.cb_sil_ogrencilistesi.Name = "cb_sil_ogrencilistesi";
             this.cb_sil_ogrencilistesi.Size = new System.Drawing.Size(95, 17);
             this.cb_sil_ogrencilistesi.TabIndex = 7;
@@ -2959,7 +3010,7 @@
             // cb_sil_zumreler
             // 
             this.cb_sil_zumreler.AutoSize = true;
-            this.cb_sil_zumreler.Location = new System.Drawing.Point(22, 211);
+            this.cb_sil_zumreler.Location = new System.Drawing.Point(22, 165);
             this.cb_sil_zumreler.Name = "cb_sil_zumreler";
             this.cb_sil_zumreler.Size = new System.Drawing.Size(142, 17);
             this.cb_sil_zumreler.TabIndex = 6;
@@ -2969,7 +3020,7 @@
             // cb_sil_defterler
             // 
             this.cb_sil_defterler.AutoSize = true;
-            this.cb_sil_defterler.Location = new System.Drawing.Point(22, 188);
+            this.cb_sil_defterler.Location = new System.Drawing.Point(205, 139);
             this.cb_sil_defterler.Name = "cb_sil_defterler";
             this.cb_sil_defterler.Size = new System.Drawing.Size(98, 17);
             this.cb_sil_defterler.TabIndex = 5;
@@ -2979,7 +3030,7 @@
             // cb_sil_serbestetkinlikler
             // 
             this.cb_sil_serbestetkinlikler.AutoSize = true;
-            this.cb_sil_serbestetkinlikler.Location = new System.Drawing.Point(22, 165);
+            this.cb_sil_serbestetkinlikler.Location = new System.Drawing.Point(22, 142);
             this.cb_sil_serbestetkinlikler.Name = "cb_sil_serbestetkinlikler";
             this.cb_sil_serbestetkinlikler.Size = new System.Drawing.Size(142, 17);
             this.cb_sil_serbestetkinlikler.TabIndex = 4;
@@ -2989,7 +3040,7 @@
             // cb_sil_gunlukplanlar
             // 
             this.cb_sil_gunlukplanlar.AutoSize = true;
-            this.cb_sil_gunlukplanlar.Location = new System.Drawing.Point(22, 143);
+            this.cb_sil_gunlukplanlar.Location = new System.Drawing.Point(205, 120);
             this.cb_sil_gunlukplanlar.Name = "cb_sil_gunlukplanlar";
             this.cb_sil_gunlukplanlar.Size = new System.Drawing.Size(127, 17);
             this.cb_sil_gunlukplanlar.TabIndex = 3;
@@ -4372,7 +4423,7 @@
             // 
             this.rb_ara_okumadefteri.AutoSize = true;
             this.rb_ara_okumadefteri.Enabled = false;
-            this.rb_ara_okumadefteri.Location = new System.Drawing.Point(6, 73);
+            this.rb_ara_okumadefteri.Location = new System.Drawing.Point(155, 34);
             this.rb_ara_okumadefteri.Name = "rb_ara_okumadefteri";
             this.rb_ara_okumadefteri.Size = new System.Drawing.Size(93, 17);
             this.rb_ara_okumadefteri.TabIndex = 3;
@@ -4597,9 +4648,9 @@
             // 
             this.groupBox23.Controls.Add(this.lnklbl_ara_ekurunler);
             this.groupBox23.Controls.Add(this.groupBox25);
-            this.groupBox23.Location = new System.Drawing.Point(164, 110);
+            this.groupBox23.Location = new System.Drawing.Point(19, 113);
             this.groupBox23.Name = "groupBox23";
-            this.groupBox23.Size = new System.Drawing.Size(273, 115);
+            this.groupBox23.Size = new System.Drawing.Size(418, 115);
             this.groupBox23.TabIndex = 36;
             this.groupBox23.TabStop = false;
             this.groupBox23.Text = "Ek Ürünler ve Durumuna Göre Listele";
@@ -4608,7 +4659,7 @@
             // 
             this.lnklbl_ara_ekurunler.AutoSize = true;
             this.lnklbl_ara_ekurunler.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lnklbl_ara_ekurunler.Location = new System.Drawing.Point(208, 53);
+            this.lnklbl_ara_ekurunler.Location = new System.Drawing.Point(351, 52);
             this.lnklbl_ara_ekurunler.Name = "lnklbl_ara_ekurunler";
             this.lnklbl_ara_ekurunler.Size = new System.Drawing.Size(63, 17);
             this.lnklbl_ara_ekurunler.TabIndex = 2;
@@ -4618,6 +4669,7 @@
             // 
             // groupBox25
             // 
+            this.groupBox25.Controls.Add(this.rb_ara_cd_ingilizce_doludefter);
             this.groupBox25.Controls.Add(this.groupBox24);
             this.groupBox25.Controls.Add(this.rb_ara_okumadefteri);
             this.groupBox25.Controls.Add(this.rb_ara_sosyalkulup);
@@ -4625,7 +4677,7 @@
             this.groupBox25.Controls.Add(this.rb_ara_cd_doludefter);
             this.groupBox25.Location = new System.Drawing.Point(13, 13);
             this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Size = new System.Drawing.Size(192, 96);
+            this.groupBox25.Size = new System.Drawing.Size(337, 96);
             this.groupBox25.TabIndex = 0;
             this.groupBox25.TabStop = false;
             // 
@@ -4634,7 +4686,7 @@
             this.groupBox24.Controls.Add(this.rb_ara_ekurun_durum_basilmamis);
             this.groupBox24.Controls.Add(this.rb_ara_ekurun_durum_basilmis);
             this.groupBox24.Controls.Add(this.rb_ara_ekurun_durum_tumu);
-            this.groupBox24.Location = new System.Drawing.Point(105, 8);
+            this.groupBox24.Location = new System.Drawing.Point(247, 8);
             this.groupBox24.Name = "groupBox24";
             this.groupBox24.Size = new System.Drawing.Size(83, 82);
             this.groupBox24.TabIndex = 4;
@@ -4675,7 +4727,7 @@
             // rb_ara_sosyalkulup
             // 
             this.rb_ara_sosyalkulup.AutoSize = true;
-            this.rb_ara_sosyalkulup.Location = new System.Drawing.Point(6, 50);
+            this.rb_ara_sosyalkulup.Location = new System.Drawing.Point(155, 11);
             this.rb_ara_sosyalkulup.Name = "rb_ara_sosyalkulup";
             this.rb_ara_sosyalkulup.Size = new System.Drawing.Size(86, 17);
             this.rb_ara_sosyalkulup.TabIndex = 2;
@@ -4685,7 +4737,7 @@
             // rb_ara_pdf
             // 
             this.rb_ara_pdf.AutoSize = true;
-            this.rb_ara_pdf.Location = new System.Drawing.Point(6, 30);
+            this.rb_ara_pdf.Location = new System.Drawing.Point(6, 56);
             this.rb_ara_pdf.Name = "rb_ara_pdf";
             this.rb_ara_pdf.Size = new System.Drawing.Size(46, 17);
             this.rb_ara_pdf.TabIndex = 1;
@@ -4700,7 +4752,6 @@
             this.rb_ara_cd_doludefter.Name = "rb_ara_cd_doludefter";
             this.rb_ara_cd_doludefter.Size = new System.Drawing.Size(79, 17);
             this.rb_ara_cd_doludefter.TabIndex = 0;
-            this.rb_ara_cd_doludefter.TabStop = true;
             this.rb_ara_cd_doludefter.Text = "Dolu Defter";
             this.rb_ara_cd_doludefter.UseVisualStyleBackColor = true;
             // 
@@ -5215,18 +5266,25 @@
             this.rb_vt_islemturu_plan.UseVisualStyleBackColor = true;
             this.rb_vt_islemturu_plan.CheckedChanged += new System.EventHandler(this.rb_vt_islemturu_plan_CheckedChanged);
             // 
-            // cb_planbas_kapsam_ozel_pdf
+            // rb_ara_cd_ingilizce_doludefter
             // 
-            this.cb_planbas_kapsam_ozel_pdf.AutoSize = true;
-            this.cb_planbas_kapsam_ozel_pdf.Location = new System.Drawing.Point(448, 25);
-            this.cb_planbas_kapsam_ozel_pdf.Name = "cb_planbas_kapsam_ozel_pdf";
-            this.cb_planbas_kapsam_ozel_pdf.Size = new System.Drawing.Size(47, 30);
-            this.cb_planbas_kapsam_ozel_pdf.TabIndex = 5;
-            this.cb_planbas_kapsam_ozel_pdf.Text = "Özel\r\nPDF";
-            this.toolTip1.SetToolTip(this.cb_planbas_kapsam_ozel_pdf, "PDF talepleri içindir. Yapılan baskı işlemini özel pdf klasöründe tutar. Sayfalar" +
-        "ı çeivrmez, renkli filigran kullanır ve yazıcıya göndermez. Basım tarihi talebi " +
-        "varsa PDF ek ürününe kaydedilir.");
-            this.cb_planbas_kapsam_ozel_pdf.UseVisualStyleBackColor = true;
+            this.rb_ara_cd_ingilizce_doludefter.AutoSize = true;
+            this.rb_ara_cd_ingilizce_doludefter.Location = new System.Drawing.Point(6, 34);
+            this.rb_ara_cd_ingilizce_doludefter.Name = "rb_ara_cd_ingilizce_doludefter";
+            this.rb_ara_cd_ingilizce_doludefter.Size = new System.Drawing.Size(120, 17);
+            this.rb_ara_cd_ingilizce_doludefter.TabIndex = 5;
+            this.rb_ara_cd_ingilizce_doludefter.Text = "İngilizce Dolu Defter";
+            this.rb_ara_cd_ingilizce_doludefter.UseVisualStyleBackColor = true;
+            // 
+            // rb_planbas_kapsam_sadeceingilizcedersdefteri
+            // 
+            this.rb_planbas_kapsam_sadeceingilizcedersdefteri.AutoSize = true;
+            this.rb_planbas_kapsam_sadeceingilizcedersdefteri.Location = new System.Drawing.Point(428, 24);
+            this.rb_planbas_kapsam_sadeceingilizcedersdefteri.Name = "rb_planbas_kapsam_sadeceingilizcedersdefteri";
+            this.rb_planbas_kapsam_sadeceingilizcedersdefteri.Size = new System.Drawing.Size(156, 30);
+            this.rb_planbas_kapsam_sadeceingilizcedersdefteri.TabIndex = 6;
+            this.rb_planbas_kapsam_sadeceingilizcedersdefteri.Text = "Sadece\r\nİNGİLİZCE DOLU DEFTER";
+            this.rb_planbas_kapsam_sadeceingilizcedersdefteri.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -5335,6 +5393,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_serbestetkinlikdersleri_1)).EndInit();
             this.tab_digerislemler.ResumeLayout(false);
             this.tab_digerislemler.PerformLayout();
+            this.groupBox64.ResumeLayout(false);
+            this.groupBox64.PerformLayout();
             this.groupBox57.ResumeLayout(false);
             this.groupBox54.ResumeLayout(false);
             this.groupBox54.PerformLayout();
@@ -5832,6 +5892,11 @@
         private System.Windows.Forms.RadioButton rb_listeye_tarih_ekle_doludefter;
         private System.Windows.Forms.Label label79;
         private System.Windows.Forms.CheckBox cb_planbas_kapsam_ozel_pdf;
+        private System.Windows.Forms.GroupBox groupBox64;
+        private System.Windows.Forms.LinkLabel lnklbl_epostametni_kaydet;
+        private System.Windows.Forms.TextBox tb_epostametni;
+        private System.Windows.Forms.RadioButton rb_ara_cd_ingilizce_doludefter;
+        private System.Windows.Forms.RadioButton rb_planbas_kapsam_sadeceingilizcedersdefteri;
     }
 }
 

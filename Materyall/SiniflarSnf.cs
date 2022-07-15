@@ -39,7 +39,7 @@ namespace Materyall
         public string defterkapakyolu { get; set; }
         public string defter_kayit_yolu_pdf { get; set; }
 
-       
+       public string epostametni { get; set; }
 
 
         public int serbestderssaati_sinif_1 { get; set; }
@@ -241,6 +241,8 @@ namespace Materyall
         public double fiyat { get; set; }
 
         public bool anadersmi { get; set; }
+
+        public bool bransmi { get; set; }
 
     }
 
