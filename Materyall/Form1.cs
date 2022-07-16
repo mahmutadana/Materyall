@@ -1175,6 +1175,21 @@ namespace Materyall
             tb_bb_odemesekli.Text = ogrblg.bayibilgileri.odemesekli;
 
 
+            tb_bb_bayilogosu.Text = "";
+            if (ogrblg.bayibilgileri.bayilogosu == "")
+            {
+                ogrblg.bayibilgileri.bayilogosu = metinler.logo_varsayilan_bayilogo_dosyaadi;
+            } else
+            {
+                //Sadece vt'den gelmişse yazıyoruz. Kendimiz eklemişsek yazıyoruz. Boş göstereceğiz.
+                tb_bb_bayilogosu.Text = ogrblg.bayibilgileri.bayilogosu;
+            }
+
+           //Yazmıyoruz, boş bırakıyoruz. Bakarsak olmadığını anlayalım diye.// tb_bb_bayilogosu.Text = ogrblg.ogretmenlogo;
+
+
+
+
             //Adres alanının boyutlandırılması.
             const int padding = 3;
             // get number of lines (first line is 0, so add 1)
@@ -1188,6 +1203,7 @@ namespace Materyall
             BirOgt = ogrblg;
 
             ogretmenlogosu_Goster();
+            bayilogosu_Goster();
 
             secimizrenginikaldir();
 
@@ -1347,9 +1363,29 @@ namespace Materyall
         }
 
 
+
+        //Bayi logosu için işlem yapıyoruz.
+        private void bayilogosu_Goster()
+        {
+
+            if (BirOgt.bayibilgileri.bayilogosu != "")
+            {
+                pb_bb_bayilogosu.Image = Image.FromFile(metinler.logo_wordbaglantili_klasor + BirOgt.bayibilgileri.bayilogosu + ".png");
+
+            }
+            else
+            {
+                pb_bb_bayilogosu.Image = null;
+            }
+
+            bayi_logoyu_wordbaglantilidosya_olarak_kaydet();
+
+        }
+
+
         //Logoyu basılacak isimle (logo.png) kaydediyoruz.
 
-       private void logoyu_wordbaglantilidosya_olarak_kaydet()
+        private void logoyu_wordbaglantilidosya_olarak_kaydet()
         {
             //Logo varsa onu ilgili klasöre logo.png olarak kaydediyoruz. Böylece word belgesi güncel isimdeki logoyu gösterecek inşallah.
             //Worde resim eklerken "ekle bağla" seçeneği kullanılacak.
@@ -1359,7 +1395,15 @@ namespace Materyall
 
         }
 
+        private void bayi_logoyu_wordbaglantilidosya_olarak_kaydet()
+        {
+            //Logo varsa onu ilgili klasöre logo.png olarak kaydediyoruz. Böylece word belgesi güncel isimdeki logoyu gösterecek inşallah.
+            //Worde resim eklerken "ekle bağla" seçeneği kullanılacak.
 
+
+            yrdsnf.bayi_logoyuKlasoreKaydet(BirOgt.bayibilgileri.bayilogosu);
+
+        }
 
 
 
@@ -1530,13 +1574,13 @@ namespace Materyall
 
 
 
-
+            /*
             //DOLU DEFTERİ OTOMATİK OLARAK EKLİYORUZ. (DAHA ÖNCE EKLENMEMİŞSE... ve ilkokulda braş dersi değilse)
             bool oncedeneklenmismi = false;
 
             //Braşs dersi ise yine önceeklenmişolarak tanımlıyoruz.
 
-            if (filtrelenenAnaDerslers[cb_talep_anadersler_yillik.SelectedIndex].bransmi)
+            if (filtrelenenAnaDerslers[cb_talep_anadersler_yillik.SelectedIndex].branskodu > 0)
             {
                 oncedeneklenmismi = true;
             }
@@ -1559,6 +1603,10 @@ namespace Materyall
             {
                 doluDefteriOtomatikOlarakEkle();
             }
+            */
+
+            doluDefteriOtomatikOlarakEkle(false);
+
 
 
             varsa_talepBolumu();
@@ -1666,6 +1714,23 @@ namespace Materyall
 
         private void CD_PDF_islemi_yap(bool eklensinmi, string urunadi)
         {
+
+
+            //Öncelikle eklenmek istenen ürün daha önce eklenmiş mi diye bakalım.
+            if (eklensinmi)
+            {
+
+                if (ekUrunDahaOnceEklenmisMi(urunadi))
+                {
+                    yrdsnf.log_yaz("Elle eklenirken kontrol edildi. Ürün daha önce eklenmiş. " + urunadi);
+                    return;
+                }
+
+            }
+
+
+
+
 
             foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
             {
@@ -2919,6 +2984,7 @@ namespace Materyall
 
             //Yıllık plan talebi varsa dolu defteri otomatik olarak ekleyeceğiz.
             bool yillikplantalebivar_DoludefterEkle = false;
+            bool yillikplantalebivar_DoludefterEkle_ingilizce = false;
 
             foreach (string snf in siniflar)
             {
@@ -3226,7 +3292,7 @@ namespace Materyall
 
             if (doludefterTalebi.Length > 0 || yillikplantalebivar_DoludefterEkle)
             {
-              if (!doluDefteriOtomatikOlarakEkle())
+              if (!doluDefteriOtomatikOlarakEkle(doludefterTalebi.Length > 0))
                 {
                     return false;
                 }
@@ -3240,13 +3306,138 @@ namespace Materyall
         }
 
 
-        private bool doluDefteriOtomatikOlarakEkle()
+        private bool doluDefteriOtomatikOlarakEkle(bool ayricaistenmismi)
         {
-            //cd_pdf_ekleme 
+            //Yıllık planı yok ama yine de dolu defter isteyenler için. ayrica_istenmiş değişkeni kullanılacak. True ise her türlü ekleyeceğiz.
+
+            //Eklenecek olan dolu defterin normal mi ingilizce mi olduğuna da bu aşamada bakalım.
+
+
+
+            //Eğer öğretmenin branşı İngilizce ise (bunu vt'den alacağız.) ve ders olarak 2-3-4. snıf İngilizce seçilmişse ekleme yapacağız.
+            //Eğer dolu defter İngilizce için uygun değilse o zaman normal doluldefteri ekleyeceğiz.
+
+            //Hatta Yıllık plan varsa otomatik ekleme kısmını dahi burada yapacağız. Yani eğer yıllık plan yoksa eklemeden çıkacağız.
+            //Eklenip eklenmeyeceğinin kontrolünü de burada yapacağız yani. Ayrıca istenmişse her türlü ekleyeceğiz. Yani yıllık plan istememiştir ama
+            // dolu defter istemiş olabilir.
+
+
+            //Öncelikle ingilizce Türkçe ayırt etmeksizin defter eklenip eklenmeyecek mi diye bakıyoruz.
+            bool doludefterkelenecekmi = false;
+            bool turkce_doludefter = false;
+            bool ingilizce_doludefter = false;
+
+
+            if (ayricaistenmismi)
+            {
+                doludefterkelenecekmi = true;
+            }
+
+
+            //Eğer ayrıca istenmemişse yıllık plan var mı diye bakıyoruz. Şartlar uygunsa true yapacağız.
+            //Şartlar 1: Yıllık plan olarak ilkokul dersleri istenmiş olacak.
+            //Şartlar 2: Eğer branş İngilizce ve eklenen ders de İngilizce ise o zaman ingilizce dolu defter eklenecek. Yoksa normal dolu defter eklenecek.
+            //Branşı İngilizce olmayan bir öğretmen de İngilizce dersini eklemiş olabilir. O durumda yine normal dolu defteri ekleyeceğiz.
+
+            //Döngüyü VT'den gelen veriyle yapacağız. Doğrudan VT'ye ekleme işlemi olabilir çünkü. Hızlı talep girişinde...
+            //if dışında da kullanacağımız için burada tanımladık.
+
+            DataTable dtanadersler = vtislemleri.dgv_icin_y_anaderleri_getir(BirOgt.oid, BirOgt.yili);
+
+            if (!doludefterkelenecekmi)
+            {
+               
+                foreach (DataRow dr in dtanadersler.Rows)
+                {
+
+                    if ( int.Parse(dr["dersadi"].ToString().Substring(0,1)) > 0 && int.Parse(dr["dersadi"].ToString().Substring(0, 1)) < 5)
+                    {
+                        doludefterkelenecekmi = true;
+                        break;
+                    }
+
+                }
+
+            }
+
+            //Eğer ayrıca istenmemişse ve yıllık plan taleplerinin içinde 1-2-3-4. sınıf dersi yoksa dolu defter eklemiyoruz.
+            if (!doludefterkelenecekmi)
+            {
+                return false;
+            }
+
+
+
+
+            //Eğer dolu defter ekleyeceksek türünü belirleyeceğiz. Eğer ingilizce öğretmeni değilse normal dolu defterdir. Bunun için derslerin
+            // branskoduna bakacağız ama önce Sınıf Öğretmeni ( Kodu 1 ) mi diye bakacağız.
+
+            //Eğer ingilizceciyse ve istenen derslerden biri İngilizce ise o zaman ingilizce dolu defteri true yapacağız.
+            if (BirOgt.bransi == metinler.ingilizceogretmeni_bransinin_yazimi)
+            {
+
+                //İngilizce için şimdilik metinler sınıfından brani ismini alacağız.
+
+                 
+                //Eğer öğretmenin branşı İngilizce ise ve yıllık plana eklenen ders 1-2-3-4 İngilizce ise o zaman ingilizce dolu defteri true yapıyoruz.
+                foreach (DataRow dr in dtanadersler.Rows)
+                {
+
+                    if ((int.Parse(dr["dersadi"].ToString().Substring(0, 1)) > 0 && int.Parse(dr["dersadi"].ToString().Substring(0, 1)) < 5) &&
+                        dr["dersadi"].ToString().Contains(metinler.ingilizce_dersinin_yazimi))
+                    {
+                        ingilizce_doludefter = true;
+                        break;
+                    }
+
+                }
+               
+
+            } else
+            {
+
+                turkce_doludefter = true;
+
+            }
+
+
+            //Eğer İngilizceci veya sınıfçı değilse defter eklemeden çıkıyoruz.
+
+            if (!turkce_doludefter && !ingilizce_doludefter)
+            {
+                return false;
+            }
+            
+
+
+
+            //Hangi defter için işlem yapılacağını belirleyelim.
+            string islemyapilandoludefter = metinler.basilacak_ekurun_defter_adi;
+
+            if (ingilizce_doludefter)
+            {
+                islemyapilandoludefter = metinler.basilacak_ekurun_ingilizce_defter_adi;
+            }
+
+
+
+            //Bu ürün daha önce eklenmişse ekleme işlemi yapmıyoruz.
+            if (ekUrunDahaOnceEklenmisMi(islemyapilandoludefter))
+            {
+                return false;
+            }
+
+
+
+            //Hiçbir sorun kalmadı. Ekleyebiliriz.
+
+
+
+            //ek ürün _ekleme 
             foreach (FiltrelenenEkUrunler urun in filtrelenenEkUrunlers)
             {
 
-                if (urun.urunadi == metinler.basilacak_ekurun_defter_adi)
+                if (urun.urunadi == islemyapilandoludefter)
                 {
 
 
@@ -3270,10 +3461,35 @@ namespace Materyall
             }
 
 
+
+
             MessageBox.Show("Dolu defter otomatik olarak eklenemedi.");
             return false;
 
         }
+
+
+
+
+        private bool ekUrunDahaOnceEklenmisMi(string ekurunadi)
+        {
+
+
+            //Yine de eklenmiş mi diye de bakalım.
+            foreach (DataGridViewRow dr in dgv_talep_ekurunler.Rows)
+            {
+
+                if (dr.Cells[0].Value.ToString() ==  ekurunadi) //metinler.basilacak_ekurun_defter_adi)
+                {
+                    return true;
+                }
+            }
+
+
+            return false;
+
+        }
+
 
 
         private void bt_sil_seciliveriler_Click(object sender, EventArgs e)

@@ -219,6 +219,8 @@ namespace Materyall
         public string web { get; set; }
         public string odemesekli { get; set; }
 
+        public string bayilogosu { get; set; }
+
 
 
 
@@ -242,7 +244,7 @@ namespace Materyall
 
         public bool anadersmi { get; set; }
 
-        public bool bransmi { get; set; }
+        public int branskodu { get; set; }
 
     }
 

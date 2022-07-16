@@ -93,10 +93,35 @@ namespace Materyall
 
 
 
+        public void bayi_logoyuKlasoreKaydet(string logoadi)
+        {
+            Metinler metinler = new Metinler();
+
+            //Logoların oluşturulacağı klasör. Word logoyu bu klasördeki logo.png'den alacak.
+            string logohedefklasoru = metinler.logo_wordbaglantili_klasor;
+
+
+            //Eğer bir logo adı gelmişse tam yol haline getiriyoruz.
+            string logomuz = metinler.logo_wordbaglantili_klasor + logoadi + ".png";
+
+            if (logoadi == null || logoadi.Trim() == "")
+            {
+                //Eğer logo yoksa varsayılan logoyu kullanıyoruz. Logo ismi dolu gelirse zaten logonun tam yolu gelecek.
+                logomuz = logohedefklasoru + "varsayilanbayilogosu.png";
+            }
 
 
 
-       public int comboboxGenisligi(ComboBox myCombo)
+            Bitmap bitmap100d = new Bitmap(Image.FromFile(logomuz), new Size(512, 512));
+
+            bitmap100d.Save(metinler.logo_wordbaglantili_klasor + metinler.logo_wordbaglantili_dosyaadi_bayi, System.Drawing.Imaging.ImageFormat.Png);
+
+        }
+
+
+
+
+        public int comboboxGenisligi(ComboBox myCombo)
         {
             int maxWidth = 0;
             int temp = 0;

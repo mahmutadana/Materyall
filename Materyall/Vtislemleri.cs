@@ -413,7 +413,8 @@ namespace Materyall
                 oge.eposta = oku["eposta"].ToString();
                 oge.web = oku["web"].ToString();
                 oge.odemesekli = oku["odemesekli"].ToString();
-               
+
+                oge.bayilogosu = "" + oku["bayilogopng"].ToString();
 
                 //________________________________________
                 //Sonradan eklenen alanlar.
@@ -813,7 +814,7 @@ namespace Materyall
 
                 oge.anadersmi = (oku["anadersmi"].ToString().Length > 0);
 
-                oge.bransmi = (oku["bransmi"].ToString().Length > 0);
+                oge.branskodu = int.Parse("0" + oku["branskodu"].ToString()); //0 + null olma ihtimaline karşı.
 
                 list.Add(oge);
 
@@ -1413,6 +1414,8 @@ namespace Materyall
                 bayibilgileri.eposta = oku["eposta"].ToString();
                 bayibilgileri.web = oku["web"].ToString();
                 bayibilgileri.odemesekli = oku["odemesekli"].ToString();
+
+                bayibilgileri.bayilogosu = "" + oku["bayilogopng"].ToString();
 
             }
 

@@ -25,11 +25,19 @@ namespace Materyall
         public string logo_wordbaglantili_dosyaadi = "logo.png";
         public string logo_varsayilan_meblogo_dosyaadi = "meb_logo.png";
 
+        public string logo_varsayilan_bayilogo_dosyaadi = "varsayilanbayilogosu"; //Bayiler için sadece png destekleniyor ve o kod kısmında ekleniyor.
 
+        public string logo_wordbaglantili_dosyaadi_bayi = "bayi_logo.png";
 
         //pLAN SEKMESİNDEN defer basımı yaparken bruadaki isme bakacağız. VT'de yazıldığı halinin bu olması gerekir.
         public string basilacak_ekurun_defter_adi = "DOLU DEFTER";
-      //  public string basilacak_ekurun_defter_urunkodu = "101";
+        //  public string basilacak_ekurun_defter_urunkodu = "101";
+
+        //Dolu defter ingilizce öğretmeni değilse Sınıf Öğretmenidir. Ona bakmak için şimdilik bu kısmı kullanacağız.
+        public string sinifogretmeni_bransinin_yazimi = "Sınıf Öğretmeni";
+        public string ingilizceogretmeni_bransinin_yazimi = "İngilizce Öğretmeni";
+        public string ingilizce_dersinin_yazimi = "Yabancı Dil";
+
 
 
         public string basilacak_ekurun_ingilizce_defter_adi = "İNGİLİZCE DOLU DEFTER";
