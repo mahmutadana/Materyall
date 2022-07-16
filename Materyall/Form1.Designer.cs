@@ -463,6 +463,7 @@
             this.tb_bb_bayilogosu = new System.Windows.Forms.TextBox();
             this.groupBox65 = new System.Windows.Forms.GroupBox();
             this.pb_bb_bayilogosu = new System.Windows.Forms.PictureBox();
+            this.cb_planbas_epostala = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -1460,6 +1461,7 @@
             // groupBox48
             // 
             this.groupBox48.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.groupBox48.Controls.Add(this.cb_planbas_epostala);
             this.groupBox48.Controls.Add(this.rb_planbas_kapsam_sadeceingilizcedersdefteri);
             this.groupBox48.Controls.Add(this.cb_planbas_kapsam_ozel_pdf);
             this.groupBox48.Controls.Add(this.rb_planbas_kapsam_yillikvegunlukartarda);
@@ -1486,11 +1488,11 @@
             // cb_planbas_kapsam_ozel_pdf
             // 
             this.cb_planbas_kapsam_ozel_pdf.AutoSize = true;
-            this.cb_planbas_kapsam_ozel_pdf.Location = new System.Drawing.Point(623, 25);
+            this.cb_planbas_kapsam_ozel_pdf.Location = new System.Drawing.Point(599, 10);
             this.cb_planbas_kapsam_ozel_pdf.Name = "cb_planbas_kapsam_ozel_pdf";
-            this.cb_planbas_kapsam_ozel_pdf.Size = new System.Drawing.Size(47, 30);
+            this.cb_planbas_kapsam_ozel_pdf.Size = new System.Drawing.Size(71, 17);
             this.cb_planbas_kapsam_ozel_pdf.TabIndex = 5;
-            this.cb_planbas_kapsam_ozel_pdf.Text = "Özel\r\nPDF";
+            this.cb_planbas_kapsam_ozel_pdf.Text = "Özel PDF";
             this.toolTip1.SetToolTip(this.cb_planbas_kapsam_ozel_pdf, "PDF talepleri içindir. Yapılan baskı işlemini özel pdf klasöründe tutar. Sayfalar" +
         "ı çeivrmez, renkli filigran kullanır ve yazıcıya göndermez. Basım tarihi talebi " +
         "varsa PDF ek ürününe kaydedilir.");
@@ -5336,6 +5338,18 @@
             this.pb_bb_bayilogosu.TabIndex = 0;
             this.pb_bb_bayilogosu.TabStop = false;
             // 
+            // cb_planbas_epostala
+            // 
+            this.cb_planbas_epostala.AutoSize = true;
+            this.cb_planbas_epostala.ForeColor = System.Drawing.Color.MediumBlue;
+            this.cb_planbas_epostala.Location = new System.Drawing.Point(599, 40);
+            this.cb_planbas_epostala.Name = "cb_planbas_epostala";
+            this.cb_planbas_epostala.Size = new System.Drawing.Size(69, 17);
+            this.cb_planbas_epostala.TabIndex = 7;
+            this.cb_planbas_epostala.Text = "e-postala";
+            this.toolTip1.SetToolTip(this.cb_planbas_epostala, "Özel PDF seçili ise oluşan PDF\'yi müşterinin kayıtlı e-posta adresine gönderir.");
+            this.cb_planbas_epostala.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5953,6 +5967,7 @@
         private System.Windows.Forms.TextBox tb_bb_bayilogosu;
         private System.Windows.Forms.GroupBox groupBox65;
         private System.Windows.Forms.PictureBox pb_bb_bayilogosu;
+        private System.Windows.Forms.CheckBox cb_planbas_epostala;
     }
 }
 
