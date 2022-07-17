@@ -108,6 +108,7 @@
             this.groupBox45 = new System.Windows.Forms.GroupBox();
             this.cb_planbas_ondosya_ekle = new System.Windows.Forms.CheckBox();
             this.groupBox48 = new System.Windows.Forms.GroupBox();
+            this.cb_planbas_epostala = new System.Windows.Forms.CheckBox();
             this.rb_planbas_kapsam_sadeceingilizcedersdefteri = new System.Windows.Forms.RadioButton();
             this.cb_planbas_kapsam_ozel_pdf = new System.Windows.Forms.CheckBox();
             this.rb_planbas_kapsam_yillikvegunlukartarda = new System.Windows.Forms.RadioButton();
@@ -295,9 +296,13 @@
             this.tb_sablon_nobetyeri_1 = new System.Windows.Forms.TextBox();
             this.linklbl_sablon_nobetyeri_sablonukaydet = new System.Windows.Forms.LinkLabel();
             this.tabPagebayiBilgileri = new System.Windows.Forms.TabPage();
+            this.groupBox65 = new System.Windows.Forms.GroupBox();
+            this.pb_bb_bayilogosu = new System.Windows.Forms.PictureBox();
             this.groupBox59 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label80 = new System.Windows.Forms.Label();
+            this.tb_bb_bayilogosu = new System.Windows.Forms.TextBox();
             this.label78 = new System.Windows.Forms.Label();
             this.tb_bb_odemesekli = new System.Windows.Forms.TextBox();
             this.label77 = new System.Windows.Forms.Label();
@@ -459,11 +464,6 @@
             this.groupBox58 = new System.Windows.Forms.GroupBox();
             this.rb_vt_islemturu_defter = new System.Windows.Forms.RadioButton();
             this.rb_vt_islemturu_plan = new System.Windows.Forms.RadioButton();
-            this.label80 = new System.Windows.Forms.Label();
-            this.tb_bb_bayilogosu = new System.Windows.Forms.TextBox();
-            this.groupBox65 = new System.Windows.Forms.GroupBox();
-            this.pb_bb_bayilogosu = new System.Windows.Forms.PictureBox();
-            this.cb_planbas_epostala = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -536,6 +536,8 @@
             this.groupBox13.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.tabPagebayiBilgileri.SuspendLayout();
+            this.groupBox65.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_bb_bayilogosu)).BeginInit();
             this.groupBox59.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -569,8 +571,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).BeginInit();
             this.tab_alt_loglar.SuspendLayout();
             this.groupBox58.SuspendLayout();
-            this.groupBox65.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_bb_bayilogosu)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -1474,6 +1474,19 @@
             this.groupBox48.TabIndex = 5;
             this.groupBox48.TabStop = false;
             this.groupBox48.Text = "Yıılık-Günlük Plan / Doldurulmuş Ders Defteri";
+            // 
+            // cb_planbas_epostala
+            // 
+            this.cb_planbas_epostala.AutoSize = true;
+            this.cb_planbas_epostala.Enabled = false;
+            this.cb_planbas_epostala.ForeColor = System.Drawing.Color.MediumBlue;
+            this.cb_planbas_epostala.Location = new System.Drawing.Point(599, 40);
+            this.cb_planbas_epostala.Name = "cb_planbas_epostala";
+            this.cb_planbas_epostala.Size = new System.Drawing.Size(69, 17);
+            this.cb_planbas_epostala.TabIndex = 7;
+            this.cb_planbas_epostala.Text = "e-postala";
+            this.toolTip1.SetToolTip(this.cb_planbas_epostala, "Özel PDF seçili ise oluşan PDF\'yi müşterinin kayıtlı e-posta adresine gönderir.");
+            this.cb_planbas_epostala.UseVisualStyleBackColor = true;
             // 
             // rb_planbas_kapsam_sadeceingilizcedersdefteri
             // 
@@ -3488,6 +3501,26 @@
             this.tabPagebayiBilgileri.Text = "Bayi Bilgisi";
             this.tabPagebayiBilgileri.UseVisualStyleBackColor = true;
             // 
+            // groupBox65
+            // 
+            this.groupBox65.Controls.Add(this.pb_bb_bayilogosu);
+            this.groupBox65.Location = new System.Drawing.Point(500, 24);
+            this.groupBox65.Name = "groupBox65";
+            this.groupBox65.Size = new System.Drawing.Size(210, 193);
+            this.groupBox65.TabIndex = 2;
+            this.groupBox65.TabStop = false;
+            this.groupBox65.Text = "Bayi Logosu";
+            // 
+            // pb_bb_bayilogosu
+            // 
+            this.pb_bb_bayilogosu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pb_bb_bayilogosu.Location = new System.Drawing.Point(3, 16);
+            this.pb_bb_bayilogosu.Name = "pb_bb_bayilogosu";
+            this.pb_bb_bayilogosu.Size = new System.Drawing.Size(204, 174);
+            this.pb_bb_bayilogosu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pb_bb_bayilogosu.TabIndex = 0;
+            this.pb_bb_bayilogosu.TabStop = false;
+            // 
             // groupBox59
             // 
             this.groupBox59.Controls.Add(this.panel1);
@@ -3570,6 +3603,26 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(457, 489);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // label80
+            // 
+            this.label80.AutoSize = true;
+            this.label80.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label80.Location = new System.Drawing.Point(3, 478);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(65, 30);
+            this.label80.TabIndex = 32;
+            this.label80.Text = "Bayi Logosu";
+            this.label80.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_bb_bayilogosu
+            // 
+            this.tb_bb_bayilogosu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_bb_bayilogosu.Location = new System.Drawing.Point(142, 481);
+            this.tb_bb_bayilogosu.Multiline = true;
+            this.tb_bb_bayilogosu.Name = "tb_bb_bayilogosu";
+            this.tb_bb_bayilogosu.Size = new System.Drawing.Size(312, 24);
+            this.tb_bb_bayilogosu.TabIndex = 33;
             // 
             // label78
             // 
@@ -5298,58 +5351,6 @@
             this.rb_vt_islemturu_plan.UseVisualStyleBackColor = true;
             this.rb_vt_islemturu_plan.CheckedChanged += new System.EventHandler(this.rb_vt_islemturu_plan_CheckedChanged);
             // 
-            // label80
-            // 
-            this.label80.AutoSize = true;
-            this.label80.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label80.Location = new System.Drawing.Point(3, 478);
-            this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(65, 30);
-            this.label80.TabIndex = 32;
-            this.label80.Text = "Bayi Logosu";
-            this.label80.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_bb_bayilogosu
-            // 
-            this.tb_bb_bayilogosu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_bb_bayilogosu.Location = new System.Drawing.Point(142, 481);
-            this.tb_bb_bayilogosu.Multiline = true;
-            this.tb_bb_bayilogosu.Name = "tb_bb_bayilogosu";
-            this.tb_bb_bayilogosu.Size = new System.Drawing.Size(312, 24);
-            this.tb_bb_bayilogosu.TabIndex = 33;
-            // 
-            // groupBox65
-            // 
-            this.groupBox65.Controls.Add(this.pb_bb_bayilogosu);
-            this.groupBox65.Location = new System.Drawing.Point(500, 24);
-            this.groupBox65.Name = "groupBox65";
-            this.groupBox65.Size = new System.Drawing.Size(210, 193);
-            this.groupBox65.TabIndex = 2;
-            this.groupBox65.TabStop = false;
-            this.groupBox65.Text = "Bayi Logosu";
-            // 
-            // pb_bb_bayilogosu
-            // 
-            this.pb_bb_bayilogosu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pb_bb_bayilogosu.Location = new System.Drawing.Point(3, 16);
-            this.pb_bb_bayilogosu.Name = "pb_bb_bayilogosu";
-            this.pb_bb_bayilogosu.Size = new System.Drawing.Size(204, 174);
-            this.pb_bb_bayilogosu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pb_bb_bayilogosu.TabIndex = 0;
-            this.pb_bb_bayilogosu.TabStop = false;
-            // 
-            // cb_planbas_epostala
-            // 
-            this.cb_planbas_epostala.AutoSize = true;
-            this.cb_planbas_epostala.ForeColor = System.Drawing.Color.MediumBlue;
-            this.cb_planbas_epostala.Location = new System.Drawing.Point(599, 40);
-            this.cb_planbas_epostala.Name = "cb_planbas_epostala";
-            this.cb_planbas_epostala.Size = new System.Drawing.Size(69, 17);
-            this.cb_planbas_epostala.TabIndex = 7;
-            this.cb_planbas_epostala.Text = "e-postala";
-            this.toolTip1.SetToolTip(this.cb_planbas_epostala, "Özel PDF seçili ise oluşan PDF\'yi müşterinin kayıtlı e-posta adresine gönderir.");
-            this.cb_planbas_epostala.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5473,6 +5474,8 @@
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.tabPagebayiBilgileri.ResumeLayout(false);
+            this.groupBox65.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_bb_bayilogosu)).EndInit();
             this.groupBox59.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -5525,8 +5528,6 @@
             this.tab_alt_loglar.PerformLayout();
             this.groupBox58.ResumeLayout(false);
             this.groupBox58.PerformLayout();
-            this.groupBox65.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb_bb_bayilogosu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
