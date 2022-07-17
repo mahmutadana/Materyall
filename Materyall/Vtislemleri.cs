@@ -814,7 +814,7 @@ namespace Materyall
 
                 oge.anadersmi = (oku["anadersmi"].ToString().Length > 0);
 
-                oge.branskodu = int.Parse("0" + oku["branskodu"].ToString()); //0 + null olma ihtimaline karşı.
+           //iptal şimdilik.     oge.branskodu =  int.Parse("0" + oku["branskodu"].ToString()); //0 + null olma ihtimaline karşı.
 
                 list.Add(oge);
 
