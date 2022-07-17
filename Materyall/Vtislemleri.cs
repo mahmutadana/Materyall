@@ -1128,7 +1128,7 @@ namespace Materyall
                     "eposta='" + ogtblg.eposta + "', " +
                     "adres='" + ogtblg.adres + "', " +
                     "aciklama='" + ogtblg.aciklama + "', " +
-                    "bayi=" + ogtblg.bayikodu + ", " +
+                    "bayi='" + ogtblg.bayikodu + "', " +
                     "logoadi='" + ogtblg.ogretmenlogo + "' " +
                     "WHERE oid=" + musterikayitno_oid;
 

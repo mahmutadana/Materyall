@@ -4481,6 +4481,20 @@ namespace Materyall
             adresMesktupBaslikDegerleri["GÖREVİ1"] = BirOgt.mudurunvani;
 
 
+
+            //AŞAĞIDA DEĞER ALACAK OLAN BAŞLIKLAR.
+            adresMesktupBaslikDegerleri["EYLUL"] = "";
+            adresMesktupBaslikDegerleri["EKIM"] = "";
+            adresMesktupBaslikDegerleri["KASIM"] = "";
+            adresMesktupBaslikDegerleri["ARALIK"] = "";
+            adresMesktupBaslikDegerleri["OCAK"] = "";
+            adresMesktupBaslikDegerleri["SUBAT"] = "";
+            adresMesktupBaslikDegerleri["MART"] = "";
+            adresMesktupBaslikDegerleri["NISAN"] = "";
+            adresMesktupBaslikDegerleri["MAYIS"] = "";
+            adresMesktupBaslikDegerleri["HAZIRAN"] = "";
+
+
             //Öğrenci listesi varsa onu da alalım ve ekleyelim.
 
             int ogrencisayac = 1;
@@ -4530,6 +4544,29 @@ namespace Materyall
                 }
 
             }
+
+
+
+
+            //Mahalli kurtuluş günlerini ekleyelim. Eylül-Haziran arası her ay için bir değişken kullanalım.
+
+            //Önce şehir için, sonra da ilçe için kurtuluş gününe bakalım ve olanları art arda birleştirip yazalım.
+            List<string> mahallilist = vtislemleri.mahallikurtulusgunubilgilerinigetir(BirOgt.ili, BirOgt.ili + "-" + BirOgt.ilcesi);
+
+            if (mahallilist.Count > 0)
+            {
+
+                foreach (string kurtulusgunu in mahallilist)
+                {
+
+                    string[] kurtulusbilgileri = kurtulusgunu.Split(';');
+
+                    adresMesktupBaslikDegerleri[kurtulusbilgileri[0]] += kurtulusbilgileri[1] + "   ";
+
+                }
+
+            }
+
 
 
 
