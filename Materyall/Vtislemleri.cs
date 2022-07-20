@@ -1278,7 +1278,7 @@ namespace Materyall
                 ogrblg.kurumkodu = oku["kurumkodu"].ToString();
                 ogrblg.okuladi = oku["okuladi"].ToString();
                 ogrblg.sinifi = oku["sinif"].ToString();
-                ogrblg.subesi = oku["sube"].ToString();
+                ogrblg.subesi = oku["sube"].ToString().ToUpper();
 
                 ogrblg.muduradi = oku["muduradi"].ToString();
                 ogrblg.mudurunvani = oku["mudurunvani"].ToString();

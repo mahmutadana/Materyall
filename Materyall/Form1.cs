@@ -955,7 +955,7 @@ namespace Materyall
             ogrblg.okuladi = tb_bilgi_okulu.Text
                 ;
             ogrblg.sinifi = cb_bilgi_sinifi.Text;
-            ogrblg.subesi = tb_bilgi_subesi.Text;
+            ogrblg.subesi = tb_bilgi_subesi.Text.ToUpper();
 
             tb_bilgi_muduradi.Text = yrdsnf.ismiduzelt(tb_bilgi_muduradi.Text, "isim");
             ogrblg.muduradi = tb_bilgi_muduradi.Text;
