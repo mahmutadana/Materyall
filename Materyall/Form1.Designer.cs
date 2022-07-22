@@ -1576,22 +1576,22 @@
             // rb_planbas_secenek_plan
             // 
             this.rb_planbas_secenek_plan.AutoSize = true;
+            this.rb_planbas_secenek_plan.Checked = true;
             this.rb_planbas_secenek_plan.Location = new System.Drawing.Point(6, 117);
             this.rb_planbas_secenek_plan.Name = "rb_planbas_secenek_plan";
             this.rb_planbas_secenek_plan.Size = new System.Drawing.Size(147, 17);
             this.rb_planbas_secenek_plan.TabIndex = 1;
+            this.rb_planbas_secenek_plan.TabStop = true;
             this.rb_planbas_secenek_plan.Text = "Sadece PLAN / DEFTER";
             this.rb_planbas_secenek_plan.UseVisualStyleBackColor = true;
             // 
             // rb_planbas_secenek_kapak
             // 
             this.rb_planbas_secenek_kapak.AutoSize = true;
-            this.rb_planbas_secenek_kapak.Checked = true;
             this.rb_planbas_secenek_kapak.Location = new System.Drawing.Point(6, 94);
             this.rb_planbas_secenek_kapak.Name = "rb_planbas_secenek_kapak";
             this.rb_planbas_secenek_kapak.Size = new System.Drawing.Size(100, 17);
             this.rb_planbas_secenek_kapak.TabIndex = 0;
-            this.rb_planbas_secenek_kapak.TabStop = true;
             this.rb_planbas_secenek_kapak.Text = "Sadece KAPAK";
             this.rb_planbas_secenek_kapak.UseVisualStyleBackColor = true;
             // 
@@ -1833,22 +1833,22 @@
             // rb_defterbas_secenek_defter
             // 
             this.rb_defterbas_secenek_defter.AutoSize = true;
+            this.rb_defterbas_secenek_defter.Checked = true;
             this.rb_defterbas_secenek_defter.Location = new System.Drawing.Point(6, 56);
             this.rb_defterbas_secenek_defter.Name = "rb_defterbas_secenek_defter";
             this.rb_defterbas_secenek_defter.Size = new System.Drawing.Size(108, 17);
             this.rb_defterbas_secenek_defter.TabIndex = 1;
+            this.rb_defterbas_secenek_defter.TabStop = true;
             this.rb_defterbas_secenek_defter.Text = "Sadece DEFTER";
             this.rb_defterbas_secenek_defter.UseVisualStyleBackColor = true;
             // 
             // rb_defterbas_secenek_kapak
             // 
             this.rb_defterbas_secenek_kapak.AutoSize = true;
-            this.rb_defterbas_secenek_kapak.Checked = true;
             this.rb_defterbas_secenek_kapak.Location = new System.Drawing.Point(6, 33);
             this.rb_defterbas_secenek_kapak.Name = "rb_defterbas_secenek_kapak";
             this.rb_defterbas_secenek_kapak.Size = new System.Drawing.Size(100, 17);
             this.rb_defterbas_secenek_kapak.TabIndex = 0;
-            this.rb_defterbas_secenek_kapak.TabStop = true;
             this.rb_defterbas_secenek_kapak.Text = "Sadece KAPAK";
             this.rb_defterbas_secenek_kapak.UseVisualStyleBackColor = true;
             // 
@@ -3952,7 +3952,7 @@
             this.dgv_muhasebe_listeozeti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_muhasebe_listeozeti.Location = new System.Drawing.Point(367, 212);
             this.dgv_muhasebe_listeozeti.Name = "dgv_muhasebe_listeozeti";
-            this.dgv_muhasebe_listeozeti.Size = new System.Drawing.Size(386, 47);
+            this.dgv_muhasebe_listeozeti.Size = new System.Drawing.Size(386, 50);
             this.dgv_muhasebe_listeozeti.TabIndex = 0;
             // 
             // groupBox2
@@ -5266,9 +5266,9 @@
             this.lbl_ara_bulunankayit_sayisi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lbl_ara_bulunankayit_sayisi.Location = new System.Drawing.Point(6, 245);
             this.lbl_ara_bulunankayit_sayisi.Name = "lbl_ara_bulunankayit_sayisi";
-            this.lbl_ara_bulunankayit_sayisi.Size = new System.Drawing.Size(16, 17);
+            this.lbl_ara_bulunankayit_sayisi.Size = new System.Drawing.Size(13, 17);
             this.lbl_ara_bulunankayit_sayisi.TabIndex = 1;
-            this.lbl_ara_bulunankayit_sayisi.Text = "0";
+            this.lbl_ara_bulunankayit_sayisi.Text = "-";
             // 
             // dgv_alt_aramavelisteleme
             // 

@@ -3970,6 +3970,15 @@ namespace Materyall
 
             dgv_muhasebe_listeozeti.DataSource = vtislemleri.dgv_icin_getirMuhasebeGenelDurumTumListeninOzeti(idler);
 
+            foreach (DataGridViewColumn dc in dgv_muhasebe_listeozeti.Columns){
+                dc.DefaultCellStyle.Format = "N2";
+            }
+
+            // dgv_muhasebe_listeozeti.Columns[0].DefaultCellStyle.Format = "N2";
+
+            dgv_muhasebe_listeozeti.Font = cb_bilgi_musterinokilitli.Font;
+
+
         }
 
 
