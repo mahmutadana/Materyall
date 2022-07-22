@@ -952,8 +952,8 @@ namespace Materyall
             ogrblg.kurumkodu = tb_bilgi_okulkodu.Text;
 
             tb_bilgi_okulu.Text = yrdsnf.ismiduzelt(tb_bilgi_okulu.Text, "ilce");
-            ogrblg.okuladi = tb_bilgi_okulu.Text
-                ;
+            ogrblg.okuladi = tb_bilgi_okulu.Text;
+                
             ogrblg.sinifi = cb_bilgi_sinifi.Text;
             ogrblg.subesi = tb_bilgi_subesi.Text.ToUpper();
 
@@ -985,10 +985,14 @@ namespace Materyall
 
                 bool mukerrerizinickontrol = mukerrereizinverilsinmi;
                 //Eğer şube kısmı sadece üç nokta ise mükerrere izin vereceğiz.
-                if (!ogrblg.subesi.Contains(metinler.ucnokta) && !ogrblg.subesi.Contains(metinler.ucnokta_bitisik))
+                if (!ogrblg.subesi.Contains(metinler.ucnokta) && !ogrblg.subesi.Contains(metinler.ucnokta_bitisik) && !ogrblg.sinifi.Contains(metinler.ucnokta) && !ogrblg.sinifi.Contains(metinler.ucnokta_bitisik))
                 {
                     mukerrerizinickontrol = false;
                 }
+
+               
+
+
 
                 string kayitsonucu = vtislemleri.yeniKayit(ogrblg, mukerrerizinickontrol);
 
@@ -1349,14 +1353,41 @@ namespace Materyall
         private void ogretmenlogosu_Goster()
         {
 
-            if (tb_bilgi_logo.Text != "")
-            {
-                pb_logo.Image = Image.FromFile(metinler.logo_wordbaglantili_klasor + tb_bilgi_logo.Text);
+            //Özel seçilmiş logo varsa o kullanılacak. Yoksa okul kodu adıyla bir logo varsa otomatik olarak onu devreye sokacağız.
+            //Okul koduyla eşleşen bir png logo yoksa o zaman varsayılan logoyu kullanacağız.
 
-            } else
+
+
+            if (BirOgt.kurumkodu.Length > 1 && BirOgt.ogretmenlogo == metinler.logo_varsayilan_meblogo_dosyaadi)
             {
-                pb_logo.Image = null;
+                //Kurum kodu varsa ve kurum koduyla eşleşen bir png logo varsa onu kullanacağız.
+
+                if (File.Exists(metinler.logo_wordbaglantili_klasor + BirOgt.kurumkodu + ".png"))
+                {
+                    BirOgt.ogretmenlogo = BirOgt.kurumkodu + ".png";
+                    pb_logo.Image = Image.FromFile(metinler.logo_wordbaglantili_klasor + BirOgt.ogretmenlogo);
+                }
+
+
+
             }
+
+
+
+            if (BirOgt.ogretmenlogo != "")
+            {
+                pb_logo.Image = Image.FromFile(metinler.logo_wordbaglantili_klasor + BirOgt.ogretmenlogo);
+
+            } else 
+            { 
+            
+                    pb_logo.Image = null;
+
+              
+            }
+
+
+
 
             logoyu_wordbaglantilidosya_olarak_kaydet();
 
@@ -1368,7 +1399,7 @@ namespace Materyall
         private void bayilogosu_Goster()
         {
 
-            if (BirOgt.bayibilgileri.bayilogosu != "")
+            if (BirOgt.bayibilgileri.bayilogosu != null && BirOgt.bayibilgileri.bayilogosu != "")
             {
                 pb_bb_bayilogosu.Image = Image.FromFile(metinler.logo_wordbaglantili_klasor + BirOgt.bayibilgileri.bayilogosu + ".png");
 
@@ -1392,6 +1423,8 @@ namespace Materyall
 
 
             yrdsnf.logoyuKlasoreKaydet(BirOgt.ogretmenlogo);
+
+
 
         }
 
@@ -2932,6 +2965,9 @@ namespace Materyall
 
             int gunluk_ders_ilk = 32;
             int gunluk_ders_adet = 14;
+
+
+
 
             //PLANI YOK    int gunluk_secmeliders_sutun = 48;
 

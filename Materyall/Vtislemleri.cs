@@ -1173,7 +1173,7 @@ namespace Materyall
 
             baglantiKur();
 
-            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND yili='" + yili + "' AND kurumkodu='" + kurumkodu + "' AND il='" + il + "' AND ilce='" + ilce + "' AND okuladi='" + okuladi + "' AND sinif='" + sinif + "' AND sube='" + sube + "' AND adisoyadi='" + adisoyadi + "'";
+            string sql = "SELECT COUNT(*) as adet FROM tlp_ogretmenbilgileri_tbl WHERE islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND yili='" + yili + "' AND il='" + il + "' AND ilce='" + ilce + "' AND okuladi='" + okuladi + "' AND sinif='" + sinif + "' AND sube='" + sube + "' AND adisoyadi='" + adisoyadi + "'";
 
 
 
