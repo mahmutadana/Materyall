@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -140,6 +142,131 @@ namespace Materyall
             return maxWidth;
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public void ePostaGonder(string epostamiz, string epostasifremiz, string aliciepostasi, string aliciadisoyadi, string konu, string icerik, string ekdosya)
+        {
+
+            
+            MailMessage ePosta = new MailMessage();
+            ePosta.From = new MailAddress(epostamiz,"Er Yayıncılık"); // ("eposta@gmail.com");
+            //
+            ePosta.To.Add(aliciepostasi);
+          //  ePosta.To.Add("eposta2@gmail.com");
+          //  ePosta.To.Add("eposta3@gmail.com");
+            //
+            ePosta.Attachments.Add(new Attachment(ekdosya));// (@"C:\deneme-upload.jpg")) ;
+            //
+            ePosta.Subject = konu;
+            //
+            ePosta.Body = icerik;
+            //
+            SmtpClient smtp = new SmtpClient();
+            //
+            smtp.Credentials = new System.Net.NetworkCredential(epostamiz, epostasifremiz); // ("eposta@gmail.com", "sifre");
+            smtp.Port = 587;
+            smtp.Host = "smtp.gmail.com";
+            smtp.EnableSsl = true;
+            object userState = ePosta;
+            bool kontrol = true;
+            try
+            {
+                // smtp.SendAsync(ePosta, (object)ePosta);
+                smtp.Send(ePosta);
+            }
+            catch (SmtpException ex)
+            {
+                kontrol = false;
+                System.Windows.Forms.MessageBox.Show(ex.Message, "Mail Gönderme Hatasi");
+            }
+          //  return kontrol;
+
+            
+
+
+
+
+            /*
+            //Diğer yöntem
+
+            var fromAddress = new MailAddress(epostamiz, "ER YAYIN GAZİANTEP");
+            var toAddress = new MailAddress(aliciepostasi, aliciadisoyadi);
+          //  const string fromPassword = epostasifremiz;
+          //  const string subject = konu;
+          //  const string body = "Body";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, epostasifremiz)
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = konu,
+                Body = icerik
+               
+            })
+            {
+                smtp.Send(message);
+            }
+            */
+
+            /*
+            //BAŞKA DİĞER YÖNTEM
+
+            String SendMailFrom = epostamiz;
+            String SendMailTo = aliciepostasi;
+            String SendMailSubject = "Email Subject";
+            String SendMailBody = "Email Body";
+
+            try
+            {
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587);
+                SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
+                MailMessage email = new MailMessage();
+                // START
+                email.From = new MailAddress(SendMailFrom);
+                email.To.Add(SendMailTo);
+                email.CC.Add(SendMailFrom);
+                email.Subject = SendMailSubject;
+                email.Body = SendMailBody;
+                //END
+                SmtpServer.Timeout = 5000;
+                SmtpServer.EnableSsl = true;
+                SmtpServer.UseDefaultCredentials = false;
+                SmtpServer.Credentials = new NetworkCredential(SendMailFrom, epostasifremiz);
+                SmtpServer.Send(email);
+
+                Console.WriteLine("Email Successfully Sent");
+             //   Console.ReadKey();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+               // Console.ReadKey();
+            }
+            */
+
+
+        }
 
 
         //Sınıf sonu.

@@ -1356,6 +1356,10 @@ namespace Materyall
             //Özel seçilmiş logo varsa o kullanılacak. Yoksa okul kodu adıyla bir logo varsa otomatik olarak onu devreye sokacağız.
             //Okul koduyla eşleşen bir png logo yoksa o zaman varsayılan logoyu kullanacağız.
 
+            if (BirOgt.kurumkodu == null)
+            {
+                return;
+            }
 
 
             if (BirOgt.kurumkodu.Length > 1 && BirOgt.ogretmenlogo == metinler.logo_varsayilan_meblogo_dosyaadi)
@@ -5994,6 +5998,26 @@ namespace Materyall
                 //Şifreleme işleminin sonu.
 
                 hedefDoc.Save(hedef_pdf_dosyamiz_birlesik);
+
+
+                //epostalıyoruz. Eposta gönder. e-posta.
+                if (cb_planbas_epostala.Checked)
+                {
+
+                    if (BirOgt.eposta.Length > 6)
+                    {
+
+                        yrdsnf.ePostaGonder(varsayilanbossa.epostam, varsayilanbossa.epostasifrem, BirOgt.eposta, BirOgt.adisoyadi, metinler.epostakonusu, varsayilanbossa.epostametni, hedef_pdf_dosyamiz_birlesik);
+
+                    } else
+                    {
+                        MessageBox.Show("Öğretmenin e-posta adresi yok. Plan dosyası gönderilmedi.");
+                    }
+
+
+                }
+
+
             }
 
 

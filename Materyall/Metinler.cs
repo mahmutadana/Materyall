@@ -83,10 +83,10 @@ namespace Materyall
 
 
 
+        public string epostakonusu = "ER YAYINCILIK - YILLIK PLAN";
 
 
 
-        
 
         public string islembasarili = "Başarılı";
         public string mukerrerkayitbilgisiogretmen = "Bu okul, sınıf, şube ve öğretmen adına daha önce açılmış bir hesap bulunmaktadır.";

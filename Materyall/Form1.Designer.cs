@@ -1478,7 +1478,6 @@
             // cb_planbas_epostala
             // 
             this.cb_planbas_epostala.AutoSize = true;
-            this.cb_planbas_epostala.Enabled = false;
             this.cb_planbas_epostala.ForeColor = System.Drawing.Color.MediumBlue;
             this.cb_planbas_epostala.Location = new System.Drawing.Point(599, 40);
             this.cb_planbas_epostala.Name = "cb_planbas_epostala";

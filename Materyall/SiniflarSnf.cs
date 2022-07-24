@@ -40,6 +40,9 @@ namespace Materyall
         public string defter_kayit_yolu_pdf { get; set; }
 
        public string epostametni { get; set; }
+        public string epostam { get; set; }
+        public string epostasifrem { get; set; }
+
 
 
         public int serbestderssaati_sinif_1 { get; set; }

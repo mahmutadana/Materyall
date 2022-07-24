@@ -94,6 +94,8 @@ namespace Materyall
                 veriler.defter_kayit_yolu_pdf = oku["defter_kayit_yolu_pdf"].ToString();
 
                 veriler.epostametni = oku["epostametni"].ToString();
+                veriler.epostam = oku["epostam"].ToString();
+                veriler.epostasifrem = oku["epostasifrem"].ToString();
 
             }
 
