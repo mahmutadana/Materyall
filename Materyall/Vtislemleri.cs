@@ -4063,13 +4063,13 @@ namespace Materyall
 
 
 
-        public DataTable ara_dgv_icin_bilgilere_gore(String yili, string iladi, string ilceadi, string okuladi, string musteriadi, string bayiadi)
+        public DataTable ara_dgv_icin_bilgilere_gore(String yili, string iladi, string ilceadi, string okuladi, string musteriadi, string bayiadi, string sinifi)
         {
 
 
            
-            string wheree = " LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' AND b.il LIKE '" + iladi + "%' AND b.ilce LIKE '" + ilceadi + "%' AND okuladi LIKE '" + okuladi + "%' AND" +
-                " b.adisoyadi LIKE '%" + musteriadi + "%' AND b.bayi IN (SELECT bayikodu FROM sis_bayiler_tbl WHERE bayiadi LIKE '%" + bayiadi + "%') ";
+            string wheree = " LEFT JOIN sis_bayiler_tbl y ON y.bayikodu=b.bayi WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' AND b.il LIKE '" + iladi + "%' AND b.ilce LIKE '" + ilceadi + "%' AND okuladi LIKE '" + okuladi + "%' AND " +
+                " b.sinif LIKE '%" + sinifi + "%' AND b.adisoyadi LIKE '%" + musteriadi + "%' AND b.bayi IN (SELECT bayikodu FROM sis_bayiler_tbl WHERE bayiadi LIKE '%" + bayiadi + "%') ";
             
 
 
@@ -4386,6 +4386,62 @@ namespace Materyall
 
 
         }
+
+
+
+
+
+
+
+
+
+
+
+        //GENEL RAPORLAR
+
+
+        public DataTable dgv_icin_genel_rapor1_getir(String yili)
+        {
+
+
+            baglantiKur();
+
+            /*
+          
+            string sql = "SELECT b.oid, b.bayi, b.aciklama, b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, b.brans, y.fiyat  FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                 " LEFT JOIN " + metinler.neyebakalim_defter_tablo + " d ON b.oid=d.oid " +
+                " LEFT JOIN " + metinler.neyebakalim_y_anaders_tablo + " y ON b.oid=y.oid " +
+                " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' ORDER BY b.il, b.ilce, b.okuladi, b.sinif, b.sube";
+            */
+
+
+            //bU KOD İSTEDİĞİMİZ İŞLEMİ YAPMIYOR. BAKACAĞIZ.
+
+            string sql = "SELECT b.oid, b.bayi, b.aciklama, b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, b.brans, " +
+                " (SELECT sum(X.fiyat) FROM (SELECT fiyat FROM " + metinler.neyebakalim_defter_tablo + " ) X ) AS fiyat " +
+                " FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b ";
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
+
+
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
+
+
+
+
+
+
 
 
 

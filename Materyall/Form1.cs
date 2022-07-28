@@ -3737,7 +3737,8 @@ namespace Materyall
 
                 DataGridViewRow dr = datagridSunucuTalepleri.Rows[i];
 
-                if (dr.Cells[excelbilgisutunlari.adisoyadi_stn].Value.ToString() != "")
+
+                if (dr.Cells[excelbilgisutunlari.adisoyadi_stn - 1].Value.ToString() != "")
                 {
 
 
@@ -4143,7 +4144,7 @@ namespace Materyall
 
 
             dgv_alt_aramavelisteleme.DataSource = vtislemleri.ara_dgv_icin_bilgilere_gore(cb_yil_ara_bilgileregore.Text, tb_yil_ara_bilgileregore_il.Text,
-                tb_yil_ara_bilgileregore_ilce.Text, tb_yil_ara_bilgileregore_okul.Text, tb_yil_ara_musteriadi.Text, tb_yil_ara_bilgileregore_bayiadi.Text);
+                tb_yil_ara_bilgileregore_ilce.Text, tb_yil_ara_bilgileregore_okul.Text, tb_yil_ara_musteriadi.Text, tb_yil_ara_bilgileregore_bayiadi.Text, tb_yil_ara_bilgileregore_sinif.Text);
 
 
             ara_sonucu_bulunan_kayit_sayisini_yaz();
@@ -6862,7 +6863,24 @@ namespace Materyall
 
         }
 
+        private void linklbl_genelRapor_1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
 
+            gnelRaporHazirla();
+
+        }
+
+        private void gnelRaporHazirla()
+        {
+
+
+
+            dgv_genel_rapor_1.DataSource = vtislemleri.dgv_icin_genel_rapor1_getir("2022-2023");
+
+
+
+            MessageBox.Show("Bulunan kayıt: " + dgv_genel_rapor_1.RowCount);
+        }
 
 
 

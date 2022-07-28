@@ -296,8 +296,6 @@
             this.tb_sablon_nobetyeri_1 = new System.Windows.Forms.TextBox();
             this.linklbl_sablon_nobetyeri_sablonukaydet = new System.Windows.Forms.LinkLabel();
             this.tabPagebayiBilgileri = new System.Windows.Forms.TabPage();
-            this.groupBox65 = new System.Windows.Forms.GroupBox();
-            this.pb_bb_bayilogosu = new System.Windows.Forms.PictureBox();
             this.groupBox59 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -337,7 +335,6 @@
             this.tb_bb_bayikodu = new System.Windows.Forms.TextBox();
             this.dgv_muhasebe_listeozeti = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.bt_bayibilgilerinigoster = new System.Windows.Forms.Button();
             this.bt_sonrakimusterino = new System.Windows.Forms.Button();
             this.bt_oncekimusterino = new System.Windows.Forms.Button();
             this.pb_logo = new System.Windows.Forms.PictureBox();
@@ -464,6 +461,18 @@
             this.groupBox58 = new System.Windows.Forms.GroupBox();
             this.rb_vt_islemturu_defter = new System.Windows.Forms.RadioButton();
             this.rb_vt_islemturu_plan = new System.Windows.Forms.RadioButton();
+            this.label81 = new System.Windows.Forms.Label();
+            this.tb_yil_ara_bilgileregore_sinif = new System.Windows.Forms.TextBox();
+            this.tp_raporlar = new System.Windows.Forms.TabPage();
+            this.groupBox66 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.groupBox67 = new System.Windows.Forms.GroupBox();
+            this.dgv_genel_rapor_1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.label82 = new System.Windows.Forms.Label();
+            this.linklbl_genelRapor_1 = new System.Windows.Forms.LinkLabel();
+            this.pb_bb_bayilogosu = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_talepgiris.SuspendLayout();
@@ -536,8 +545,6 @@
             this.groupBox13.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.tabPagebayiBilgileri.SuspendLayout();
-            this.groupBox65.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_bb_bayilogosu)).BeginInit();
             this.groupBox59.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -571,6 +578,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_alt_aramavelisteleme)).BeginInit();
             this.tab_alt_loglar.SuspendLayout();
             this.groupBox58.SuspendLayout();
+            this.tp_raporlar.SuspendLayout();
+            this.groupBox66.SuspendLayout();
+            this.groupBox67.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_genel_rapor_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_bb_bayilogosu)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -606,6 +619,7 @@
             this.tabControl1.Controls.Add(this.tab_serbestetkinlikler);
             this.tabControl1.Controls.Add(this.tab_digerislemler);
             this.tabControl1.Controls.Add(this.tabPagebayiBilgileri);
+            this.tabControl1.Controls.Add(this.tp_raporlar);
             this.tabControl1.Location = new System.Drawing.Point(394, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -3490,7 +3504,6 @@
             // 
             // tabPagebayiBilgileri
             // 
-            this.tabPagebayiBilgileri.Controls.Add(this.groupBox65);
             this.tabPagebayiBilgileri.Controls.Add(this.groupBox59);
             this.tabPagebayiBilgileri.Location = new System.Drawing.Point(4, 22);
             this.tabPagebayiBilgileri.Name = "tabPagebayiBilgileri";
@@ -3499,26 +3512,6 @@
             this.tabPagebayiBilgileri.TabIndex = 8;
             this.tabPagebayiBilgileri.Text = "Bayi Bilgisi";
             this.tabPagebayiBilgileri.UseVisualStyleBackColor = true;
-            // 
-            // groupBox65
-            // 
-            this.groupBox65.Controls.Add(this.pb_bb_bayilogosu);
-            this.groupBox65.Location = new System.Drawing.Point(500, 24);
-            this.groupBox65.Name = "groupBox65";
-            this.groupBox65.Size = new System.Drawing.Size(210, 193);
-            this.groupBox65.TabIndex = 2;
-            this.groupBox65.TabStop = false;
-            this.groupBox65.Text = "Bayi Logosu";
-            // 
-            // pb_bb_bayilogosu
-            // 
-            this.pb_bb_bayilogosu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pb_bb_bayilogosu.Location = new System.Drawing.Point(3, 16);
-            this.pb_bb_bayilogosu.Name = "pb_bb_bayilogosu";
-            this.pb_bb_bayilogosu.Size = new System.Drawing.Size(204, 174);
-            this.pb_bb_bayilogosu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pb_bb_bayilogosu.TabIndex = 0;
-            this.pb_bb_bayilogosu.TabStop = false;
             // 
             // groupBox59
             // 
@@ -3956,7 +3949,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.bt_bayibilgilerinigoster);
+            this.groupBox2.Controls.Add(this.pb_bb_bayilogosu);
             this.groupBox2.Controls.Add(this.bt_sonrakimusterino);
             this.groupBox2.Controls.Add(this.bt_oncekimusterino);
             this.groupBox2.Controls.Add(this.pb_logo);
@@ -4008,16 +4001,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bilgiler";
             // 
-            // bt_bayibilgilerinigoster
-            // 
-            this.bt_bayibilgilerinigoster.Location = new System.Drawing.Point(333, 762);
-            this.bt_bayibilgilerinigoster.Name = "bt_bayibilgilerinigoster";
-            this.bt_bayibilgilerinigoster.Size = new System.Drawing.Size(40, 23);
-            this.bt_bayibilgilerinigoster.TabIndex = 47;
-            this.bt_bayibilgilerinigoster.Text = "Bilgi";
-            this.bt_bayibilgilerinigoster.UseVisualStyleBackColor = true;
-            this.bt_bayibilgilerinigoster.Click += new System.EventHandler(this.bt_bayibilgilerinigoster_Click);
-            // 
             // bt_sonrakimusterino
             // 
             this.bt_sonrakimusterino.Location = new System.Drawing.Point(206, 9);
@@ -4040,9 +4023,9 @@
             // 
             // pb_logo
             // 
-            this.pb_logo.Location = new System.Drawing.Point(281, 630);
+            this.pb_logo.Location = new System.Drawing.Point(265, 629);
             this.pb_logo.Name = "pb_logo";
-            this.pb_logo.Size = new System.Drawing.Size(86, 87);
+            this.pb_logo.Size = new System.Drawing.Size(52, 49);
             this.pb_logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_logo.TabIndex = 44;
             this.pb_logo.TabStop = false;
@@ -4051,7 +4034,7 @@
             // 
             this.linklbl_logo_gozat.AutoSize = true;
             this.linklbl_logo_gozat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.linklbl_logo_gozat.Location = new System.Drawing.Point(233, 633);
+            this.linklbl_logo_gozat.Location = new System.Drawing.Point(213, 630);
             this.linklbl_logo_gozat.Name = "linklbl_logo_gozat";
             this.linklbl_logo_gozat.Size = new System.Drawing.Size(46, 17);
             this.linklbl_logo_gozat.TabIndex = 43;
@@ -4074,7 +4057,7 @@
             this.tb_bilgi_logo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tb_bilgi_logo.Location = new System.Drawing.Point(87, 630);
             this.tb_bilgi_logo.Name = "tb_bilgi_logo";
-            this.tb_bilgi_logo.Size = new System.Drawing.Size(144, 22);
+            this.tb_bilgi_logo.Size = new System.Drawing.Size(120, 22);
             this.tb_bilgi_logo.TabIndex = 41;
             // 
             // label21
@@ -5003,6 +4986,8 @@
             // 
             // groupBox31
             // 
+            this.groupBox31.Controls.Add(this.label81);
+            this.groupBox31.Controls.Add(this.tb_yil_ara_bilgileregore_sinif);
             this.groupBox31.Controls.Add(this.label51);
             this.groupBox31.Controls.Add(this.label50);
             this.groupBox31.Controls.Add(this.label49);
@@ -5011,7 +4996,7 @@
             this.groupBox31.Controls.Add(this.tb_yil_ara_bilgileregore_il);
             this.groupBox31.Location = new System.Drawing.Point(163, 79);
             this.groupBox31.Name = "groupBox31";
-            this.groupBox31.Size = new System.Drawing.Size(274, 140);
+            this.groupBox31.Size = new System.Drawing.Size(274, 150);
             this.groupBox31.TabIndex = 42;
             this.groupBox31.TabStop = false;
             this.groupBox31.Text = "İl-İlçe-Okul";
@@ -5019,7 +5004,7 @@
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(12, 108);
+            this.label51.Location = new System.Drawing.Point(12, 86);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(35, 13);
             this.label51.TabIndex = 6;
@@ -5028,7 +5013,7 @@
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(12, 67);
+            this.label50.Location = new System.Drawing.Point(12, 54);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(31, 13);
             this.label50.TabIndex = 5;
@@ -5037,7 +5022,7 @@
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(12, 30);
+            this.label49.Location = new System.Drawing.Point(12, 22);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(14, 13);
             this.label49.TabIndex = 4;
@@ -5046,7 +5031,7 @@
             // tb_yil_ara_bilgileregore_okul
             // 
             this.tb_yil_ara_bilgileregore_okul.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_yil_ara_bilgileregore_okul.Location = new System.Drawing.Point(59, 97);
+            this.tb_yil_ara_bilgileregore_okul.Location = new System.Drawing.Point(59, 75);
             this.tb_yil_ara_bilgileregore_okul.Name = "tb_yil_ara_bilgileregore_okul";
             this.tb_yil_ara_bilgileregore_okul.Size = new System.Drawing.Size(201, 29);
             this.tb_yil_ara_bilgileregore_okul.TabIndex = 3;
@@ -5054,7 +5039,7 @@
             // tb_yil_ara_bilgileregore_ilce
             // 
             this.tb_yil_ara_bilgileregore_ilce.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_yil_ara_bilgileregore_ilce.Location = new System.Drawing.Point(59, 56);
+            this.tb_yil_ara_bilgileregore_ilce.Location = new System.Drawing.Point(59, 43);
             this.tb_yil_ara_bilgileregore_ilce.Name = "tb_yil_ara_bilgileregore_ilce";
             this.tb_yil_ara_bilgileregore_ilce.Size = new System.Drawing.Size(201, 29);
             this.tb_yil_ara_bilgileregore_ilce.TabIndex = 2;
@@ -5062,7 +5047,7 @@
             // tb_yil_ara_bilgileregore_il
             // 
             this.tb_yil_ara_bilgileregore_il.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tb_yil_ara_bilgileregore_il.Location = new System.Drawing.Point(59, 19);
+            this.tb_yil_ara_bilgileregore_il.Location = new System.Drawing.Point(59, 11);
             this.tb_yil_ara_bilgileregore_il.Name = "tb_yil_ara_bilgileregore_il";
             this.tb_yil_ara_bilgileregore_il.Size = new System.Drawing.Size(201, 29);
             this.tb_yil_ara_bilgileregore_il.TabIndex = 1;
@@ -5350,6 +5335,126 @@
             this.rb_vt_islemturu_plan.UseVisualStyleBackColor = true;
             this.rb_vt_islemturu_plan.CheckedChanged += new System.EventHandler(this.rb_vt_islemturu_plan_CheckedChanged);
             // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(12, 118);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(29, 13);
+            this.label81.TabIndex = 8;
+            this.label81.Text = "Sınıfı";
+            // 
+            // tb_yil_ara_bilgileregore_sinif
+            // 
+            this.tb_yil_ara_bilgileregore_sinif.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_yil_ara_bilgileregore_sinif.Location = new System.Drawing.Point(59, 107);
+            this.tb_yil_ara_bilgileregore_sinif.Name = "tb_yil_ara_bilgileregore_sinif";
+            this.tb_yil_ara_bilgileregore_sinif.Size = new System.Drawing.Size(75, 29);
+            this.tb_yil_ara_bilgileregore_sinif.TabIndex = 7;
+            // 
+            // tp_raporlar
+            // 
+            this.tp_raporlar.Controls.Add(this.linklbl_genelRapor_1);
+            this.tp_raporlar.Controls.Add(this.label82);
+            this.tp_raporlar.Controls.Add(this.dataGridView2);
+            this.tp_raporlar.Controls.Add(this.dgv_genel_rapor_1);
+            this.tp_raporlar.Controls.Add(this.groupBox67);
+            this.tp_raporlar.Controls.Add(this.groupBox66);
+            this.tp_raporlar.Location = new System.Drawing.Point(4, 22);
+            this.tp_raporlar.Name = "tp_raporlar";
+            this.tp_raporlar.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_raporlar.Size = new System.Drawing.Size(1360, 544);
+            this.tp_raporlar.TabIndex = 9;
+            this.tp_raporlar.Text = "RAPORLAR";
+            this.tp_raporlar.UseVisualStyleBackColor = true;
+            // 
+            // groupBox66
+            // 
+            this.groupBox66.Controls.Add(this.comboBox1);
+            this.groupBox66.Location = new System.Drawing.Point(6, 6);
+            this.groupBox66.Name = "groupBox66";
+            this.groupBox66.Size = new System.Drawing.Size(140, 64);
+            this.groupBox66.TabIndex = 40;
+            this.groupBox66.TabStop = false;
+            this.groupBox66.Text = "Yıl Seçimi";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(6, 19);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 32);
+            this.comboBox1.TabIndex = 100;
+            this.toolTip1.SetToolTip(this.comboBox1, "Yeni kayıt veya Güncelleme yaparken boş bırakılırsa varsayılan değeri alır. (Bayi" +
+        " de aynı şekilde varsayılan değeri alır.)");
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(6, 18);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(346, 33);
+            this.comboBox2.TabIndex = 41;
+            // 
+            // groupBox67
+            // 
+            this.groupBox67.Controls.Add(this.comboBox2);
+            this.groupBox67.Location = new System.Drawing.Point(155, 6);
+            this.groupBox67.Name = "groupBox67";
+            this.groupBox67.Size = new System.Drawing.Size(358, 64);
+            this.groupBox67.TabIndex = 43;
+            this.groupBox67.TabStop = false;
+            this.groupBox67.Text = "Bayi (Bayi adı)";
+            // 
+            // dgv_genel_rapor_1
+            // 
+            this.dgv_genel_rapor_1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_genel_rapor_1.Location = new System.Drawing.Point(20, 76);
+            this.dgv_genel_rapor_1.Name = "dgv_genel_rapor_1";
+            this.dgv_genel_rapor_1.Size = new System.Drawing.Size(746, 250);
+            this.dgv_genel_rapor_1.TabIndex = 44;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(20, 362);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(746, 176);
+            this.dataGridView2.TabIndex = 45;
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(17, 343);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(29, 13);
+            this.label82.TabIndex = 46;
+            this.label82.Text = "Özet";
+            // 
+            // linklbl_genelRapor_1
+            // 
+            this.linklbl_genelRapor_1.AutoSize = true;
+            this.linklbl_genelRapor_1.Location = new System.Drawing.Point(714, 56);
+            this.linklbl_genelRapor_1.Name = "linklbl_genelRapor_1";
+            this.linklbl_genelRapor_1.Size = new System.Drawing.Size(50, 13);
+            this.linklbl_genelRapor_1.TabIndex = 47;
+            this.linklbl_genelRapor_1.TabStop = true;
+            this.linklbl_genelRapor_1.Text = "LİSTELE";
+            this.linklbl_genelRapor_1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklbl_genelRapor_1_LinkClicked);
+            // 
+            // pb_bb_bayilogosu
+            // 
+            this.pb_bb_bayilogosu.Location = new System.Drawing.Point(323, 674);
+            this.pb_bb_bayilogosu.Name = "pb_bb_bayilogosu";
+            this.pb_bb_bayilogosu.Size = new System.Drawing.Size(49, 45);
+            this.pb_bb_bayilogosu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pb_bb_bayilogosu.TabIndex = 0;
+            this.pb_bb_bayilogosu.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5473,8 +5578,6 @@
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.tabPagebayiBilgileri.ResumeLayout(false);
-            this.groupBox65.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb_bb_bayilogosu)).EndInit();
             this.groupBox59.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -5527,6 +5630,13 @@
             this.tab_alt_loglar.PerformLayout();
             this.groupBox58.ResumeLayout(false);
             this.groupBox58.PerformLayout();
+            this.tp_raporlar.ResumeLayout(false);
+            this.tp_raporlar.PerformLayout();
+            this.groupBox66.ResumeLayout(false);
+            this.groupBox67.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_genel_rapor_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_bb_bayilogosu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5902,7 +6012,6 @@
         private System.Windows.Forms.Button bt_oncekimusterino;
         private System.Windows.Forms.TabPage tabPagebayiBilgileri;
         private System.Windows.Forms.GroupBox groupBox59;
-        private System.Windows.Forms.Button bt_bayibilgilerinigoster;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label78;
@@ -5965,9 +6074,19 @@
         private System.Windows.Forms.RadioButton rb_planbas_kapsam_sadeceingilizcedersdefteri;
         private System.Windows.Forms.Label label80;
         private System.Windows.Forms.TextBox tb_bb_bayilogosu;
-        private System.Windows.Forms.GroupBox groupBox65;
-        private System.Windows.Forms.PictureBox pb_bb_bayilogosu;
         private System.Windows.Forms.CheckBox cb_planbas_epostala;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.TextBox tb_yil_ara_bilgileregore_sinif;
+        private System.Windows.Forms.TabPage tp_raporlar;
+        private System.Windows.Forms.GroupBox groupBox66;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox groupBox67;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.DataGridView dgv_genel_rapor_1;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.LinkLabel linklbl_genelRapor_1;
+        private System.Windows.Forms.PictureBox pb_bb_bayilogosu;
     }
 }
 
