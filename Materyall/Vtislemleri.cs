@@ -4393,6 +4393,62 @@ namespace Materyall
 
 
 
+        //Listeye indirim uygulama bölümü.
+
+        public bool isle_listeyeIndirimUygula(string oidler, bool yuzdeolarakislemyap, int indirimmiktari, bool toplamtutaruzerinden, string aciklama)
+        {
+
+
+            //Belirtilen seçeneklere göre indirim işlemi uyguluyoruz.
+
+
+
+            bool durum;
+
+            //Bağlantı kısmı.
+
+            baglantiKur();
+
+            //  ödemetürü 5 = indirim. İndirimi ayrı hesaplıyoruz.
+
+            string sql = "INSERT INTO odemeler_tbl " +
+                    "(oid, odemekodu, tutar, aciklama, otomatiktarih, odemetarihi) " +
+                    "SELECT oid, 5," + indirimmiktari +", 'Özel indirim', NOW(), NOW() FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " " +
+                    "WHERE oid IN (" + oidler + ")";
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, mysqlbaglantisi);
+
+            object kayitbilgisi = cmd.ExecuteNonQuery();
+
+            try
+            {
+               
+                durum = true;
+
+            }
+            catch (Exception)
+            {
+
+                durum = false;
+
+            }
+
+
+
+            baglantikapat(mysqlbaglantisi);
+
+            //Bağlantı kısımları.
+
+            return durum;
+
+
+        }
+
+
+
+
+
 
 
 
@@ -4415,11 +4471,36 @@ namespace Materyall
             */
 
 
-            //bU KOD İSTEDİĞİMİZ İŞLEMİ YAPMIYOR. BAKACAĞIZ.
+            /*
+             * iş yapıyor.
+            string sql = "SELECT b.oid, b.bayi, b.aciklama, b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, b.brans, d.fiyat  FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+                "  JOIN (SELECT * FROM " + metinler.neyebakalim_defter_tablo + ") d  ON b.oid=d.oid " +
+               " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' ORDER BY b.il, b.ilce, b.okuladi, b.sinif, b.sube";
+            */
 
-            string sql = "SELECT b.oid, b.bayi, b.aciklama, b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, b.brans, " +
-                " (SELECT sum(X.fiyat) FROM (SELECT fiyat FROM " + metinler.neyebakalim_defter_tablo + " ) X ) AS fiyat " +
-                " FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b ";
+
+            /*
+            string sql = "SELECT b.oid, b.bayi, b.aciklama, b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, b.brans, d.fiyat, y.fiyat  FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+               " LEFT JOIN " + metinler.neyebakalim_y_anaders_tablo + " y  ON y.oid=b.oid " +
+                " LEFT JOIN " + metinler.neyebakalim_defter_tablo + " d  ON d.oid=b.oid " +
+               " WHERE b.islemturu=" + Form1.ISLEM_TURU_TABLO_DEGERI + " AND b.yili='" + yili + "' ORDER BY b.il, b.ilce, b.okuladi, b.sinif, b.sube";
+            */
+
+
+            string sql = "SELECT b.oid, b.bayi, b.aciklama, b.il, b.ilce, b.okuladi, b.sinif, b.sube, b.adisoyadi, b.brans, t.turu, t.kodu, t.fiyat  FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+              " LEFT JOIN (" +
+                "SELECT oid,fiyat, defterkodu AS kodu, 'Defter' as turu FROM tlp_defterler_tbl " +
+                "UNION ALL " +
+                "SELECT oid,fiyat, urunkodu AS kodu, 'Ek Ürün' as turu FROM tlp_ekurunler_tbl " +
+                "UNION ALL " +
+                "SELECT oid,fiyat, dersid AS kodu, 'Günlük Plan' as turu FROM tlp_g_anadersler_tbl " +
+                "UNION ALL " +
+                "SELECT oid,fiyat, dersid AS kodu, 'Serbest (Günlük)' as turu FROM tlp_g_serbestler_tbl " +
+                "UNION ALL " +
+                "SELECT oid,fiyat, kulupkodu AS kodu, 'Kulüp' as turu FROM tlp_sosyalkulup_tbl " +
+                "UNION ALL " +
+                "SELECT oid,fiyat, dersid AS kodu, 'Yıllık Plan' as turu FROM tlp_y_anadersler_tbl ) t ON t.oid=b.oid ";
+
 
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
@@ -4440,13 +4521,46 @@ namespace Materyall
 
 
 
+        public DataTable dgv_icin_genel_rapor1_getir_ozet(String yili)
+        {
+
+            //Özet rapor ürün türü ve koduna göre gruplama yaparak sunulur.
+
+            baglantiKur();
+
+           
+
+            string sql = "SELECT b.bayi, t.turu, t.kodu, COUNT(t.kodu) AS adet, SUM(t.fiyat) tutar  FROM " + metinler.neyebakalim_bilgi_ogretmen_tablo + " b " +
+              " LEFT JOIN (" +
+                "SELECT oid,fiyat, defterkodu AS kodu, 'Defter' as turu FROM tlp_defterler_tbl " +
+                "UNION ALL " +
+                "SELECT oid,fiyat, urunkodu AS kodu, 'Ek Ürün' as turu FROM tlp_ekurunler_tbl " +
+                "UNION ALL " +
+                "SELECT oid,fiyat, dersid AS kodu, 'Günlük Plan' as turu FROM tlp_g_anadersler_tbl " +
+                "UNION ALL " +
+                "SELECT oid,fiyat, dersid AS kodu, 'Serbest (Günlük)' as turu FROM tlp_g_serbestler_tbl " +
+                "UNION ALL " +
+                "SELECT oid,fiyat, kulupkodu AS kodu, 'Kulüp' as turu FROM tlp_sosyalkulup_tbl " +
+                "UNION ALL " +
+                "SELECT oid,fiyat, dersid AS kodu, 'Yıllık Plan' as turu FROM tlp_y_anadersler_tbl ) t ON t.oid=b.oid " +
+                " GROUP BY b.bayi, t.turu, t.kodu ORDER BY b.bayi, t.turu, t.kodu";
 
 
 
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, mysqlbaglantisi);
 
 
 
+            DataTable dt = new DataTable();
+            da.Fill(dt);
 
+
+            baglantikapat(mysqlbaglantisi);
+
+
+            return dt;
+
+        }
 
 
 

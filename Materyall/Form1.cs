@@ -6877,9 +6877,58 @@ namespace Materyall
 
             dgv_genel_rapor_1.DataSource = vtislemleri.dgv_icin_genel_rapor1_getir("2022-2023");
 
+         //   MessageBox.Show("Bulunan kayıt: " + dgv_genel_rapor_1.RowCount);
 
 
-            MessageBox.Show("Bulunan kayıt: " + dgv_genel_rapor_1.RowCount);
+            //Hemen özeti hazırlayalım.
+            dgv_genel_rapor_1_ozet.DataSource = vtislemleri.dgv_icin_genel_rapor1_getir_ozet("2022-2023");
+           
+            // MessageBox.Show("Bulunan kayıt: " + dgv_genel_rapor_1_ozet.RowCount);
+
+            lbl_genelraporsayilari.Text = dgv_genel_rapor_1_ozet.RowCount + " / " + dgv_genel_rapor_1.RowCount;
+
+        }
+
+
+        private void linklbl_genelRapor_1_exceleAktar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            excelSnf.dgvExceleAktar(dgv_genel_rapor_1);
+
+        }
+
+        private void linklbl_listeye_indirim_uygula_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            listeyeIndirimUygula();
+
+        }
+
+
+
+        private void listeyeIndirimUygula()
+        {
+
+            string idler = listedekiIDleriGetir(false);
+
+
+
+
+            if (vtislemleri.isle_listeyeIndirimUygula(idler, false, int.Parse(tb_topluindirim_miktari.Text), true, "Özel indirim"))
+            {
+
+                MessageBox.Show("İndirim işlemi tamamlandı.");
+
+            }
+            else
+            {
+
+                MessageBox.Show("Bir hata meydana geldi. İndirimler eklenemedi.");
+            }
+
+
+
+
         }
 
 

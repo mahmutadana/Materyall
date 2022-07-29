@@ -173,51 +173,42 @@ namespace Materyall
 
 
 
+        }
 
 
 
-            /*
-             * 
-            String csv = String.Join(
-    Environment.NewLine,
-    adresMesktupBaslikDegerleri.Select(d => $"{d.Key};{d.Value};"));
-            System.IO.File.WriteAllText(metinler.siparisci_tam_yolu, csv);
-
-            */
-
-            /*
-          
-            //Gelen başlıkları 1. satıra, değerleri 2. satıra yazarak bir excel belgesi oluşturuyoruz. (Eski siparişçi) Adı siparisci2022.xls olabilir.
-
-            //Exceli açalım.
-            Microsoft.Office.Interop.Excel.Application uyg = new Microsoft.Office.Interop.Excel.Application();
-            Microsoft.Office.Interop.Excel.Workbook ktp;
-            Microsoft.Office.Interop.Excel.Worksheet syf;
-
-
-            ktp = uyg.Workbooks.Open(metinler.siparisci_tam_yolu);
-            syf = ktp.Worksheets["Sayfa1"];
-
-
-            syf.Cells.ClearContents();
-            int sutunsayac = 1;
-
-            foreach (string s in adresMesktupBaslikDegerleri.Keys)
-            {
-                syf.Cells[1, sutunsayac] = s;
-                syf.Cells[2,sutunsayac] = adresMesktupBaslikDegerleri[s];
-
-                sutunsayac++;
-            }
 
 
 
-            ktp.SaveAs(Filename: metinler.siparisci_tam_yolu_csv, FileFormat: Microsoft.Office.Interop.Excel.XlFileFormat.xlCSV, CreateBackup: false);
+        //Data gridleri excele aktarma.
+        private void panoyaKopyala(DataGridView dgv)
+        {
+            dgv.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+            dgv.MultiSelect = true;
+            dgv.SelectAll();
+            DataObject dataObj = dgv.GetClipboardContent();
+            if (dataObj != null)
+                Clipboard.SetDataObject(dataObj);
 
-            ktp.Close(true);
-            uyg.Quit();
-            */
+        }
 
+        public void dgvExceleAktar(DataGridView dgv)
+        {
+            panoyaKopyala(dgv);
+
+            Microsoft.Office.Interop.Excel.Application xlexcel;
+            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+            xlexcel = new Microsoft.Office.Interop.Excel.Application();
+            xlexcel.Visible = true;
+            xlWorkBook = xlexcel.Workbooks.Add(misValue);
+            xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[1, 1];
+            CR.Select();
+            xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
+
+            Clipboard.Clear();
         }
 
 
