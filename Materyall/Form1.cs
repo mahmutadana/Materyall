@@ -6902,6 +6902,7 @@ namespace Materyall
 
             listeyeIndirimUygula();
 
+
         }
 
 
